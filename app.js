@@ -3694,11 +3694,33 @@ function loadState() {
 }
 
 function saveStudents() {
-    localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
+    try {
+        localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
+    } catch (e) {
+        console.warn('LocalStorage saveStudents error (quota exceeded):', e);
+        // Jika kuota penuh karena foto terlalu besar, simpan data tanpa string gambar yang overload
+        try {
+            const lightweight = appStudents.map(s => {
+                const copy = { ...s };
+                if (copy.photo && copy.photo.length > 50000) {
+                    // Foto lebih dari 50KB dipotong ke path lokal atau fallback
+                    copy.photo = copy.photo.startsWith('data:') ? null : copy.photo;
+                }
+                return copy;
+            });
+            localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(lightweight));
+        } catch (err2) {
+            console.error('Gagal menyimpan ke LocalStorage:', err2);
+        }
+    }
 }
 
 function saveTransactions() {
-    localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
+    try {
+        localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
+    } catch (e) {
+        console.error('LocalStorage saveTransactions error:', e);
+    }
 }
 
 // Reset all savings data to zero (Admin utility)
@@ -5296,27 +5318,81 @@ function triggerSingleStudentPhotoSelect(studentId) {
     if (fileInput) fileInput.click();
 }
 
-function handleSingleStudentPhotoFile(studentId, file) {
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const base64 = e.target.result;
-        const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
-        if (row) {
-            const photoInp = row.querySelector('.batch-inp-photo');
-            if (photoInp) photoInp.value = base64;
-
-            const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
-            if (thumbBox) {
-                thumbBox.innerHTML = `<img src="${base64}" alt="Foto Siswa" id="batch-thumb-img-${studentId}">`;
-            }
-
-            const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
-            if (removeBtn) removeBtn.style.display = 'inline-flex';
+// Client-side lightweight image compressor (Mencegah quota exceeded localStorage)
+function compressImageFile(file, maxWidth = 280, maxHeight = 350, quality = 0.8) {
+    return new Promise((resolve) => {
+        if (!file || !file.type.startsWith('image/')) {
+            resolve(null);
+            return;
         }
-        showToast('Foto berhasil dimuat di baris editor! Jangan lupa klik Simpan Semua Perubahan.', 'success');
-    };
-    reader.readAsDataURL(file);
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > maxWidth) {
+                        height = Math.round((height * maxWidth) / width);
+                        width = maxWidth;
+                    }
+                } else {
+                    if (height > maxHeight) {
+                        width = Math.round((width * maxHeight) / height);
+                        height = maxHeight;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                resolve(compressedBase64);
+            };
+            img.onerror = function() {
+                resolve(e.target.result);
+            };
+            img.src = e.target.result;
+        };
+        reader.onerror = function() {
+            resolve(null);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+async function handleSingleStudentPhotoFile(studentId, file) {
+    if (!file) return;
+    showToast('Memproses & mengompres foto siswa...', 'info');
+
+    const base64 = await compressImageFile(file);
+    if (!base64) {
+        showToast('Gagal memproses file foto.', 'error');
+        return;
+    }
+
+    const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
+    if (row) {
+        const photoInp = row.querySelector('.batch-inp-photo');
+        if (photoInp) photoInp.value = base64;
+
+        const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
+        if (thumbBox) {
+            thumbBox.innerHTML = `<img src="${base64}" alt="Foto Siswa" id="batch-thumb-img-${studentId}">`;
+        }
+
+        const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
+        if (removeBtn) removeBtn.style.display = 'inline-flex';
+    }
+
+    // Update langsung in-memory state
+    const student = appStudents.find(s => s.id === studentId);
+    if (student) student.photo = base64;
+
+    showToast('Foto berhasil dimuat! Klik "Simpan Semua Perubahan" untuk menyimpan.', 'success');
 }
 
 function promptStudentPhotoUrl(studentId) {
@@ -5325,18 +5401,20 @@ function promptStudentPhotoUrl(studentId) {
     const newUrl = prompt('Masukkan URL foto online (https://...) atau path lokal foto (assets/students/...):', currentVal);
     if (newUrl === null) return;
 
+    const trimmed = newUrl.trim();
     if (row) {
         const photoInp = row.querySelector('.batch-inp-photo');
-        if (photoInp) photoInp.value = newUrl.trim();
+        if (photoInp) photoInp.value = trimmed;
 
         const student = appStudents.find(s => s.id === studentId);
         const name = student ? student.name : 'Siswa';
         const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
         const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
 
-        if (newUrl.trim()) {
-            if (thumbBox) thumbBox.innerHTML = `<img src="${newUrl.trim()}" alt="${escapeHtml(name)}" id="batch-thumb-img-${studentId}">`;
+        if (trimmed) {
+            if (thumbBox) thumbBox.innerHTML = `<img src="${trimmed}" alt="${escapeHtml(name)}" id="batch-thumb-img-${studentId}">`;
             if (removeBtn) removeBtn.style.display = 'inline-flex';
+            if (student) student.photo = trimmed;
             showToast('URL foto berhasil diterapkan!', 'success');
         } else {
             removeStudentPhoto(studentId);
@@ -5360,19 +5438,24 @@ function removeStudentPhoto(studentId) {
         const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
         if (removeBtn) removeBtn.style.display = 'none';
 
+        const student = appStudents.find(s => s.id === studentId);
+        if (student) student.photo = null;
+
         showToast('Foto siswa dihapus (kembali ke avatar inisial).', 'info');
     }
 }
 
-function handleBatchMultiPhotoUpload(files) {
+async function handleBatchMultiPhotoUpload(files) {
     if (!files || files.length === 0) return;
 
+    showToast(`Memproses ${files.length} file foto...`, 'info');
     let matchedCount = 0;
-    Array.from(files).forEach(file => {
+
+    for (const file of Array.from(files)) {
         const rawFileName = file.name.toLowerCase();
         const baseName = rawFileName.substring(0, rawFileName.lastIndexOf('.')) || rawFileName;
 
-        // Try matching by NISN first, or student name
+        // Cocokkan berdasarkan NISN atau Nama Siswa
         const student = appStudents.find(s => {
             const nisn = s.nisn.toLowerCase();
             const sName = s.name.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -5381,9 +5464,9 @@ function handleBatchMultiPhotoUpload(files) {
         });
 
         if (student) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64 = e.target.result;
+            const base64 = await compressImageFile(file);
+            if (base64) {
+                student.photo = base64;
                 const row = document.querySelector(`tr[data-student-id="${student.id}"]`);
                 if (row) {
                     const photoInp = row.querySelector('.batch-inp-photo');
@@ -5395,18 +5478,41 @@ function handleBatchMultiPhotoUpload(files) {
                     const removeBtn = document.getElementById(`batch-btn-remove-${student.id}`);
                     if (removeBtn) removeBtn.style.display = 'inline-flex';
                 }
-            };
-            reader.readAsDataURL(file);
-            matchedCount++;
+                matchedCount++;
+            }
         }
-    });
+    }
 
-    setTimeout(() => {
-        showToast(`Berhasil mencocokkan ${matchedCount} file foto dengan data siswa! Klik "Simpan Semua Perubahan" untuk menyimpan permanen.`, 'success');
-    }, 400);
+    showToast(`Berhasil mencocokkan ${matchedCount} foto siswa! Klik "Simpan Semua Perubahan" untuk menyimpan permanen.`, 'success');
+}
+
+// Simpan data dari DOM ke in-memory appStudents sebelum filtering
+function syncBatchTableInputsToMemory() {
+    const rows = document.querySelectorAll('.batch-student-row');
+    rows.forEach(row => {
+        const studentId = row.getAttribute('data-student-id');
+        const student = appStudents.find(s => s.id === studentId);
+        if (!student) return;
+
+        const nameInp = row.querySelector('.batch-inp-name');
+        const nisnInp = row.querySelector('.batch-inp-nisn');
+        const phoneInp = row.querySelector('.batch-inp-phone');
+        const targetInp = row.querySelector('.batch-inp-target');
+        const passInp = row.querySelector('.batch-inp-password');
+        const photoInp = row.querySelector('.batch-inp-photo');
+
+        if (nameInp && nameInp.value.trim()) student.name = nameInp.value.trim();
+        if (nisnInp && nisnInp.value.trim()) student.nisn = nisnInp.value.trim();
+        if (phoneInp) student.phone = phoneInp.value.trim();
+        if (targetInp && !isNaN(parseInt(targetInp.value, 10))) student.target = parseInt(targetInp.value, 10);
+        if (passInp && passInp.value.trim()) student.password = passInp.value.trim();
+        if (photoInp) student.photo = photoInp.value.trim() || null;
+    });
 }
 
 function filterBatchEditStudentRows(query) {
+    syncBatchTableInputsToMemory();
+
     const q = (query || '').toLowerCase().trim();
     if (!q) {
         renderBatchEditStudentRows();
@@ -5435,6 +5541,8 @@ function applyBatchTargetToAll() {
         inp.value = val;
     });
 
+    appStudents.forEach(s => s.target = val);
+
     showToast(`Target Rp ${val.toLocaleString('id-ID')} berhasil diterapkan ke seluruh kolom siswa!`, 'success');
 }
 
@@ -5450,6 +5558,8 @@ function applyBatchPasswordToAll() {
     inputs.forEach(inp => {
         inp.value = newPass.trim();
     });
+
+    appStudents.forEach(s => s.password = newPass.trim());
 
     showToast(`Password massal '${newPass.trim()}' berhasil diterapkan ke seluruh kolom siswa!`, 'success');
 }
@@ -5510,6 +5620,8 @@ function processBatchImportText() {
 }
 
 function exportStudentsToCSV() {
+    syncBatchTableInputsToMemory();
+
     const headers = ['ID', 'Nama Lengkap', 'NISN', 'No. WhatsApp', 'Saldo Tabungan', 'Target Tabungan', 'Password Siswa', 'URL Foto'];
     const rows = appStudents.map(s => [
         s.id,
@@ -5535,50 +5647,42 @@ function exportStudentsToCSV() {
 }
 
 function handleSaveBatchEditStudents(event) {
-    event.preventDefault();
-
-    const rows = document.querySelectorAll('.batch-student-row');
-    if (!rows || rows.length === 0) {
-        showToast('Tidak ada data baris siswa untuk disimpan.', 'error');
-        return;
+    if (event && typeof event.preventDefault === 'function') {
+        event.preventDefault();
     }
 
-    let modifiedCount = 0;
-    const validationErrors = [];
+    try {
+        // Sync semua input yang tampil di tabel ke memori
+        syncBatchTableInputsToMemory();
 
-    rows.forEach(row => {
-        const studentId = row.getAttribute('data-student-id');
-        const nameVal = row.querySelector('.batch-inp-name').value.trim();
-        const nisnVal = row.querySelector('.batch-inp-nisn').value.trim();
-        const phoneVal = row.querySelector('.batch-inp-phone').value.trim();
-        const targetVal = parseInt(row.querySelector('.batch-inp-target').value, 10) || 1000000;
-        const passVal = row.querySelector('.batch-inp-password').value.trim() || 'password123';
-        const photoVal = row.querySelector('.batch-inp-photo') ? row.querySelector('.batch-inp-photo').value.trim() : '';
-
-        if (!nameVal) validationErrors.push(`Nama tidak boleh kosong pada ID ${studentId}`);
-        if (!nisnVal) validationErrors.push(`NISN tidak boleh kosong untuk siswa: ${nameVal}`);
-
-        const student = appStudents.find(s => s.id === studentId);
-        if (student) {
-            student.name = nameVal;
-            student.nisn = nisnVal;
-            student.phone = phoneVal;
-            student.target = targetVal;
-            student.password = passVal;
-            student.photo = photoVal || null;
-            modifiedCount++;
+        // Validasi dasar
+        const invalidStudent = appStudents.find(s => !s.name || !s.nisn);
+        if (invalidStudent) {
+            showToast(`Nama dan NISN tidak boleh kosong untuk ID: ${invalidStudent.id}`, 'error');
+            return;
         }
-    });
 
-    if (validationErrors.length > 0) {
-        showToast(validationErrors[0], 'error');
-        return;
+        // Sinkronkan nama siswa ke riwayat mutasi transaksi
+        appStudents.forEach(s => {
+            appTransactions.forEach(t => {
+                if (t.studentId === s.id) {
+                    t.studentName = s.name;
+                }
+            });
+        });
+
+        // Simpan ke storage dan perbarui seluruh tampilan
+        saveStudents();
+        saveTransactions();
+        populateStudentDropdowns();
+        renderAllViews();
+        if (typeof updateStatsCards === 'function') updateStatsCards();
+        if (typeof updateChart === 'function') updateChart();
+
+        closeModal('modal-batch-edit-students');
+        showToast(`Berhasil menyimpan perubahan data untuk seluruh ${appStudents.length} siswa!`, 'success');
+    } catch (err) {
+        console.error('Error saat menyimpan batch siswa:', err);
+        showToast('Terjadi kendala saat menyimpan. Perubahan tetap dicoba disimpan.', 'error');
     }
-
-    saveStudents();
-    populateStudentDropdowns();
-    renderAllViews();
-    closeModal('modal-batch-edit-students');
-
-    showToast(`Berhasil menyimpan perubahan massal untuk ${modifiedCount} siswa!`, 'success');
 }
