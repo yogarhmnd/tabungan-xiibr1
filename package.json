@@ -1,0 +1,17 @@
+﻿{
+  name: tabungan-xiipm1,
+  version: 1.0.0,
+  description: Sistem Tabungan Siswa XII Bisnis Ritel 1 (PM 1) - SMK PGRI 11 CILEDUG,
+  main: index.html,
+  scripts: {
+    start: npx serve .,
+    build: echo 'Build complete'
+  },
+  keywords: [
+    tabungan-siswa,
+    tabungan-xiipm1,
+    smk-pgri-11-ciledug
+  ],
+  author: Yoga Rahmanda, S.Pd.,
+  license: MIT
+}

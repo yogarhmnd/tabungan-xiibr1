@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Shield Frame -->
+  <path d="M50 5 L85 20 V50 C85 72 50 92 50 92 C50 92 15 72 15 50 V20 Z" fill="url(#shieldGrad)" stroke="#818cf8" stroke-width="3" />
+  
+  <!-- Inner Shield Accent Line -->
+  <path d="M50 12 L78 24 V48 C78 66 50 82 50 82 C50 82 22 66 22 48 V24 Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+  
+  <!-- Vault / Lock Icon Graphic -->
+  <circle cx="50" cy="46" r="16" fill="url(#goldGrad)" />
+  <circle cx="50" cy="46" r="6" fill="#0f172a" />
+  <rect x="47" y="46" width="6" height="12" rx="2" fill="#0f172a" />
+  
+  <!-- Star Emblem Top -->
+  <polygon points="50,18 53,26 61,26 55,31 57,39 50,34 43,39 45,31 39,26 47,26" fill="#fbbf24" />
+
+  <!-- Text Badge 11 -->
+  <text x="50" y="78" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="14" fill="#ffffff" text-anchor="middle">BR 1</text>
+</svg>
