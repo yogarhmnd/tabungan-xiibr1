@@ -1141,7 +1141,7 @@
                     <h3><i class="fa-solid fa-user-pen text-emerald"></i> Batch Edit Data Siswa XII Bisnis Ritel 1</h3>
                     <p class="text-muted small mb-0">Ubah Nama, NISN, No. WhatsApp, Target Tabungan, dan Password untuk seluruh siswa sekaligus.</p>
                 </div>
-                <button class="modal-close" onclick="closeModal('modal-batch-edit-students')">&times;</button>
+                <button class="modal-close" onclick="attemptCloseBatchEditModal()">&times;</button>
             </div>
             <form id="form-batch-edit-students" onsubmit="handleSaveBatchEditStudents(event)">
                 <div class="modal-body">
@@ -1221,13 +1221,86 @@
                         <span id="batch-edit-count-badge" class="badge badge-emerald">44 Siswa Terdaftar</span>
                     </div>
                     <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-batch-edit-students')">Batal</button>
+                        <button type="button" class="btn btn-secondary" onclick="attemptCloseBatchEditModal()">Batal</button>
                         <button type="submit" class="btn btn-emerald btn-lg" id="btn-save-batch-students">
                             <i class="fa-solid fa-floppy-disk"></i> Simpan Semua Perubahan Siswa
                         </button>
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP: Konfirmasi Ringkasan Perubahan Siswa -->
+    <div class="modal-backdrop" id="modal-confirm-changes">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <div>
+                    <h3><i class="fa-solid fa-clipboard-check text-emerald"></i> Konfirmasi Perubahan Data Siswa</h3>
+                    <p class="text-muted small mb-0">Tinjau daftar perubahan data sebelum disimpan permanen ke sistem.</p>
+                </div>
+                <button class="modal-close" onclick="closeModal('modal-confirm-changes')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="change-summary-header mb-3">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <span class="badge badge-emerald font-weight-bold" id="confirm-changes-count-badge">0 Siswa Mengalami Perubahan</span>
+                        <span class="small text-muted"><i class="fa-solid fa-clock-rotate-left"></i> Siap Disimpan ke LocalStorage</span>
+                    </div>
+                </div>
+                <div class="change-summary-list" id="confirm-changes-list-container">
+                    <!-- Dynamic change diff items -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('modal-confirm-changes')">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali & Edit Lagi
+                </button>
+                <button type="button" class="btn btn-emerald btn-lg" id="btn-execute-confirmed-save" onclick="executeBatchSaveConfirmed()">
+                    <i class="fa-solid fa-check-double"></i> Ya, Terapkan & Simpan Sekarang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP: Peringatan Keluar Tanpa Menyimpan -->
+    <div class="modal-backdrop" id="modal-unsaved-warning">
+        <div class="modal-card" style="max-width: 460px;">
+            <div class="modal-header" style="border-bottom-color: rgba(244, 63, 94, 0.3);">
+                <h3 class="text-rose"><i class="fa-solid fa-triangle-exclamation"></i> Perubahan Belum Disimpan</h3>
+                <button class="modal-close" onclick="closeModal('modal-unsaved-warning')">&times;</button>
+            </div>
+            <div class="modal-body text-center p-4">
+                <div class="unsaved-warning-icon mb-3">
+                    <i class="fa-solid fa-circle-exclamation text-rose" style="font-size: 3rem;"></i>
+                </div>
+                <h4 class="mb-2">Batalkan Perubahan?</h4>
+                <p class="text-muted small mb-0">Anda telah mengubah data di tabel. Jika keluar sekarang tanpa menyimpan, perubahan tersebut akan dibatalkan.</p>
+            </div>
+            <div class="modal-footer justify-content-center gap-2">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('modal-unsaved-warning')">
+                    <i class="fa-solid fa-pen"></i> Lanjut Mengedit
+                </button>
+                <button type="button" class="btn btn-danger" onclick="forceCloseBatchEditModal()">
+                    <i class="fa-solid fa-trash-can"></i> Buang & Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP: Notifikasi Sukses Interaktif -->
+    <div class="modal-backdrop" id="modal-feedback-success">
+        <div class="modal-card" style="max-width: 440px;">
+            <div class="modal-body text-center p-4">
+                <div class="success-pop-icon mb-3">
+                    <i class="fa-solid fa-circle-check text-emerald" style="font-size: 3.5rem;"></i>
+                </div>
+                <h3 class="font-heading mb-2" id="pop-success-title">Perubahan Berhasil Disimpan!</h3>
+                <p class="text-muted small mb-4" id="pop-success-desc">Data siswa dan pengaturan tabungan telah berhasil diperbarui ke seluruh sistem.</p>
+                <button type="button" class="btn btn-emerald btn-lg w-100" onclick="closeModal('modal-feedback-success')">
+                    <i class="fa-solid fa-check"></i> Selesai & Mengerti
+                </button>
+            </div>
         </div>
     </div>
 

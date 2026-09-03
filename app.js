@@ -4748,12 +4748,20 @@ function handleTargetSubmit(e) {
 
     const studentIndex = appStudents.findIndex(s => s.id === studentId);
     if (studentIndex !== -1) {
-        appStudents[studentIndex].target = newTarget;
-        appStudents[studentIndex].phone = newPhone;
+        const student = appStudents[studentIndex];
+        const oldTarget = student.target;
+        const oldPhone = student.phone;
+
+        student.target = newTarget;
+        student.phone = newPhone;
         saveStudents();
         renderAllViews();
         closeModal('modal-edit-target');
-        showToast(`Data & No WA ${appStudents[studentIndex].name} berhasil diperbarui!`, 'success');
+
+        showFeedbackSuccessModal(
+            'Data Siswa Berhasil Diperbarui!',
+            `Target tabungan siswa ${student.name} berhasil diatur ke ${formatRp(newTarget)} dan nomor WhatsApp berhasil disimpan.`
+        );
     }
 }
 
@@ -5226,11 +5234,16 @@ function escapeHtml(str) {
 // SISTEM BATCH EDIT DATA SISWA (SPREADSHEET-STYLE MASS EDITOR)
 // ==========================================================================
 
+let initialBatchSnapshot = [];
+
 function openBatchEditStudentsModal() {
     if (currentUser && currentUser.role !== 'admin') {
         showToast('Akses ditolak: Menu ini khusus Wali Kelas / Admin.', 'error');
         return;
     }
+
+    // Rekam snapshot awal sebelum terjadi pengeditan
+    initialBatchSnapshot = JSON.parse(JSON.stringify(appStudents));
 
     renderBatchEditStudentRows();
     const searchInput = document.getElementById('batch-edit-search');
@@ -5646,22 +5659,115 @@ function exportStudentsToCSV() {
     showToast('File CSV Data Siswa berhasil diunduh!', 'success');
 }
 
+function detectBatchChanges() {
+    syncBatchTableInputsToMemory();
+    const changes = [];
+
+    appStudents.forEach(curr => {
+        const init = initialBatchSnapshot.find(s => s.id === curr.id);
+        if (!init) return;
+
+        const studentDiffs = [];
+        if (init.name !== curr.name) {
+            studentDiffs.push({ field: 'name', label: 'Nama', oldVal: init.name, newVal: curr.name, tagClass: 'tag-name' });
+        }
+        if (init.nisn !== curr.nisn) {
+            studentDiffs.push({ field: 'nisn', label: 'NISN', oldVal: init.nisn, newVal: curr.nisn, tagClass: 'tag-nisn' });
+        }
+        if ((init.phone || '') !== (curr.phone || '')) {
+            studentDiffs.push({ field: 'phone', label: 'WhatsApp', oldVal: init.phone || '-', newVal: curr.phone || '-', tagClass: 'tag-phone' });
+        }
+        if ((init.target || 1000000) !== (curr.target || 1000000)) {
+            studentDiffs.push({ field: 'target', label: 'Target', oldVal: formatRp(init.target || 1000000), newVal: formatRp(curr.target || 1000000), tagClass: 'tag-target' });
+        }
+        if ((init.password || 'password123') !== (curr.password || 'password123')) {
+            studentDiffs.push({ field: 'password', label: 'Password', oldVal: '******', newVal: curr.password, tagClass: 'tag-pass' });
+        }
+        if ((init.photo || '') !== (curr.photo || '')) {
+            studentDiffs.push({ field: 'photo', label: 'Pasfoto', oldVal: init.photo ? 'Foto Lama' : 'Inisial', newVal: curr.photo ? 'Foto Baru Diperbarui' : 'Dihapus', tagClass: 'tag-photo' });
+        }
+
+        if (studentDiffs.length > 0) {
+            changes.push({
+                student: curr,
+                diffs: studentDiffs
+            });
+        }
+    });
+
+    return changes;
+}
+
 function handleSaveBatchEditStudents(event) {
     if (event && typeof event.preventDefault === 'function') {
         event.preventDefault();
     }
 
+    // Sinkronkan input tabel ke memori
+    syncBatchTableInputsToMemory();
+
+    // Validasi dasar
+    const invalidStudent = appStudents.find(s => !s.name || !s.nisn);
+    if (invalidStudent) {
+        showToast(`Nama dan NISN tidak boleh kosong untuk ID: ${invalidStudent.id}`, 'error');
+        return;
+    }
+
+    // Deteksi perubahan
+    const changes = detectBatchChanges();
+
+    if (changes.length === 0) {
+        showToast('Tidak ada perubahan data yang terdeteksi. Semua data sudah sesuai.', 'info');
+        closeModal('modal-batch-edit-students');
+        return;
+    }
+
+    // Tampilkan Pop-up Ringkasan Konfirmasi Perubahan
+    const countBadge = document.getElementById('confirm-changes-count-badge');
+    if (countBadge) countBadge.innerText = `${changes.length} Siswa Mengalami Perubahan Data`;
+
+    const listContainer = document.getElementById('confirm-changes-list-container');
+    if (listContainer) {
+        listContainer.innerHTML = changes.map(item => {
+            const s = item.student;
+            const thumbHtml = s.photo 
+                ? `<img src="${s.photo}" alt="${escapeHtml(s.name)}">`
+                : `<div class="d-flex align-items-center justify-content-center w-100 h-100 font-weight-bold" style="background: ${getStudentAvatarGradient(s.name)}; font-size: 1.1rem; color: #fff;">${s.name.charAt(0)}</div>`;
+
+            const diffTagsHtml = item.diffs.map(d => {
+                if (d.field === 'photo') {
+                    return `<span class="change-tag tag-photo"><i class="fa-solid fa-camera"></i> ${d.newVal}</span>`;
+                }
+                if (d.field === 'target') {
+                    return `<span class="change-tag tag-target"><i class="fa-solid fa-bullseye"></i> Target: ${d.newVal}</span>`;
+                }
+                if (d.field === 'password') {
+                    return `<span class="change-tag tag-pass"><i class="fa-solid fa-key"></i> Password diubah</span>`;
+                }
+                return `<span class="change-tag"><i class="fa-solid fa-pen"></i> ${d.label}: <strong>${escapeHtml(d.newVal)}</strong></span>`;
+            }).join('');
+
+            return `
+            <div class="change-diff-card">
+                <div class="change-diff-thumb">
+                    ${thumbHtml}
+                </div>
+                <div class="change-diff-info">
+                    <div class="change-diff-name">${escapeHtml(s.name)} <span class="badge badge-emerald small" style="font-size: 0.7rem;">NISN: ${s.nisn}</span></div>
+                    <div class="change-diff-tags">
+                        ${diffTagsHtml}
+                    </div>
+                </div>
+            </div>
+            `;
+        }).join('');
+    }
+
+    openModal('modal-confirm-changes');
+}
+
+function executeBatchSaveConfirmed() {
     try {
-        // Sync semua input yang tampil di tabel ke memori
-        syncBatchTableInputsToMemory();
-
-        // Validasi dasar
-        const invalidStudent = appStudents.find(s => !s.name || !s.nisn);
-        if (invalidStudent) {
-            showToast(`Nama dan NISN tidak boleh kosong untuk ID: ${invalidStudent.id}`, 'error');
-            return;
-        }
-
         // Sinkronkan nama siswa ke riwayat mutasi transaksi
         appStudents.forEach(s => {
             appTransactions.forEach(t => {
@@ -5679,10 +5785,47 @@ function handleSaveBatchEditStudents(event) {
         if (typeof updateStatsCards === 'function') updateStatsCards();
         if (typeof updateChart === 'function') updateChart();
 
+        // Update snapshot baru
+        initialBatchSnapshot = JSON.parse(JSON.stringify(appStudents));
+
+        closeModal('modal-confirm-changes');
         closeModal('modal-batch-edit-students');
-        showToast(`Berhasil menyimpan perubahan data untuk seluruh ${appStudents.length} siswa!`, 'success');
+
+        // Tampilkan Pop-up Sukses yang Mewah & Interaktif
+        showFeedbackSuccessModal(
+            'Perubahan Data Siswa Berhasil Disimpan!',
+            `Data untuk ${appStudents.length} siswa kelas XII Bisnis Ritel 1 telah berhasil diperbarui dan disinkronkan secara permanen ke sistem.`
+        );
     } catch (err) {
         console.error('Error saat menyimpan batch siswa:', err);
         showToast('Terjadi kendala saat menyimpan. Perubahan tetap dicoba disimpan.', 'error');
     }
+}
+
+function attemptCloseBatchEditModal() {
+    const changes = detectBatchChanges();
+    if (changes.length === 0) {
+        closeModal('modal-batch-edit-students');
+    } else {
+        openModal('modal-unsaved-warning');
+    }
+}
+
+function forceCloseBatchEditModal() {
+    // Revert in-memory appStudents to snapshot
+    if (initialBatchSnapshot && initialBatchSnapshot.length > 0) {
+        appStudents = JSON.parse(JSON.stringify(initialBatchSnapshot));
+    }
+    closeModal('modal-unsaved-warning');
+    closeModal('modal-batch-edit-students');
+    renderBatchEditStudentRows();
+    showToast('Perubahan dibatalkan.', 'info');
+}
+
+function showFeedbackSuccessModal(title, description) {
+    const titleEl = document.getElementById('pop-success-title');
+    const descEl = document.getElementById('pop-success-desc');
+    if (titleEl) titleEl.innerText = title || 'Perubahan Berhasil Disimpan!';
+    if (descEl) descEl.innerText = description || 'Data berhasil diperbarui ke seluruh sistem.';
+    openModal('modal-feedback-success');
 }
