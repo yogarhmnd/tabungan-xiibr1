@@ -5168,3 +5168,234 @@ function escapeHtml(str) {
     if (!str) return '';
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
+
+// ==========================================================================
+// SISTEM BATCH EDIT DATA SISWA (SPREADSHEET-STYLE MASS EDITOR)
+// ==========================================================================
+
+function openBatchEditStudentsModal() {
+    if (currentUser && currentUser.role !== 'admin') {
+        showToast('Akses ditolak: Menu ini khusus Wali Kelas / Admin.', 'error');
+        return;
+    }
+
+    renderBatchEditStudentRows();
+    const searchInput = document.getElementById('batch-edit-search');
+    if (searchInput) searchInput.value = '';
+    
+    const importPanel = document.getElementById('batch-import-panel');
+    if (importPanel) importPanel.classList.add('hidden');
+
+    openModal('modal-batch-edit-students');
+}
+
+function renderBatchEditStudentRows(studentsList = null) {
+    const tbody = document.getElementById('batch-edit-students-tbody');
+    if (!tbody) return;
+
+    const list = studentsList || [...appStudents].sort((a, b) => a.name.localeCompare(b.name));
+    const badge = document.getElementById('batch-edit-count-badge');
+    if (badge) badge.innerText = `${list.length} Siswa Ditampilkan (Total: ${appStudents.length})`;
+
+    if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted p-4">Tidak ada data siswa yang cocok dengan pencarian.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = list.map((s, idx) => {
+        return `
+        <tr data-student-id="${s.id}" class="batch-student-row">
+            <td style="text-align: center;">
+                <div class="d-flex align-items-center justify-content-center gap-1">
+                    <span class="small font-weight-bold text-muted">${idx + 1}</span>
+                </div>
+            </td>
+            <td>
+                <input type="text" class="form-control batch-inp-name" value="${escapeHtml(s.name)}" required placeholder="Nama Siswa" data-id="${s.id}">
+            </td>
+            <td>
+                <input type="text" class="form-control batch-inp-nisn font-monospace" value="${escapeHtml(s.nisn)}" required placeholder="NISN" data-id="${s.id}">
+            </td>
+            <td>
+                <input type="text" class="form-control batch-inp-phone font-monospace" value="${escapeHtml(s.phone || '')}" placeholder="08xxxxxxxxxx" data-id="${s.id}">
+            </td>
+            <td>
+                <input type="number" class="form-control batch-inp-target font-weight-bold" value="${s.target || 1000000}" step="10000" min="0" placeholder="Target" data-id="${s.id}">
+            </td>
+            <td>
+                <input type="text" class="form-control batch-inp-password font-monospace" value="${escapeHtml(s.password || 'password123')}" required placeholder="Password" data-id="${s.id}">
+            </td>
+            <td style="text-align: right;">
+                <span class="badge badge-emerald font-weight-bold">${formatRp(s.balance || 0)}</span>
+            </td>
+        </tr>
+        `;
+    }).join('');
+}
+
+function filterBatchEditStudentRows(query) {
+    const q = (query || '').toLowerCase().trim();
+    if (!q) {
+        renderBatchEditStudentRows();
+        return;
+    }
+
+    const filtered = appStudents.filter(s => 
+        s.name.toLowerCase().includes(q) ||
+        s.nisn.includes(q) ||
+        (s.phone && s.phone.includes(q))
+    ).sort((a, b) => a.name.localeCompare(b.name));
+
+    renderBatchEditStudentRows(filtered);
+}
+
+function applyBatchTargetToAll() {
+    const massTargetInp = document.getElementById('mass-target-input');
+    const val = parseInt(massTargetInp.value, 10);
+    if (isNaN(val) || val < 0) {
+        showToast('Masukkan nominal target yang valid terlebih dahulu!', 'error');
+        return;
+    }
+
+    const inputs = document.querySelectorAll('.batch-inp-target');
+    inputs.forEach(inp => {
+        inp.value = val;
+    });
+
+    showToast(`Target Rp ${val.toLocaleString('id-ID')} berhasil diterapkan ke seluruh kolom siswa!`, 'success');
+}
+
+function applyBatchPasswordToAll() {
+    const newPass = prompt('Masukkan password baru untuk SEMUA siswa:', 'password123');
+    if (newPass === null) return;
+    if (!newPass.trim()) {
+        showToast('Password tidak boleh kosong!', 'error');
+        return;
+    }
+
+    const inputs = document.querySelectorAll('.batch-inp-password');
+    inputs.forEach(inp => {
+        inp.value = newPass.trim();
+    });
+
+    showToast(`Password massal '${newPass.trim()}' berhasil diterapkan ke seluruh kolom siswa!`, 'success');
+}
+
+function toggleBatchImportBox() {
+    const panel = document.getElementById('batch-import-panel');
+    if (panel) panel.classList.toggle('hidden');
+}
+
+function processBatchImportText() {
+    const textarea = document.getElementById('batch-import-textarea');
+    if (!textarea || !textarea.value.trim()) {
+        showToast('Silakan tempel teks spreadsheet data siswa terlebih dahulu!', 'error');
+        return;
+    }
+
+    const lines = textarea.value.trim().split('\n').map(l => l.trim()).filter(Boolean);
+    let updatedCount = 0;
+
+    lines.forEach(line => {
+        // Support tab-delimited or comma-delimited
+        const parts = line.includes('\t') ? line.split('\t') : line.split(',');
+        if (parts.length < 2) return;
+
+        const name = parts[0].trim();
+        const nisn = parts[1].trim();
+        const phone = parts[2] ? parts[2].trim() : '';
+        const target = parts[3] ? parseInt(parts[3].replace(/[^\d]/g, ''), 10) : null;
+        const pass = parts[4] ? parts[4].trim() : '';
+
+        // Match with existing rows
+        const nameInp = Array.from(document.querySelectorAll('.batch-inp-name')).find(inp => 
+            inp.value.toLowerCase().trim() === name.toLowerCase()
+        );
+
+        if (nameInp) {
+            const studentId = nameInp.dataset.id;
+            const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
+            if (row) {
+                if (nisn) row.querySelector('.batch-inp-nisn').value = nisn;
+                if (phone) row.querySelector('.batch-inp-phone').value = phone;
+                if (target !== null && !isNaN(target)) row.querySelector('.batch-inp-target').value = target;
+                if (pass) row.querySelector('.batch-inp-password').value = pass;
+                updatedCount++;
+            }
+        }
+    });
+
+    showToast(`Berhasil mencocokkan & mengisi ${updatedCount} baris data siswa dari spreadsheet!`, 'success');
+    toggleBatchImportBox();
+}
+
+function exportStudentsToCSV() {
+    const headers = ['ID', 'Nama Lengkap', 'NISN', 'No. WhatsApp', 'Saldo Tabungan', 'Target Tabungan', 'Password Siswa'];
+    const rows = appStudents.map(s => [
+        s.id,
+        `"${s.name.replace(/"/g, '""')}"`,
+        `"${s.nisn}"`,
+        `"${s.phone || ''}"`,
+        s.balance || 0,
+        s.target || 1000000,
+        `"${s.password || 'password123'}"`
+    ]);
+
+    const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `data_siswa_xii_br1_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    showToast('File CSV Data Siswa berhasil diunduh!', 'success');
+}
+
+function handleSaveBatchEditStudents(event) {
+    event.preventDefault();
+
+    const rows = document.querySelectorAll('.batch-student-row');
+    if (!rows || rows.length === 0) {
+        showToast('Tidak ada data baris siswa untuk disimpan.', 'error');
+        return;
+    }
+
+    let modifiedCount = 0;
+    const validationErrors = [];
+
+    rows.forEach(row => {
+        const studentId = row.getAttribute('data-student-id');
+        const nameVal = row.querySelector('.batch-inp-name').value.trim();
+        const nisnVal = row.querySelector('.batch-inp-nisn').value.trim();
+        const phoneVal = row.querySelector('.batch-inp-phone').value.trim();
+        const targetVal = parseInt(row.querySelector('.batch-inp-target').value, 10) || 1000000;
+        const passVal = row.querySelector('.batch-inp-password').value.trim() || 'password123';
+
+        if (!nameVal) validationErrors.push(`Nama tidak boleh kosong pada ID ${studentId}`);
+        if (!nisnVal) validationErrors.push(`NISN tidak boleh kosong untuk siswa: ${nameVal}`);
+
+        const student = appStudents.find(s => s.id === studentId);
+        if (student) {
+            student.name = nameVal;
+            student.nisn = nisnVal;
+            student.phone = phoneVal;
+            student.target = targetVal;
+            student.password = passVal;
+            modifiedCount++;
+        }
+    });
+
+    if (validationErrors.length > 0) {
+        showToast(validationErrors[0], 'error');
+        return;
+    }
+
+    saveStudents();
+    populateStudentDropdowns();
+    renderAllViews();
+    closeModal('modal-batch-edit-students');
+
+    showToast(`Berhasil menyimpan perubahan massal untuk ${modifiedCount} siswa!`, 'success');
+}

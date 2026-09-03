@@ -242,6 +242,9 @@
                     <button class="btn btn-secondary btn-icon" onclick="refreshData()" title="Refresh Data">
                         <i class="fa-solid fa-rotate"></i>
                     </button>
+                    <button class="btn btn-emerald admin-only" onclick="openBatchEditStudentsModal()" title="Edit Data Banyak Siswa Sekaligus">
+                        <i class="fa-solid fa-user-pen"></i> Batch Edit Siswa
+                    </button>
                     <button class="btn btn-primary admin-only" onclick="openAddStudentModal()">
                         <i class="fa-solid fa-user-plus"></i> Tambah Siswa
                     </button>
@@ -462,9 +465,14 @@
                             <h3><i class="fa-solid fa-users"></i> Data Siswa/i XII Bisnis Ritel 1 (44 Siswa)</h3>
                             <p>SMK PGRI 11 Ciledug Kota Tangerang</p>
                         </div>
-                        <button class="btn btn-primary admin-only" onclick="openAddStudentModal()">
-                            <i class="fa-solid fa-user-plus"></i> Tambah Siswa Baru
-                        </button>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button class="btn btn-emerald admin-only" onclick="openBatchEditStudentsModal()" title="Edit Data Banyak Siswa Sekaligus">
+                                <i class="fa-solid fa-user-pen"></i> Batch Edit Data Siswa
+                            </button>
+                            <button class="btn btn-primary admin-only" onclick="openAddStudentModal()">
+                                <i class="fa-solid fa-user-plus"></i> Tambah Siswa Baru
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <!-- Student Cards Grid -->
@@ -1122,6 +1130,97 @@
                     <i class="fa-solid fa-copy"></i> Salin Rekap Ke Clipboard (Copied)
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL 8: BATCH EDIT DATA SISWA KELAS (Spreadsheet-Style Mass Editor) -->
+    <div class="modal-backdrop" id="modal-batch-edit-students">
+        <div class="modal-card modal-xl">
+            <div class="modal-header">
+                <div>
+                    <h3><i class="fa-solid fa-user-pen text-emerald"></i> Batch Edit Data Siswa XII Bisnis Ritel 1</h3>
+                    <p class="text-muted small mb-0">Ubah Nama, NISN, No. WhatsApp, Target Tabungan, dan Password untuk seluruh siswa sekaligus.</p>
+                </div>
+                <button class="modal-close" onclick="closeModal('modal-batch-edit-students')">&times;</button>
+            </div>
+            <form id="form-batch-edit-students" onsubmit="handleSaveBatchEditStudents(event)">
+                <div class="modal-body">
+                    <!-- Batch Toolbar: Search & Quick Mass Controls -->
+                    <div class="batch-toolbar">
+                        <div class="search-box" style="max-width: 280px;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="batch-edit-search" placeholder="Cari nama atau NISN siswa..." oninput="filterBatchEditStudentRows(this.value)">
+                        </div>
+
+                        <div class="batch-quick-controls">
+                            <!-- Mass Target Setter -->
+                            <div class="d-flex align-items-center gap-1">
+                                <input type="number" id="mass-target-input" class="form-control" placeholder="Target Rp..." style="width: 140px; padding: 0.4rem 0.6rem; font-size: 0.825rem;" step="50000" min="0">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="applyBatchTargetToAll()" title="Terapkan Target ini ke Semua Siswa">
+                                    <i class="fa-solid fa-bullseye"></i> Set Semua Target
+                                </button>
+                            </div>
+
+                            <!-- Mass Password Reset -->
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="applyBatchPasswordToAll()" title="Set Password 'password123' untuk Semua Siswa">
+                                <i class="fa-solid fa-key"></i> Reset Password Masal
+                            </button>
+
+                            <!-- Toggle Import/Export Panel -->
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBatchImportBox()" title="Impor Data dari Spreadsheet / Excel">
+                                <i class="fa-solid fa-file-import"></i> Impor Paste
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="exportStudentsToCSV()" title="Ekspor Data Siswa ke File CSV">
+                                <i class="fa-solid fa-file-csv"></i> Ekspor CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Collapsible Batch Import Box -->
+                    <div id="batch-import-panel" class="batch-import-panel hidden">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong><i class="fa-solid fa-table"></i> Tempel (Paste) Data Spreadsheet Siswa</strong>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBatchImportBox()">&times; Tutup</button>
+                        </div>
+                        <p class="small text-muted mb-2">Format kolom per baris (berpisah Tab atau Koma): <code>Nama Siswa [Tab] NISN [Tab] No. WA [Tab] Target [Tab] Password</code></p>
+                        <textarea id="batch-import-textarea" class="form-control font-monospace mb-2" rows="4" placeholder="Contoh:&#10;AFGAN AFFANDI&#9;0085191456&#9;081234567001&#9;1000000&#9;password123&#10;AHMAD&#9;0082546680&#9;081234567002&#9;1000000&#9;password123"></textarea>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="processBatchImportText()">
+                            <i class="fa-solid fa-check"></i> Terapkan ke Tabel Batch Edit
+                        </button>
+                    </div>
+
+                    <!-- Interactive Editable Table -->
+                    <div class="batch-table-container">
+                        <table class="batch-edit-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px; text-align: center;">No</th>
+                                    <th style="min-width: 220px;">Nama Lengkap Siswa <span class="required">*</span></th>
+                                    <th style="min-width: 130px;">NISN <span class="required">*</span></th>
+                                    <th style="min-width: 140px;">No. WhatsApp</th>
+                                    <th style="min-width: 140px;">Target Tabungan (Rp)</th>
+                                    <th style="min-width: 140px;">Password Siswa</th>
+                                    <th style="min-width: 120px; text-align: right;">Saldo Saat Ini</th>
+                                </tr>
+                            </thead>
+                            <tbody id="batch-edit-students-tbody">
+                                <!-- Dynamic populated rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-muted small">
+                        <span id="batch-edit-count-badge" class="badge badge-emerald">44 Siswa Terdaftar</span>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-batch-edit-students')">Batal</button>
+                        <button type="submit" class="btn btn-emerald btn-lg" id="btn-save-batch-students">
+                            <i class="fa-solid fa-floppy-disk"></i> Simpan Semua Perubahan Siswa
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
