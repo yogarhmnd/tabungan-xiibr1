@@ -6,11 +6,11 @@
    ========================================================================= */
 
 // Storage Keys (Auto-seeded with 44 Official Students)
-const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v7';
-const STORAGE_TX_KEY = 'tabungbr1_transactions_v7';
-const STORAGE_AUTH_KEY = 'tabungbr1_session_v7';
-const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v7';
-const STORAGE_THEME_KEY = 'tabungbr1_theme_v7';
+const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v8';
+const STORAGE_TX_KEY = 'tabungbr1_transactions_v8';
+const STORAGE_AUTH_KEY = 'tabungbr1_session_v8';
+const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v8';
+const STORAGE_THEME_KEY = 'tabungbr1_theme_v8';
 
 // Official Class List for XII Bisnis Ritel 1 (44 Students with Registered WhatsApp Phone Numbers)
 const INITIAL_TRANSACTIONS = [
@@ -3111,6 +3111,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-001",
         "nisn": "0085191456",
         "name": "AFGAN AFFANDI",
+        "photo": "assets/students/0085191456.jpg",
         "phone": "081234567001",
         "balance": 10000,
         "target": 1000000,
@@ -3120,6 +3121,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-002",
         "nisn": "0082546680",
         "name": "AHMAD",
+        "photo": "assets/students/0082546680.jpg",
         "phone": "081234567002",
         "balance": 55000,
         "target": 1000000,
@@ -3129,6 +3131,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-003",
         "nisn": "0082865515",
         "name": "AHMAD DAI ROBI",
+        "photo": "assets/students/0082865515.jpg",
         "phone": "081234567003",
         "balance": 0,
         "target": 1000000,
@@ -3138,6 +3141,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-004",
         "nisn": "0092316992",
         "name": "ALFI SYAHRI",
+        "photo": "assets/students/0092316992.jpg",
         "phone": "081234567004",
         "balance": 200000,
         "target": 1000000,
@@ -3147,6 +3151,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-005",
         "nisn": "0085602576",
         "name": "ALFIESYA NUR RACHMAN",
+        "photo": "assets/students/0085602576.jpg",
         "phone": "081234567005",
         "balance": 80000,
         "target": 1000000,
@@ -3658,6 +3663,7 @@ function loadState() {
                     id: official.id,
                     nisn: official.nisn,
                     name: official.name,
+                    photo: (found && found.photo) ? found.photo : (official.photo || null),
                     phone: (found && found.phone) ? found.phone : official.phone,
                     balance: (found && typeof found.balance === 'number') ? found.balance : official.balance,
                     target: (found && typeof found.target === 'number') ? found.target : official.target,
@@ -3780,8 +3786,13 @@ function handleStudentSelectChange(selectedNisn) {
     if (student) {
         if (previewBox) {
             const avatarEl = document.getElementById('preview-student-avatar');
-            avatarEl.innerText = student.name.charAt(0);
-            avatarEl.style.background = getStudentAvatarGradient(student.name);
+            if (student.photo) {
+                avatarEl.innerHTML = `<img src="${student.photo}" alt="${escapeHtml(student.name)}" class="student-photo-img" onerror="this.onerror=null; this.parentElement.innerText='${student.name.charAt(0)}'; this.parentElement.style.background='${getStudentAvatarGradient(student.name)}';">`;
+                avatarEl.style.background = '#0f172a';
+            } else {
+                avatarEl.innerHTML = student.name.charAt(0);
+                avatarEl.style.background = getStudentAvatarGradient(student.name);
+            }
             document.getElementById('preview-student-name').innerText = student.name;
             document.getElementById('preview-student-nisn').innerText = student.nisn;
             previewBox.classList.remove('hidden');
@@ -4169,8 +4180,13 @@ function renderStudentDashboard() {
 
     const avatarEl = document.getElementById('s-welcome-avatar');
     if (avatarEl) {
-        avatarEl.innerText = student.name.charAt(0);
-        avatarEl.style.background = getStudentAvatarGradient(student.name);
+        if (student.photo) {
+            avatarEl.innerHTML = `<img src="${student.photo}" alt="${escapeHtml(student.name)}" class="student-photo-img" onerror="this.onerror=null; this.parentElement.innerText='${student.name.charAt(0)}'; this.parentElement.style.background='${getStudentAvatarGradient(student.name)}';">`;
+            avatarEl.style.background = '#0f172a';
+        } else {
+            avatarEl.innerHTML = student.name.charAt(0);
+            avatarEl.style.background = getStudentAvatarGradient(student.name);
+        }
     }
     document.getElementById('s-welcome-name').innerText = student.name;
     document.getElementById('s-welcome-nisn').innerText = student.nisn;
@@ -4297,10 +4313,14 @@ function renderStudentsGrid() {
 
     container.innerHTML = sortedStudents.map(s => {
         const progress = s.target > 0 ? Math.min(100, Math.round((s.balance / s.target) * 100)) : 0;
+        const avatarHtml = s.photo 
+            ? `<div class="student-avatar-frame"><img src="${s.photo}" alt="${escapeHtml(s.name)}" class="student-photo-img" onerror="this.onerror=null; this.parentElement.outerHTML='<div class=\\'student-avatar\\' style=\\'background: ${getStudentAvatarGradient(s.name)};\\'>${s.name.charAt(0)}</div>';"></div>`
+            : `<div class="student-avatar" style="background: ${getStudentAvatarGradient(s.name)};">${s.name.charAt(0)}</div>`;
+
         return `
             <div class="student-card">
                 <div class="student-header">
-                    <div class="student-avatar" style="background: ${getStudentAvatarGradient(s.name)};">${s.name.charAt(0)}</div>
+                    ${avatarHtml}
                     <div class="student-name-box">
                         <h4>${escapeHtml(s.name)}</h4>
                         <small>NISN: ${s.nisn} | WA: ${s.phone || '-'}</small>
@@ -4951,6 +4971,17 @@ function openPassbookModal(studentId) {
     document.getElementById('pb-target').innerText = formatRp(student.target || 0);
     document.getElementById('pb-saldo').innerText = formatRp(student.balance);
 
+    const photoContainer = document.getElementById('pb-photo-container');
+    if (photoContainer) {
+        if (student.photo) {
+            photoContainer.innerHTML = `<img src="${student.photo}" alt="${escapeHtml(student.name)}" class="student-photo-img" onerror="this.onerror=null; this.parentElement.innerText='${student.name.charAt(0)}'; this.parentElement.style.background='${getStudentAvatarGradient(student.name)}';">`;
+            photoContainer.style.background = '#0f172a';
+        } else {
+            photoContainer.innerHTML = student.name.charAt(0);
+            photoContainer.style.background = getStudentAvatarGradient(student.name);
+        }
+    }
+
     const progress = student.target > 0 ? Math.min(100, Math.round((student.balance / student.target) * 100)) : 0;
     document.getElementById('pb-progress-text').innerText = `${progress}%`;
     document.getElementById('pb-progress-bar').style.width = `${progress}%`;
@@ -5203,6 +5234,10 @@ function renderBatchEditStudentRows(studentsList = null) {
     }
 
     tbody.innerHTML = list.map((s, idx) => {
+        const thumbHtml = s.photo 
+            ? `<div class="batch-student-thumb"><img src="${s.photo}" alt="${escapeHtml(s.name)}" onerror="this.onerror=null; this.parentElement.innerText='${s.name.charAt(0)}';"></div>`
+            : `<div class="batch-student-thumb" style="background: ${getStudentAvatarGradient(s.name)};">${s.name.charAt(0)}</div>`;
+
         return `
         <tr data-student-id="${s.id}" class="batch-student-row">
             <td style="text-align: center;">
@@ -5211,7 +5246,10 @@ function renderBatchEditStudentRows(studentsList = null) {
                 </div>
             </td>
             <td>
-                <input type="text" class="form-control batch-inp-name" value="${escapeHtml(s.name)}" required placeholder="Nama Siswa" data-id="${s.id}">
+                <div class="d-flex align-items-center">
+                    ${thumbHtml}
+                    <input type="text" class="form-control batch-inp-name flex-grow" value="${escapeHtml(s.name)}" required placeholder="Nama Siswa" data-id="${s.id}">
+                </div>
             </td>
             <td>
                 <input type="text" class="form-control batch-inp-nisn font-monospace" value="${escapeHtml(s.nisn)}" required placeholder="NISN" data-id="${s.id}">
