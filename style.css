@@ -1925,6 +1925,74 @@ select.form-control {
     border-color: #a5b4fc !important;
 }
 
+/* Interactive Batch Photo Upload Cell */
+.batch-photo-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.batch-thumb-container {
+    position: relative;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.batch-thumb-container:hover .batch-thumb-overlay {
+    opacity: 1;
+}
+
+.batch-thumb-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.75);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.batch-photo-actions-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.batch-photo-btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.72rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.batch-photo-btn-sm:hover {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--text-primary);
+    border-color: var(--color-indigo);
+}
+
+.batch-photo-btn-sm.btn-remove-photo:hover {
+    background: rgba(244, 63, 94, 0.2);
+    color: var(--color-rose);
+    border-color: var(--color-rose);
+}
+
 .modal-header {
     padding: 1.4rem 1.75rem;
     border-bottom: 1px solid var(--border-color);

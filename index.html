@@ -1166,6 +1166,12 @@
                                 <i class="fa-solid fa-key"></i> Reset Password Masal
                             </button>
 
+                            <!-- Mass Photo Upload -->
+                            <label class="btn btn-secondary btn-sm" title="Upload Banyak File Foto Sekaligus (Otomatis cocokkan dengan NISN atau Nama File Siswa)" style="cursor: pointer; margin-bottom: 0;">
+                                <i class="fa-solid fa-images text-emerald"></i> Upload Banyak Foto
+                                <input type="file" id="batch-multi-photo-input" multiple accept="image/*" style="display: none;" onchange="handleBatchMultiPhotoUpload(this.files)">
+                            </label>
+
                             <!-- Toggle Import/Export Panel -->
                             <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBatchImportBox()" title="Impor Data dari Spreadsheet / Excel">
                                 <i class="fa-solid fa-file-import"></i> Impor Paste
@@ -1182,8 +1188,8 @@
                             <strong><i class="fa-solid fa-table"></i> Tempel (Paste) Data Spreadsheet Siswa</strong>
                             <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBatchImportBox()">&times; Tutup</button>
                         </div>
-                        <p class="small text-muted mb-2">Format kolom per baris (berpisah Tab atau Koma): <code>Nama Siswa [Tab] NISN [Tab] No. WA [Tab] Target [Tab] Password</code></p>
-                        <textarea id="batch-import-textarea" class="form-control font-monospace mb-2" rows="4" placeholder="Contoh:&#10;AFGAN AFFANDI&#9;0085191456&#9;081234567001&#9;1000000&#9;password123&#10;AHMAD&#9;0082546680&#9;081234567002&#9;1000000&#9;password123"></textarea>
+                        <p class="small text-muted mb-2">Format kolom per baris (berpisah Tab atau Koma): <code>Nama Siswa [Tab] NISN [Tab] No. WA [Tab] Target [Tab] Password [Tab] URL Foto</code></p>
+                        <textarea id="batch-import-textarea" class="form-control font-monospace mb-2" rows="4" placeholder="Contoh:&#10;AFGAN AFFANDI&#9;0085191456&#9;081234567001&#9;1000000&#9;password123&#9;assets/students/0085191456.jpg&#10;AHMAD&#9;0082546680&#9;081234567002&#9;1000000&#9;password123"></textarea>
                         <button type="button" class="btn btn-primary btn-sm" onclick="processBatchImportText()">
                             <i class="fa-solid fa-check"></i> Terapkan ke Tabel Batch Edit
                         </button>
@@ -1194,13 +1200,14 @@
                         <table class="batch-edit-table">
                             <thead>
                                 <tr>
-                                    <th style="width: 50px; text-align: center;">No</th>
-                                    <th style="min-width: 220px;">Nama Lengkap Siswa <span class="required">*</span></th>
-                                    <th style="min-width: 130px;">NISN <span class="required">*</span></th>
-                                    <th style="min-width: 140px;">No. WhatsApp</th>
-                                    <th style="min-width: 140px;">Target Tabungan (Rp)</th>
-                                    <th style="min-width: 140px;">Password Siswa</th>
-                                    <th style="min-width: 120px; text-align: right;">Saldo Saat Ini</th>
+                                    <th style="width: 45px; text-align: center;">No</th>
+                                    <th style="width: 140px; text-align: center;">Pasfoto</th>
+                                    <th style="min-width: 200px;">Nama Lengkap Siswa <span class="required">*</span></th>
+                                    <th style="min-width: 120px;">NISN <span class="required">*</span></th>
+                                    <th style="min-width: 130px;">No. WhatsApp</th>
+                                    <th style="min-width: 130px;">Target (Rp)</th>
+                                    <th style="min-width: 130px;">Password</th>
+                                    <th style="min-width: 110px; text-align: right;">Saldo</th>
                                 </tr>
                             </thead>
                             <tbody id="batch-edit-students-tbody">

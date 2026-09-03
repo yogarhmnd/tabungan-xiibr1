@@ -5229,27 +5229,47 @@ function renderBatchEditStudentRows(studentsList = null) {
     if (badge) badge.innerText = `${list.length} Siswa Ditampilkan (Total: ${appStudents.length})`;
 
     if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted p-4">Tidak ada data siswa yang cocok dengan pencarian.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted p-4">Tidak ada data siswa yang cocok dengan pencarian.</td></tr>`;
         return;
     }
 
     tbody.innerHTML = list.map((s, idx) => {
-        const thumbHtml = s.photo 
-            ? `<div class="batch-student-thumb"><img src="${s.photo}" alt="${escapeHtml(s.name)}" onerror="this.onerror=null; this.parentElement.innerText='${s.name.charAt(0)}';"></div>`
-            : `<div class="batch-student-thumb" style="background: ${getStudentAvatarGradient(s.name)};">${s.name.charAt(0)}</div>`;
+        const thumbImg = s.photo 
+            ? `<img src="${s.photo}" alt="${escapeHtml(s.name)}" id="batch-thumb-img-${s.id}">`
+            : `<div id="batch-thumb-img-${s.id}" class="d-flex align-items-center justify-content-center w-100 h-100 font-weight-bold" style="background: ${getStudentAvatarGradient(s.name)}; font-size: 1.1rem; color: #fff;">${s.name.charAt(0)}</div>`;
 
         return `
         <tr data-student-id="${s.id}" class="batch-student-row">
             <td style="text-align: center;">
-                <div class="d-flex align-items-center justify-content-center gap-1">
-                    <span class="small font-weight-bold text-muted">${idx + 1}</span>
+                <span class="small font-weight-bold text-muted">${idx + 1}</span>
+            </td>
+            <td>
+                <div class="batch-photo-cell">
+                    <div class="batch-thumb-container" onclick="triggerSingleStudentPhotoSelect('${s.id}')" title="Klik untuk upload/ganti file foto siswa">
+                        <div class="batch-student-thumb" id="batch-thumb-box-${s.id}" style="margin-right: 0;">
+                            ${thumbImg}
+                        </div>
+                        <div class="batch-thumb-overlay">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="batch-photo-actions-btn">
+                        <input type="file" id="batch-file-${s.id}" accept="image/*" style="display: none;" onchange="handleSingleStudentPhotoFile('${s.id}', this.files[0])">
+                        <button type="button" class="batch-photo-btn-sm" onclick="triggerSingleStudentPhotoSelect('${s.id}')" title="Pilih File Foto">
+                            <i class="fa-solid fa-upload"></i> Upload
+                        </button>
+                        <button type="button" class="batch-photo-btn-sm" onclick="promptStudentPhotoUrl('${s.id}')" title="Tempel Link URL / Path Foto">
+                            <i class="fa-solid fa-link"></i> URL
+                        </button>
+                        <button type="button" class="batch-photo-btn-sm btn-remove-photo" id="batch-btn-remove-${s.id}" onclick="removeStudentPhoto('${s.id}')" title="Hapus Foto" style="${s.photo ? '' : 'display: none;'}">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                    <input type="hidden" class="batch-inp-photo" data-id="${s.id}" value="${escapeHtml(s.photo || '')}">
                 </div>
             </td>
             <td>
-                <div class="d-flex align-items-center">
-                    ${thumbHtml}
-                    <input type="text" class="form-control batch-inp-name flex-grow" value="${escapeHtml(s.name)}" required placeholder="Nama Siswa" data-id="${s.id}">
-                </div>
+                <input type="text" class="form-control batch-inp-name" value="${escapeHtml(s.name)}" required placeholder="Nama Siswa" data-id="${s.id}">
             </td>
             <td>
                 <input type="text" class="form-control batch-inp-nisn font-monospace" value="${escapeHtml(s.nisn)}" required placeholder="NISN" data-id="${s.id}">
@@ -5269,6 +5289,121 @@ function renderBatchEditStudentRows(studentsList = null) {
         </tr>
         `;
     }).join('');
+}
+
+function triggerSingleStudentPhotoSelect(studentId) {
+    const fileInput = document.getElementById(`batch-file-${studentId}`);
+    if (fileInput) fileInput.click();
+}
+
+function handleSingleStudentPhotoFile(studentId, file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64 = e.target.result;
+        const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
+        if (row) {
+            const photoInp = row.querySelector('.batch-inp-photo');
+            if (photoInp) photoInp.value = base64;
+
+            const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
+            if (thumbBox) {
+                thumbBox.innerHTML = `<img src="${base64}" alt="Foto Siswa" id="batch-thumb-img-${studentId}">`;
+            }
+
+            const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
+            if (removeBtn) removeBtn.style.display = 'inline-flex';
+        }
+        showToast('Foto berhasil dimuat di baris editor! Jangan lupa klik Simpan Semua Perubahan.', 'success');
+    };
+    reader.readAsDataURL(file);
+}
+
+function promptStudentPhotoUrl(studentId) {
+    const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
+    const currentVal = row ? (row.querySelector('.batch-inp-photo').value || '') : '';
+    const newUrl = prompt('Masukkan URL foto online (https://...) atau path lokal foto (assets/students/...):', currentVal);
+    if (newUrl === null) return;
+
+    if (row) {
+        const photoInp = row.querySelector('.batch-inp-photo');
+        if (photoInp) photoInp.value = newUrl.trim();
+
+        const student = appStudents.find(s => s.id === studentId);
+        const name = student ? student.name : 'Siswa';
+        const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
+        const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
+
+        if (newUrl.trim()) {
+            if (thumbBox) thumbBox.innerHTML = `<img src="${newUrl.trim()}" alt="${escapeHtml(name)}" id="batch-thumb-img-${studentId}">`;
+            if (removeBtn) removeBtn.style.display = 'inline-flex';
+            showToast('URL foto berhasil diterapkan!', 'success');
+        } else {
+            removeStudentPhoto(studentId);
+        }
+    }
+}
+
+function removeStudentPhoto(studentId) {
+    const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
+    if (row) {
+        const photoInp = row.querySelector('.batch-inp-photo');
+        if (photoInp) photoInp.value = '';
+
+        const nameInp = row.querySelector('.batch-inp-name');
+        const name = nameInp ? nameInp.value : 'S';
+        const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
+        if (thumbBox) {
+            thumbBox.innerHTML = `<div id="batch-thumb-img-${studentId}" class="d-flex align-items-center justify-content-center w-100 h-100 font-weight-bold" style="background: ${getStudentAvatarGradient(name)}; font-size: 1.1rem; color: #fff;">${name.charAt(0)}</div>`;
+        }
+
+        const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
+        if (removeBtn) removeBtn.style.display = 'none';
+
+        showToast('Foto siswa dihapus (kembali ke avatar inisial).', 'info');
+    }
+}
+
+function handleBatchMultiPhotoUpload(files) {
+    if (!files || files.length === 0) return;
+
+    let matchedCount = 0;
+    Array.from(files).forEach(file => {
+        const rawFileName = file.name.toLowerCase();
+        const baseName = rawFileName.substring(0, rawFileName.lastIndexOf('.')) || rawFileName;
+
+        // Try matching by NISN first, or student name
+        const student = appStudents.find(s => {
+            const nisn = s.nisn.toLowerCase();
+            const sName = s.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const cleanBase = baseName.replace(/[^a-z0-9]/g, '');
+            return cleanBase.includes(nisn) || nisn.includes(cleanBase) || cleanBase === sName || sName.includes(cleanBase) || cleanBase.includes(sName);
+        });
+
+        if (student) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64 = e.target.result;
+                const row = document.querySelector(`tr[data-student-id="${student.id}"]`);
+                if (row) {
+                    const photoInp = row.querySelector('.batch-inp-photo');
+                    if (photoInp) photoInp.value = base64;
+
+                    const thumbBox = document.getElementById(`batch-thumb-box-${student.id}`);
+                    if (thumbBox) thumbBox.innerHTML = `<img src="${base64}" alt="${escapeHtml(student.name)}" id="batch-thumb-img-${student.id}">`;
+
+                    const removeBtn = document.getElementById(`batch-btn-remove-${student.id}`);
+                    if (removeBtn) removeBtn.style.display = 'inline-flex';
+                }
+            };
+            reader.readAsDataURL(file);
+            matchedCount++;
+        }
+    });
+
+    setTimeout(() => {
+        showToast(`Berhasil mencocokkan ${matchedCount} file foto dengan data siswa! Klik "Simpan Semua Perubahan" untuk menyimpan permanen.`, 'success');
+    }, 400);
 }
 
 function filterBatchEditStudentRows(query) {
@@ -5344,6 +5479,7 @@ function processBatchImportText() {
         const phone = parts[2] ? parts[2].trim() : '';
         const target = parts[3] ? parseInt(parts[3].replace(/[^\d]/g, ''), 10) : null;
         const pass = parts[4] ? parts[4].trim() : '';
+        const photo = parts[5] ? parts[5].trim() : '';
 
         // Match with existing rows
         const nameInp = Array.from(document.querySelectorAll('.batch-inp-name')).find(inp => 
@@ -5358,6 +5494,12 @@ function processBatchImportText() {
                 if (phone) row.querySelector('.batch-inp-phone').value = phone;
                 if (target !== null && !isNaN(target)) row.querySelector('.batch-inp-target').value = target;
                 if (pass) row.querySelector('.batch-inp-password').value = pass;
+                if (photo) {
+                    const photoInp = row.querySelector('.batch-inp-photo');
+                    if (photoInp) photoInp.value = photo;
+                    const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
+                    if (thumbBox) thumbBox.innerHTML = `<img src="${photo}" alt="${escapeHtml(name)}" id="batch-thumb-img-${studentId}">`;
+                }
                 updatedCount++;
             }
         }
@@ -5368,7 +5510,7 @@ function processBatchImportText() {
 }
 
 function exportStudentsToCSV() {
-    const headers = ['ID', 'Nama Lengkap', 'NISN', 'No. WhatsApp', 'Saldo Tabungan', 'Target Tabungan', 'Password Siswa'];
+    const headers = ['ID', 'Nama Lengkap', 'NISN', 'No. WhatsApp', 'Saldo Tabungan', 'Target Tabungan', 'Password Siswa', 'URL Foto'];
     const rows = appStudents.map(s => [
         s.id,
         `"${s.name.replace(/"/g, '""')}"`,
@@ -5376,7 +5518,8 @@ function exportStudentsToCSV() {
         `"${s.phone || ''}"`,
         s.balance || 0,
         s.target || 1000000,
-        `"${s.password || 'password123'}"`
+        `"${s.password || 'password123'}"`,
+        `"${s.photo || ''}"`
     ]);
 
     const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
@@ -5410,6 +5553,7 @@ function handleSaveBatchEditStudents(event) {
         const phoneVal = row.querySelector('.batch-inp-phone').value.trim();
         const targetVal = parseInt(row.querySelector('.batch-inp-target').value, 10) || 1000000;
         const passVal = row.querySelector('.batch-inp-password').value.trim() || 'password123';
+        const photoVal = row.querySelector('.batch-inp-photo') ? row.querySelector('.batch-inp-photo').value.trim() : '';
 
         if (!nameVal) validationErrors.push(`Nama tidak boleh kosong pada ID ${studentId}`);
         if (!nisnVal) validationErrors.push(`NISN tidak boleh kosong untuk siswa: ${nameVal}`);
@@ -5421,6 +5565,7 @@ function handleSaveBatchEditStudents(event) {
             student.phone = phoneVal;
             student.target = targetVal;
             student.password = passVal;
+            student.photo = photoVal || null;
             modifiedCount++;
         }
     });
