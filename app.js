@@ -4934,31 +4934,76 @@ function handleTransactionSubmit(e) {
     openWaPromptModal(newTx, student);
 }
 
-// WHATSAPP NOTIFICATION ENGINE
+// WHATSAPP NOTIFICATION ENGINE & FORMATTERS
+function formatWaDate(dtStr) {
+    if (!dtStr) return '-';
+    const d = new Date(dtStr);
+    const months = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = months[d.getMonth()];
+    const year = d.getFullYear();
+    return `${day} ${month} ${year}`;
+}
+
+function formatWaTime(dtStr) {
+    if (!dtStr) return '-';
+    const d = new Date(dtStr);
+    const hours = String(d.getHours()).padStart(2, '0');
+    const minutes = String(d.getMinutes()).padStart(2, '0');
+    return `${hours}.${minutes}`;
+}
+
+function formatWaRp(amount) {
+    return 'Rp' + Number(amount || 0).toLocaleString('id-ID');
+}
+
 function buildWaMessageText(tx, student) {
     const isSetor = tx.type === 'setor';
-    const txLabel = isSetor ? 'SETORAN TABUNGAN (UANG MASUK)' : 'PENARIKAN TABUNGAN (UANG KELUAR)';
-    const emojiHeader = isSetor ? '📥' : '📤';
+    const txTypeStr = isSetor ? 'setoran tabungan siswa' : 'penarikan tabungan siswa';
+    const txJenisStr = isSetor ? 'Setoran Tabungan' : 'Penarikan Tabungan';
+    const txNominalLabel = isSetor ? 'Nominal Setoran' : 'Nominal Penarikan';
+    const concludingSentence = isSetor 
+        ? 'Setoran tersebut telah dicatat dan diperbarui pada administrasi tabungan kelas.' 
+        : 'Penarikan tersebut telah dicatat dan diperbarui pada administrasi tabungan kelas.';
 
-    let msg = `*${emojiHeader} NOTIFIKASI TABUNGAN SISWA*\n`;
-    msg += `*SMK PGRI 11 CILEDUG KOTA TANGERANG*\n`;
-    msg += `-------------------------------------------\n\n`;
-    msg += `Yth. Orang Tua / Siswa:\n`;
-    msg += `👤 *Nama:* ${student.name}\n`;
-    msg += `🆔 *NISN:* ${student.nisn}\n`;
-    msg += `🏫 *Kelas:* XII Bisnis Ritel 1 (BR 1)\n\n`;
-    msg += `*Rincian Transaksi:* \n`;
-    msg += `📌 *Jenis:* ${txLabel}\n`;
-    msg += `🏷️ *Kategori:* ${tx.category}\n`;
-    msg += `💰 *Nominal:* *${isSetor ? '+' : '-'} ${formatRp(tx.amount)}*\n`;
-    msg += `🕒 *Waktu:* ${formatDateTime(tx.date)}\n`;
-    msg += `📝 *Keterangan:* ${tx.note || '-'}\n\n`;
-    msg += `-------------------------------------------\n`;
-    msg += `💳 *SALDO TABUNGAN SAAT INI:* *${formatRp(student.balance)}*\n`;
-    msg += `🎯 *Target Tabungan:* ${formatRp(student.target || 0)}\n`;
-    msg += `-------------------------------------------\n\n`;
-    msg += `_Pesan ini dikirim otomatis oleh Sistem Tabungan Kelas XII BR 1 SMK PGRI 11 Ciledug._\n`;
-    msg += `Wali Kelas: *Yoga Rahmanda, S.Pd.*`;
+    const formattedDate = formatWaDate(tx.date);
+    const formattedTime = `${formatWaTime(tx.date)} WIB`;
+    const nominalFormatted = formatWaRp(tx.amount);
+    const saldoFormatted = formatWaRp(student.balance);
+    const targetFormatted = formatWaRp(student.target || 1000000);
+    const keterangan = tx.note && tx.note.trim() ? tx.note.trim() : (isSetor ? 'Setoran harian kas kelas BR 1' : 'Penarikan kas kelas BR 1');
+    const kategori = tx.category || (isSetor ? 'Tabungan Harian' : 'Penarikan Tabungan');
+
+    let msg = `*PEMBERITAHUAN TRANSAKSI TABUNGAN SISWA*\n`;
+    msg += `*SMK PGRI 11 CILEDUG KOTA TANGERANG*\n\n`;
+    msg += `Yth. Bapak/Ibu Orang Tua/Wali Siswa\n`;
+    msg += `serta Siswa Kelas XII Bisnis Ritel 1,\n\n`;
+    msg += `Dengan hormat, kami menyampaikan bahwa telah tercatat transaksi *${txTypeStr}* dengan rincian sebagai berikut:\n\n`;
+    msg += `*DATA SISWA*\n`;
+    msg += `Nama        : *${student.name}*\n`;
+    msg += `NISN        : ${student.nisn || '-'}\n`;
+    msg += `Kelas       : XII Bisnis Ritel 1 (BR 1)\n\n`;
+    msg += `*DETAIL TRANSAKSI*\n`;
+    msg += `Jenis Transaksi : *${txJenisStr}*\n`;
+    msg += `Kategori        : ${kategori}\n`;
+    msg += `${txNominalLabel} : *${nominalFormatted}*\n`;
+    msg += `Tanggal         : ${formattedDate}\n`;
+    msg += `Waktu           : ${formattedTime}\n`;
+    msg += `Keterangan      : ${keterangan}\n\n`;
+    msg += `*INFORMASI TABUNGAN*\n`;
+    msg += `Saldo Saat Ini  : *${saldoFormatted}*\n`;
+    msg += `Target Tabungan : *${targetFormatted}*\n\n`;
+    msg += `${concludingSentence}\n\n`;
+    msg += `Demikian pemberitahuan ini disampaikan sebagai informasi kepada siswa dan orang tua/wali. Terima kasih atas perhatian dan kerja sama yang baik.\n\n`;
+    msg += `Hormat kami,\n\n`;
+    msg += `*Wali Kelas XII Bisnis Ritel 1*\n`;
+    msg += `*Yoga Rahmanda, S.Pd.*\n\n`;
+    msg += `--- \n\n`;
+    msg += `*Pesan ini dikirim secara otomatis oleh Sistem Administrasi Tabungan Kelas XII BR 1 SMK PGRI 11 Ciledug.*\n`;
+    msg += `*Mohon tidak membalas pesan ini.*`;
 
     return msg;
 }
