@@ -117,6 +117,14 @@
 
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
+            <!-- Mobile Close Navigation Panel (Khusus Layar HP / Mobile) -->
+            <div class="sidebar-mobile-header">
+                <span class="mobile-nav-title"><i class="fa-solid fa-bars-staggered"></i> Menu Navigasi</span>
+                <button class="sidebar-close-btn" onclick="toggleSidebar()" title="Tutup Navigasi Sidebar">
+                    <i class="fa-solid fa-xmark"></i> <span>Tutup</span>
+                </button>
+            </div>
+
             <div class="brand">
                 <div class="brand-icon" id="brand-icon-box" title="Logo PGRI - SMK PGRI 11 CILEDUG">
                     <img src="PGRI.png" id="brand-logo-img" alt="Logo SMK PGRI 11" class="brand-logo-img" onload="adaptLogoBackground(this)" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
@@ -127,8 +135,6 @@
                     <span class="brand-class">XII Bisnis Ritel 1</span>
                     <span class="brand-school">SMK PGRI 11 CILEDUG</span>
                 </div>
-                <!-- Tombol Close Sidebar Khusus Mobile -->
-                <button class="sidebar-close-btn" onclick="toggleSidebar()" title="Tutup Menu Sidebar"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <!-- Role Indicator Card -->

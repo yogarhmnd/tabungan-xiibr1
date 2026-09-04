@@ -5309,19 +5309,37 @@ function updateChart() {
     savingsChartInstance.update();
 }
 
-// Toast System
+// Toast Notification System
 function showToast(message, type = 'success') {
     const container = document.getElementById('toast-container');
+    if (!container) return;
+
     const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
+    const normalizedType = (type === 'danger' || type === 'error') ? 'danger' : type;
+    toast.className = `toast toast-${normalizedType}`;
+
+    let iconClass = 'fa-circle-check text-emerald';
+    if (normalizedType === 'danger') {
+        iconClass = 'fa-circle-xmark text-rose';
+    } else if (normalizedType === 'warning') {
+        iconClass = 'fa-triangle-exclamation text-amber';
+    } else if (normalizedType === 'info') {
+        iconClass = 'fa-circle-info text-primary';
+    }
+
     toast.innerHTML = `
-        <i class="fa-solid ${type === 'success' ? 'fa-circle-check text-emerald' : 'fa-circle-exclamation text-rose'}"></i>
+        <i class="fa-solid ${iconClass}"></i>
         <span>${escapeHtml(message)}</span>
+        <button type="button" class="toast-close-btn" onclick="this.parentElement.remove()" title="Tutup Notifikasi">&times;</button>
     `;
     container.appendChild(toast);
+
     setTimeout(() => {
-        toast.remove();
-    }, 4000);
+        if (toast.parentElement) {
+            toast.style.animation = 'slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) reverse forwards';
+            setTimeout(() => toast.remove(), 300);
+        }
+    }, 4500);
 }
 
 // Helpers
