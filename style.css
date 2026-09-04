@@ -596,15 +596,24 @@ select option {
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.12));
 }
 
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
 .brand-text h2 {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: 1.18rem;
     font-weight: 800;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
+    line-height: 1.15;
     background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 1.15;
+    text-transform: uppercase;
+    margin: 0;
 }
 
 [data-theme="light"] .brand-text h2 {
@@ -613,76 +622,23 @@ select option {
     -webkit-text-fill-color: transparent !important;
 }
 
-.brand-text span {
-    font-size: 0.75rem;
-    color: var(--color-emerald);
+.brand-class {
+    font-size: 0.8rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    display: block;
-}
-
-/* School Info Card */
-.class-info-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 0.95rem 1.1rem;
-    margin-bottom: 1.25rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.class-info-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, var(--color-indigo), var(--color-emerald));
-}
-
-[data-theme="light"] .class-info-card {
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-}
-
-.class-badge {
-    font-size: 0.75rem;
-    color: var(--color-indigo-light);
-    font-weight: 800;
-    letter-spacing: 0.3px;
-}
-
-[data-theme="light"] .class-badge {
-    color: #4338ca !important;
-}
-
-.school-city {
-    font-size: 0.7rem;
     color: var(--color-emerald);
-    font-weight: 800;
-    letter-spacing: 0.6px;
-}
-
-.homeroom-teacher {
-    font-size: 0.85rem;
-    color: var(--text-primary);
-}
-
-.homeroom-teacher small {
+    letter-spacing: 0.2px;
     display: block;
-    color: var(--text-muted);
-    font-size: 0.725rem;
-    font-weight: 600;
+    line-height: 1.2;
 }
 
-.academic-year {
-    font-size: 0.725rem;
-    color: var(--text-secondary);
-    margin-top: 0.25rem;
+.brand-school {
+    font-size: 0.68rem;
     font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1.2;
 }
 
 /* User Role Badge in Sidebar */
@@ -718,6 +674,97 @@ select option {
 [data-theme="light"][data-role="siswa"] .user-role-badge {
     background: #eef2ff !important;
     border: 1px solid #c7d2fe !important;
+}
+
+/* Nav Badges & Quick Action Items */
+.nav-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    margin-left: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .nav-badge {
+    background: #e2e8f0;
+    color: #475569;
+    border-color: #cbd5e1;
+}
+
+.nav-item.active .nav-badge {
+    background: rgba(99, 102, 241, 0.25);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.live-pulse {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #34d399 !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+.nav-action-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.nav-action-item:hover {
+    background: rgba(99, 102, 241, 0.12);
+    border-color: var(--color-indigo);
+}
+
+[data-theme="light"] .nav-action-item {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .nav-action-item:hover {
+    background: #eef2ff;
+    border-color: #6366f1;
+}
+
+/* Dynamic Student Mini Avatar */
+.student-mini-avatar {
+    width: 32px;
+    height: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #0f172a;
+    transition: transform 0.2s ease;
+}
+
+.student-mini-avatar:hover {
+    transform: scale(1.1);
+}
+
+[data-theme="light"] .student-mini-avatar {
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.student-mini-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 12%;
+}
+
+.student-col-flex {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
 }
 
 /* Nav Menu Items */

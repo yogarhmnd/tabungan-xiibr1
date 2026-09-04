@@ -4075,6 +4075,35 @@ function renderAllViews() {
     }
 }
 
+// Helper Mini Avatar Foto Siswa Tersistematis & Dinamis
+function getStudentMiniAvatarHtml(studentOrId, size = 32) {
+    let student = null;
+    if (studentOrId && typeof studentOrId === 'object') {
+        student = studentOrId;
+    } else if (typeof studentOrId === 'string') {
+        student = appStudents.find(s => s.id === studentOrId || s.name.toLowerCase() === studentOrId.toLowerCase() || s.nisn === studentOrId);
+    }
+
+    const height = Math.round(size * 1.25);
+
+    if (!student) {
+        return `<div class="student-mini-avatar" style="width:${size}px; height:${height}px;"><i class="fa-solid fa-user"></i></div>`;
+    }
+
+    const initial = student.name ? student.name.charAt(0).toUpperCase() : 'S';
+    if (student.photo) {
+        return `
+        <div class="student-mini-avatar" style="width:${size}px; height:${height}px;" title="${escapeHtml(student.name)}">
+            <img src="${student.photo}" alt="${escapeHtml(student.name)}" onerror="this.onerror=null; this.parentElement.innerText='${initial}'; this.parentElement.style.background='${getStudentAvatarGradient(student.name)}';">
+        </div>`;
+    }
+
+    return `
+    <div class="student-mini-avatar" style="width:${size}px; height:${height}px; background:${getStudentAvatarGradient(student.name)}; font-size:${Math.round(size * 0.42)}px;" title="${escapeHtml(student.name)}">
+        ${initial}
+    </div>`;
+}
+
 // Render Papan Tabungan Kelas untuk Siswa (hanya baca)
 function renderLeaderboard() {
     const tbody = document.getElementById('leaderboard-tbody');
@@ -4092,6 +4121,7 @@ function renderLeaderboard() {
         const progress = s.target > 0 ? Math.min(100, Math.round((s.balance / s.target) * 100)) : 0;
         const isMe = s.id === myId;
         const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx + 1}`;
+        const avatarHtml = getStudentMiniAvatarHtml(s, 28);
         const statusBadge = progress >= 100
             ? `<span class="badge badge-emerald"><i class="fa-solid fa-check-circle"></i> Lunas</span>`
             : progress >= 50
@@ -4102,9 +4132,14 @@ function renderLeaderboard() {
         <tr style="${isMe ? 'background: rgba(99,102,241,0.12); font-weight: 700;' : ''}">
             <td style="font-size: 1.1rem; text-align:center;">${medal}</td>
             <td>
-                ${isMe ? '<i class="fa-solid fa-star text-amber" title="Ini Anda"></i> ' : ''}
-                ${escapeHtml(s.name)}
-                ${isMe ? '<span class="badge badge-indigo" style="font-size:0.65rem; margin-left:4px;">Saya</span>' : ''}
+                <div class="student-col-flex">
+                    ${avatarHtml}
+                    <div>
+                        ${isMe ? '<i class="fa-solid fa-star text-amber" title="Ini Anda"></i> ' : ''}
+                        <strong>${escapeHtml(s.name)}</strong>
+                        ${isMe ? '<span class="badge badge-indigo" style="font-size:0.65rem; margin-left:4px;">Saya</span>' : ''}
+                    </div>
+                </div>
             </td>
             <td class="text-emerald" style="font-weight: 700;">${formatRp(s.balance)}</td>
             <td>${formatRp(s.target || 0)}</td>
@@ -4141,14 +4176,16 @@ function renderDashboard() {
     document.getElementById('stat-total-siswa').innerText = `${appStudents.length} Siswa`;
     document.getElementById('stat-avg-saldo').innerText = `Rata-rata: ${formatRp(avgSaldo)}`;
 
-    // Top Savers
+    // Top Savers Leaderboard (Dengan Avatar Foto Dinamis)
     const sortedStudents = [...appStudents].sort((a, b) => b.balance - a.balance).slice(0, 5);
     const topSaversContainer = document.getElementById('top-savers-list');
     topSaversContainer.innerHTML = sortedStudents.map((s, index) => {
         const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : 'rank-other';
+        const avatarHtml = getStudentMiniAvatarHtml(s, 34);
         return `
             <div class="saver-item">
                 <div class="saver-rank ${rankClass}">${index + 1}</div>
+                ${avatarHtml}
                 <div class="saver-info">
                     <strong>${escapeHtml(s.name)}</strong>
                     <small>NISN: ${s.nisn} | WA: ${s.phone || '-'}</small>
@@ -4158,17 +4195,25 @@ function renderDashboard() {
         `;
     }).join('');
 
-    // Recent Transactions
+    // Recent Transactions (Dengan Avatar Foto Dinamis)
     const recentTx = [...appTransactions].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
     const recentTbody = document.getElementById('recent-transactions-tbody');
     if (recentTx.length === 0) {
         recentTbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted p-4">Belum ada transaksi. Silakan tambah setoran siswa.</td></tr>`;
     } else {
-        recentTbody.innerHTML = recentTx.map(t => `
+        recentTbody.innerHTML = recentTx.map(t => {
+            const student = appStudents.find(s => s.id === t.studentId);
+            const avatarHtml = getStudentMiniAvatarHtml(student || t.studentName, 28);
+            return `
             <tr>
                 <td><code>${t.id}</code></td>
                 <td>${formatDateTime(t.date)}</td>
-                <td><strong>${escapeHtml(t.studentName)}</strong></td>
+                <td>
+                    <div class="student-col-flex">
+                        ${avatarHtml}
+                        <span><strong>${escapeHtml(t.studentName)}</strong></span>
+                    </div>
+                </td>
                 <td>
                     <span class="badge ${t.type === 'setor' ? 'badge-emerald' : 'badge-rose'}">
                         ${t.type === 'setor' ? 'SETORAN' : 'PENARIKAN'}
@@ -4189,7 +4234,8 @@ function renderDashboard() {
                     </div>
                 </td>
             </tr>
-        `).join('');
+            `;
+        }).join('');
     }
 }
 
@@ -4294,11 +4340,19 @@ function applyTransactionFilters() {
         return;
     }
 
-    tbody.innerHTML = filtered.map(t => `
+    tbody.innerHTML = filtered.map(t => {
+        const student = appStudents.find(s => s.id === t.studentId);
+        const avatarHtml = getStudentMiniAvatarHtml(student || t.studentName, 28);
+        return `
         <tr>
             <td><code>${t.id}</code></td>
             <td>${formatDateTime(t.date)}</td>
-            <td><strong>${escapeHtml(t.studentName)}</strong></td>
+            <td>
+                <div class="student-col-flex">
+                    ${avatarHtml}
+                    <span><strong>${escapeHtml(t.studentName)}</strong></span>
+                </div>
+            </td>
             <td>
                 <span class="badge ${t.type === 'setor' ? 'badge-emerald' : 'badge-rose'}">
                     ${t.type === 'setor' ? 'UANG MASUK' : 'UANG KELUAR'}
@@ -4325,7 +4379,8 @@ function applyTransactionFilters() {
                 </button>
             </td>
         </tr>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // 4. Students Grid Renderer (Admin)
@@ -4395,14 +4450,20 @@ function renderReportView() {
         const setoran = studentTx.filter(t => t.type === 'setor').reduce((acc, t) => acc + t.amount, 0);
         const penarikan = studentTx.filter(t => t.type === 'tarik').reduce((acc, t) => acc + t.amount, 0);
         const targetReached = s.target > 0 && s.balance >= s.target;
+        const avatarHtml = getStudentMiniAvatarHtml(s, 28);
 
         return `
             <tr>
                 <td>${index + 1}</td>
                 <td><code>${s.nisn}</code></td>
                 <td>
-                    <strong>${escapeHtml(s.name)}</strong>
-                    <br><small class="text-muted"><i class="fa-brands fa-whatsapp text-emerald"></i> ${s.phone || '-'}</small>
+                    <div class="student-col-flex">
+                        ${avatarHtml}
+                        <div>
+                            <strong>${escapeHtml(s.name)}</strong>
+                            <br><small class="text-muted"><i class="fa-brands fa-whatsapp text-emerald"></i> ${s.phone || '-'}</small>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     ${formatRp(s.target || 0)} 

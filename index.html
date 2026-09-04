@@ -118,27 +118,17 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
             <div class="brand">
-                <div class="brand-icon" id="brand-icon-box" title="Logo SMK PGRI 11 CILEDUG - XII BR 1">
-                    <!-- GAMBAR LOGO SEKOLAH/KELAS (Bisa diganti di text editor: ubah src="PGRI.png" atau "logo.svg") -->
+                <div class="brand-icon" id="brand-icon-box" title="Logo PGRI - SMK PGRI 11 CILEDUG">
                     <img src="PGRI.png" id="brand-logo-img" alt="Logo SMK PGRI 11" class="brand-logo-img" onload="adaptLogoBackground(this)" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
                     <i class="fa-solid fa-vault" style="display: none;"></i>
                 </div>
                 <div class="brand-text">
-                    <h2>TabungBR1</h2>
-                    <span>XII Bisnis Ritel 1</span>
+                    <h2>TABUNG BR 1</h2>
+                    <span class="brand-class">XII Bisnis Ritel 1</span>
+                    <span class="brand-school">SMK PGRI 11 CILEDUG</span>
                 </div>
                 <!-- Tombol Close Sidebar Khusus Mobile -->
                 <button class="sidebar-close-btn" onclick="toggleSidebar()" title="Tutup Menu Sidebar"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <div class="class-info-card">
-                <div class="class-badge"><i class="fa-solid fa-school"></i> SMK PGRI 11 CILEDUG</div>
-                <div class="school-city">KOTA TANGERANG</div>
-                <div class="homeroom-teacher mt-2">
-                    <small>Wali Kelas:</small>
-                    <strong>Yoga Rahmanda, S.Pd.</strong>
-                </div>
-                <div class="academic-year">TP. 2026/2027</div>
             </div>
 
             <!-- Role Indicator Card -->
@@ -153,51 +143,60 @@
             <nav class="nav-menu">
                 <!-- ADMIN MENU (Wali Kelas Only) -->
                 <div class="nav-section-label admin-only hidden">
-                    <i class="fa-solid fa-user-tie"></i> Menu Wali Kelas
+                    <i class="fa-solid fa-compass"></i> MENU UTAMA
                 </div>
                 <a href="#dashboard" class="nav-item active admin-only hidden" data-tab="dashboard">
                     <i class="fa-solid fa-chart-pie"></i>
                     <span>Dashboard Kelas</span>
-                </a>
-                <a href="#transaksi" class="nav-item admin-only hidden" data-tab="transaksi">
-                    <i class="fa-solid fa-money-bill-transfer"></i>
-                    <span>Kelola Transaksi</span>
+                    <span class="nav-badge live-pulse">Live</span>
                 </a>
                 <a href="#siswa" class="nav-item admin-only hidden" data-tab="siswa">
                     <i class="fa-solid fa-users"></i>
-                    <span>Data Siswa (44)</span>
+                    <span>Data Siswa</span>
+                    <span class="nav-badge">44 Siswa</span>
+                </a>
+
+                <div class="nav-section-label admin-only hidden mt-2">
+                    <i class="fa-solid fa-receipt"></i> KAS & TRANSAKSI
+                </div>
+                <a href="#transaksi" class="nav-item admin-only hidden" data-tab="transaksi">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Kelola Transaksi</span>
                 </a>
                 <a href="#laporan" class="nav-item admin-only hidden" data-tab="laporan">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span>Laporan Kas & Rekap</span>
                 </a>
 
+                <div class="nav-section-label admin-only hidden mt-2">
+                    <i class="fa-solid fa-bolt"></i> AKSI CEPAT
+                </div>
+                <a href="javascript:void(0)" class="nav-item admin-only hidden nav-action-item" onclick="openBatchModal('setor')">
+                    <i class="fa-solid fa-layer-group text-primary"></i>
+                    <span>Batch Transaksi</span>
+                </a>
+                <a href="javascript:void(0)" class="nav-item admin-only hidden nav-action-item" onclick="openBatchEditStudentsModal()">
+                    <i class="fa-solid fa-user-pen text-emerald"></i>
+                    <span>Batch Edit Siswa</span>
+                </a>
+                <a href="javascript:void(0)" class="nav-item admin-only hidden nav-action-item" onclick="openWaConfigModal()">
+                    <i class="fa-brands fa-whatsapp text-emerald"></i>
+                    <span>WA Gateway API</span>
+                </a>
+
                 <!-- SISWA MENU (Siswa Only) -->
                 <div class="nav-section-label siswa-only hidden">
-                    <i class="fa-solid fa-user-graduate"></i> Menu Siswa
+                    <i class="fa-solid fa-user-graduate"></i> MENU SISWA
                 </div>
                 <a href="#tabungan-saya" class="nav-item siswa-only hidden" data-tab="tabungan-saya">
                     <i class="fa-solid fa-wallet"></i>
                     <span>Buku Tabungan Saya</span>
                 </a>
                 <a href="#teman-sekelas" class="nav-item siswa-only hidden" data-tab="teman-sekelas">
-                    <i class="fa-solid fa-users-viewfinder"></i>
+                    <i class="fa-solid fa-trophy text-amber"></i>
                     <span>Papan Tabungan Kelas</span>
                 </a>
             </nav>
-
-            <!-- Admin Quick Action Buttons -->
-            <div class="quick-actions-sidebar admin-only">
-                <button class="btn btn-primary btn-block" onclick="openBatchModal('setor')">
-                    <i class="fa-solid fa-layer-group"></i> Transaksi Masal (Batch)
-                </button>
-                <button class="btn btn-emerald btn-block" onclick="openTransactionModal('setor')">
-                    <i class="fa-solid fa-circle-plus"></i> Setor Uang Single
-                </button>
-                <button class="btn btn-rose btn-block" onclick="openTransactionModal('tarik')">
-                    <i class="fa-solid fa-circle-minus"></i> Tarik Uang Single
-                </button>
-            </div>
 
             <div class="sidebar-footer">
                 <button class="btn btn-rose btn-block mb-3" onclick="handleLogout()" title="Keluar / Logout dari Sistem">
@@ -276,7 +275,7 @@
 
                     <div class="metric-card metric-emerald">
                         <div class="metric-icon">
-                            <i class="fa-solid fa-arrow-down-left-and-arrow-up-right-to-inside"></i>
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
                         </div>
                         <div class="metric-info">
                             <span class="metric-label">Total Uang Masuk</span>
@@ -287,7 +286,7 @@
 
                     <div class="metric-card metric-rose">
                         <div class="metric-icon">
-                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                            <i class="fa-solid fa-money-bill-transfer"></i>
                         </div>
                         <div class="metric-info">
                             <span class="metric-label">Total Uang Keluar</span>
