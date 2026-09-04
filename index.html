@@ -199,6 +199,9 @@
             </nav>
 
             <div class="sidebar-footer">
+                <button class="btn btn-danger-soft btn-block mb-2 admin-only" onclick="resetAllSavingsData()" title="Reset Ulang Seluruh Data Tabungan Siswa">
+                    <i class="fa-solid fa-trash-arrow-up"></i> Reset Data Kas
+                </button>
                 <button class="btn btn-rose btn-block mb-3" onclick="handleLogout()" title="Keluar / Logout dari Sistem">
                     <i class="fa-solid fa-right-from-bracket"></i> Keluar (Logout)
                 </button>
@@ -213,44 +216,49 @@
         <main class="main-content">
             <!-- Top Navbar Header -->
             <header class="top-header">
-                <button class="mobile-hamburger-btn" onclick="toggleSidebar()" title="Buka Menu Navigasi">
-                    <i class="fa-solid fa-bars"></i> <span>Menu</span>
-                </button>
-                <div class="header-title">
-                    <h1 id="page-title">Dashboard Tabungan Siswa</h1>
-                    <p id="page-subtitle">Sistem Tabungan XII Bisnis Ritel 1 - SMK PGRI 11 Ciledug Kota Tangerang.</p>
-                </div>
-                <div class="header-actions">
-                    <div class="search-box admin-only">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="global-search" placeholder="Cari siswa atau transaksi..." oninput="handleGlobalSearch(this.value)">
+                <div class="header-left-group">
+                    <button class="mobile-hamburger-btn" onclick="toggleSidebar()" title="Buka Menu Navigasi">
+                        <i class="fa-solid fa-bars"></i> <span>Menu</span>
+                    </button>
+                    <div class="header-title">
+                        <h1 id="page-title">Dashboard Tabungan Siswa</h1>
+                        <p id="page-subtitle">Sistem Tabungan XII Bisnis Ritel 1 - SMK PGRI 11 Ciledug Kota Tangerang.</p>
                     </div>
-                    <button class="btn btn-whatsapp admin-only" onclick="openWaConfigModal()" title="Pengaturan Otomatis WA Gateway Background">
-                        <i class="fa-brands fa-whatsapp"></i> WA Gateway
+                </div>
+
+                <!-- Wide Elegant Global Search Box -->
+                <div class="header-center-group admin-only">
+                    <div class="search-box header-search-expanded">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="global-search" placeholder="Cari siswa, NISN, atau mutasi transaksi..." oninput="handleGlobalSearch(this.value)">
+                    </div>
+                </div>
+
+                <!-- Right-aligned action and utility items -->
+                <div class="header-actions">
+                    <!-- Primary Action -->
+                    <button class="btn btn-primary admin-only" onclick="openAddStudentModal()" title="Tambah Data Siswa Baru">
+                        <i class="fa-solid fa-user-plus"></i> <span>Tambah Siswa</span>
                     </button>
-                    <button class="btn btn-primary admin-only" onclick="openBatchModal('setor')" title="Setor atau Tarik Uang Banyak Siswa Sekaligus">
-                        <i class="fa-solid fa-layer-group"></i> Batch Transaksi
-                    </button>
-                    <button class="btn btn-rose btn-sm admin-only" onclick="resetAllSavingsData()" title="Reset Ulang Semua Tabungan">
-                        <i class="fa-solid fa-trash-arrow-up"></i> Reset
-                    </button>
-                    <!-- Tombol Pengubah Tema Warna (Light / Dark Mode) -->
-                    <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" title="Ubah Tema Warna (Light / Dark Mode)">
-                        <i class="fa-solid fa-sun" id="theme-icon-header"></i>
-                    </button>
-                    <button class="btn btn-secondary btn-icon" onclick="refreshData()" title="Refresh Data">
-                        <i class="fa-solid fa-rotate"></i>
-                    </button>
-                    <button class="btn btn-emerald admin-only" onclick="openBatchEditStudentsModal()" title="Edit Data Banyak Siswa Sekaligus">
-                        <i class="fa-solid fa-user-pen"></i> Batch Edit Siswa
-                    </button>
-                    <button class="btn btn-primary admin-only" onclick="openAddStudentModal()">
-                        <i class="fa-solid fa-user-plus"></i> Tambah Siswa
-                    </button>
-                    <!-- Tombol Logout Menonjol di Navbar Atas untuk Admin & Siswa -->
-                    <button class="btn btn-rose" onclick="handleLogout()" title="Keluar / Logout dari Sistem">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </button>
+
+                    <!-- Utility Group: Theme Toggle & Refresh Data -->
+                    <div class="header-utility-group">
+                        <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" title="Ubah Tema Warna (Light / Dark Mode)">
+                            <i class="fa-solid fa-sun" id="theme-icon-header"></i>
+                        </button>
+                        <button class="btn btn-secondary btn-icon" onclick="refreshData()" title="Segarkan / Refresh Data">
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+                    </div>
+
+                    <div class="header-v-divider"></div>
+
+                    <!-- Logout Button -->
+                    <div class="header-user-group">
+                        <button class="btn btn-rose btn-logout-top" onclick="handleLogout()" title="Keluar / Logout dari Sistem">
+                            <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+                        </button>
+                    </div>
                 </div>
             </header>
 
