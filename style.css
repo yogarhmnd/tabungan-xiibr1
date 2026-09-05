@@ -945,13 +945,17 @@ select option {
 }
 
 .brand-school {
-    font-size: 0.68rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 700;
     color: var(--text-muted);
     letter-spacing: 0.3px;
     text-transform: uppercase;
     display: block;
-    line-height: 1.2;
+    line-height: 1.25;
+}
+
+[data-theme="light"] .brand-school {
+    color: #475569 !important;
 }
 
 /* User Role Badge in Sidebar */
@@ -993,12 +997,12 @@ select option {
 .nav-badge {
     font-size: 0.68rem;
     font-weight: 700;
-    padding: 0.15rem 0.5rem;
+    padding: 0.18rem 0.55rem;
     border-radius: 999px;
-    background: rgba(0, 180, 216, 0.15);
+    background: rgba(0, 180, 216, 0.2);
     color: var(--ocean-ice);
     margin-left: auto;
-    border: 1px solid rgba(0, 180, 216, 0.25);
+    border: 1px solid rgba(0, 180, 216, 0.3);
 }
 
 [data-theme="light"] .nav-badge {
@@ -1008,15 +1012,49 @@ select option {
 }
 
 .nav-item.active .nav-badge {
-    background: rgba(255, 255, 255, 0.25);
+    background: #0077b6;
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: #00b4d8;
 }
 
 .live-pulse {
-    background: rgba(0, 180, 216, 0.25) !important;
-    color: #caf0f8 !important;
-    border-color: rgba(0, 180, 216, 0.5) !important;
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #34d399 !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.4px !important;
+}
+
+.live-pulse::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    animation: liveBlink 1.4s infinite ease-in-out;
+}
+
+@keyframes liveBlink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+[data-theme="light"] .live-pulse {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #10b981 !important;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.35) !important;
+}
+
+[data-theme="light"] .nav-item.active .live-pulse {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #34d399 !important;
 }
 
 .nav-action-item {
