@@ -4166,76 +4166,22 @@ function getStudentAvatarGradient(name) {
 }
 
 // Load State from LocalStorage (Otomatis memuat seluruh 44 siswa resmi dengan target Rp 2.000.000)
+// Inisialisasi Data Awal (Firebase Realtime Database adalah Single Source of Truth)
 function loadState() {
-    let savedStudents = localStorage.getItem(STORAGE_STUDENTS_KEY);
-    let savedTx = localStorage.getItem(STORAGE_TX_KEY);
-
-    if (savedStudents) {
-        try {
-            const parsed = JSON.parse(savedStudents);
-            appStudents = OFFICIAL_STUDENTS.map((official) => {
-                const found = parsed.find(s => s.nisn === official.nisn || s.id === official.id || (s.name && official.name && s.name.toUpperCase() === official.name.toUpperCase()));
-                return {
-                    id: official.id,
-                    nisn: official.nisn,
-                    name: (found && found.name) ? found.name : official.name,
-                    photo: (found && typeof found.photo === 'string' && found.photo.trim().length > 0) ? found.photo : (official.photo || null),
-                    phone: (found && found.phone) ? found.phone : official.phone,
-                    balance: (found && typeof found.balance === 'number') ? found.balance : official.balance,
-                    target: (found && typeof found.target === 'number' && found.target > 0) ? found.target : 2000000,
-                    password: (found && found.password) ? found.password : (official.password || 'password123')
-                };
-            });
-            saveStudents();
-        } catch(e) {
-            appStudents = JSON.parse(JSON.stringify(OFFICIAL_STUDENTS));
-            saveStudents();
-        }
-    } else {
+    if (!appStudents || appStudents.length === 0) {
         appStudents = JSON.parse(JSON.stringify(OFFICIAL_STUDENTS));
-        saveStudents();
     }
-
-    if (savedTx) {
-        try {
-            appTransactions = JSON.parse(savedTx);
-        } catch(e) {
-            appTransactions = (typeof INITIAL_TRANSACTIONS !== 'undefined') ? JSON.parse(JSON.stringify(INITIAL_TRANSACTIONS)) : [];
-        }
-    } else {
+    if (!appTransactions || appTransactions.length === 0) {
         appTransactions = (typeof INITIAL_TRANSACTIONS !== 'undefined') ? JSON.parse(JSON.stringify(INITIAL_TRANSACTIONS)) : [];
-        saveTransactions();
     }
 }
 
 function saveStudents() {
-    try {
-        localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
-    } catch (e) {
-        console.warn('LocalStorage saveStudents error (quota exceeded):', e);
-        try {
-            const lightweight = appStudents.map(s => {
-                const copy = { ...s };
-                if (copy.photo && copy.photo.length > 100000) {
-                    copy.photo = `assets/students/${s.nisn}.jpg`;
-                }
-                return copy;
-            });
-            localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(lightweight));
-        } catch (err2) {
-            console.error('Gagal menyimpan ke LocalStorage:', err2);
-        }
-    }
-    syncToFirebase();
+    syncToFirebase(false);
 }
 
 function saveTransactions() {
-    try {
-        localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
-    } catch (e) {
-        console.error('LocalStorage saveTransactions error:', e);
-    }
-    syncToFirebase();
+    syncToFirebase(false);
 }
 
 // Reset all savings data to zero (Admin utility)
@@ -4710,7 +4656,7 @@ function initFirebaseRealtimeSync() {
         connectedRef.on('value', (snap) => {
             if (snap.val() === true && !firebasePermissionDenied) {
                 console.log('[Firebase] Terhubung ke Cloud RTDB.');
-                updateCloudSyncStatus('connected', 'Live Cloud');
+                updateCloudSyncStatus('connected', 'Firebase Aktif');
             } else if (!firebasePermissionDenied) {
                 console.log('[Firebase] Koneksi Cloud terputus / offline.');
                 updateCloudSyncStatus('offline', 'Mode Offline');
@@ -4744,19 +4690,11 @@ function initFirebaseRealtimeSync() {
                     } catch(e) {}
                 }
 
-                // Simpan ke cache browser
-                try {
-                    localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
-                    localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
-                } catch(e) {
-                    console.warn('Gagal menyimpan cache lokal dari cloud:', e);
-                }
-
                 // Jika sedang login sebagai siswa, perbarui objek currentUser
                 if (currentUser && currentUser.role === 'siswa') {
-                    const freshStudent = appStudents.find(s => s.id === currentUser.id || s.nisn === currentUser.nisn);
+                    const freshStudent = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
                     if (freshStudent) {
-                        currentUser = { ...currentUser, ...freshStudent };
+                        currentUser = { ...currentUser, ...freshStudent, studentId: freshStudent.id, id: freshStudent.id };
                         sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
                     }
                 }
@@ -4772,7 +4710,7 @@ function initFirebaseRealtimeSync() {
                 populateStudentDropdowns();
 
                 isReceivingRemoteUpdate = false;
-                updateCloudSyncStatus('connected', 'Live Cloud');
+                updateCloudSyncStatus('connected', 'Firebase Aktif');
             } else {
                 // Jika database Cloud masih kosong, lakukan inisialisasi awal (seed)
                 console.log('[Firebase] Cloud RTDB kosong. Menginisialisasi seed data awal...');
@@ -4821,7 +4759,7 @@ function syncToFirebase(force = false) {
             .then(() => {
                 firebasePermissionDenied = false;
                 isSyncingToCloud = false;
-                updateCloudSyncStatus('connected', 'Live Cloud');
+                updateCloudSyncStatus('connected', 'Firebase Aktif');
                 console.log('[Firebase] Data berhasil disinkronkan ke Cloud.');
             })
             .catch((error) => {
@@ -4848,7 +4786,7 @@ function updateCloudSyncStatus(status, text = null) {
     if (status === 'connected') {
         badge.classList.add('sync-active');
         badge.title = 'Status Cloud Database: Terhubung & Real-Time Sync Aktif (Multi-Device). Klik untuk info.';
-        if (label) label.textContent = text || 'Live Cloud';
+        if (label) label.textContent = text || 'Firebase Aktif';
     } else if (status === 'syncing') {
         badge.classList.add('sync-loading');
         badge.title = 'Sedang Menyinkronkan data ke Cloud Database...';
@@ -4930,7 +4868,7 @@ function forceUploadToFirebaseCloud() {
     firebaseDb.ref('tabungan_br1').set(payload)
         .then(() => {
             firebasePermissionDenied = false;
-            updateCloudSyncStatus('connected', 'Live Cloud');
+            updateCloudSyncStatus('connected', 'Firebase Aktif');
             closeModal('modal-firebase-rules-guide');
             showFeedbackSuccessModal(
                 'Data Berhasil Diunggah ke Cloud!',
@@ -4953,39 +4891,46 @@ function forceUploadToFirebaseCloud() {
 
 function refreshData() {
     updateCloudSyncStatus('syncing', 'Memuat...');
-    showToast('Menyegarkan dan menyinkronkan data dari Cloud...', 'info');
+    showToast('Menyegarkan data langsung dari Firebase Database...', 'info');
     if (firebaseDb) {
         firebaseDb.ref('tabungan_br1').once('value').then((snapshot) => {
             const data = snapshot.val();
             if (data && data.students) {
                 appStudents = data.students;
                 appTransactions = data.transactions || [];
-                localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
-                localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
+                if (data.waConfig) waConfig = { ...waConfig, ...data.waConfig };
+
+                if (currentUser && currentUser.role === 'siswa') {
+                    const freshStudent = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
+                    if (freshStudent) {
+                        currentUser = { ...currentUser, ...freshStudent, studentId: freshStudent.id, id: freshStudent.id };
+                        sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+                    }
+                }
+
                 renderAllViews();
                 if (currentUser && currentUser.role === 'admin') {
                     updateStatsCards();
                     updateChart();
                 }
-                showToast('Data berhasil diperbarui secara real-time dari Cloud!', 'success');
+                populateStudentDropdowns();
+                showToast('Data berhasil diperbarui langsung dari Firebase Database!', 'success');
             } else {
                 renderAllViews();
-                showToast('Data lokal telah disegarkan!', 'success');
+                showToast('Data Firebase telah disegarkan!', 'success');
             }
-            updateCloudSyncStatus('connected', 'Live Cloud');
+            updateCloudSyncStatus('connected', 'Firebase Aktif');
         }).catch(err => {
             console.warn('[Firebase] Refresh data error:', err);
             renderAllViews();
-            showToast('Memuat data dari cache lokal.', 'warning');
+            showToast('Koneksi Firebase terganggu.', 'warning');
             if (err.code === 'PERMISSION_DENIED' || (err.message && err.message.toLowerCase().includes('permission_denied'))) {
                 firebasePermissionDenied = true;
                 updateCloudSyncStatus('error', 'Aturan Cloud');
             }
         });
     } else {
-        loadState();
-        renderAllViews();
-        showToast('Data lokal berhasil disegarkan!', 'success');
+        initFirebaseRealtimeSync();
     }
 }
 
