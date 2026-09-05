@@ -4126,17 +4126,17 @@ function adaptLogoBackground(imgEl, targetBoxId = null) {
     }
 }
 
-// GRADIENT PALETTE UNTUK AVATAR SISWA (Modern & Dinamis)
+// GRADIENT PALETTE UNTUK AVATAR SISWA (Modern Oceanic Sky Palette)
 function getStudentAvatarGradient(name) {
     const gradients = [
-        'linear-gradient(135deg, #6366f1, #a855f7)', // Indigo - Purple
-        'linear-gradient(135deg, #06b6d4, #3b82f6)', // Cyan - Blue
-        'linear-gradient(135deg, #10b981, #059669)', // Emerald - Green
-        'linear-gradient(135deg, #f59e0b, #d97706)', // Amber - Orange
-        'linear-gradient(135deg, #ec4899, #8b5cf6)', // Pink - Violet
-        'linear-gradient(135deg, #14b8a6, #0284c7)', // Teal - Sky
-        'linear-gradient(135deg, #f43f5e, #be123c)', // Rose - Crimson
-        'linear-gradient(135deg, #8b5cf6, #6366f1)'  // Purple - Indigo
+        'linear-gradient(135deg, #03045e, #0077b6)', // Deep Ocean - Cobalt
+        'linear-gradient(135deg, #0077b6, #00b4d8)', // Cobalt - Cyan
+        'linear-gradient(135deg, #00b4d8, #90e0ef)', // Cyan - Ice
+        'linear-gradient(135deg, #03045e, #00b4d8)', // Navy - Cyan
+        'linear-gradient(135deg, #0077b6, #90e0ef)', // Cobalt - Ice
+        'linear-gradient(135deg, #0284c7, #38bdf8)', // Sky - Light Cyan
+        'linear-gradient(135deg, #0f766e, #14b8a6)', // Deep Teal - Emerald
+        'linear-gradient(135deg, #1d4ed8, #60a5fa)'  // Royal - Ice Blue
     ];
     let hash = 0;
     for (let i = 0; i < (name || '').length; i++) {
