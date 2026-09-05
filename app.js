@@ -6,33 +6,23 @@
    ========================================================================= */
 
 // Storage Keys (Auto-seeded with 44 Official Students - Target Rp 2.000.000)
-const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v9';
-const STORAGE_TX_KEY = 'tabungbr1_transactions_v9';
-const STORAGE_AUTH_KEY = 'tabungbr1_session_v9';
-const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v9';
-const STORAGE_THEME_KEY = 'tabungbr1_theme_v9';
+const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v10';
+const STORAGE_TX_KEY = 'tabungbr1_transactions_v10';
+const STORAGE_AUTH_KEY = 'tabungbr1_session_v10';
+const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v10';
+const STORAGE_THEME_KEY = 'tabungbr1_theme_v10';
 
 // Official Class List for XII Bisnis Ritel 1 (44 Students with Registered WhatsApp Phone Numbers)
 const INITIAL_TRANSACTIONS = [
     {
-        "id": "TRX-0001",
-        "studentId": "STU-001",
-        "studentName": "AFGAN AFFANDI",
+        "id": "TRX-0242",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0002",
-        "studentId": "STU-001",
-        "studentName": "AFGAN AFFANDI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
+        "date": "2026-08-01T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 1)"
     },
     {
         "id": "TRX-0003",
@@ -45,12 +35,472 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 3)"
     },
     {
+        "id": "TRX-0014",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0037",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0053",
+        "studentId": "STU-009",
+        "studentName": "AURA RIZKA AMELIA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0069",
+        "studentId": "STU-011",
+        "studentName": "DESIANALESTARI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0075",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0085",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0103",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0113",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0121",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0135",
+        "studentId": "STU-022",
+        "studentName": "MELATI KESYAFANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0139",
+        "studentId": "STU-023",
+        "studentName": "MOH ILYAS",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0143",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0182",
+        "studentId": "STU-029",
+        "studentName": "MUHAMMAD RAFA OKTAFIAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0184",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0192",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0222",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0237",
+        "studentId": "STU-035",
+        "studentName": "SAFIRA NAILA AGUSTIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0243",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0257",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0265",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0278",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0286",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0304",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 30000,
+        "date": "2026-08-03T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 3)"
+    },
+    {
+        "id": "TRX-0001",
+        "studentId": "STU-001",
+        "studentName": "AFGAN AFFANDI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
         "id": "TRX-0004",
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0015",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0032",
+        "studentId": "STU-006",
+        "studentName": "ALIP PIRMANSAH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 6000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0038",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0054",
+        "studentId": "STU-009",
+        "studentName": "AURA RIZKA AMELIA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0060",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0076",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0086",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 18000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0101",
+        "studentId": "STU-015",
+        "studentName": "ERVANSYAH FAUZI NASUTION",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0104",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0114",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0122",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0132",
+        "studentId": "STU-021",
+        "studentName": "MARCEL MU'AMAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0136",
+        "studentId": "STU-022",
+        "studentName": "MELATI KESYAFANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0144",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0155",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0169",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0206",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0238",
+        "studentId": "STU-035",
+        "studentName": "SAFIRA NAILA AGUSTIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0258",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0266",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0279",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-04T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 4)"
+    },
+    {
+        "id": "TRX-0305",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 30000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
     },
@@ -65,12 +515,552 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 5)"
     },
     {
+        "id": "TRX-0016",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0033",
+        "studentId": "STU-006",
+        "studentName": "ALIP PIRMANSAH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0039",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0055",
+        "studentId": "STU-009",
+        "studentName": "AURA RIZKA AMELIA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0061",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0070",
+        "studentId": "STU-011",
+        "studentName": "DESIANALESTARI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0077",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0087",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0102",
+        "studentId": "STU-015",
+        "studentName": "ERVANSYAH FAUZI NASUTION",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0105",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0115",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0123",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0133",
+        "studentId": "STU-021",
+        "studentName": "MARCEL MU'AMAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0137",
+        "studentId": "STU-022",
+        "studentName": "MELATI KESYAFANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0156",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0170",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0193",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0207",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0223",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0239",
+        "studentId": "STU-035",
+        "studentName": "SAFIRA NAILA AGUSTIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0253",
+        "studentId": "STU-037",
+        "studentName": "SILFA NOVIYANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0259",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0267",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0287",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0301",
+        "studentId": "STU-043",
+        "studentName": "VIJAY MAHENDRA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 8000,
+        "date": "2026-08-05T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 5)"
+    },
+    {
+        "id": "TRX-0002",
+        "studentId": "STU-001",
+        "studentName": "AFGAN AFFANDI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
         "id": "TRX-0006",
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0017",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0034",
+        "studentId": "STU-006",
+        "studentName": "ALIP PIRMANSAH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 6000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0036",
+        "studentId": "STU-007",
+        "studentName": "ANANDA NOVAN ALVIAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0040",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0056",
+        "studentId": "STU-009",
+        "studentName": "AURA RIZKA AMELIA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0062",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0078",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0088",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0106",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0134",
+        "studentId": "STU-021",
+        "studentName": "MARCEL MU'AMAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0138",
+        "studentId": "STU-022",
+        "studentName": "MELATI KESYAFANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0145",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0157",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0162",
+        "studentId": "STU-027",
+        "studentName": "MUHAMMAD ALNUR PASHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0171",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0185",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0194",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0208",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0224",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0240",
+        "studentId": "STU-035",
+        "studentName": "SAFIRA NAILA AGUSTIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0244",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0254",
+        "studentId": "STU-037",
+        "studentName": "SILFA NOVIYANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0260",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0268",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0280",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0288",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0302",
+        "studentId": "STU-043",
+        "studentName": "VIJAY MAHENDRA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-06T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 6)"
+    },
+    {
+        "id": "TRX-0306",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 35000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
     },
@@ -85,9 +1075,719 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 7)"
     },
     {
+        "id": "TRX-0018",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0035",
+        "studentId": "STU-006",
+        "studentName": "ALIP PIRMANSAH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0041",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0057",
+        "studentId": "STU-009",
+        "studentName": "AURA RIZKA AMELIA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0063",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0089",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 22000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0116",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0124",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0140",
+        "studentId": "STU-023",
+        "studentName": "MOH ILYAS",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0146",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0158",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0163",
+        "studentId": "STU-027",
+        "studentName": "MUHAMMAD ALNUR PASHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0172",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0195",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0209",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0225",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0255",
+        "studentId": "STU-037",
+        "studentName": "SILFA NOVIYANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0261",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0269",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0281",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0289",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0307",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-07T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 7)"
+    },
+    {
+        "id": "TRX-0042",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0064",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0071",
+        "studentId": "STU-011",
+        "studentName": "DESIANALESTARI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 15000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0090",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0117",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0125",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0147",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0159",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0173",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0196",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0270",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0290",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0308",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 35000,
+        "date": "2026-08-08T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 8)"
+    },
+    {
+        "id": "TRX-0019",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0043",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 6000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0058",
+        "studentId": "STU-009",
+        "studentName": "AURA RIZKA AMELIA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0065",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0072",
+        "studentId": "STU-011",
+        "studentName": "DESIANALESTARI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 9000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0091",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0107",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0126",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0148",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0164",
+        "studentId": "STU-027",
+        "studentName": "MUHAMMAD ALNUR PASHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0174",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0186",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0197",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0210",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0226",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0245",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0271",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0282",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
+        "id": "TRX-0291",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-10T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 10)"
+    },
+    {
         "id": "TRX-0008",
         "studentId": "STU-002",
         "studentName": "AHMAD",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0020",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0059",
+        "studentId": "STU-009",
+        "studentName": "AURA RIZKA AMELIA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0066",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0079",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0092",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0118",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0127",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0149",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0175",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0198",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0211",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0227",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0246",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0256",
+        "studentId": "STU-037",
+        "studentName": "SILFA NOVIYANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0262",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0292",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-11T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 11)"
+    },
+    {
+        "id": "TRX-0303",
+        "studentId": "STU-043",
+        "studentName": "VIJAY MAHENDRA",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
@@ -105,12 +1805,692 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 12)"
     },
     {
+        "id": "TRX-0021",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0067",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0073",
+        "studentId": "STU-011",
+        "studentName": "DESIANALESTARI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0080",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0093",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0108",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0119",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0128",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0165",
+        "studentId": "STU-027",
+        "studentName": "MUHAMMAD ALNUR PASHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 40000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0176",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0199",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0212",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0228",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0247",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0272",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0293",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TRX-0309",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-12T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 12)"
+    },
+    {
+        "id": "TX-3588",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "tarik",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-15T09:21",
+        "note": ""
+    },
+    {
+        "id": "TRX-0044",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0074",
+        "studentId": "STU-011",
+        "studentName": "DESIANALESTARI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 14000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0081",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 8000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0129",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0141",
+        "studentId": "STU-023",
+        "studentName": "MOH ILYAS",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0183",
+        "studentId": "STU-029",
+        "studentName": "MUHAMMAD RAFA OKTAFIAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0187",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0200",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 6000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0213",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0229",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TRX-0294",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-18T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 18)"
+    },
+    {
+        "id": "TX-1984",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "tarik",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-20T09:17",
+        "note": ""
+    },
+    {
+        "id": "TRX-0045",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0082",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 12000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0094",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0150",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0160",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0177",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0201",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0214",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TRX-0230",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-20T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 20)"
+    },
+    {
+        "id": "TX-7662",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "tarik",
+        "category": "Tabungan Harian",
+        "amount": 100000,
+        "date": "2026-08-21T09:07",
+        "note": ""
+    },
+    {
+        "id": "TRX-0046",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0095",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0109",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0120",
+        "studentId": "STU-018",
+        "studentName": "FITRIANI SALWA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0130",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0142",
+        "studentId": "STU-023",
+        "studentName": "MOH ILYAS",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0151",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0161",
+        "studentId": "STU-026",
+        "studentName": "MUHAMAD FINZA DESMAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0166",
+        "studentId": "STU-027",
+        "studentName": "MUHAMMAD ALNUR PASHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 40000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0178",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0188",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0215",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0231",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0248",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0273",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
+        "id": "TRX-0283",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-21T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 21)"
+    },
+    {
         "id": "TRX-0010",
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0022",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0047",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0068",
+        "studentId": "STU-010",
+        "studentName": "CHARLIE NOVAL PRADANA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0096",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0152",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0179",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0202",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 7000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0216",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0249",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0263",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0274",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-22T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 22)"
+    },
+    {
+        "id": "TRX-0295",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
     },
@@ -125,12 +2505,212 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 24)"
     },
     {
+        "id": "TRX-0023",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 15000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0028",
+        "studentId": "STU-005",
+        "studentName": "ALFIESYA NUR RACHMAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0083",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0131",
+        "studentId": "STU-020",
+        "studentName": "KURNIAWAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0153",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 15000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0180",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0189",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0203",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0217",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0232",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0241",
+        "studentId": "STU-035",
+        "studentName": "SAFIRA NAILA AGUSTIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 150000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0250",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
+        "id": "TRX-0296",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-24T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 24)"
+    },
+    {
         "id": "TRX-0012",
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
+        "date": "2026-08-26T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 26)"
+    },
+    {
+        "id": "TRX-0024",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-26T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 26)"
+    },
+    {
+        "id": "TRX-0048",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 6000,
+        "date": "2026-08-26T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 26)"
+    },
+    {
+        "id": "TRX-0097",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-26T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 26)"
+    },
+    {
+        "id": "TRX-0167",
+        "studentId": "STU-027",
+        "studentName": "MUHAMMAD ALNUR PASHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-26T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 26)"
+    },
+    {
+        "id": "TRX-0218",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-26T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 26)"
+    },
+    {
+        "id": "TRX-0251",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-26T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 26)"
+    },
+    {
+        "id": "TRX-0297",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
     },
@@ -145,116 +2725,6 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 27)"
     },
     {
-        "id": "TRX-0014",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0015",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0016",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0017",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0018",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0019",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0020",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0021",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0022",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0023",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 15000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0024",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-26T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 26)"
-    },
-    {
         "id": "TRX-0025",
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
@@ -263,36 +2733,6 @@ const INITIAL_TRANSACTIONS = [
         "amount": 20000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0026",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-28T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 28)"
-    },
-    {
-        "id": "TRX-0027",
-        "studentId": "STU-004",
-        "studentName": "ALFI SYAHRI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 15000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0028",
-        "studentId": "STU-005",
-        "studentName": "ALFIESYA NUR RACHMAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
     },
     {
         "id": "TRX-0029",
@@ -305,196 +2745,6 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 27)"
     },
     {
-        "id": "TRX-0030",
-        "studentId": "STU-005",
-        "studentName": "ALFIESYA NUR RACHMAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-28T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 28)"
-    },
-    {
-        "id": "TRX-0031",
-        "studentId": "STU-005",
-        "studentName": "ALFIESYA NUR RACHMAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0032",
-        "studentId": "STU-006",
-        "studentName": "ALIP PIRMANSAH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 6000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0033",
-        "studentId": "STU-006",
-        "studentName": "ALIP PIRMANSAH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0034",
-        "studentId": "STU-006",
-        "studentName": "ALIP PIRMANSAH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 6000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0035",
-        "studentId": "STU-006",
-        "studentName": "ALIP PIRMANSAH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0036",
-        "studentId": "STU-007",
-        "studentName": "ANANDA NOVAN ALVIAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0037",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 50000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0038",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0039",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0040",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0041",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0042",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0043",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 6000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0044",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0045",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0046",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0047",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0048",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 6000,
-        "date": "2026-08-26T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 26)"
-    },
-    {
         "id": "TRX-0049",
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
@@ -505,12 +2755,192 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 27)"
     },
     {
+        "id": "TRX-0098",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0110",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0154",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 15000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0168",
+        "studentId": "STU-027",
+        "studentName": "MUHAMMAD ALNUR PASHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0190",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0204",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0219",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0233",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TRX-0252",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-08-27T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 27)"
+    },
+    {
+        "id": "TX-1206",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "tarik",
+        "category": "Tabungan Harian",
+        "amount": 80000,
+        "date": "2026-08-28T09:40",
+        "note": ""
+    },
+    {
+        "id": "TX-3211",
+        "studentId": "STU-025",
+        "studentName": "MUHAMAD APDIL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 80000,
+        "date": "2026-08-28T10:04",
+        "note": ""
+    },
+    {
+        "id": "TRX-0026",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-28T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 28)"
+    },
+    {
+        "id": "TRX-0030",
+        "studentId": "STU-005",
+        "studentName": "ALFIESYA NUR RACHMAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-28T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 28)"
+    },
+    {
         "id": "TRX-0050",
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
+        "date": "2026-08-28T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 28)"
+    },
+    {
+        "id": "TRX-0111",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-28T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 28)"
+    },
+    {
+        "id": "TRX-0234",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-28T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 28)"
+    },
+    {
+        "id": "TRX-0275",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-08-28T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 28)"
+    },
+    {
+        "id": "TRX-0284",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 15000,
+        "date": "2026-08-28T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 28)"
+    },
+    {
+        "id": "TRX-0298",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
     },
@@ -525,326 +2955,6 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 29)"
     },
     {
-        "id": "TRX-0052",
-        "studentId": "STU-008",
-        "studentName": "AUGRAH DWI AURAWATI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0053",
-        "studentId": "STU-009",
-        "studentName": "AURA RIZKA AMELIA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0054",
-        "studentId": "STU-009",
-        "studentName": "AURA RIZKA AMELIA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0055",
-        "studentId": "STU-009",
-        "studentName": "AURA RIZKA AMELIA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0056",
-        "studentId": "STU-009",
-        "studentName": "AURA RIZKA AMELIA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0057",
-        "studentId": "STU-009",
-        "studentName": "AURA RIZKA AMELIA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0058",
-        "studentId": "STU-009",
-        "studentName": "AURA RIZKA AMELIA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0059",
-        "studentId": "STU-009",
-        "studentName": "AURA RIZKA AMELIA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0060",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0061",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0062",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0063",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0064",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0065",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0066",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0067",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0068",
-        "studentId": "STU-010",
-        "studentName": "CHARLIE NOVAL PRADANA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0069",
-        "studentId": "STU-011",
-        "studentName": "DESIANALESTARI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 50000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0070",
-        "studentId": "STU-011",
-        "studentName": "DESIANALESTARI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0071",
-        "studentId": "STU-011",
-        "studentName": "DESIANALESTARI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 15000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0072",
-        "studentId": "STU-011",
-        "studentName": "DESIANALESTARI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 9000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0073",
-        "studentId": "STU-011",
-        "studentName": "DESIANALESTARI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0074",
-        "studentId": "STU-011",
-        "studentName": "DESIANALESTARI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 14000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0075",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0076",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0077",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0078",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0079",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0080",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0081",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 8000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0082",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 12000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0083",
-        "studentId": "STU-012",
-        "studentName": "DHEBI NURMALA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
         "id": "TRX-0084",
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
@@ -853,146 +2963,6 @@ const INITIAL_TRANSACTIONS = [
         "amount": 15000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
-    },
-    {
-        "id": "TRX-0085",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0086",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 18000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0087",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0088",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 50000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0089",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 22000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0090",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0091",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0092",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0093",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0094",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0095",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0096",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0097",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-26T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 26)"
-    },
-    {
-        "id": "TRX-0098",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
     },
     {
         "id": "TRX-0099",
@@ -1005,1206 +2975,6 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 29)"
     },
     {
-        "id": "TRX-0100",
-        "studentId": "STU-014",
-        "studentName": "DOES SALAM",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0101",
-        "studentId": "STU-015",
-        "studentName": "ERVANSYAH FAUZI NASUTION",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0102",
-        "studentId": "STU-015",
-        "studentName": "ERVANSYAH FAUZI NASUTION",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0103",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0104",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0105",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0106",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0107",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0108",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0109",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0110",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0111",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-28T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 28)"
-    },
-    {
-        "id": "TRX-0112",
-        "studentId": "STU-017",
-        "studentName": "FATIHATUS SHALIHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0113",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0114",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0115",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0116",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0117",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0118",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0119",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0120",
-        "studentId": "STU-018",
-        "studentName": "FITRIANI SALWA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0121",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0122",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0123",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0124",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0125",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0126",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0127",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0128",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0129",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0130",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0131",
-        "studentId": "STU-020",
-        "studentName": "KURNIAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0132",
-        "studentId": "STU-021",
-        "studentName": "MARCEL MU'AMAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0133",
-        "studentId": "STU-021",
-        "studentName": "MARCEL MU'AMAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0134",
-        "studentId": "STU-021",
-        "studentName": "MARCEL MU'AMAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0135",
-        "studentId": "STU-022",
-        "studentName": "MELATI KESYAFANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0136",
-        "studentId": "STU-022",
-        "studentName": "MELATI KESYAFANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0137",
-        "studentId": "STU-022",
-        "studentName": "MELATI KESYAFANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0138",
-        "studentId": "STU-022",
-        "studentName": "MELATI KESYAFANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0139",
-        "studentId": "STU-023",
-        "studentName": "MOH ILYAS",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0140",
-        "studentId": "STU-023",
-        "studentName": "MOH ILYAS",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0141",
-        "studentId": "STU-023",
-        "studentName": "MOH ILYAS",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0142",
-        "studentId": "STU-023",
-        "studentName": "MOH ILYAS",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0143",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0144",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0145",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0146",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0147",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0148",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0149",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0150",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0151",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0152",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0153",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 15000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0154",
-        "studentId": "STU-025",
-        "studentName": "MUHAMAD APDIL",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 15000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0155",
-        "studentId": "STU-026",
-        "studentName": "MUHAMAD FINZA DESMAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0156",
-        "studentId": "STU-026",
-        "studentName": "MUHAMAD FINZA DESMAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0157",
-        "studentId": "STU-026",
-        "studentName": "MUHAMAD FINZA DESMAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0158",
-        "studentId": "STU-026",
-        "studentName": "MUHAMAD FINZA DESMAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0159",
-        "studentId": "STU-026",
-        "studentName": "MUHAMAD FINZA DESMAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0160",
-        "studentId": "STU-026",
-        "studentName": "MUHAMAD FINZA DESMAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0161",
-        "studentId": "STU-026",
-        "studentName": "MUHAMAD FINZA DESMAWAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0162",
-        "studentId": "STU-027",
-        "studentName": "MUHAMMAD ALNUR PASHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0163",
-        "studentId": "STU-027",
-        "studentName": "MUHAMMAD ALNUR PASHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0164",
-        "studentId": "STU-027",
-        "studentName": "MUHAMMAD ALNUR PASHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0165",
-        "studentId": "STU-027",
-        "studentName": "MUHAMMAD ALNUR PASHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 40000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0166",
-        "studentId": "STU-027",
-        "studentName": "MUHAMMAD ALNUR PASHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 40000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0167",
-        "studentId": "STU-027",
-        "studentName": "MUHAMMAD ALNUR PASHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-26T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 26)"
-    },
-    {
-        "id": "TRX-0168",
-        "studentId": "STU-027",
-        "studentName": "MUHAMMAD ALNUR PASHA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0169",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0170",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0171",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0172",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0173",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0174",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0175",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0176",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0177",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0178",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0179",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0180",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0181",
-        "studentId": "STU-028",
-        "studentName": "MUHAMMAD AMALUL ARIFIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 25000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0182",
-        "studentId": "STU-029",
-        "studentName": "MUHAMMAD RAFA OKTAFIAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0183",
-        "studentId": "STU-029",
-        "studentName": "MUHAMMAD RAFA OKTAFIAN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0184",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0185",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0186",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0187",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0188",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0189",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0190",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 50000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0191",
-        "studentId": "STU-031",
-        "studentName": "NIRWAN AKBAR",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0192",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0193",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0194",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0195",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0196",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0197",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0198",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0199",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0200",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 6000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0201",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0202",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0203",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0204",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0205",
-        "studentId": "STU-032",
-        "studentName": "OLIFIAH YULIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0206",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0207",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0208",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0209",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0210",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0211",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0212",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0213",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0214",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0215",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0216",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0217",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0218",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-26T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 26)"
-    },
-    {
-        "id": "TRX-0219",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
         "id": "TRX-0220",
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
@@ -2213,146 +2983,6 @@ const INITIAL_TRANSACTIONS = [
         "amount": 10000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
-    },
-    {
-        "id": "TRX-0221",
-        "studentId": "STU-033",
-        "studentName": "PUTRA HAIRUL LATIF",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0222",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0223",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0224",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0225",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0226",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0227",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0228",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0229",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0230",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-20T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 20)"
-    },
-    {
-        "id": "TRX-0231",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0232",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0233",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0234",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-28T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 28)"
     },
     {
         "id": "TRX-0235",
@@ -2365,406 +2995,6 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 29)"
     },
     {
-        "id": "TRX-0236",
-        "studentId": "STU-034",
-        "studentName": "ROMDANI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0237",
-        "studentId": "STU-035",
-        "studentName": "SAFIRA NAILA AGUSTIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0238",
-        "studentId": "STU-035",
-        "studentName": "SAFIRA NAILA AGUSTIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0239",
-        "studentId": "STU-035",
-        "studentName": "SAFIRA NAILA AGUSTIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0240",
-        "studentId": "STU-035",
-        "studentName": "SAFIRA NAILA AGUSTIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0241",
-        "studentId": "STU-035",
-        "studentName": "SAFIRA NAILA AGUSTIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 150000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0242",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-01T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 1)"
-    },
-    {
-        "id": "TRX-0243",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0244",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0245",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0246",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0247",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0248",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0249",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0250",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0251",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-26T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 26)"
-    },
-    {
-        "id": "TRX-0252",
-        "studentId": "STU-036",
-        "studentName": "SAVA QUINSHA AULIA YASMIN",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-27T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 27)"
-    },
-    {
-        "id": "TRX-0253",
-        "studentId": "STU-037",
-        "studentName": "SILFA NOVIYANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0254",
-        "studentId": "STU-037",
-        "studentName": "SILFA NOVIYANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0255",
-        "studentId": "STU-037",
-        "studentName": "SILFA NOVIYANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0256",
-        "studentId": "STU-037",
-        "studentName": "SILFA NOVIYANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0257",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0258",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0259",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0260",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0261",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0262",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0263",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0264",
-        "studentId": "STU-039",
-        "studentName": "SRI WAHYUNINGSIH",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0265",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0266",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0267",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0268",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0269",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0270",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0271",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0272",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0273",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0274",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0275",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 50000,
-        "date": "2026-08-28T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 28)"
-    },
-    {
         "id": "TRX-0276",
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
@@ -2773,226 +3003,6 @@ const INITIAL_TRANSACTIONS = [
         "amount": 10000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
-    },
-    {
-        "id": "TRX-0277",
-        "studentId": "STU-040",
-        "studentName": "SYAFIA MARIAM HIDAYAT",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0278",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 50000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0279",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
-    },
-    {
-        "id": "TRX-0280",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0281",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0282",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0283",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 5000,
-        "date": "2026-08-21T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 21)"
-    },
-    {
-        "id": "TRX-0284",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 15000,
-        "date": "2026-08-28T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 28)"
-    },
-    {
-        "id": "TRX-0285",
-        "studentId": "STU-041",
-        "studentName": "SYLVA ARDIANTI",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-31T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 31)"
-    },
-    {
-        "id": "TRX-0286",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
-    },
-    {
-        "id": "TRX-0287",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0288",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0289",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
-    },
-    {
-        "id": "TRX-0290",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
-    },
-    {
-        "id": "TRX-0291",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-10T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 10)"
-    },
-    {
-        "id": "TRX-0292",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
-    },
-    {
-        "id": "TRX-0293",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 10000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
-    },
-    {
-        "id": "TRX-0294",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-18T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 18)"
-    },
-    {
-        "id": "TRX-0295",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-22T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 22)"
-    },
-    {
-        "id": "TRX-0296",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-24T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 24)"
-    },
-    {
-        "id": "TRX-0297",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-26T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 26)"
-    },
-    {
-        "id": "TRX-0298",
-        "studentId": "STU-042",
-        "studentName": "TB. FADLAN AL-FAROJ",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 20000,
-        "date": "2026-08-28T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 28)"
     },
     {
         "id": "TRX-0299",
@@ -3005,6 +3015,136 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 29)"
     },
     {
+        "id": "TRX-0027",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 15000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0031",
+        "studentId": "STU-005",
+        "studentName": "ALFIESYA NUR RACHMAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0052",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0100",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0112",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0181",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 25000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0191",
+        "studentId": "STU-031",
+        "studentName": "NIRWAN AKBAR",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0205",
+        "studentId": "STU-032",
+        "studentName": "OLIFIAH YULIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0221",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0236",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0264",
+        "studentId": "STU-039",
+        "studentName": "SRI WAHYUNINGSIH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0277",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
+        "id": "TRX-0285",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-08-31T08:30:00.000Z",
+        "note": "Setoran Buku Tabungan (Hari 31)"
+    },
+    {
         "id": "TRX-0300",
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
@@ -3015,94 +3155,424 @@ const INITIAL_TRANSACTIONS = [
         "note": "Setoran Buku Tabungan (Hari 31)"
     },
     {
-        "id": "TRX-0301",
-        "studentId": "STU-043",
-        "studentName": "VIJAY MAHENDRA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 8000,
-        "date": "2026-08-05T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 5)"
-    },
-    {
-        "id": "TRX-0302",
-        "studentId": "STU-043",
-        "studentName": "VIJAY MAHENDRA",
-        "type": "setor",
-        "category": "Tabungan Harian",
-        "amount": 7000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
-    },
-    {
-        "id": "TRX-0303",
-        "studentId": "STU-043",
-        "studentName": "VIJAY MAHENDRA",
+        "id": "TX-B8758",
+        "studentId": "STU-002",
+        "studentName": "AHMAD",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 5000,
-        "date": "2026-08-11T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 11)"
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
     },
     {
-        "id": "TRX-0304",
+        "id": "TX-B2709",
+        "studentId": "STU-005",
+        "studentName": "ALFIESYA NUR RACHMAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
+    },
+    {
+        "id": "TX-B8596",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
+    },
+    {
+        "id": "TX-B7087",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
+    },
+    {
+        "id": "TX-B6916",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
+    },
+    {
+        "id": "TX-B1212",
+        "studentId": "STU-036",
+        "studentName": "SAVA QUINSHA AULIA YASMIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
+    },
+    {
+        "id": "TX-B6257",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
+    },
+    {
+        "id": "TX-B5806",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
+    },
+    {
+        "id": "TX-B6763",
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 30000,
-        "date": "2026-08-03T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 3)"
+        "date": "2026-09-01T09:41",
+        "note": "Setoran harian kas kelas BR 1 (Batch 9 Siswa)"
     },
     {
-        "id": "TRX-0305",
-        "studentId": "STU-044",
-        "studentName": "ZEIN KHA ABDUL",
+        "id": "TX-B2750",
+        "studentId": "STU-002",
+        "studentName": "AHMAD",
         "type": "setor",
         "category": "Tabungan Harian",
-        "amount": 30000,
-        "date": "2026-08-04T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 4)"
+        "amount": 5000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
     },
     {
-        "id": "TRX-0306",
-        "studentId": "STU-044",
-        "studentName": "ZEIN KHA ABDUL",
+        "id": "TX-B9326",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
         "type": "setor",
         "category": "Tabungan Harian",
-        "amount": 35000,
-        "date": "2026-08-06T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 6)"
+        "amount": 10000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
     },
     {
-        "id": "TRX-0307",
+        "id": "TX-B8032",
+        "studentId": "STU-006",
+        "studentName": "ALIP PIRMANSAH",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B5596",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B1873",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B1516",
+        "studentId": "STU-017",
+        "studentName": "FATIHATUS SHALIHA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B2539",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B8814",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B2272",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B6056",
+        "studentId": "STU-038",
+        "studentName": "SITI SARAH AZZAHRA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B9411",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
+    },
+    {
+        "id": "TX-B4629",
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 20000,
-        "date": "2026-08-07T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 7)"
+        "date": "2026-09-02T09:43",
+        "note": "Setoran harian kas kelas BR 1 (Batch 12 Siswa)"
     },
     {
-        "id": "TRX-0308",
-        "studentId": "STU-044",
-        "studentName": "ZEIN KHA ABDUL",
+        "id": "TX-B9891",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
         "type": "setor",
         "category": "Tabungan Harian",
-        "amount": 35000,
-        "date": "2026-08-08T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 8)"
+        "amount": 10000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
     },
     {
-        "id": "TRX-0309",
-        "studentId": "STU-044",
-        "studentName": "ZEIN KHA ABDUL",
+        "id": "TX-B6231",
+        "studentId": "STU-005",
+        "studentName": "ALFIESYA NUR RACHMAN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B4285",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B5294",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
         "type": "setor",
         "category": "Tabungan Harian",
         "amount": 50000,
-        "date": "2026-08-12T08:30:00.000Z",
-        "note": "Setoran Buku Tabungan (Hari 12)"
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B7096",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B7877",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B2872",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B5168",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B9085",
+        "studentId": "STU-040",
+        "studentName": "SYAFIA MARIAM HIDAYAT",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B9592",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-B4074",
+        "studentId": "STU-044",
+        "studentName": "ZEIN KHA ABDUL",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-03T09:46",
+        "note": "Setoran harian kas kelas BR 1 (Batch 11 Siswa)"
+    },
+    {
+        "id": "TX-6144",
+        "studentId": "STU-011",
+        "studentName": "DESIANALESTARI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 50000,
+        "date": "2026-09-04T08:42",
+        "note": ""
+    },
+    {
+        "id": "TX-B1804",
+        "studentId": "STU-004",
+        "studentName": "ALFI SYAHRI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B3065",
+        "studentId": "STU-008",
+        "studentName": "AUGRAH DWI AURAWATI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B1852",
+        "studentId": "STU-012",
+        "studentName": "DHEBI NURMALA",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B4033",
+        "studentId": "STU-014",
+        "studentName": "DOES SALAM",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B5930",
+        "studentId": "STU-028",
+        "studentName": "MUHAMMAD AMALUL ARIFIN",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 5000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B7609",
+        "studentId": "STU-033",
+        "studentName": "PUTRA HAIRUL LATIF",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B6560",
+        "studentId": "STU-034",
+        "studentName": "ROMDANI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 10000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B8720",
+        "studentId": "STU-041",
+        "studentName": "SYLVA ARDIANTI",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 100000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
+    },
+    {
+        "id": "TX-B6884",
+        "studentId": "STU-042",
+        "studentName": "TB. FADLAN AL-FAROJ",
+        "type": "setor",
+        "category": "Tabungan Harian",
+        "amount": 20000,
+        "date": "2026-09-04T09:50",
+        "note": "Setoran harian kas kelas BR 1 (Batch 10 Siswa)"
     }
 ];
 
@@ -3123,7 +3593,7 @@ const OFFICIAL_STUDENTS = [
         "name": "AHMAD",
         "photo": "assets/students/0082546680.jpg",
         "phone": "081234567002",
-        "balance": 55000,
+        "balance": 65000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3143,7 +3613,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ALFI SYAHRI",
         "photo": "assets/students/0092316992.jpg",
         "phone": "081234567004",
-        "balance": 200000,
+        "balance": 240000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3153,7 +3623,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ALFIESYA NUR RACHMAN",
         "photo": "assets/students/0085602576.jpg",
         "phone": "081234567005",
-        "balance": 80000,
+        "balance": 120000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3161,8 +3631,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-006",
         "nisn": "0087807942",
         "name": "ALIP PIRMANSAH",
+        "photo": "assets/students/0087807942.jpg",
         "phone": "081234567006",
-        "balance": 24000,
+        "balance": 29000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3170,6 +3641,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-007",
         "nisn": "0086664698",
         "name": "ANANDA NOVAN ALVIAN",
+        "photo": "assets/students/0086664698.jpg",
         "phone": "081234567007",
         "balance": 5000,
         "target": 2000000,
@@ -3179,8 +3651,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-008",
         "nisn": "0082163626",
         "name": "AUGRAH DWI AURAWATI",
+        "photo": "assets/students/0082163626.jpg",
         "phone": "081234567008",
-        "balance": 152000,
+        "balance": 182000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3188,6 +3661,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-009",
         "nisn": "0087919336",
         "name": "AURA RIZKA AMELIA",
+        "photo": "assets/students/0087919336.jpg",
         "phone": "081234567009",
         "balance": 46000,
         "target": 2000000,
@@ -3197,6 +3671,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-010",
         "nisn": "0086133724",
         "name": "CHARLIE NOVAL PRADANA",
+        "photo": "assets/students/0086133724.jpg",
         "phone": "081234567010",
         "balance": 50000,
         "target": 2000000,
@@ -3206,8 +3681,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-011",
         "nisn": "3080709342",
         "name": "DESIANALESTARI",
+        "photo": "assets/students/3080709342.jpg",
         "phone": "081234567011",
-        "balance": 100000,
+        "balance": 150000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3215,8 +3691,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-012",
         "nisn": "0084895927",
         "name": "DHEBI NURMALA",
+        "photo": "assets/students/0084895927.jpg",
         "phone": "081234567012",
-        "balance": 85000,
+        "balance": 150000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3224,6 +3701,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-013",
         "nisn": "0091881465",
         "name": "DINDA RAHMASARI SEPTIANA",
+        "photo": "assets/students/0091881465.jpg",
         "phone": "081234567013",
         "balance": 0,
         "target": 2000000,
@@ -3233,8 +3711,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-014",
         "nisn": "3092826253",
         "name": "DOES SALAM",
+        "photo": "assets/students/3092826253.jpg",
         "phone": "081234567014",
-        "balance": 330000,
+        "balance": 400000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3242,6 +3721,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-015",
         "nisn": "0081666197",
         "name": "ERVANSYAH FAUZI NASUTION",
+        "photo": "assets/students/0081666197.jpg",
         "phone": "081234567015",
         "balance": 10000,
         "target": 2000000,
@@ -3251,6 +3731,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-016",
         "nisn": "0088134330",
         "name": "FADHLI DZIL JALAL",
+        "photo": "assets/students/0088134330.jpg",
         "phone": "081234567016",
         "balance": 0,
         "target": 2000000,
@@ -3260,8 +3741,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-017",
         "nisn": "3093487601",
         "name": "FATIHATUS SHALIHA",
+        "photo": "assets/students/3093487601.jpg",
         "phone": "081234567017",
-        "balance": 95000,
+        "balance": 100000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3269,6 +3751,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-018",
         "nisn": "3084030878",
         "name": "FITRIANI SALWA",
+        "photo": "assets/students/3084030878.jpg",
         "phone": "081234567018",
         "balance": 65000,
         "target": 2000000,
@@ -3278,6 +3761,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-019",
         "nisn": "0092525525",
         "name": "ILHAM ADI SAPUTRA",
+        "photo": "assets/students/0092525525.jpg",
         "phone": "081234567019",
         "balance": 0,
         "target": 2000000,
@@ -3287,6 +3771,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-020",
         "nisn": "0083705721",
         "name": "KURNIAWAN",
+        "photo": "assets/students/0083705721.jpg",
         "phone": "081234567020",
         "balance": 55000,
         "target": 2000000,
@@ -3296,6 +3781,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-021",
         "nisn": "0097656255",
         "name": "MARCEL MU'AMAR",
+        "photo": "assets/students/0097656255.jpg",
         "phone": "081234567021",
         "balance": 25000,
         "target": 2000000,
@@ -3305,6 +3791,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-022",
         "nisn": "0092348363",
         "name": "MELATI KESYAFANI",
+        "photo": "assets/students/0092348363.jpg",
         "phone": "081234567022",
         "balance": 20000,
         "target": 2000000,
@@ -3314,6 +3801,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-023",
         "nisn": "0096716273",
         "name": "MOH ILYAS",
+        "photo": "assets/students/0096716273.jpg",
         "phone": "081234567023",
         "balance": 32000,
         "target": 2000000,
@@ -3323,6 +3811,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-024",
         "nisn": "0072822191",
         "name": "MUHAMAD ALVATAR",
+        "photo": "assets/students/0072822191.jpg",
         "phone": "081234567024",
         "balance": 0,
         "target": 2000000,
@@ -3332,6 +3821,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-025",
         "nisn": "0092170243",
         "name": "MUHAMAD APDIL",
+        "photo": "assets/students/0092170243.jpg",
         "phone": "081234567025",
         "balance": 100000,
         "target": 2000000,
@@ -3341,8 +3831,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-026",
         "nisn": "0082428075",
         "name": "MUHAMAD FINZA DESMAWAN",
+        "photo": "assets/students/0082428075.jpg",
         "phone": "081234567026",
-        "balance": 120000,
+        "balance": 50000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3350,6 +3841,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-027",
         "nisn": "0159615200",
         "name": "MUHAMMAD ALNUR PASHA",
+        "photo": "assets/students/0159615200.jpg",
         "phone": "081234567027",
         "balance": 160000,
         "target": 2000000,
@@ -3359,8 +3851,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-028",
         "nisn": "0086723136",
         "name": "MUHAMMAD AMALUL ARIFIN",
+        "photo": "assets/students/0086723136.jpg",
         "phone": "081234567028",
-        "balance": 135000,
+        "balance": 155000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3368,6 +3861,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-029",
         "nisn": "0098972007",
         "name": "MUHAMMAD RAFA OKTAFIAN",
+        "photo": "assets/students/0098972007.jpg",
         "phone": "081234567029",
         "balance": 15000,
         "target": 2000000,
@@ -3377,6 +3871,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-030",
         "nisn": "0098916344",
         "name": "MUHAMMAD RIVIANSYAH",
+        "photo": "assets/students/0098916344.jpg",
         "phone": "081234567030",
         "balance": 0,
         "target": 2000000,
@@ -3386,6 +3881,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-031",
         "nisn": "0085877685",
         "name": "NIRWAN AKBAR",
+        "photo": "assets/students/0085877685.jpg",
         "phone": "081234567031",
         "balance": 190000,
         "target": 2000000,
@@ -3395,6 +3891,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-032",
         "nisn": "0094378426",
         "name": "OLIFIAH YULIANTI",
+        "photo": "assets/students/0094378426.jpg",
         "phone": "081234567032",
         "balance": 88000,
         "target": 2000000,
@@ -3404,8 +3901,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-033",
         "nisn": "0087295743",
         "name": "PUTRA HAIRUL LATIF",
+        "photo": "assets/students/0087295743.jpg",
         "phone": "081234567033",
-        "balance": 150000,
+        "balance": 180000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3413,8 +3911,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-034",
         "nisn": "0075181099",
         "name": "ROMDANI",
+        "photo": "assets/students/0075181099.jpg",
         "phone": "081234567034",
-        "balance": 155000,
+        "balance": 195000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3422,6 +3921,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-035",
         "nisn": "0086296055",
         "name": "SAFIRA NAILA AGUSTIN",
+        "photo": "assets/students/0086296055.jpg",
         "phone": "081234567035",
         "balance": 170000,
         "target": 2000000,
@@ -3431,8 +3931,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-036",
         "nisn": "0104662813",
         "name": "SAVA QUINSHA AULIA YASMIN",
+        "photo": "assets/students/0104662813.jpg",
         "phone": "081234567036",
-        "balance": 65000,
+        "balance": 75000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3440,6 +3941,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-037",
         "nisn": "0087746448",
         "name": "SILFA NOVIYANTI",
+        "photo": "assets/students/0087746448.jpg",
         "phone": "081234567037",
         "balance": 35000,
         "target": 2000000,
@@ -3449,8 +3951,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-038",
         "nisn": "0093065485",
         "name": "SITI SARAH AZZAHRA",
+        "photo": "assets/students/0093065485.jpg",
         "phone": "081234567038",
-        "balance": 0,
+        "balance": 5000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3458,6 +3961,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-039",
         "nisn": "0097696921",
         "name": "SRI WAHYUNINGSIH",
+        "photo": "assets/students/0097696921.jpg",
         "phone": "081234567039",
         "balance": 50000,
         "target": 2000000,
@@ -3467,8 +3971,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-040",
         "nisn": "0097699869",
         "name": "SYAFIA MARIAM HIDAYAT",
+        "photo": "assets/students/0097699869.jpg",
         "phone": "081234567040",
-        "balance": 190000,
+        "balance": 220000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3476,8 +3981,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-041",
         "nisn": "0095383788",
         "name": "SYLVA ARDIANTI",
+        "photo": "assets/students/0095383788.jpg",
         "phone": "081234567041",
-        "balance": 115000,
+        "balance": 215000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3485,8 +3991,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-042",
         "nisn": "0084351493",
         "name": "TB. FADLAN AL-FAROJ",
+        "photo": "assets/students/0084351493.jpg",
         "phone": "081234567042",
-        "balance": 220000,
+        "balance": 270000,
         "target": 2000000,
         "password": "password123"
     },
@@ -3494,6 +4001,7 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-043",
         "nisn": "0083453775",
         "name": "VIJAY MAHENDRA",
+        "photo": "assets/students/0083453775.jpg",
         "phone": "081234567043",
         "balance": 20000,
         "target": 2000000,
@@ -3503,8 +4011,9 @@ const OFFICIAL_STUDENTS = [
         "id": "STU-044",
         "nisn": "0091351864",
         "name": "ZEIN KHA ABDUL",
+        "photo": "assets/students/0091351864.jpg",
         "phone": "081234567044",
-        "balance": 200000,
+        "balance": 170000,
         "target": 2000000,
         "password": "password123"
     }
@@ -3647,10 +4156,10 @@ function loadState() {
 
     // Cek migrasi dari storage versi sebelumnya jika ada
     if (!savedStudents) {
-        savedStudents = localStorage.getItem('tabungbr1_students_v8') || localStorage.getItem('tabungbr1_students_v7');
+        savedStudents = localStorage.getItem('tabungbr1_students_v10') || localStorage.getItem('tabungbr1_students_v10');
     }
     if (!savedTx) {
-        savedTx = localStorage.getItem('tabungbr1_transactions_v8') || localStorage.getItem('tabungbr1_transactions_v7');
+        savedTx = localStorage.getItem('tabungbr1_transactions_v10') || localStorage.getItem('tabungbr1_transactions_v10');
     }
 
     if (savedStudents) {

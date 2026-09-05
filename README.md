@@ -45,10 +45,10 @@
 
 - **Total Siswa Terdaftar:** 44 Siswa
 - **Target Capaian per Siswa:** Rp 2.000.000
-- **Total Transaksi Mutasi:** 309 Transaksi
-- **Total Kas Masuk:** Rp 3.617.000
-- **Total Kas Keluar:** Rp 0
-- **Saldo Net Kas Kelas:** Rp 3.617.000
+- **Total Transaksi Mutasi:** 356 Transaksi
+- **Total Kas Masuk:** Rp 4.367.000
+- **Total Kas Keluar:** Rp 250.000
+- **Saldo Net Kas Kelas:** Rp 4.117.000
 
 ---
 
