@@ -860,19 +860,19 @@ select option {
 }
 
 .brand-icon {
-    width: 54px;
-    height: 54px;
-    background: rgba(0, 180, 216, 0.1);
-    border: 1.5px solid rgba(0, 180, 216, 0.35);
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid #dfba73;
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.6rem;
     color: #fff;
-    box-shadow: 0 8px 20px -4px rgba(3, 4, 94, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 22px -4px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.6);
     overflow: hidden;
-    padding: 4px;
+    padding: 5px;
     flex-shrink: 0;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(12px);
@@ -880,18 +880,18 @@ select option {
 }
 
 .brand-icon:hover {
-    transform: translateY(-2px) scale(1.08) rotate(-2deg);
-    box-shadow: 0 12px 28px -4px rgba(0, 180, 216, 0.5), 0 0 20px rgba(0, 119, 182, 0.4);
-    border-color: rgba(144, 224, 239, 0.6);
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 12px 28px -4px rgba(223, 186, 115, 0.5), 0 0 20px rgba(0, 119, 182, 0.4);
+    border-color: #c59b27;
 }
 
 .brand-logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 10px;
     display: block;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
     transition: transform 0.3s ease;
 }
 
@@ -901,12 +901,12 @@ select option {
 
 [data-theme="light"] .brand-icon {
     background: #ffffff !important;
-    border: 1.5px solid #caf0f8 !important;
-    box-shadow: 0 6px 18px -3px rgba(0, 119, 182, 0.1), 0 0 15px rgba(0, 180, 216, 0.15) !important;
+    border: 1.5px solid #dfba73 !important;
+    box-shadow: 0 6px 18px -3px rgba(223, 186, 115, 0.25), 0 0 15px rgba(0, 180, 216, 0.12) !important;
 }
 
 [data-theme="light"] .brand-logo-img {
-    filter: drop-shadow(0 2px 5px rgba(0, 119, 182, 0.15));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
 }
 
 .brand-text {
