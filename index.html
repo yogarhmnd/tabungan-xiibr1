@@ -16,51 +16,54 @@
 </head>
 <body>
 
-    <!-- SCREEN 1: LOGIN MODAL OVERLAY -->
+    <!-- SCREEN 1: LOGIN MODAL OVERLAY (Minimalist SaaS Cloud Aesthetic) -->
     <div id="login-overlay" class="login-overlay">
+        <!-- Ambient Concentric Circular Halo / Orbit Rings in Background -->
+        <div class="login-ambient-halo">
+            <div class="halo-ring halo-ring-1"></div>
+            <div class="halo-ring halo-ring-2"></div>
+            <div class="halo-ring halo-ring-3"></div>
+        </div>
+
         <div class="login-card">
-            <div class="login-top-bar">
-                <div class="login-official-badge">
-                    <span class="badge-dot-glow"></span>
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <span>Sistem Tabungan Resmi</span>
-                </div>
+            <!-- Top Right Floating Theme Toggle -->
+            <div class="login-card-topbar">
                 <button type="button" class="btn-theme-toggle-login" onclick="toggleTheme()" title="Ubah Tema Warna (Terang / Gelap)" aria-label="Ubah Tema">
                     <i class="fa-solid fa-sun" id="theme-icon-login"></i>
                 </button>
             </div>
+
+            <!-- Login Header: Centered Minimalist Logo & Clean Typography -->
             <div class="login-header">
-                <div class="login-icon" id="login-icon-box" title="Logo SMK PGRI 11 CILEDUG">
-                    <!-- GAMBAR LOGO SEKOLAH (Mengikuti logo yang sama dengan sidebar) -->
+                <div class="login-icon" id="login-icon-box" title="SMK PGRI 11 CILEDUG">
                     <img src="PGRI.png" id="login-logo-img" alt="Logo SMK PGRI 11" class="login-logo-img" onload="adaptLogoBackground(this, 'login-icon-box')" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
                     <i class="fa-solid fa-graduation-cap" style="display: none;"></i>
                 </div>
                 <h2>SMK PGRI 11 CILEDUG</h2>
-                <p>KOTA TANGERANG</p>
-                <div class="class-badge-login">Tabungan Siswa XII Bisnis Ritel 1</div>
+                <p class="login-subtitle">Tabungan Siswa XII Bisnis Ritel 1</p>
             </div>
 
             <div class="login-tabs">
                 <button type="button" class="login-tab-btn active" id="tab-btn-guru" onclick="switchLoginRole('admin')">
-                    <i class="fa-solid fa-user-tie"></i> Wali Kelas / Guru
+                    <i class="fa-solid fa-user-tie"></i> Wali Kelas
                 </button>
                 <button type="button" class="login-tab-btn" id="tab-btn-siswa" onclick="switchLoginRole('siswa')">
-                    <i class="fa-solid fa-user-graduate"></i> Login Siswa
+                    <i class="fa-solid fa-user-graduate"></i> Siswa
                 </button>
             </div>
 
-            <!-- Admin Form (Keterangan default admin HILANG agar aman dari murid) -->
+            <!-- Admin Form -->
             <form id="form-login-admin" onsubmit="handleLoginAdmin(event)">
                 <div class="form-group mb-3">
-                    <label for="admin-username"><i class="fa-solid fa-user"></i> Username Admin / Guru</label>
-                    <input type="text" id="admin-username" class="form-control" placeholder="Masukkan username admin" required>
+                    <label for="admin-username"><i class="fa-solid fa-user"></i> Username</label>
+                    <input type="text" id="admin-username" class="form-control" placeholder="admin / walikelas" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="admin-password"><i class="fa-solid fa-lock"></i> Password</label>
-                    <input type="password" id="admin-password" class="form-control" placeholder="Masukkan password" required>
+                    <input type="password" id="admin-password" class="form-control" placeholder="Masukkan password admin" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block btn-lg mt-3">
-                    <i class="fa-solid fa-right-to-bracket"></i> Masuk Sebagai Wali Kelas
+                <button type="submit" class="btn btn-primary btn-block btn-lg mt-3 login-submit-btn">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Sebagai Wali Kelas
                 </button>
             </form>
 
@@ -94,7 +97,7 @@
 
                 <!-- Input Password Siswa -->
                 <div class="form-group mb-3">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
                         <label for="siswa-password"><i class="fa-solid fa-key"></i> Password Siswa</label>
                         <button type="button" class="btn-link-toggle" onclick="togglePasswordVisibility('siswa-password', 'eye-icon-siswa')" title="Lihat / Sembunyikan Password">
                             <i class="fa-solid fa-eye" id="eye-icon-siswa"></i> <small>Lihat</small>
@@ -104,11 +107,11 @@
                 </div>
 
                 <div class="login-hint mb-3">
-                    <small><i class="fa-solid fa-circle-info"></i> Password Default: <strong>password123</strong> (Sesuai NISN yang dipilih)</small>
+                    <small><i class="fa-solid fa-circle-info"></i> Password Default: <strong>password123</strong> (Sesuai NISN)</small>
                 </div>
 
-                <button type="submit" class="btn btn-emerald btn-block btn-lg" id="btn-login-siswa-submit">
-                    <i class="fa-solid fa-right-to-bracket"></i> Masuk Sebagai Siswa
+                <button type="submit" class="btn btn-primary btn-block btn-lg login-submit-btn" id="btn-login-siswa-submit">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Tabungan Siswa
                 </button>
             </form>
         </div>

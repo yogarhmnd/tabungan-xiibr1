@@ -122,7 +122,7 @@ body {
 }
 
 /* ====================================================================
-   LOGIN OVERLAY & MODAL STYLES (Frosted Glass UI)
+   1. LOGIN OVERLAY & SAAS CLOUD AESTHETIC DESIGN
    ==================================================================== */
 .login-overlay {
     position: fixed;
@@ -130,281 +130,229 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at center, rgba(15, 23, 42, 0.96), #060911);
-    backdrop-filter: blur(16px);
+    background: radial-gradient(circle at 50% 15%, #1e293b 0%, #0f172a 50%, #080c16 100%);
+    backdrop-filter: blur(24px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 99999;
     padding: 1.5rem;
+    overflow-y: auto;
+    position: relative;
 }
 
 [data-theme="light"] .login-overlay {
-    background: radial-gradient(circle at center, rgba(241, 245, 249, 0.95), rgba(226, 232, 240, 0.97)) !important;
+    background: linear-gradient(180deg, #cae8ff 0%, #d8efff 22%, #eaf5fe 55%, #f6fafe 82%, #ffffff 100%) !important;
 }
 
+/* Ambient Concentric Orbital Rings (SaaS Sky Aesthetic) */
+.login-ambient-halo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 1000px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.halo-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.halo-ring-1 {
+    width: 460px;
+    height: 460px;
+}
+
+.halo-ring-2 {
+    width: 720px;
+    height: 720px;
+    border-color: rgba(255, 255, 255, 0.035);
+}
+
+.halo-ring-3 {
+    width: 980px;
+    height: 980px;
+    border-color: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="light"] .halo-ring-1 {
+    border-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+[data-theme="light"] .halo-ring-2 {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="light"] .halo-ring-3 {
+    border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+/* Floating Glassmorphic Login Card */
 .login-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-xl);
+    background: rgba(15, 23, 42, 0.82);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
     width: 100%;
-    max-width: 460px;
-    padding: 2.25rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(24px);
+    max-width: 420px;
+    padding: 2.5rem 2rem 2rem;
+    box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    backdrop-filter: blur(28px);
     animation: modalPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
-    overflow: hidden;
-}
-
-.login-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-indigo), var(--color-emerald), var(--color-purple));
+    z-index: 2;
 }
 
 [data-theme="light"] .login-card {
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08) !important;
+    background: rgba(255, 255, 255, 0.82) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 25px 60px -15px rgba(56, 189, 248, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.8) inset, 0 12px 30px rgba(0, 0, 0, 0.04) !important;
+    backdrop-filter: blur(32px) !important;
 }
 
-/* Login Top Bar: Aesthetic Official Badge & Compact Theme Toggle */
-.login-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.35rem;
-    gap: 0.75rem;
+/* Top Right Minimalist Theme Toggle */
+.login-card-topbar {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 10;
 }
 
-.login-official-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.42rem 0.85rem;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 78, 59, 0.28));
-    border: 1px solid rgba(16, 185, 129, 0.45);
-    border-radius: var(--radius-full);
-    color: #34d399;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.45px;
-    text-transform: uppercase;
-    box-shadow: 0 0 16px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.login-official-badge:hover {
-    border-color: rgba(16, 185, 129, 0.7);
-    box-shadow: 0 0 22px rgba(16, 185, 129, 0.3);
-    transform: translateY(-1px);
-}
-
-.login-official-badge i {
-    font-size: 0.85rem;
-    color: var(--color-emerald);
-    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.7));
-}
-
-.badge-dot-glow {
-    width: 6.5px;
-    height: 6.5px;
-    border-radius: 50%;
-    background-color: var(--color-emerald);
-    box-shadow: 0 0 8px var(--color-emerald), 0 0 14px rgba(16, 185, 129, 0.6);
-    display: inline-block;
-    animation: pulseDot 2s infinite ease-in-out;
-}
-
-@keyframes pulseDot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.35; transform: scale(0.75); }
-}
-
-[data-theme="light"] .login-official-badge {
-    background: linear-gradient(135deg, #ecfdf5, #d1fae5) !important;
-    border: 1px solid #6ee7b7 !important;
-    color: #065f46 !important;
-    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.12) !important;
-}
-
-[data-theme="light"] .login-official-badge i {
-    color: #059669 !important;
-    filter: none;
-}
-
-/* Compact Icon-Only Theme Toggle on Login */
 .btn-theme-toggle-login {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-full);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-    flex-shrink: 0;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-theme-toggle-login:hover {
-    background: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.18);
     border-color: rgba(255, 255, 255, 0.35);
     transform: translateY(-2px) rotate(15deg);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="light"] .btn-theme-toggle-login {
-    background: #f1f5f9 !important;
-    border: 1.5px solid #cbd5e1 !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
     color: #1e293b !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
 }
 
 [data-theme="light"] .btn-theme-toggle-login:hover {
-    background: #e2e8f0 !important;
-    border-color: #94a3b8 !important;
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
 }
 
 @keyframes modalPopIn {
-    from { opacity: 0; transform: scale(0.94) translateY(10px); }
+    from { opacity: 0; transform: scale(0.94) translateY(12px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+/* Header & Centered Logo Icon Box */
 .login-header {
     text-align: center;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .login-icon {
-    width: 92px;
-    height: 92px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1.5px solid rgba(255, 255, 255, 0.22);
-    border-radius: 26px;
+    width: 58px;
+    height: 58px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
-    color: #fff;
-    margin: 0 auto 1.35rem;
-    box-shadow: 0 14px 35px -6px rgba(0, 0, 0, 0.5), 0 0 25px rgba(234, 179, 8, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    margin: 0 auto 1rem;
+    box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.2);
     overflow: hidden;
-    padding: 6px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    animation: floatLogo 5s ease-in-out infinite alternate;
-    position: relative;
-    backdrop-filter: blur(16px);
+    padding: 7px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .login-icon:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 18px 40px -4px rgba(234, 179, 8, 0.4), 0 0 30px rgba(16, 185, 129, 0.3);
-    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 14px 30px -4px rgba(0, 0, 0, 0.45);
 }
 
 .login-logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 18px;
+    border-radius: 12px;
     display: block;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
-    transition: transform 0.3s ease;
-}
-
-.login-icon:hover .login-logo-img {
-    transform: scale(1.06);
 }
 
 [data-theme="light"] .login-icon {
     background: #ffffff !important;
-    border: 1.5px solid #e2e8f0 !important;
-    box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.1), 0 0 20px rgba(99, 102, 241, 0.1) !important;
-}
-
-[data-theme="light"] .login-logo-img {
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-}
-
-@keyframes floatLogo {
-    0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-4px) rotate(0.8deg); }
-    100% { transform: translateY(0px) rotate(0deg); }
+    border: 1.5px solid rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 12px 26px -4px rgba(0, 0, 0, 0.09), 0 4px 10px rgba(0, 0, 0, 0.03) !important;
 }
 
 .login-header h2 {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: var(--text-primary);
-    letter-spacing: -0.4px;
-    margin-bottom: 0.2rem;
+    letter-spacing: -0.3px;
+    margin-bottom: 0.25rem;
 }
 
-.login-header p {
+.login-subtitle {
     font-size: 0.85rem;
-    color: var(--color-emerald);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0;
 }
 
-.class-badge-login {
-    display: inline-block;
-    margin-top: 0.6rem;
-    padding: 0.3rem 0.9rem;
-    background: rgba(99, 102, 241, 0.12);
-    border: 1px solid rgba(99, 102, 241, 0.25);
-    border-radius: var(--radius-full);
-    font-size: 0.775rem;
-    color: var(--color-indigo-light);
-    font-weight: 700;
+[data-theme="light"] .login-subtitle {
+    color: #64748b !important;
 }
 
-[data-theme="light"] .class-badge-login {
-    background: #e0e7ff !important;
-    color: #3730a3 !important;
-    border-color: #c7d2fe !important;
-}
-
-/* Login Tab Switcher */
+/* Modern Pill Segmented Control Tabs */
 .login-tabs {
     display: flex;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 5px;
-    margin-bottom: 1.5rem;
-    gap: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 4px;
+    margin-bottom: 1.35rem;
+    gap: 4px;
 }
 
 [data-theme="light"] .login-tabs {
-    background: #f1f5f9;
-    border-color: #e2e8f0;
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
 }
 
 .login-tab-btn {
     flex: 1;
-    padding: 0.7rem 0.6rem;
+    padding: 0.65rem 0.5rem;
     border: none;
     background: transparent;
     color: var(--text-secondary);
     font-weight: 700;
-    font-size: 0.85rem;
-    border-radius: var(--radius-sm);
+    font-size: 0.825rem;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -412,13 +360,54 @@ body {
 }
 
 .login-tab-btn.active {
-    background: linear-gradient(135deg, var(--color-indigo), var(--color-indigo-dark));
-    color: #fff;
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    background: #1e293b;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-[data-theme="light"] .login-tab-btn:not(.active) {
-    color: #475569;
+[data-theme="light"] .login-tab-btn {
+    color: #64748b;
+}
+
+[data-theme="light"] .login-tab-btn.active {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Action Submit Buttons (Inspired by Sleek 'Get Started' Button) */
+.login-submit-btn {
+    background: #111827 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 14px !important;
+    padding: 0.85rem 1.25rem !important;
+    font-weight: 700 !important;
+    font-size: 0.925rem !important;
+    box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.45) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.login-submit-btn:hover {
+    background: #000000 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="light"] .login-submit-btn {
+    background: #18181b !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 8px 22px -4px rgba(24, 24, 27, 0.3) !important;
+}
+
+[data-theme="light"] .login-submit-btn:hover {
+    background: #09090b !important;
+    box-shadow: 0 12px 28px -4px rgba(9, 9, 11, 0.45) !important;
 }
 
 .login-hint {
@@ -501,17 +490,17 @@ body {
     font-weight: 700;
 }
 
-/* Khusus Dropdown dan Input pada Form Login Siswa */
+/* Form Inputs & Dropdowns (Clean SaaS Style) */
 #siswa-login-nisn,
 #siswa-search-input,
 #admin-username,
 #admin-password,
 #siswa-password {
     background: rgba(15, 23, 42, 0.85);
-    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
     color: #f8fafc;
     font-size: 0.9rem;
-    border-radius: var(--radius-md);
+    border-radius: 12px;
     padding: 0.8rem 1rem;
     transition: all 0.25s ease;
 }
@@ -521,13 +510,13 @@ body {
 #admin-username:focus,
 #admin-password:focus,
 #siswa-password:focus {
-    background: rgba(15, 23, 42, 0.95);
-    border-color: var(--color-indigo);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    background: rgba(15, 23, 42, 0.98);
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
     color: #ffffff;
 }
 
-/* Opsi Dropdown (Anti Teks Tak Terlihat di Semua Browser) */
+/* Opsi Dropdown */
 select option {
     background-color: #0b1120;
     color: #f8fafc;
@@ -542,9 +531,10 @@ select option {
 [data-theme="light"] #admin-password,
 [data-theme="light"] #siswa-password,
 [data-theme="light"] .form-control {
-    background-color: #ffffff !important;
-    border: 1.5px solid #cbd5e1 !important;
+    background-color: #f1f5f9 !important;
+    border: 1.5px solid #e2e8f0 !important;
     color: #0f172a !important;
+    border-radius: 12px !important;
 }
 
 [data-theme="light"] #siswa-login-nisn:focus,
@@ -554,8 +544,8 @@ select option {
 [data-theme="light"] #siswa-password:focus,
 [data-theme="light"] .form-control:focus {
     background-color: #ffffff !important;
-    border-color: #4f46e5 !important;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18) !important;
     color: #0f172a !important;
 }
 
@@ -2842,6 +2832,19 @@ select.form-control {
 @media (max-width: 480px) {
     .metrics-grid {
         grid-template-columns: 1fr;
+    }
+
+    .login-overlay {
+        padding: 1rem 0.85rem;
+    }
+
+    .login-card {
+        padding: 2rem 1.35rem 1.65rem;
+        border-radius: 24px;
+    }
+
+    .login-header h2 {
+        font-size: 1.25rem;
     }
 }
 
