@@ -4736,6 +4736,14 @@ function initFirebaseRealtimeSync() {
                     appTransactions = [];
                 }
 
+                // Sinkronkan konfigurasi WhatsApp Gateway jika tersedia di cloud
+                if (data.waConfig && typeof data.waConfig === 'object') {
+                    waConfig = { ...waConfig, ...data.waConfig };
+                    try {
+                        localStorage.setItem(STORAGE_WA_CONFIG_KEY, JSON.stringify(waConfig));
+                    } catch(e) {}
+                }
+
                 // Simpan ke cache browser
                 try {
                     localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
@@ -4799,9 +4807,14 @@ function syncToFirebase(force = false) {
         updateCloudSyncStatus('syncing', 'Sinkron...');
 
         const payload = {
+            repository: "https://github.com/yogarhmnd/tabungan-xiibr1",
+            liveUrl: "https://tabungan-xiibr1.vercel.app",
+            appName: "Tabungan Siswa XII BR 1 SMK PGRI 11 CILEDUG KOTA TANGERANG",
+            version: "v1.2.0-cloud",
+            lastUpdated: new Date().toISOString(),
+            waConfig: typeof waConfig !== 'undefined' ? waConfig : {},
             students: appStudents,
-            transactions: appTransactions,
-            lastUpdated: new Date().toISOString()
+            transactions: appTransactions
         };
 
         firebaseDb.ref('tabungan_br1').set(payload)
