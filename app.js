@@ -5,12 +5,12 @@
    Features: WhatsApp Notification System & 44 Student Roster
    ========================================================================= */
 
-// Storage Keys (Auto-seeded with 44 Official Students)
-const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v8';
-const STORAGE_TX_KEY = 'tabungbr1_transactions_v8';
-const STORAGE_AUTH_KEY = 'tabungbr1_session_v8';
-const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v8';
-const STORAGE_THEME_KEY = 'tabungbr1_theme_v8';
+// Storage Keys (Auto-seeded with 44 Official Students - Target Rp 2.000.000)
+const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v9';
+const STORAGE_TX_KEY = 'tabungbr1_transactions_v9';
+const STORAGE_AUTH_KEY = 'tabungbr1_session_v9';
+const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v9';
+const STORAGE_THEME_KEY = 'tabungbr1_theme_v9';
 
 // Official Class List for XII Bisnis Ritel 1 (44 Students with Registered WhatsApp Phone Numbers)
 const INITIAL_TRANSACTIONS = [
@@ -19,7 +19,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-001",
         "studentName": "AFGAN AFFANDI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -29,7 +29,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-001",
         "studentName": "AFGAN AFFANDI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -39,7 +39,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -49,7 +49,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -59,7 +59,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -69,7 +69,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -79,7 +79,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -89,7 +89,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -99,7 +99,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -109,7 +109,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -119,7 +119,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -129,7 +129,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -139,7 +139,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-002",
         "studentName": "AHMAD",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -149,7 +149,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -159,7 +159,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -169,7 +169,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -179,7 +179,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -189,7 +189,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -199,7 +199,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -209,7 +209,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -219,7 +219,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -229,7 +229,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -239,7 +239,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -249,7 +249,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -259,7 +259,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -269,7 +269,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -279,7 +279,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-004",
         "studentName": "ALFI SYAHRI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -289,7 +289,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-005",
         "studentName": "ALFIESYA NUR RACHMAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -299,7 +299,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-005",
         "studentName": "ALFIESYA NUR RACHMAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -309,7 +309,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-005",
         "studentName": "ALFIESYA NUR RACHMAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -319,7 +319,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-005",
         "studentName": "ALFIESYA NUR RACHMAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -329,7 +329,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-006",
         "studentName": "ALIP PIRMANSAH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 6000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -339,7 +339,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-006",
         "studentName": "ALIP PIRMANSAH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -349,7 +349,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-006",
         "studentName": "ALIP PIRMANSAH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 6000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -359,7 +359,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-006",
         "studentName": "ALIP PIRMANSAH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -369,7 +369,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-007",
         "studentName": "ANANDA NOVAN ALVIAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -379,7 +379,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 50000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -389,7 +389,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -399,7 +399,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -409,7 +409,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -419,7 +419,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -429,7 +429,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -439,7 +439,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 6000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -449,7 +449,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -459,7 +459,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -469,7 +469,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -479,7 +479,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -489,7 +489,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 6000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -499,7 +499,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -509,7 +509,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -519,7 +519,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
@@ -529,7 +529,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-008",
         "studentName": "AUGRAH DWI AURAWATI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -539,7 +539,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-009",
         "studentName": "AURA RIZKA AMELIA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -549,7 +549,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-009",
         "studentName": "AURA RIZKA AMELIA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -559,7 +559,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-009",
         "studentName": "AURA RIZKA AMELIA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -569,7 +569,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-009",
         "studentName": "AURA RIZKA AMELIA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -579,7 +579,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-009",
         "studentName": "AURA RIZKA AMELIA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -589,7 +589,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-009",
         "studentName": "AURA RIZKA AMELIA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -599,7 +599,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-009",
         "studentName": "AURA RIZKA AMELIA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -609,7 +609,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -619,7 +619,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -629,7 +629,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -639,7 +639,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -649,7 +649,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -659,7 +659,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -669,7 +669,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -679,7 +679,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -689,7 +689,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-010",
         "studentName": "CHARLIE NOVAL PRADANA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -699,7 +699,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-011",
         "studentName": "DESIANALESTARI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 50000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -709,7 +709,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-011",
         "studentName": "DESIANALESTARI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -719,7 +719,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-011",
         "studentName": "DESIANALESTARI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -729,7 +729,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-011",
         "studentName": "DESIANALESTARI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 9000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -739,7 +739,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-011",
         "studentName": "DESIANALESTARI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -749,7 +749,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-011",
         "studentName": "DESIANALESTARI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 14000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -759,7 +759,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -769,7 +769,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -779,7 +779,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -789,7 +789,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -799,7 +799,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -809,7 +809,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -819,7 +819,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 8000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -829,7 +829,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 12000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -839,7 +839,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -849,7 +849,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-012",
         "studentName": "DHEBI NURMALA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
@@ -859,7 +859,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -869,7 +869,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 18000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -879,7 +879,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -889,7 +889,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 50000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -899,7 +899,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 22000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -909,7 +909,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -919,7 +919,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -929,7 +929,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -939,7 +939,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -949,7 +949,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -959,7 +959,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -969,7 +969,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -979,7 +979,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -989,7 +989,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -999,7 +999,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
@@ -1009,7 +1009,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-014",
         "studentName": "DOES SALAM",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -1019,7 +1019,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-015",
         "studentName": "ERVANSYAH FAUZI NASUTION",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1029,7 +1029,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-015",
         "studentName": "ERVANSYAH FAUZI NASUTION",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1039,7 +1039,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1049,7 +1049,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1059,7 +1059,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1069,7 +1069,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1079,7 +1079,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -1089,7 +1089,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -1099,7 +1099,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1109,7 +1109,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -1119,7 +1119,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -1129,7 +1129,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-017",
         "studentName": "FATIHATUS SHALIHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -1139,7 +1139,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1149,7 +1149,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1159,7 +1159,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1169,7 +1169,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1179,7 +1179,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -1189,7 +1189,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -1199,7 +1199,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -1209,7 +1209,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-018",
         "studentName": "FITRIANI SALWA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1219,7 +1219,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1229,7 +1229,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1239,7 +1239,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1249,7 +1249,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1259,7 +1259,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -1269,7 +1269,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -1279,7 +1279,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -1289,7 +1289,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -1299,7 +1299,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -1309,7 +1309,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1319,7 +1319,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-020",
         "studentName": "KURNIAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -1329,7 +1329,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-021",
         "studentName": "MARCEL MU'AMAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1339,7 +1339,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-021",
         "studentName": "MARCEL MU'AMAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1349,7 +1349,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-021",
         "studentName": "MARCEL MU'AMAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1359,7 +1359,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-022",
         "studentName": "MELATI KESYAFANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1369,7 +1369,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-022",
         "studentName": "MELATI KESYAFANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1379,7 +1379,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-022",
         "studentName": "MELATI KESYAFANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1389,7 +1389,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-022",
         "studentName": "MELATI KESYAFANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1399,7 +1399,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-023",
         "studentName": "MOH ILYAS",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1409,7 +1409,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-023",
         "studentName": "MOH ILYAS",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1419,7 +1419,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-023",
         "studentName": "MOH ILYAS",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -1429,7 +1429,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-023",
         "studentName": "MOH ILYAS",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1439,7 +1439,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1449,7 +1449,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1459,7 +1459,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1469,7 +1469,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1479,7 +1479,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -1489,7 +1489,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -1499,7 +1499,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -1509,7 +1509,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -1519,7 +1519,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1529,7 +1529,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -1539,7 +1539,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -1549,7 +1549,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-025",
         "studentName": "MUHAMAD APDIL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -1559,7 +1559,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-026",
         "studentName": "MUHAMAD FINZA DESMAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1569,7 +1569,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-026",
         "studentName": "MUHAMAD FINZA DESMAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1579,7 +1579,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-026",
         "studentName": "MUHAMAD FINZA DESMAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1589,7 +1589,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-026",
         "studentName": "MUHAMAD FINZA DESMAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1599,7 +1599,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-026",
         "studentName": "MUHAMAD FINZA DESMAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -1609,7 +1609,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-026",
         "studentName": "MUHAMAD FINZA DESMAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -1619,7 +1619,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-026",
         "studentName": "MUHAMAD FINZA DESMAWAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1629,7 +1629,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-027",
         "studentName": "MUHAMMAD ALNUR PASHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1639,7 +1639,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-027",
         "studentName": "MUHAMMAD ALNUR PASHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1649,7 +1649,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-027",
         "studentName": "MUHAMMAD ALNUR PASHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -1659,7 +1659,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-027",
         "studentName": "MUHAMMAD ALNUR PASHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 40000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -1669,7 +1669,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-027",
         "studentName": "MUHAMMAD ALNUR PASHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 40000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1679,7 +1679,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-027",
         "studentName": "MUHAMMAD ALNUR PASHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -1689,7 +1689,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-027",
         "studentName": "MUHAMMAD ALNUR PASHA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -1699,7 +1699,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -1709,7 +1709,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1719,7 +1719,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1729,7 +1729,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1739,7 +1739,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -1749,7 +1749,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -1759,7 +1759,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -1769,7 +1769,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -1779,7 +1779,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -1789,7 +1789,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1799,7 +1799,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -1809,7 +1809,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -1819,7 +1819,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-028",
         "studentName": "MUHAMMAD AMALUL ARIFIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 25000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -1829,7 +1829,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-029",
         "studentName": "MUHAMMAD RAFA OKTAFIAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1839,7 +1839,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-029",
         "studentName": "MUHAMMAD RAFA OKTAFIAN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -1849,7 +1849,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1859,7 +1859,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1869,7 +1869,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -1879,7 +1879,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -1889,7 +1889,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -1899,7 +1899,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -1909,7 +1909,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 50000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -1919,7 +1919,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-031",
         "studentName": "NIRWAN AKBAR",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -1929,7 +1929,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -1939,7 +1939,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -1949,7 +1949,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -1959,7 +1959,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -1969,7 +1969,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -1979,7 +1979,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -1989,7 +1989,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -1999,7 +1999,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -2009,7 +2009,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 6000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -2019,7 +2019,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -2029,7 +2029,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -2039,7 +2039,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -2049,7 +2049,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -2059,7 +2059,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-032",
         "studentName": "OLIFIAH YULIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -2069,7 +2069,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -2079,7 +2079,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -2089,7 +2089,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2099,7 +2099,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -2109,7 +2109,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -2119,7 +2119,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -2129,7 +2129,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -2139,7 +2139,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -2149,7 +2149,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -2159,7 +2159,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -2169,7 +2169,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -2179,7 +2179,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -2189,7 +2189,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -2199,7 +2199,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -2209,7 +2209,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
@@ -2219,7 +2219,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-033",
         "studentName": "PUTRA HAIRUL LATIF",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -2229,7 +2229,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -2239,7 +2239,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -2249,7 +2249,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2259,7 +2259,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -2269,7 +2269,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -2279,7 +2279,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -2289,7 +2289,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -2299,7 +2299,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -2309,7 +2309,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-20T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 20)"
@@ -2319,7 +2319,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -2329,7 +2329,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -2339,7 +2339,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -2349,7 +2349,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -2359,7 +2359,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
@@ -2369,7 +2369,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-034",
         "studentName": "ROMDANI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -2379,7 +2379,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-035",
         "studentName": "SAFIRA NAILA AGUSTIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -2389,7 +2389,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-035",
         "studentName": "SAFIRA NAILA AGUSTIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -2399,7 +2399,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-035",
         "studentName": "SAFIRA NAILA AGUSTIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -2409,7 +2409,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-035",
         "studentName": "SAFIRA NAILA AGUSTIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2419,7 +2419,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-035",
         "studentName": "SAFIRA NAILA AGUSTIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 150000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -2429,7 +2429,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-01T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 1)"
@@ -2439,7 +2439,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -2449,7 +2449,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2459,7 +2459,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -2469,7 +2469,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -2479,7 +2479,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -2489,7 +2489,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -2499,7 +2499,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -2509,7 +2509,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -2519,7 +2519,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -2529,7 +2529,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-036",
         "studentName": "SAVA QUINSHA AULIA YASMIN",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-27T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 27)"
@@ -2539,7 +2539,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-037",
         "studentName": "SILFA NOVIYANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -2549,7 +2549,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-037",
         "studentName": "SILFA NOVIYANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2559,7 +2559,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-037",
         "studentName": "SILFA NOVIYANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -2569,7 +2569,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-037",
         "studentName": "SILFA NOVIYANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -2579,7 +2579,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -2589,7 +2589,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -2599,7 +2599,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -2609,7 +2609,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2619,7 +2619,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -2629,7 +2629,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -2639,7 +2639,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -2649,7 +2649,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-039",
         "studentName": "SRI WAHYUNINGSIH",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -2659,7 +2659,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -2669,7 +2669,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -2679,7 +2679,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -2689,7 +2689,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2699,7 +2699,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -2709,7 +2709,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -2719,7 +2719,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -2729,7 +2729,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -2739,7 +2739,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -2749,7 +2749,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -2759,7 +2759,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 50000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -2769,7 +2769,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
@@ -2779,7 +2779,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-040",
         "studentName": "SYAFIA MARIAM HIDAYAT",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -2789,7 +2789,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 50000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -2799,7 +2799,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -2809,7 +2809,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2819,7 +2819,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -2829,7 +2829,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -2839,7 +2839,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-21T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 21)"
@@ -2849,7 +2849,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 15000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -2859,7 +2859,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-041",
         "studentName": "SYLVA ARDIANTI",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -2869,7 +2869,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -2879,7 +2879,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -2889,7 +2889,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -2899,7 +2899,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -2909,7 +2909,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -2919,7 +2919,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-10T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 10)"
@@ -2929,7 +2929,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -2939,7 +2939,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -2949,7 +2949,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-18T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 18)"
@@ -2959,7 +2959,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-22T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 22)"
@@ -2969,7 +2969,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-24T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 24)"
@@ -2979,7 +2979,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-26T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 26)"
@@ -2989,7 +2989,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-28T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 28)"
@@ -2999,7 +2999,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-29T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 29)"
@@ -3009,7 +3009,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-042",
         "studentName": "TB. FADLAN AL-FAROJ",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 10000,
         "date": "2026-08-31T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 31)"
@@ -3019,7 +3019,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-043",
         "studentName": "VIJAY MAHENDRA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 8000,
         "date": "2026-08-05T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 5)"
@@ -3029,7 +3029,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-043",
         "studentName": "VIJAY MAHENDRA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 7000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -3039,7 +3039,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-043",
         "studentName": "VIJAY MAHENDRA",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 5000,
         "date": "2026-08-11T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 11)"
@@ -3049,7 +3049,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 30000,
         "date": "2026-08-03T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 3)"
@@ -3059,7 +3059,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 30000,
         "date": "2026-08-04T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 4)"
@@ -3069,7 +3069,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 35000,
         "date": "2026-08-06T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 6)"
@@ -3079,7 +3079,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 20000,
         "date": "2026-08-07T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 7)"
@@ -3089,7 +3089,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 35000,
         "date": "2026-08-08T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 8)"
@@ -3099,7 +3099,7 @@ const INITIAL_TRANSACTIONS = [
         "studentId": "STU-044",
         "studentName": "ZEIN KHA ABDUL",
         "type": "setor",
-        "category": "Setoran Rutin",
+        "category": "Tabungan Harian",
         "amount": 50000,
         "date": "2026-08-12T08:30:00.000Z",
         "note": "Setoran Buku Tabungan (Hari 12)"
@@ -3114,7 +3114,7 @@ const OFFICIAL_STUDENTS = [
         "photo": "assets/students/0085191456.jpg",
         "phone": "081234567001",
         "balance": 10000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3124,7 +3124,7 @@ const OFFICIAL_STUDENTS = [
         "photo": "assets/students/0082546680.jpg",
         "phone": "081234567002",
         "balance": 55000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3134,7 +3134,7 @@ const OFFICIAL_STUDENTS = [
         "photo": "assets/students/0082865515.jpg",
         "phone": "081234567003",
         "balance": 0,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3144,7 +3144,7 @@ const OFFICIAL_STUDENTS = [
         "photo": "assets/students/0092316992.jpg",
         "phone": "081234567004",
         "balance": 200000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3154,7 +3154,7 @@ const OFFICIAL_STUDENTS = [
         "photo": "assets/students/0085602576.jpg",
         "phone": "081234567005",
         "balance": 80000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3163,7 +3163,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ALIP PIRMANSAH",
         "phone": "081234567006",
         "balance": 24000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3172,7 +3172,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ANANDA NOVAN ALVIAN",
         "phone": "081234567007",
         "balance": 5000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3181,7 +3181,7 @@ const OFFICIAL_STUDENTS = [
         "name": "AUGRAH DWI AURAWATI",
         "phone": "081234567008",
         "balance": 152000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3190,7 +3190,7 @@ const OFFICIAL_STUDENTS = [
         "name": "AURA RIZKA AMELIA",
         "phone": "081234567009",
         "balance": 46000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3199,7 +3199,7 @@ const OFFICIAL_STUDENTS = [
         "name": "CHARLIE NOVAL PRADANA",
         "phone": "081234567010",
         "balance": 50000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3208,7 +3208,7 @@ const OFFICIAL_STUDENTS = [
         "name": "DESIANALESTARI",
         "phone": "081234567011",
         "balance": 100000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3217,7 +3217,7 @@ const OFFICIAL_STUDENTS = [
         "name": "DHEBI NURMALA",
         "phone": "081234567012",
         "balance": 85000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3226,7 +3226,7 @@ const OFFICIAL_STUDENTS = [
         "name": "DINDA RAHMASARI SEPTIANA",
         "phone": "081234567013",
         "balance": 0,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3235,7 +3235,7 @@ const OFFICIAL_STUDENTS = [
         "name": "DOES SALAM",
         "phone": "081234567014",
         "balance": 330000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3244,7 +3244,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ERVANSYAH FAUZI NASUTION",
         "phone": "081234567015",
         "balance": 10000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3253,7 +3253,7 @@ const OFFICIAL_STUDENTS = [
         "name": "FADHLI DZIL JALAL",
         "phone": "081234567016",
         "balance": 0,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3262,7 +3262,7 @@ const OFFICIAL_STUDENTS = [
         "name": "FATIHATUS SHALIHA",
         "phone": "081234567017",
         "balance": 95000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3271,7 +3271,7 @@ const OFFICIAL_STUDENTS = [
         "name": "FITRIANI SALWA",
         "phone": "081234567018",
         "balance": 65000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3280,7 +3280,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ILHAM ADI SAPUTRA",
         "phone": "081234567019",
         "balance": 0,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3289,7 +3289,7 @@ const OFFICIAL_STUDENTS = [
         "name": "KURNIAWAN",
         "phone": "081234567020",
         "balance": 55000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3298,7 +3298,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MARCEL MU'AMAR",
         "phone": "081234567021",
         "balance": 25000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3307,7 +3307,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MELATI KESYAFANI",
         "phone": "081234567022",
         "balance": 20000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3316,7 +3316,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MOH ILYAS",
         "phone": "081234567023",
         "balance": 32000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3325,7 +3325,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMAD ALVATAR",
         "phone": "081234567024",
         "balance": 0,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3334,7 +3334,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMAD APDIL",
         "phone": "081234567025",
         "balance": 100000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3343,7 +3343,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMAD FINZA DESMAWAN",
         "phone": "081234567026",
         "balance": 120000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3352,7 +3352,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMMAD ALNUR PASHA",
         "phone": "081234567027",
         "balance": 160000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3361,7 +3361,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMMAD AMALUL ARIFIN",
         "phone": "081234567028",
         "balance": 135000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3370,7 +3370,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMMAD RAFA OKTAFIAN",
         "phone": "081234567029",
         "balance": 15000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3379,7 +3379,7 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMMAD RIVIANSYAH",
         "phone": "081234567030",
         "balance": 0,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3388,7 +3388,7 @@ const OFFICIAL_STUDENTS = [
         "name": "NIRWAN AKBAR",
         "phone": "081234567031",
         "balance": 190000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3397,7 +3397,7 @@ const OFFICIAL_STUDENTS = [
         "name": "OLIFIAH YULIANTI",
         "phone": "081234567032",
         "balance": 88000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3406,7 +3406,7 @@ const OFFICIAL_STUDENTS = [
         "name": "PUTRA HAIRUL LATIF",
         "phone": "081234567033",
         "balance": 150000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3415,7 +3415,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ROMDANI",
         "phone": "081234567034",
         "balance": 155000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3424,7 +3424,7 @@ const OFFICIAL_STUDENTS = [
         "name": "SAFIRA NAILA AGUSTIN",
         "phone": "081234567035",
         "balance": 170000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3433,7 +3433,7 @@ const OFFICIAL_STUDENTS = [
         "name": "SAVA QUINSHA AULIA YASMIN",
         "phone": "081234567036",
         "balance": 65000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3442,7 +3442,7 @@ const OFFICIAL_STUDENTS = [
         "name": "SILFA NOVIYANTI",
         "phone": "081234567037",
         "balance": 35000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3451,7 +3451,7 @@ const OFFICIAL_STUDENTS = [
         "name": "SITI SARAH AZZAHRA",
         "phone": "081234567038",
         "balance": 0,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3460,7 +3460,7 @@ const OFFICIAL_STUDENTS = [
         "name": "SRI WAHYUNINGSIH",
         "phone": "081234567039",
         "balance": 50000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3469,7 +3469,7 @@ const OFFICIAL_STUDENTS = [
         "name": "SYAFIA MARIAM HIDAYAT",
         "phone": "081234567040",
         "balance": 190000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3478,7 +3478,7 @@ const OFFICIAL_STUDENTS = [
         "name": "SYLVA ARDIANTI",
         "phone": "081234567041",
         "balance": 115000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3487,7 +3487,7 @@ const OFFICIAL_STUDENTS = [
         "name": "TB. FADLAN AL-FAROJ",
         "phone": "081234567042",
         "balance": 220000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3496,7 +3496,7 @@ const OFFICIAL_STUDENTS = [
         "name": "VIJAY MAHENDRA",
         "phone": "081234567043",
         "balance": 20000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     },
     {
@@ -3505,7 +3505,7 @@ const OFFICIAL_STUDENTS = [
         "name": "ZEIN KHA ABDUL",
         "phone": "081234567044",
         "balance": 200000,
-        "target": 1000000,
+        "target": 2000000,
         "password": "password123"
     }
 ];
@@ -3640,24 +3640,24 @@ function getStudentAvatarGradient(name) {
     return gradients[Math.abs(hash)];
 }
 
-// Load State from LocalStorage (Otomatis memuat seluruh 44 siswa resmi)
+// Load State from LocalStorage (Otomatis memuat seluruh 44 siswa resmi dengan target Rp 2.000.000)
 function loadState() {
     let savedStudents = localStorage.getItem(STORAGE_STUDENTS_KEY);
     let savedTx = localStorage.getItem(STORAGE_TX_KEY);
 
     // Cek migrasi dari storage versi sebelumnya jika ada
     if (!savedStudents) {
-        savedStudents = localStorage.getItem('tabungbr1_students_v7') || localStorage.getItem('tabungbr1_students_v7');
+        savedStudents = localStorage.getItem('tabungbr1_students_v8') || localStorage.getItem('tabungbr1_students_v7');
     }
     if (!savedTx) {
-        savedTx = localStorage.getItem('tabungbr1_transactions_v7') || localStorage.getItem('tabungbr1_transactions_v7');
+        savedTx = localStorage.getItem('tabungbr1_transactions_v8') || localStorage.getItem('tabungbr1_transactions_v7');
     }
 
     if (savedStudents) {
         try {
             const parsed = JSON.parse(savedStudents);
-            // Salin data 44 siswa resmi dan satukan dengan data balance/target jika ada
-            appStudents = OFFICIAL_STUDENTS.map((official, idx) => {
+            // Salin data 44 siswa resmi dan tetapkan target tabungan ke Rp 2.000.000
+            appStudents = OFFICIAL_STUDENTS.map((official) => {
                 const found = parsed.find(s => s.nisn === official.nisn || s.id === official.id || s.name.toUpperCase() === official.name.toUpperCase());
                 return {
                     id: official.id,
@@ -3666,7 +3666,7 @@ function loadState() {
                     photo: (found && found.photo) ? found.photo : (official.photo || null),
                     phone: (found && found.phone) ? found.phone : official.phone,
                     balance: (found && typeof found.balance === 'number') ? found.balance : official.balance,
-                    target: (found && typeof found.target === 'number') ? found.target : official.target,
+                    target: 2000000, // Target resmi Rp 2.000.000 seluruh siswa
                     password: official.password || 'password123'
                 };
             });
@@ -3676,7 +3676,7 @@ function loadState() {
             saveStudents();
         }
     } else {
-        // Inisialisasi awal: Otomatis memuat 44 siswa resmi dengan saldo dari spreadsheet
+        // Inisialisasi awal: Otomatis memuat 44 siswa resmi dengan saldo dan target Rp 2.000.000
         appStudents = JSON.parse(JSON.stringify(OFFICIAL_STUDENTS));
         saveStudents();
     }
@@ -4432,24 +4432,253 @@ function renderStudentsGrid() {
     }).join('');
 }
 
-// 5. Report View Renderer (Admin)
+// 5. Report View Renderer (Admin: Rekap Harian, Mingguan, Bulanan & Per Siswa)
+let currentReportTab = 'harian';
+
+function switchReportTab(tabType) {
+    currentReportTab = tabType;
+    
+    // Update active tab buttons and subviews
+    ['harian', 'mingguan', 'bulanan', 'siswa'].forEach(t => {
+        const btn = document.getElementById(`btn-rekap-${t}`);
+        const view = document.getElementById(`report-view-${t}`);
+        if (btn) btn.classList.toggle('active', t === tabType);
+        if (view) view.classList.toggle('hidden', t !== tabType);
+    });
+
+    renderReportView();
+}
+
 function renderReportView() {
     const totalMasuk = appTransactions.filter(t => t.type === 'setor').reduce((acc, t) => acc + t.amount, 0);
     const totalKeluar = appTransactions.filter(t => t.type === 'tarik').reduce((acc, t) => acc + t.amount, 0);
     const totalSaldo = appStudents.reduce((acc, s) => acc + s.balance, 0);
 
-    document.getElementById('report-total-masuk').innerText = formatRp(totalMasuk);
-    document.getElementById('report-total-keluar').innerText = formatRp(totalKeluar);
-    document.getElementById('report-saldo-akhir').innerText = formatRp(totalSaldo);
+    const elMasuk = document.getElementById('report-total-masuk');
+    const elKeluar = document.getElementById('report-total-keluar');
+    const elSaldo = document.getElementById('report-saldo-akhir');
+    const elDate = document.getElementById('report-date-display');
+
+    if (elMasuk) elMasuk.innerText = formatRp(totalMasuk);
+    if (elKeluar) elKeluar.innerText = formatRp(totalKeluar);
+    if (elSaldo) elSaldo.innerText = formatRp(totalSaldo);
+    if (elDate) elDate.innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+
+    renderReportHarian();
+    renderReportMingguan();
+    renderReportBulanan();
+    renderReportPerSiswa();
+}
+
+// 5.1 Rekapitulasi Tabungan Harian (Per Hari)
+function renderReportHarian() {
+    const tbody = document.getElementById('report-harian-tbody');
+    const badge = document.getElementById('badge-harian-count');
+    if (!tbody) return;
+
+    if (appTransactions.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted p-4"><i class="fa-solid fa-circle-info"></i> Belum ada riwayat transaksi yang tercatat.</td></tr>`;
+        if (badge) badge.innerText = '0 Hari';
+        return;
+    }
+
+    // Group transactions by date string YYYY-MM-DD
+    const groups = {};
+    appTransactions.forEach(t => {
+        const dateKey = (t.date || '').slice(0, 10) || '2026-09-04';
+        if (!groups[dateKey]) {
+            groups[dateKey] = {
+                date: dateKey,
+                transactions: [],
+                totalSetor: 0,
+                totalTarik: 0,
+                studentIds: new Set()
+            };
+        }
+        groups[dateKey].transactions.push(t);
+        if (t.type === 'setor') groups[dateKey].totalSetor += t.amount;
+        else if (t.type === 'tarik') groups[dateKey].totalTarik += t.amount;
+        if (t.studentId) groups[dateKey].studentIds.add(t.studentId);
+    });
+
+    const sortedDates = Object.values(groups).sort((a, b) => new Date(b.date) - new Date(a.date));
+    if (badge) badge.innerText = `${sortedDates.length} Hari Transaksi`;
+
+    tbody.innerHTML = sortedDates.map((g, idx) => {
+        const netFlow = g.totalSetor - g.totalTarik;
+        const d = new Date(g.date + 'T00:00:00');
+        const formattedDate = d.toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+        const avgPerTx = g.transactions.length > 0 ? (g.totalSetor + g.totalTarik) / g.transactions.length : 0;
+        const isNetPositive = netFlow >= 0;
+
+        return `
+            <tr>
+                <td>${idx + 1}</td>
+                <td>
+                    <strong><i class="fa-solid fa-calendar-day text-indigo"></i> ${formattedDate}</strong>
+                </td>
+                <td><span class="badge badge-indigo">${g.transactions.length} Transaksi</span></td>
+                <td class="text-emerald font-weight-bold">+ ${formatRp(g.totalSetor)}</td>
+                <td class="text-rose font-weight-bold">- ${formatRp(g.totalTarik)}</td>
+                <td class="${isNetPositive ? 'text-emerald' : 'text-rose'} font-weight-bold">
+                    ${isNetPositive ? '+' : ''}${formatRp(netFlow)}
+                </td>
+                <td>
+                    <span class="badge badge-emerald"><i class="fa-solid fa-user-check"></i> ${g.studentIds.size} Siswa</span>
+                </td>
+                <td><small class="text-muted">${formatRp(Math.round(avgPerTx))}</small></td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// 5.2 Rekapitulasi Tabungan Mingguan (Per Minggu)
+function renderReportMingguan() {
+    const tbody = document.getElementById('report-mingguan-tbody');
+    const badge = document.getElementById('badge-mingguan-count');
+    if (!tbody) return;
+
+    if (appTransactions.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted p-4"><i class="fa-solid fa-circle-info"></i> Belum ada data transaksi mingguan.</td></tr>`;
+        if (badge) badge.innerText = '0 Minggu';
+        return;
+    }
+
+    const getWeekInfo = (dateStr) => {
+        const d = new Date(dateStr);
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+        const monday = new Date(d.setDate(diff));
+        const sunday = new Date(monday);
+        sunday.setDate(monday.getDate() + 6);
+
+        const mStr = monday.toISOString().slice(0, 10);
+        const sStr = sunday.toISOString().slice(0, 10);
+        const key = `${mStr}_${sStr}`;
+        const label = `${monday.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' })} - ${sunday.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })}`;
+        const monthYear = monday.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+        return { key, label, monthYear, monday, sunday };
+    };
+
+    const weekGroups = {};
+    appTransactions.forEach(t => {
+        const wInfo = getWeekInfo(t.date || '2026-09-04');
+        if (!weekGroups[wInfo.key]) {
+            weekGroups[wInfo.key] = {
+                key: wInfo.key,
+                label: wInfo.label,
+                monthYear: wInfo.monthYear,
+                monday: wInfo.monday,
+                transactions: [],
+                totalSetor: 0,
+                totalTarik: 0
+            };
+        }
+        weekGroups[wInfo.key].transactions.push(t);
+        if (t.type === 'setor') weekGroups[wInfo.key].totalSetor += t.amount;
+        else if (t.type === 'tarik') weekGroups[wInfo.key].totalTarik += t.amount;
+    });
+
+    const sortedWeeks = Object.values(weekGroups).sort((a, b) => b.monday - a.monday);
+    if (badge) badge.innerText = `${sortedWeeks.length} Periode Minggu`;
+
+    tbody.innerHTML = sortedWeeks.map((w, idx) => {
+        const netFlow = w.totalSetor - w.totalTarik;
+        const avgPerDay = netFlow / 7;
+        const isNetPositive = netFlow >= 0;
+
+        return `
+            <tr>
+                <td>${idx + 1}</td>
+                <td>
+                    <strong><i class="fa-solid fa-calendar-week text-emerald"></i> ${w.label}</strong>
+                </td>
+                <td><span class="badge badge-secondary">${w.monthYear}</span></td>
+                <td><span class="badge badge-indigo">${w.transactions.length} Transaksi</span></td>
+                <td class="text-emerald font-weight-bold">+ ${formatRp(w.totalSetor)}</td>
+                <td class="text-rose font-weight-bold">- ${formatRp(w.totalTarik)}</td>
+                <td class="${isNetPositive ? 'text-emerald' : 'text-rose'} font-weight-bold">
+                    ${isNetPositive ? '+' : ''}${formatRp(netFlow)}
+                </td>
+                <td><small class="text-muted">${formatRp(Math.round(avgPerDay))} / hari</small></td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// 5.3 Rekapitulasi Tabungan Bulanan (Per Bulan)
+function renderReportBulanan() {
+    const tbody = document.getElementById('report-bulanan-tbody');
+    const badge = document.getElementById('badge-bulanan-count');
+    if (!tbody) return;
+
+    if (appTransactions.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted p-4"><i class="fa-solid fa-circle-info"></i> Belum ada data transaksi bulanan.</td></tr>`;
+        if (badge) badge.innerText = '0 Bulan';
+        return;
+    }
+
+    const monthGroups = {};
+    appTransactions.forEach(t => {
+        const ymKey = (t.date || '').slice(0, 7) || '2026-09';
+        if (!monthGroups[ymKey]) {
+            const [y, m] = ymKey.split('-');
+            const d = new Date(parseInt(y), parseInt(m) - 1, 1);
+            monthGroups[ymKey] = {
+                key: ymKey,
+                monthName: d.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' }),
+                yearMonth: ymKey,
+                transactions: [],
+                totalSetor: 0,
+                totalTarik: 0
+            };
+        }
+        monthGroups[ymKey].transactions.push(t);
+        if (t.type === 'setor') monthGroups[ymKey].totalSetor += t.amount;
+        else if (t.type === 'tarik') monthGroups[ymKey].totalTarik += t.amount;
+    });
+
+    const sortedMonths = Object.values(monthGroups).sort((a, b) => b.yearMonth.localeCompare(a.yearMonth));
+    if (badge) badge.innerText = `${sortedMonths.length} Bulan`;
+
+    tbody.innerHTML = sortedMonths.map((m, idx) => {
+        const netFlow = m.totalSetor - m.totalTarik;
+        const isSurplus = netFlow >= 0;
+
+        return `
+            <tr>
+                <td>${idx + 1}</td>
+                <td>
+                    <strong><i class="fa-solid fa-calendar-days text-amber"></i> ${m.monthName}</strong>
+                </td>
+                <td><span class="badge badge-indigo">${m.transactions.length} Transaksi</span></td>
+                <td class="text-emerald font-weight-bold">+ ${formatRp(m.totalSetor)}</td>
+                <td class="text-rose font-weight-bold">- ${formatRp(m.totalTarik)}</td>
+                <td class="${isSurplus ? 'text-emerald' : 'text-rose'} font-weight-bold">
+                    ${isSurplus ? '+' : ''}${formatRp(netFlow)}
+                </td>
+                <td>
+                    <span class="badge ${isSurplus ? 'badge-emerald' : 'badge-rose'}">
+                        <i class="fa-solid ${isSurplus ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'}"></i> ${isSurplus ? 'SURPLUS' : 'DEFISIT'}
+                    </span>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// 5.4 Rekapitulasi Per Siswa
+function renderReportPerSiswa() {
+    const tbody = document.getElementById('report-students-tbody');
+    if (!tbody) return;
 
     const sortedStudents = [...appStudents].sort((a, b) => a.name.localeCompare(b.name));
-    const tbody = document.getElementById('report-students-tbody');
 
     tbody.innerHTML = sortedStudents.map((s, index) => {
         const studentTx = appTransactions.filter(t => t.studentId === s.id);
         const setoran = studentTx.filter(t => t.type === 'setor').reduce((acc, t) => acc + t.amount, 0);
         const penarikan = studentTx.filter(t => t.type === 'tarik').reduce((acc, t) => acc + t.amount, 0);
-        const targetReached = s.target > 0 && s.balance >= s.target;
+        const targetReached = (s.target || 2000000) > 0 && s.balance >= (s.target || 2000000);
         const avatarHtml = getStudentMiniAvatarHtml(s, 28);
 
         return `
@@ -4466,7 +4695,7 @@ function renderReportView() {
                     </div>
                 </td>
                 <td>
-                    ${formatRp(s.target || 0)} 
+                    ${formatRp(s.target || 2000000)} 
                     <button class="btn btn-secondary btn-sm p-1 ml-1" onclick="openEditTargetModal('${s.id}')" title="Edit Target">
                         <i class="fa-solid fa-pen"></i>
                     </button>
@@ -4520,10 +4749,23 @@ function updateBatchModalType(type) {
         titleEl.innerHTML = `<i class="fa-solid fa-layer-group text-emerald"></i> Transaksi Setor Masal (Banyak Siswa)`;
         submitBtn.className = 'btn btn-emerald';
         submitBtn.innerHTML = `<i class="fa-solid fa-layer-group"></i> Eksekusi Setor Masal (Batch)`;
+        const bCat = document.getElementById('batch-category');
+        if (bCat) {
+            bCat.innerHTML = `<option value="Tabungan Harian" selected>Tabungan Harian</option>`;
+            bCat.value = 'Tabungan Harian';
+        }
     } else {
         titleEl.innerHTML = `<i class="fa-solid fa-layer-group text-rose"></i> Transaksi Tarik Masal (Banyak Siswa)`;
         submitBtn.className = 'btn btn-rose';
         submitBtn.innerHTML = `<i class="fa-solid fa-layer-group"></i> Eksekusi Tarik Masal (Batch)`;
+        const bCat = document.getElementById('batch-category');
+        if (bCat) {
+            bCat.innerHTML = `
+                <option value="Penarikan Tabungan" selected>Penarikan Tabungan</option>
+                <option value="Kegiatan Kelas">Kegiatan Kelas</option>
+                <option value="Lainnya">Lainnya</option>
+            `;
+        }
     }
 }
 
@@ -4796,7 +5038,7 @@ function openEditTargetModal(studentId) {
     document.getElementById('target-student-id').value = student.id;
     document.getElementById('target-student-name').value = `${student.name} (${student.nisn})`;
     document.getElementById('target-student-phone').value = student.phone || '';
-    document.getElementById('target-amount-input').value = student.target || 1000000;
+    document.getElementById('target-amount-input').value = student.target || 2000000;
 
     openModal('modal-edit-target');
 }
@@ -4804,7 +5046,7 @@ function openEditTargetModal(studentId) {
 function handleTargetSubmit(e) {
     e.preventDefault();
     const studentId = document.getElementById('target-student-id').value;
-    const newTarget = Number(document.getElementById('target-amount-input').value) || 0;
+    const newTarget = Number(document.getElementById('target-amount-input').value) || 2000000;
     const newPhone = document.getElementById('target-student-phone').value.trim();
 
     const studentIndex = appStudents.findIndex(s => s.id === studentId);
@@ -4836,10 +5078,24 @@ function openTransactionModal(type = 'setor', studentId = '') {
         titleEl.innerHTML = `<i class="fa-solid fa-circle-plus text-emerald"></i> Catat Setoran Uang Masuk`;
         submitBtn.className = 'btn btn-emerald';
         submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Simpan Setoran & Notifikasi WA`;
+        const catSelect = document.getElementById('tx-category');
+        if (catSelect) {
+            catSelect.innerHTML = `<option value="Tabungan Harian" selected>Tabungan Harian</option>`;
+            catSelect.value = 'Tabungan Harian';
+        }
     } else {
         titleEl.innerHTML = `<i class="fa-solid fa-circle-minus text-rose"></i> Catat Penarikan Uang Keluar`;
         submitBtn.className = 'btn btn-rose';
         submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Simpan Penarikan & Notifikasi WA`;
+        const catSelect = document.getElementById('tx-category');
+        if (catSelect) {
+            catSelect.innerHTML = `
+                <option value="Penarikan Tabungan" selected>Penarikan Tabungan</option>
+                <option value="Keperluan Ujian/Praktik">Keperluan Ujian/Praktik</option>
+                <option value="Pengembalian Sisa Kas">Pengembalian Sisa Kas</option>
+                <option value="Lainnya">Lainnya</option>
+            `;
+        }
     }
 
     const now = new Date();
@@ -5188,30 +5444,73 @@ function handleGlobalSearch(query) {
     applyTransactionFilters();
 }
 
-// Export CSV
+// Export CSV (Laporan Lengkap Rekap Harian, Mingguan, Bulanan & Per Siswa)
 function exportToCSV() {
     let csvContent = "\uFEFF";
-    csvContent += "REKAPITULASI TABUNGAN SISWA - SMK PGRI 11 CILEDUG KOTA TANGERANG\n";
-    csvContent += "KELAS XII BISNIS RITEL 1 (WALI KELAS: YOGA RAHMANDA, S.Pd.)\n";
-    csvContent += `Tanggal Cetak: ${new Date().toLocaleString('id-ID')}\n\n`;
+    csvContent += "=========================================================================\n";
+    csvContent += "REKAPITULASI & LAPORAN RESMI TABUNGAN SISWA XII BISNIS RITEL 1\n";
+    csvContent += "SMK PGRI 11 CILEDUG KOTA TANGERANG\n";
+    csvContent += "Wali Kelas: Yoga Rahmanda, S.Pd. | Target Tabungan: Rp 2.000.000\n";
+    csvContent += `Tanggal Cetak: ${new Date().toLocaleString('id-ID')}\n`;
+    csvContent += "=========================================================================\n\n";
 
-    csvContent += "DATA SISWA & SALDO TABUNGAN (44 SISWA)\n";
-    csvContent += "No,NISN,Nama Siswa,No WhatsApp,Target Tabungan,Total Setoran,Total Penarikan,Saldo Akhir\n";
+    // 1. REKAP HARIAN
+    csvContent += "1. REKAPITULASI TABUNGAN HARIAN (PER HARI)\n";
+    csvContent += "No,Tanggal,Jumlah Transaksi,Total Setoran (+),Total Penarikan (-),Arus Kas Bersih (Net),Rata-rata/TX\n";
+
+    const dailyGroups = {};
+    appTransactions.forEach(t => {
+        const dKey = (t.date || '').slice(0, 10) || '2026-09-04';
+        if (!dailyGroups[dKey]) dailyGroups[dKey] = { date: dKey, count: 0, setor: 0, tarik: 0 };
+        dailyGroups[dKey].count++;
+        if (t.type === 'setor') dailyGroups[dKey].setor += t.amount;
+        else if (t.type === 'tarik') dailyGroups[dKey].tarik += t.amount;
+    });
+
+    const sortedDaily = Object.values(dailyGroups).sort((a, b) => new Date(b.date) - new Date(a.date));
+    sortedDaily.forEach((d, idx) => {
+        const net = d.setor - d.tarik;
+        const avg = d.count > 0 ? (d.setor + d.tarik) / d.count : 0;
+        csvContent += `"${idx + 1}","${d.date}","${d.count}","${d.setor}","${d.tarik}","${net}","${Math.round(avg)}"\n`;
+    });
+
+    // 2. REKAP BULANAN
+    csvContent += "\n\n2. REKAPITULASI TABUNGAN BULANAN (PER BULAN)\n";
+    csvContent += "No,Bulan & Tahun,Frekuensi Transaksi,Total Setoran (+),Total Penarikan (-),Surplus/Defisit Kas,Status\n";
+
+    const monthlyGroups = {};
+    appTransactions.forEach(t => {
+        const mKey = (t.date || '').slice(0, 7) || '2026-09';
+        if (!monthlyGroups[mKey]) monthlyGroups[mKey] = { ym: mKey, count: 0, setor: 0, tarik: 0 };
+        monthlyGroups[mKey].count++;
+        if (t.type === 'setor') monthlyGroups[mKey].setor += t.amount;
+        else if (t.type === 'tarik') monthlyGroups[mKey].tarik += t.amount;
+    });
+
+    const sortedMonthly = Object.values(monthlyGroups).sort((a, b) => b.ym.localeCompare(a.ym));
+    sortedMonthly.forEach((m, idx) => {
+        const net = m.setor - m.tarik;
+        csvContent += `"${idx + 1}","${m.ym}","${m.count}","${m.setor}","${m.tarik}","${net}","${net >= 0 ? 'SURPLUS' : 'DEFISIT'}"\n`;
+    });
+
+    // 3. REKAP PER SISWA
+    csvContent += "\n\n3. DATA TABUNGAN 44 SISWA (TARGET: RP 2.000.000)\n";
+    csvContent += "No,NISN,Nama Siswa,No WhatsApp,Target Tabungan,Total Setoran,Total Penarikan,Saldo Akhir,Status Target\n";
 
     const sortedStudents = [...appStudents].sort((a, b) => a.name.localeCompare(b.name));
-
     sortedStudents.forEach((s, idx) => {
         const studentTx = appTransactions.filter(t => t.studentId === s.id);
         const setoran = studentTx.filter(t => t.type === 'setor').reduce((acc, t) => acc + t.amount, 0);
         const penarikan = studentTx.filter(t => t.type === 'tarik').reduce((acc, t) => acc + t.amount, 0);
-        csvContent += `"${idx + 1}","'${s.nisn}","${s.name}","'${s.phone || ''}","${s.target}","${setoran}","${penarikan}","${s.balance}"\n`;
+        const status = s.balance >= (s.target || 2000000) ? 'TERCAPAI' : 'PROSES';
+        csvContent += `"${idx + 1}","'${s.nisn}","${s.name}","'${s.phone || ''}","${s.target || 2000000}","${setoran}","${penarikan}","${s.balance}","${status}"\n`;
     });
 
-    csvContent += "\n\nRIWAYAT TRANSAKSI DILAKUKAN\n";
-    csvContent += "Kode TX,Waktu,NISN,Nama Siswa,Jenis,Kategori,Nominal,Catatan\n";
+    // 4. RIWAYAT TRANSAKSI
+    csvContent += "\n\n4. RIWAYAT LENGKAP MUTASI TRANSAKSI\n";
+    csvContent += "Kode TX,Waktu Transaksi,NISN,Nama Siswa,Jenis,Kategori,Nominal,Catatan\n";
 
     const sortedTx = [...appTransactions].sort((a, b) => new Date(a.date) - new Date(b.date));
-
     sortedTx.forEach(t => {
         const student = appStudents.find(s => s.id === t.studentId);
         csvContent += `"${t.id}","${t.date}","'${student ? student.nisn : ''}","${t.studentName}","${t.type}","${t.category}","${t.amount}","${t.note || ''}"\n`;
@@ -5221,12 +5520,12 @@ function exportToCSV() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `Rekap_Tabungan_SMK_PGRI_11_XII_BR1_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `Rekap_Lengkap_Tabungan_SMK_PGRI_11_XII_BR1_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
-    showToast('File Laporan Excel/CSV 44 Siswa berhasil diunduh!', 'success');
+    showToast('File Rekap Lengkap Excel/CSV (Harian, Bulanan & Siswa) berhasil diunduh!', 'success');
 }
 
 // Chart.js Graph
@@ -5437,7 +5736,7 @@ function renderBatchEditStudentRows(studentsList = null) {
                 <input type="text" class="form-control batch-inp-phone font-monospace" value="${escapeHtml(s.phone || '')}" placeholder="08xxxxxxxxxx" data-id="${s.id}">
             </td>
             <td>
-                <input type="number" class="form-control batch-inp-target font-weight-bold" value="${s.target || 1000000}" step="10000" min="0" placeholder="Target" data-id="${s.id}">
+                <input type="number" class="form-control batch-inp-target font-weight-bold" value="${s.target || 2000000}" step="10000" min="0" placeholder="Target" data-id="${s.id}">
             </td>
             <td>
                 <input type="text" class="form-control batch-inp-password font-monospace" value="${escapeHtml(s.password || 'password123')}" required placeholder="Password" data-id="${s.id}">
@@ -5766,7 +6065,7 @@ function exportStudentsToCSV() {
         `"${s.nisn}"`,
         `"${s.phone || ''}"`,
         s.balance || 0,
-        s.target || 1000000,
+        s.target || 2000000,
         `"${s.password || 'password123'}"`,
         `"${s.photo || ''}"`
     ]);
@@ -5801,8 +6100,8 @@ function detectBatchChanges() {
         if ((init.phone || '') !== (curr.phone || '')) {
             studentDiffs.push({ field: 'phone', label: 'WhatsApp', oldVal: init.phone || '-', newVal: curr.phone || '-', tagClass: 'tag-phone' });
         }
-        if ((init.target || 1000000) !== (curr.target || 1000000)) {
-            studentDiffs.push({ field: 'target', label: 'Target', oldVal: formatRp(init.target || 1000000), newVal: formatRp(curr.target || 1000000), tagClass: 'tag-target' });
+        if ((init.target || 2000000) !== (curr.target || 2000000)) {
+            studentDiffs.push({ field: 'target', label: 'Target', oldVal: formatRp(init.target || 2000000), newVal: formatRp(curr.target || 2000000), tagClass: 'tag-target' });
         }
         if ((init.password || 'password123') !== (curr.password || 'password123')) {
             studentDiffs.push({ field: 'password', label: 'Password', oldVal: '******', newVal: curr.password, tagClass: 'tag-pass' });

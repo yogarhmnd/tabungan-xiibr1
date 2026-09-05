@@ -430,10 +430,9 @@
                                 <label><i class="fa-solid fa-tags"></i> Kategori:</label>
                                 <select id="filter-category" onchange="applyTransactionFilters()">
                                     <option value="all">Semua Kategori</option>
-                                    <option value="Tabungan Harian">Tabungan Harian</option>
-                                    <option value="Uang Kas Kelas">Uang Kas Kelas</option>
-                                    <option value="Dana Pariwisata/Perpisahan">Dana Pariwisata/Perpisahan</option>
-                                    <option value="Modal Usaha Ritel">Modal Usaha Ritel</option>
+                                    <option value="Tabungan Harian">Tabungan Harian (Setoran)</option>
+                                    <option value="Penarikan Tabungan">Penarikan Tabungan</option>
+                                    <option value="Keperluan Ujian/Praktik">Keperluan Ujian/Praktik</option>
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
                             </div>
@@ -501,21 +500,22 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3><i class="fa-solid fa-file-csv"></i> Laporan Keuangan Kas & Tabungan</h3>
-                            <p>Rekapitulasi resmi oleh Wali Kelas Yoga Rahmanda, S.Pd.</p>
+                            <h3><i class="fa-solid fa-file-invoice-dollar text-primary"></i> Rekapitulasi & Laporan Kas Tabungan</h3>
+                            <p>Laporan Resmi Rekapitulasi Harian, Mingguan, Bulanan & Per Siswa XII BR 1</p>
                         </div>
                         <div class="card-actions header-btn-group">
-                            <button class="btn btn-emerald" onclick="exportToCSV()">
+                            <button class="btn btn-emerald" onclick="exportToCSV()" title="Unduh File Rekap Lengkap ke Format Excel/CSV">
                                 <i class="fa-solid fa-file-excel"></i> Download Excel/CSV
                             </button>
-                            <button class="btn btn-secondary" onclick="window.print()">
+                            <button class="btn btn-secondary" onclick="window.print()" title="Cetak / Print Laporan">
                                 <i class="fa-solid fa-print"></i> Cetak Laporan
                             </button>
                         </div>
                     </div>
                     <div class="card-body">
+                        <!-- Official Report Header Summary Box -->
                         <div class="report-summary-box">
-                            <h4><i class="fa-solid fa-school"></i> LAPORAN TABUNGAN SISWA XII BR 1</h4>
+                            <h4><i class="fa-solid fa-school text-emerald"></i> LAPORAN KAS & TABUNGAN SISWA XII BR 1</h4>
                             <p>SMK PGRI 11 CILEDUG KOTA TANGERANG</p>
                             <small>Wali Kelas: <strong>Yoga Rahmanda, S.Pd.</strong> | Per Tanggal: <strong id="report-date-display">-</strong></small>
                             <hr>
@@ -526,26 +526,128 @@
                             </div>
                         </div>
 
-                        <h4 class="mt-4 mb-2"><i class="fa-solid fa-table-list"></i> Rekapitulasi Tabungan Per Siswa</h4>
-                        <div class="table-responsive">
-                            <table class="data-table print-table">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>NISN</th>
-                                        <th>Nama Lengkap Siswa</th>
-                                        <th>Target Tabungan</th>
-                                        <th>Total Setoran</th>
-                                        <th>Total Penarikan</th>
-                                        <th>Saldo Saat Ini</th>
-                                        <th>Status Target</th>
-                                        <th>Aksi Admin</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="report-students-tbody">
-                                    <!-- Dynamic -->
-                                </tbody>
-                            </table>
+                        <!-- Sub-Navigation: Tab Pilihan Rekapitulasi Harian / Mingguan / Bulanan / Siswa -->
+                        <div class="report-nav-tabs mb-4">
+                            <button type="button" class="report-tab-btn active" id="btn-rekap-harian" onclick="switchReportTab('harian')">
+                                <i class="fa-solid fa-calendar-day"></i> Rekapitulasi Harian
+                            </button>
+                            <button type="button" class="report-tab-btn" id="btn-rekap-mingguan" onclick="switchReportTab('mingguan')">
+                                <i class="fa-solid fa-calendar-week"></i> Rekapitulasi Mingguan
+                            </button>
+                            <button type="button" class="report-tab-btn" id="btn-rekap-bulanan" onclick="switchReportTab('bulanan')">
+                                <i class="fa-solid fa-calendar-days"></i> Rekapitulasi Bulanan
+                            </button>
+                            <button type="button" class="report-tab-btn" id="btn-rekap-siswa" onclick="switchReportTab('siswa')">
+                                <i class="fa-solid fa-users"></i> Rekapitulasi Per Siswa
+                            </button>
+                        </div>
+
+                        <!-- 1. VIEW REKAPITULASI HARIAN -->
+                        <div id="report-view-harian" class="report-subview">
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="m-0"><i class="fa-solid fa-calendar-day text-indigo"></i> Rincian Tabungan Harian (Per Hari)</h4>
+                                <span class="badge badge-indigo" id="badge-harian-count">0 Hari Transaksi</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table print-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Hari & Tanggal</th>
+                                            <th>Frekuensi TX</th>
+                                            <th>Total Setoran Masuk (+)</th>
+                                            <th>Total Penarikan Keluar (-)</th>
+                                            <th>Arus Kas Bersih (Net)</th>
+                                            <th>Siswa Menabung</th>
+                                            <th>Rata-rata / TX</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-harian-tbody">
+                                        <!-- Dynamic via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 2. VIEW REKAPITULASI MINGGUAN -->
+                        <div id="report-view-mingguan" class="report-subview hidden">
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="m-0"><i class="fa-solid fa-calendar-week text-emerald"></i> Rincian Tabungan Mingguan (Per Minggu)</h4>
+                                <span class="badge badge-emerald" id="badge-mingguan-count">0 Minggu</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table print-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Periode Minggu</th>
+                                            <th>Bulan & Tahun</th>
+                                            <th>Frekuensi TX</th>
+                                            <th>Total Setoran Masuk (+)</th>
+                                            <th>Total Penarikan Keluar (-)</th>
+                                            <th>Net Kas Mingguan</th>
+                                            <th>Rata-rata / Hari</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-mingguan-tbody">
+                                        <!-- Dynamic via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 3. VIEW REKAPITULASI BULANAN -->
+                        <div id="report-view-bulanan" class="report-subview hidden">
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="m-0"><i class="fa-solid fa-calendar-days text-amber"></i> Rincian Tabungan Bulanan (Per Bulan)</h4>
+                                <span class="badge badge-amber" id="badge-bulanan-count">0 Bulan</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table print-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Bulan & Tahun</th>
+                                            <th>Frekuensi Transaksi</th>
+                                            <th>Total Setoran Masuk (+)</th>
+                                            <th>Total Penarikan Keluar (-)</th>
+                                            <th>Surplus / Defisit Kas</th>
+                                            <th>Status Keuangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-bulanan-tbody">
+                                        <!-- Dynamic via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 4. VIEW REKAPITULASI PER SISWA -->
+                        <div id="report-view-siswa" class="report-subview hidden">
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="m-0"><i class="fa-solid fa-users text-primary"></i> Rekapitulasi Tabungan Per Siswa (44 Siswa)</h4>
+                                <span class="badge badge-emerald">Target: Rp 2.000.000</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table print-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NISN</th>
+                                            <th>Nama Lengkap Siswa</th>
+                                            <th>Target Tabungan</th>
+                                            <th>Total Setoran</th>
+                                            <th>Total Penarikan</th>
+                                            <th>Saldo Saat Ini</th>
+                                            <th>Status Target</th>
+                                            <th>Aksi Admin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-students-tbody">
+                                        <!-- Dynamic via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -874,7 +976,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="target-amount-input">Nominal Target Tabungan Rp <span class="required">*</span></label>
-                        <input type="number" id="target-amount-input" class="form-control" placeholder="Contoh: 1000000" min="0" step="10000" required>
+                        <input type="number" id="target-amount-input" class="form-control" placeholder="Contoh: 2000000" min="0" step="10000" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -914,7 +1016,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="student-target">Target Tabungan (Opsional) Rp</label>
-                        <input type="number" id="student-target" class="form-control" placeholder="Contoh: 1000000" min="0" step="10000">
+                        <input type="number" id="student-target" class="form-control" placeholder="Contoh: 2000000" min="0" step="10000">
                     </div>
                 </div>
                 <div class="modal-footer">
