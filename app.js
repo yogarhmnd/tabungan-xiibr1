@@ -6252,3 +6252,59 @@ function showFeedbackSuccessModal(title, description) {
     if (descEl) descEl.innerText = description || 'Data berhasil diperbarui ke seluruh sistem.';
     openModal('modal-feedback-success');
 }
+
+// ==========================================================================
+// DATABASE EXPORT, BACKUP & VERCEL SEED SYNC HELPERS
+// ==========================================================================
+
+function getFullDatabaseExportObject() {
+    return {
+        metadata: {
+            database_name: 'db_tabungan_xii_br1',
+            exported_at: new Date().toISOString(),
+            total_students: appStudents.length,
+            total_transactions: appTransactions.length,
+            total_setor: appTransactions.filter(t => t.type === 'setor').reduce((a, b) => a + b.amount, 0),
+            total_tarik: appTransactions.filter(t => t.type === 'tarik').reduce((a, b) => a + b.amount, 0),
+            total_saldo: appTransactions.filter(t => t.type === 'setor').reduce((a, b) => a + b.amount, 0) - appTransactions.filter(t => t.type === 'tarik').reduce((a, b) => a + b.amount, 0)
+        },
+        students: appStudents,
+        transactions: appTransactions
+    };
+}
+
+function exportFullDatabaseJSON() {
+    const data = getFullDatabaseExportObject();
+    const jsonStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Database_Tabungan_XII_BR1_${new Date().toISOString().slice(0, 10)}.json`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    showToast('File Backup Database JSON berhasil diunduh!', 'success');
+}
+
+function copySeedDataToClipboard() {
+    const data = getFullDatabaseExportObject();
+    const jsonStr = JSON.stringify(data, null, 2);
+    const textarea = document.getElementById('db-sync-json-textarea');
+    if (textarea) textarea.value = jsonStr;
+    openModal('modal-db-sync');
+}
+
+function copySeedTextareaToClipboard() {
+    const textarea = document.getElementById('db-sync-json-textarea');
+    if (!textarea) return;
+    textarea.select();
+    navigator.clipboard.writeText(textarea.value).then(() => {
+        showToast('Data JSON berhasil disalin ke Clipboard!', 'success');
+    }).catch(() => {
+        document.execCommand('copy');
+        showToast('Data JSON berhasil disalin ke Clipboard!', 'success');
+    });
+}
+
