@@ -6258,6 +6258,14 @@ function showFeedbackSuccessModal(title, description) {
 // ==========================================================================
 
 function getFullDatabaseExportObject() {
+    const cleanedStudents = appStudents.map(s => {
+        const copy = Object.assign({}, s);
+        if (copy.photo && copy.photo.startsWith('data:image')) {
+            copy.photo = `assets/students/${s.nisn}.jpg`;
+        }
+        return copy;
+    });
+
     return {
         metadata: {
             database_name: 'db_tabungan_xii_br1',
@@ -6268,7 +6276,7 @@ function getFullDatabaseExportObject() {
             total_tarik: appTransactions.filter(t => t.type === 'tarik').reduce((a, b) => a + b.amount, 0),
             total_saldo: appTransactions.filter(t => t.type === 'setor').reduce((a, b) => a + b.amount, 0) - appTransactions.filter(t => t.type === 'tarik').reduce((a, b) => a + b.amount, 0)
         },
-        students: appStudents,
+        students: cleanedStudents,
         transactions: appTransactions
     };
 }
