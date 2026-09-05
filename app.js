@@ -5056,7 +5056,7 @@ function renderDashboard() {
 function renderStudentDashboard() {
     if (!currentUser || currentUser.role !== 'siswa') return;
 
-    const student = appStudents.find(s => s.id === currentUser.studentId);
+    const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
     if (!student) return;
 
     const avatarEl = document.getElementById('s-welcome-avatar');
@@ -7202,7 +7202,7 @@ function openStudentSelfPhotoModal() {
         return;
     }
 
-    const student = appStudents.find(s => s.id === currentUser.studentId);
+    const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
     if (!student) {
         showToast('Data akun siswa tidak ditemukan.', 'danger');
         return;
@@ -7257,7 +7257,7 @@ async function handleSelfPhotoFile(file) {
     const photoVal = document.getElementById('self-photo-val');
     if (photoVal) photoVal.value = base64;
 
-    const student = appStudents.find(s => s.id === currentUser.studentId);
+    const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
     updateSelfPhotoPreviewDisplay(base64, student ? student.name : 'S');
     showToast('Pasfoto baru siap disimpan!', 'success');
 }
@@ -7271,7 +7271,7 @@ function promptSelfPhotoUrl() {
     const trimmed = url.trim();
     if (photoVal) photoVal.value = trimmed;
 
-    const student = appStudents.find(s => s.id === currentUser.studentId);
+    const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
     updateSelfPhotoPreviewDisplay(trimmed, student ? student.name : 'S');
     if (trimmed) showToast('URL pasfoto berhasil diterapkan!', 'success');
 }
@@ -7280,7 +7280,7 @@ function removeSelfPhoto() {
     const photoVal = document.getElementById('self-photo-val');
     if (photoVal) photoVal.value = '';
 
-    const student = appStudents.find(s => s.id === currentUser.studentId);
+    const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
     updateSelfPhotoPreviewDisplay('', student ? student.name : 'S');
     showToast('Foto profil dihapus (menggunakan avatar inisial).', 'info');
 }
@@ -7292,7 +7292,7 @@ function handleStudentSelfPhotoSubmit(e) {
     const photoVal = document.getElementById('self-photo-val');
     const newPhoto = photoVal ? (photoVal.value.trim() || null) : null;
 
-    const student = appStudents.find(s => s.id === currentUser.studentId);
+    const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
     if (student) {
         student.photo = newPhoto;
         saveStudents();
