@@ -4732,47 +4732,61 @@ function initFirebaseRealtimeSync() {
     }
 }
 
-function syncToFirebase(force = false) {
-    if (!firebaseDb) return;
-    if (isReceivingRemoteUpdate && !force) return;
+function saveToFirebaseDatabase(force = true) {
+    if (!firebaseDb) {
+        console.warn('[Firebase] Database belum siap.');
+        return Promise.resolve(false);
+    }
 
     if (firebaseSyncDebounceTimer) {
         clearTimeout(firebaseSyncDebounceTimer);
     }
 
+    isSyncingToCloud = true;
+    updateCloudSyncStatus('syncing', 'Menyimpan...');
+
+    const payload = {
+        repository: "https://github.com/yogarhmnd/tabungan-xiibr1",
+        liveUrl: "https://tabungan-xiibr1.vercel.app",
+        appName: "Tabungan Siswa XII BR 1 SMK PGRI 11 CILEDUG KOTA TANGERANG",
+        version: "v1.2.0-cloud",
+        lastUpdated: new Date().toISOString(),
+        waConfig: typeof waConfig !== 'undefined' ? waConfig : {},
+        students: appStudents,
+        transactions: appTransactions
+    };
+
+    return firebaseDb.ref('tabungan_br1').set(payload)
+        .then(() => {
+            firebasePermissionDenied = false;
+            isSyncingToCloud = false;
+            updateCloudSyncStatus('connected', 'Firebase Aktif');
+            console.log('[Firebase] Berhasil tersimpan ke Cloud RTDB.');
+            return true;
+        })
+        .catch((error) => {
+            isSyncingToCloud = false;
+            console.error('[Firebase] Gagal simpan ke Cloud:', error);
+            if (error.code === 'PERMISSION_DENIED' || (error.message && error.message.toLowerCase().includes('permission_denied'))) {
+                firebasePermissionDenied = true;
+                updateCloudSyncStatus('error', 'Aturan Cloud');
+            } else {
+                updateCloudSyncStatus('error', 'Gagal Simpan');
+            }
+            return false;
+        });
+}
+
+function syncToFirebase(force = false) {
+    if (force) {
+        return saveToFirebaseDatabase(true);
+    }
+    if (firebaseSyncDebounceTimer) {
+        clearTimeout(firebaseSyncDebounceTimer);
+    }
     firebaseSyncDebounceTimer = setTimeout(() => {
-        isSyncingToCloud = true;
-        updateCloudSyncStatus('syncing', 'Sinkron...');
-
-        const payload = {
-            repository: "https://github.com/yogarhmnd/tabungan-xiibr1",
-            liveUrl: "https://tabungan-xiibr1.vercel.app",
-            appName: "Tabungan Siswa XII BR 1 SMK PGRI 11 CILEDUG KOTA TANGERANG",
-            version: "v1.2.0-cloud",
-            lastUpdated: new Date().toISOString(),
-            waConfig: typeof waConfig !== 'undefined' ? waConfig : {},
-            students: appStudents,
-            transactions: appTransactions
-        };
-
-        firebaseDb.ref('tabungan_br1').set(payload)
-            .then(() => {
-                firebasePermissionDenied = false;
-                isSyncingToCloud = false;
-                updateCloudSyncStatus('connected', 'Firebase Aktif');
-                console.log('[Firebase] Data berhasil disinkronkan ke Cloud.');
-            })
-            .catch((error) => {
-                isSyncingToCloud = false;
-                console.error('[Firebase] Cloud sync error:', error);
-                if (error.code === 'PERMISSION_DENIED' || (error.message && error.message.toLowerCase().includes('permission_denied'))) {
-                    firebasePermissionDenied = true;
-                    updateCloudSyncStatus('error', 'Aturan Cloud');
-                } else {
-                    updateCloudSyncStatus('error', 'Gagal Sinkron');
-                }
-            });
-    }, force ? 0 : 300);
+        saveToFirebaseDatabase(true);
+    }, 250);
 }
 
 function updateCloudSyncStatus(status, text = null) {
@@ -5841,7 +5855,7 @@ function triggerEditSinglePhotoUpload() {
 
 async function handleEditSinglePhotoFile(file) {
     if (!file) return;
-    showToast('Mengompres dan memproses pasfoto siswa...', 'info');
+    showToast('Mengompres dan menyimpan pasfoto siswa...', 'info');
 
     const base64 = await compressImageFile(file, 240, 300, 0.78);
     if (!base64) {
@@ -5849,32 +5863,53 @@ async function handleEditSinglePhotoFile(file) {
         return;
     }
 
-    document.getElementById('target-student-photo-val').value = base64;
+    const photoVal = document.getElementById('target-student-photo-val');
+    if (photoVal) photoVal.value = base64;
+
     const studentId = document.getElementById('target-student-id').value;
     const student = appStudents.find(s => s.id === studentId);
-    updateEditSinglePhotoDisplay(base64, student ? student.name : 'S');
-    showToast('Foto baru siap disimpan!', 'success');
+    if (student) {
+        student.photo = base64;
+        updateEditSinglePhotoDisplay(base64, student.name);
+        await saveToFirebaseDatabase(true);
+        renderAllViews();
+        showToast(`Pasfoto ${student.name} LANGSUNG TERSIMPAN ke Firebase!`, 'success');
+    }
 }
 
 function promptEditSinglePhotoUrl() {
-    const current = document.getElementById('target-student-photo-val').value;
+    const photoVal = document.getElementById('target-student-photo-val');
+    const current = photoVal ? photoVal.value : '';
     const url = prompt('Masukkan URL foto online (https://...) atau path lokal (assets/students/...):', current);
     if (url === null) return;
 
     const trimmed = url.trim();
-    document.getElementById('target-student-photo-val').value = trimmed;
+    if (photoVal) photoVal.value = trimmed;
+
     const studentId = document.getElementById('target-student-id').value;
     const student = appStudents.find(s => s.id === studentId);
-    updateEditSinglePhotoDisplay(trimmed, student ? student.name : 'S');
-    if (trimmed) showToast('URL foto berhasil diterapkan!', 'success');
+    if (student) {
+        student.photo = trimmed || null;
+        updateEditSinglePhotoDisplay(trimmed, student.name);
+        saveToFirebaseDatabase(true);
+        renderAllViews();
+        showToast('URL foto berhasil diterapkan & LANGSUNG TERSIMPAN ke Firebase!', 'success');
+    }
 }
 
 function removeEditSinglePhoto() {
-    document.getElementById('target-student-photo-val').value = '';
+    const photoVal = document.getElementById('target-student-photo-val');
+    if (photoVal) photoVal.value = '';
+
     const studentId = document.getElementById('target-student-id').value;
     const student = appStudents.find(s => s.id === studentId);
-    updateEditSinglePhotoDisplay('', student ? student.name : 'S');
-    showToast('Foto siswa dihapus (kembali ke avatar inisial).', 'info');
+    if (student) {
+        student.photo = null;
+        updateEditSinglePhotoDisplay('', student.name);
+        saveToFirebaseDatabase(true);
+        renderAllViews();
+        showToast('Foto siswa dihapus & LANGSUNG TERSIMPAN ke Firebase.', 'info');
+    }
 }
 
 function handleTargetSubmit(e) {
@@ -6636,9 +6671,9 @@ function compressImageFile(file, maxWidth = 280, maxHeight = 350, quality = 0.8)
 
 async function handleSingleStudentPhotoFile(studentId, file) {
     if (!file) return;
-    showToast('Memproses & mengompres foto siswa...', 'info');
+    showToast('Memproses & menyimpan foto siswa...', 'info');
 
-    const base64 = await compressImageFile(file);
+    const base64 = await compressImageFile(file, 240, 300, 0.78);
     if (!base64) {
         showToast('Gagal memproses file foto.', 'error');
         return;
@@ -6649,20 +6684,19 @@ async function handleSingleStudentPhotoFile(studentId, file) {
         const photoInp = row.querySelector('.batch-inp-photo');
         if (photoInp) photoInp.value = base64;
 
-        const thumbBox = document.getElementById(`batch-thumb-box-${studentId}`);
-        if (thumbBox) {
-            thumbBox.innerHTML = `<img src="${base64}" alt="Foto Siswa" id="batch-thumb-img-${studentId}">`;
+        const previewBox = row.querySelector('.batch-photo-preview-box');
+        if (previewBox) {
+            previewBox.innerHTML = `<img src="${base64}" alt="Foto" class="batch-preview-img">`;
         }
-
-        const removeBtn = document.getElementById(`batch-btn-remove-${studentId}`);
-        if (removeBtn) removeBtn.style.display = 'inline-flex';
     }
 
-    // Update langsung in-memory state
     const student = appStudents.find(s => s.id === studentId);
-    if (student) student.photo = base64;
-
-    showToast('Foto berhasil dimuat! Klik "Simpan Semua Perubahan" untuk menyimpan.', 'success');
+    if (student) {
+        student.photo = base64;
+        await saveToFirebaseDatabase(true);
+        renderAllViews();
+        showToast(`Foto ${student.name} LANGSUNG TERSIMPAN ke Firebase!`, 'success');
+    }
 }
 
 function promptStudentPhotoUrl(studentId) {
@@ -6718,42 +6752,53 @@ function removeStudentPhoto(studentId) {
 async function handleBatchMultiPhotoUpload(files) {
     if (!files || files.length === 0) return;
 
-    showToast(`Memproses ${files.length} file foto...`, 'info');
+    showToast(`Memproses ${files.length} foto sekaligus & menyimpan ke Firebase...`, 'info');
     let matchedCount = 0;
+    let unmatched = [];
 
-    for (const file of Array.from(files)) {
-        const rawFileName = file.name.toLowerCase();
-        const baseName = rawFileName.substring(0, rawFileName.lastIndexOf('.')) || rawFileName;
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const rawFileName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+        const cleanName = rawFileName.trim().toLowerCase();
 
-        // Cocokkan berdasarkan NISN atau Nama Siswa
+        // Cari berdasarkan NISN atau Nama
         const student = appStudents.find(s => {
-            const nisn = s.nisn.toLowerCase();
-            const sName = s.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-            const cleanBase = baseName.replace(/[^a-z0-9]/g, '');
-            return cleanBase.includes(nisn) || nisn.includes(cleanBase) || cleanBase === sName || sName.includes(cleanBase) || cleanBase.includes(sName);
+            const sNisn = (s.nisn || '').toLowerCase();
+            const sName = (s.name || '').toLowerCase();
+            return cleanName === sNisn || cleanName === sName || sName.includes(cleanName) || cleanName.includes(sName);
         });
 
         if (student) {
-            const base64 = await compressImageFile(file);
+            const base64 = await compressImageFile(file, 240, 300, 0.78);
             if (base64) {
                 student.photo = base64;
                 const row = document.querySelector(`tr[data-student-id="${student.id}"]`);
                 if (row) {
                     const photoInp = row.querySelector('.batch-inp-photo');
                     if (photoInp) photoInp.value = base64;
-
-                    const thumbBox = document.getElementById(`batch-thumb-box-${student.id}`);
-                    if (thumbBox) thumbBox.innerHTML = `<img src="${base64}" alt="${escapeHtml(student.name)}" id="batch-thumb-img-${student.id}">`;
-
-                    const removeBtn = document.getElementById(`batch-btn-remove-${student.id}`);
-                    if (removeBtn) removeBtn.style.display = 'inline-flex';
+                    const previewBox = row.querySelector('.batch-photo-preview-box');
+                    if (previewBox) {
+                        previewBox.innerHTML = `<img src="${base64}" alt="${escapeHtml(student.name)}" class="batch-preview-img">`;
+                    }
                 }
                 matchedCount++;
             }
+        } else {
+            unmatched.push(file.name);
         }
     }
 
-    showToast(`Berhasil mencocokkan ${matchedCount} foto siswa! Klik "Simpan Semua Perubahan" untuk menyimpan permanen.`, 'success');
+    if (matchedCount > 0) {
+        await saveToFirebaseDatabase(true);
+        renderAllViews();
+        showFeedbackSuccessModal(
+            'Upload Foto Massal Berhasil!',
+            `${matchedCount} foto siswa berhasil dicocokkan dan LANGSUNG TERSIMPAN ke Firebase Cloud!` +
+            (unmatched.length > 0 ? `\n\n(${unmatched.length} foto tidak cocok dengan nama/NISN: ${unmatched.slice(0, 3).join(', ')}...)` : '')
+        );
+    } else {
+        showToast('Tidak ada foto yang cocok dengan nama siswa atau NISN.', 'warning');
+    }
 }
 
 // Simpan data dari DOM ke in-memory appStudents sebelum filtering
@@ -7204,7 +7249,7 @@ function triggerSelfPhotoUpload() {
 
 async function handleSelfPhotoFile(file) {
     if (!file) return;
-    showToast('Mengompres pasfoto profil...', 'info');
+    showToast('Mengompres dan menyimpan pasfoto profil...', 'info');
 
     const base64 = await compressImageFile(file, 240, 300, 0.78);
     if (!base64) {
@@ -7216,8 +7261,15 @@ async function handleSelfPhotoFile(file) {
     if (photoVal) photoVal.value = base64;
 
     const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
-    updateSelfPhotoPreviewDisplay(base64, student ? student.name : 'S');
-    showToast('Pasfoto baru siap disimpan!', 'success');
+    if (student) {
+        student.photo = base64;
+        currentUser.photo = base64;
+        sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+        updateSelfPhotoPreviewDisplay(base64, student.name);
+        await saveToFirebaseDatabase(true);
+        renderAllViews();
+        showToast('Pasfoto profil berhasil LANGSUNG TERSIMPAN ke Firebase!', 'success');
+    }
 }
 
 function promptSelfPhotoUrl() {
@@ -7230,8 +7282,15 @@ function promptSelfPhotoUrl() {
     if (photoVal) photoVal.value = trimmed;
 
     const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
-    updateSelfPhotoPreviewDisplay(trimmed, student ? student.name : 'S');
-    if (trimmed) showToast('URL pasfoto berhasil diterapkan!', 'success');
+    if (student) {
+        student.photo = trimmed || null;
+        currentUser.photo = trimmed || null;
+        sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+        updateSelfPhotoPreviewDisplay(trimmed, student.name);
+        saveToFirebaseDatabase(true);
+        renderAllViews();
+        showToast('URL pasfoto berhasil diterapkan & LANGSUNG TERSIMPAN ke Firebase!', 'success');
+    }
 }
 
 function removeSelfPhoto() {
@@ -7239,8 +7298,15 @@ function removeSelfPhoto() {
     if (photoVal) photoVal.value = '';
 
     const student = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
-    updateSelfPhotoPreviewDisplay('', student ? student.name : 'S');
-    showToast('Foto profil dihapus (menggunakan avatar inisial).', 'info');
+    if (student) {
+        student.photo = null;
+        currentUser.photo = null;
+        sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+        updateSelfPhotoPreviewDisplay('', student.name);
+        saveToFirebaseDatabase(true);
+        renderAllViews();
+        showToast('Foto profil dihapus & LANGSUNG TERSIMPAN ke Firebase.', 'info');
+    }
 }
 
 function handleStudentSelfPhotoSubmit(e) {
