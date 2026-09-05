@@ -4672,8 +4672,11 @@ function renderLeaderboard() {
 }
 
 // ==========================================================================
-// FIREBASE REALTIME DATABASE CLOUD SYNCHRONIZATION
+// FIREBASE REALTIME DATABASE CLOUD SYNCHRONIZATION & MULTI-DEVICE SYSTEM
 // ==========================================================================
+
+let currentCloudStatus = 'offline';
+let firebasePermissionDenied = false;
 
 function initFirebaseRealtimeSync() {
     if (typeof firebase === 'undefined') {
@@ -4691,13 +4694,24 @@ function initFirebaseRealtimeSync() {
         firebaseDb = firebase.database();
         console.log('[Firebase] Realtime Database tersambung.');
 
-        // 1. Pantau status koneksi internet & cloud
+        // Coba sign in secara anonim jika diaktifkan di Firebase Console
+        if (firebase.auth) {
+            try {
+                firebase.auth().signInAnonymously().catch(e => {
+                    console.log('[Firebase Auth] Anonymous notice:', e.message);
+                });
+            } catch(authErr) {
+                // ignore
+            }
+        }
+
+        // 1. Pantau status koneksi internet & socket Firebase
         const connectedRef = firebaseDb.ref('.info/connected');
         connectedRef.on('value', (snap) => {
-            if (snap.val() === true) {
+            if (snap.val() === true && !firebasePermissionDenied) {
                 console.log('[Firebase] Terhubung ke Cloud RTDB.');
                 updateCloudSyncStatus('connected', 'Live Cloud');
-            } else {
+            } else if (!firebasePermissionDenied) {
                 console.log('[Firebase] Koneksi Cloud terputus / offline.');
                 updateCloudSyncStatus('offline', 'Mode Offline');
             }
@@ -4706,6 +4720,7 @@ function initFirebaseRealtimeSync() {
         // 2. Real-time Listener data tabungan
         const mainRef = firebaseDb.ref('tabungan_br1');
         mainRef.on('value', (snapshot) => {
+            firebasePermissionDenied = false;
             const data = snapshot.val();
             if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
                 console.log('[Firebase] Menerima pembaruan real-time dari Cloud.');
@@ -4757,7 +4772,12 @@ function initFirebaseRealtimeSync() {
             }
         }, (error) => {
             console.error('[Firebase] Realtime listener error:', error);
-            updateCloudSyncStatus('error', 'Sync Error');
+            if (error.code === 'PERMISSION_DENIED' || (error.message && error.message.toLowerCase().includes('permission_denied'))) {
+                firebasePermissionDenied = true;
+                updateCloudSyncStatus('error', 'Aturan Cloud');
+            } else {
+                updateCloudSyncStatus('error', 'Sync Error');
+            }
         });
 
     } catch (err) {
@@ -4786,6 +4806,7 @@ function syncToFirebase(force = false) {
 
         firebaseDb.ref('tabungan_br1').set(payload)
             .then(() => {
+                firebasePermissionDenied = false;
                 isSyncingToCloud = false;
                 updateCloudSyncStatus('connected', 'Live Cloud');
                 console.log('[Firebase] Data berhasil disinkronkan ke Cloud.');
@@ -4793,31 +4814,128 @@ function syncToFirebase(force = false) {
             .catch((error) => {
                 isSyncingToCloud = false;
                 console.error('[Firebase] Cloud sync error:', error);
-                updateCloudSyncStatus('error', 'Gagal Sinkron');
+                if (error.code === 'PERMISSION_DENIED' || (error.message && error.message.toLowerCase().includes('permission_denied'))) {
+                    firebasePermissionDenied = true;
+                    updateCloudSyncStatus('error', 'Aturan Cloud');
+                } else {
+                    updateCloudSyncStatus('error', 'Gagal Sinkron');
+                }
             });
     }, force ? 0 : 300);
 }
 
 function updateCloudSyncStatus(status, text = null) {
+    currentCloudStatus = status;
     const badge = document.getElementById('cloud-sync-badge');
     const label = document.getElementById('cloud-sync-status-text');
     if (!badge) return;
 
-    badge.classList.remove('sync-active', 'sync-loading', 'sync-offline');
+    badge.classList.remove('sync-active', 'sync-loading', 'sync-offline', 'sync-error');
 
     if (status === 'connected') {
         badge.classList.add('sync-active');
-        badge.title = 'Status Cloud Database: Terhubung & Real-Time Sync Aktif (Multi-Device)';
+        badge.title = 'Status Cloud Database: Terhubung & Real-Time Sync Aktif (Multi-Device). Klik untuk info.';
         if (label) label.textContent = text || 'Live Cloud';
     } else if (status === 'syncing') {
         badge.classList.add('sync-loading');
         badge.title = 'Sedang Menyinkronkan data ke Cloud Database...';
         if (label) label.textContent = text || 'Sinkronisasi...';
+    } else if (status === 'error') {
+        badge.classList.add('sync-error');
+        badge.title = 'Izin Firebase Realtime Database Terkunci (Permission Denied). Klik untuk panduan aktivasi.';
+        if (label) label.textContent = text || 'Aturan Cloud';
     } else {
         badge.classList.add('sync-offline');
-        badge.title = 'Koneksi Cloud Terputus (Menggunakan cache lokal browser)';
+        badge.title = 'Koneksi Cloud Terputus (Menggunakan cache lokal browser). Klik untuk coba lagi.';
         if (label) label.textContent = text || 'Mode Lokal';
     }
+}
+
+function handleCloudBadgeClick() {
+    if (firebasePermissionDenied || currentCloudStatus === 'error') {
+        openFirebaseConfigHelpModal();
+    } else if (currentCloudStatus === 'connected') {
+        showToast('🟢 Cloud Database Terhubung! Setiap perubahan tersinkron secara real-time ke seluruh HP & Laptop.', 'success');
+    } else if (currentCloudStatus === 'syncing') {
+        showToast('🟡 Sedang menyinkronkan data perubahan ke Cloud Firebase...', 'info');
+    } else {
+        showToast('⚪ Mode Offline / Lokal. Memulai ulang koneksi ke Cloud...', 'info');
+        initFirebaseRealtimeSync();
+    }
+}
+
+function openFirebaseConfigHelpModal() {
+    const diagBox = document.getElementById('cloud-diag-status');
+    if (diagBox) {
+        if (firebasePermissionDenied || currentCloudStatus === 'error') {
+            diagBox.style.display = 'block';
+            diagBox.innerHTML = `
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="fa-solid fa-triangle-exclamation text-rose font-size-lg"></i>
+                    <strong class="text-rose">Izin Database Terkunci (Permission Denied)</strong>
+                </div>
+                <p class="small mb-0 text-muted">
+                    Aturan keamanan Firebase Realtime Database saat ini menolak akses baca/tulis. Ikuti 3 langkah di bawah untuk mengaktifkan agar data bisa diakses live oleh semua siswa & guru.
+                </p>
+            `;
+        } else if (currentCloudStatus === 'connected') {
+            diagBox.style.display = 'block';
+            diagBox.style.background = 'rgba(16, 185, 129, 0.12)';
+            diagBox.style.borderColor = 'rgba(16, 185, 129, 0.35)';
+            diagBox.innerHTML = `
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="fa-solid fa-cloud-check text-emerald font-size-lg"></i>
+                    <strong class="text-emerald">Cloud Terhubung & Real-Time Sync Aktif</strong>
+                </div>
+                <p class="small mb-0 text-muted">
+                    Database Firebase siap digunakan. Setiap perubahan transaksi, saldo, dan foto siswa langsung tersinkronkan multi-device.
+                </p>
+            `;
+        }
+    }
+    openModal('modal-firebase-rules-guide');
+}
+
+function forceUploadToFirebaseCloud() {
+    if (!firebaseDb) {
+        initFirebaseRealtimeSync();
+    }
+    if (!firebaseDb) {
+        showToast('SDK Firebase belum siap. Silakan periksa koneksi internet.', 'error');
+        return;
+    }
+
+    updateCloudSyncStatus('syncing', 'Mengunggah...');
+    showToast('Mengunggah 44 data siswa dan transaksi ke Firebase Cloud...', 'info');
+
+    const payload = {
+        students: appStudents,
+        transactions: appTransactions,
+        lastUpdated: new Date().toISOString()
+    };
+
+    firebaseDb.ref('tabungan_br1').set(payload)
+        .then(() => {
+            firebasePermissionDenied = false;
+            updateCloudSyncStatus('connected', 'Live Cloud');
+            closeModal('modal-firebase-rules-guide');
+            showFeedbackSuccessModal(
+                'Data Berhasil Diunggah ke Cloud!',
+                'Seluruh 44 data siswa dan ' + appTransactions.length + ' riwayat transaksi tabungan telah berhasil diunggah ke Firebase Realtime Database. Siswa dan Wali Kelas kini dapat mengakses data real-time dari HP dan laptop secara langsung!'
+            );
+        })
+        .catch((error) => {
+            console.error('[Firebase] Force upload error:', error);
+            if (error.code === 'PERMISSION_DENIED' || (error.message && error.message.toLowerCase().includes('permission_denied'))) {
+                firebasePermissionDenied = true;
+                updateCloudSyncStatus('error', 'Aturan Cloud');
+                showToast('Gagal: Izin Firebase masih terkunci di Firebase Console.', 'error');
+                openFirebaseConfigHelpModal();
+            } else {
+                updateCloudSyncStatus('error', 'Gagal Upload');
+                showToast('Gagal mengunggah ke Cloud: ' + error.message, 'error');
+            }
+        });
 }
 
 function refreshData() {
@@ -4843,9 +4961,13 @@ function refreshData() {
             }
             updateCloudSyncStatus('connected', 'Live Cloud');
         }).catch(err => {
+            console.warn('[Firebase] Refresh data error:', err);
             renderAllViews();
             showToast('Memuat data dari cache lokal.', 'warning');
-            updateCloudSyncStatus('connected', 'Live Cloud');
+            if (err.code === 'PERMISSION_DENIED' || (err.message && err.message.toLowerCase().includes('permission_denied'))) {
+                firebasePermissionDenied = true;
+                updateCloudSyncStatus('error', 'Aturan Cloud');
+            }
         });
     } else {
         loadState();

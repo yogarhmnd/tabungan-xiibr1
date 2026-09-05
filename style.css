@@ -3301,3 +3301,31 @@ select.form-control {
         border: 1px solid #ccc !important;
     }
 }
+
+
+.cloud-sync-badge {
+    cursor: pointer;
+}
+.cloud-sync-badge:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+}
+.cloud-sync-badge.sync-error {
+    background: rgba(239, 68, 68, 0.14) !important;
+    border-color: rgba(239, 68, 68, 0.45) !important;
+    color: #ef4444 !important;
+}
+.cloud-sync-badge.sync-error .cloud-pulse-dot {
+    background: #ef4444 !important;
+    box-shadow: 0 0 8px #ef4444 !important;
+}
+.cloud-sync-badge.sync-offline {
+    background: rgba(148, 163, 184, 0.14) !important;
+    border-color: rgba(148, 163, 184, 0.35) !important;
+    color: #94a3b8 !important;
+}
+.cloud-sync-badge.sync-offline .cloud-pulse-dot {
+    background: #94a3b8 !important;
+    box-shadow: none !important;
+    animation: none !important;
+}
