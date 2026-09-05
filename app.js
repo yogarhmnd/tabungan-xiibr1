@@ -4167,12 +4167,12 @@ function loadState() {
                 return {
                     id: official.id,
                     nisn: official.nisn,
-                    name: official.name,
-                    photo: (found && found.photo) ? found.photo : (official.photo || null),
+                    name: (found && found.name) ? found.name : official.name,
+                    photo: (found && typeof found.photo === 'string' && found.photo.trim().length > 0) ? found.photo : (official.photo || `assets/students/${official.nisn}.jpg`),
                     phone: (found && found.phone) ? found.phone : official.phone,
                     balance: (found && typeof found.balance === 'number') ? found.balance : official.balance,
-                    target: 2000000, // Target resmi Rp 2.000.000 seluruh siswa
-                    password: official.password || 'password123'
+                    target: (found && typeof found.target === 'number' && found.target > 0) ? found.target : 2000000,
+                    password: (found && found.password) ? found.password : (official.password || 'password123')
                 };
             });
             saveStudents();
@@ -4181,7 +4181,7 @@ function loadState() {
             saveStudents();
         }
     } else {
-        // Inisialisasi awal: Otomatis memuat 44 siswa resmi dengan saldo dan target Rp 2.000.000
+        // Inisialisasi awal: Otomatis memuat 44 siswa resmi dengan pasfoto resmi dan target Rp 2.000.000
         appStudents = JSON.parse(JSON.stringify(OFFICIAL_STUDENTS));
         saveStudents();
     }
@@ -4203,13 +4203,11 @@ function saveStudents() {
         localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
     } catch (e) {
         console.warn('LocalStorage saveStudents error (quota exceeded):', e);
-        // Jika kuota penuh karena foto terlalu besar, simpan data tanpa string gambar yang overload
         try {
             const lightweight = appStudents.map(s => {
                 const copy = { ...s };
-                if (copy.photo && copy.photo.length > 50000) {
-                    // Foto lebih dari 50KB dipotong ke path lokal atau fallback
-                    copy.photo = copy.photo.startsWith('data:') ? null : copy.photo;
+                if (copy.photo && copy.photo.length > 100000) {
+                    copy.photo = `assets/students/${s.nisn}.jpg`;
                 }
                 return copy;
             });
@@ -5535,17 +5533,80 @@ function closeModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
 }
 
-// EDIT TARGET TABUNGAN MODAL
+// EDIT PROFIL, PASFOTO & TARGET TABUNGAN MODAL
 function openEditTargetModal(studentId) {
     const student = appStudents.find(s => s.id === studentId);
     if (!student) return;
 
     document.getElementById('target-student-id').value = student.id;
-    document.getElementById('target-student-name').value = `${student.name} (${student.nisn})`;
+    document.getElementById('target-student-name').value = `${student.name} (NISN: ${student.nisn})`;
     document.getElementById('target-student-phone').value = student.phone || '';
     document.getElementById('target-amount-input').value = student.target || 2000000;
+    document.getElementById('target-student-photo-val').value = student.photo || '';
+
+    updateEditSinglePhotoDisplay(student.photo, student.name);
 
     openModal('modal-edit-target');
+}
+
+function updateEditSinglePhotoDisplay(photoUrl, studentName) {
+    const imgEl = document.getElementById('edit-single-photo-img');
+    const fallbackEl = document.getElementById('edit-single-photo-fallback');
+    const name = studentName || 'S';
+
+    if (photoUrl && photoUrl.trim()) {
+        imgEl.src = photoUrl;
+        imgEl.style.display = 'block';
+        fallbackEl.style.display = 'none';
+    } else {
+        imgEl.style.display = 'none';
+        fallbackEl.style.display = 'flex';
+        fallbackEl.innerText = name.charAt(0).toUpperCase();
+        fallbackEl.style.background = getStudentAvatarGradient(name);
+    }
+}
+
+function triggerEditSinglePhotoUpload() {
+    const inp = document.getElementById('edit-single-photo-file');
+    if (inp) inp.click();
+}
+
+async function handleEditSinglePhotoFile(file) {
+    if (!file) return;
+    showToast('Mengompres dan memproses pasfoto siswa...', 'info');
+
+    const base64 = await compressImageFile(file, 240, 300, 0.78);
+    if (!base64) {
+        showToast('Gagal memproses file foto.', 'danger');
+        return;
+    }
+
+    document.getElementById('target-student-photo-val').value = base64;
+    const studentId = document.getElementById('target-student-id').value;
+    const student = appStudents.find(s => s.id === studentId);
+    updateEditSinglePhotoDisplay(base64, student ? student.name : 'S');
+    showToast('Foto baru siap disimpan!', 'success');
+}
+
+function promptEditSinglePhotoUrl() {
+    const current = document.getElementById('target-student-photo-val').value;
+    const url = prompt('Masukkan URL foto online (https://...) atau path lokal (assets/students/...):', current);
+    if (url === null) return;
+
+    const trimmed = url.trim();
+    document.getElementById('target-student-photo-val').value = trimmed;
+    const studentId = document.getElementById('target-student-id').value;
+    const student = appStudents.find(s => s.id === studentId);
+    updateEditSinglePhotoDisplay(trimmed, student ? student.name : 'S');
+    if (trimmed) showToast('URL foto berhasil diterapkan!', 'success');
+}
+
+function removeEditSinglePhoto() {
+    document.getElementById('target-student-photo-val').value = '';
+    const studentId = document.getElementById('target-student-id').value;
+    const student = appStudents.find(s => s.id === studentId);
+    updateEditSinglePhotoDisplay('', student ? student.name : 'S');
+    showToast('Foto siswa dihapus (kembali ke avatar inisial).', 'info');
 }
 
 function handleTargetSubmit(e) {
@@ -5553,22 +5614,22 @@ function handleTargetSubmit(e) {
     const studentId = document.getElementById('target-student-id').value;
     const newTarget = Number(document.getElementById('target-amount-input').value) || 2000000;
     const newPhone = document.getElementById('target-student-phone').value.trim();
+    const newPhoto = document.getElementById('target-student-photo-val').value.trim() || null;
 
     const studentIndex = appStudents.findIndex(s => s.id === studentId);
     if (studentIndex !== -1) {
         const student = appStudents[studentIndex];
-        const oldTarget = student.target;
-        const oldPhone = student.phone;
-
         student.target = newTarget;
         student.phone = newPhone;
+        student.photo = newPhoto;
+
         saveStudents();
         renderAllViews();
         closeModal('modal-edit-target');
 
         showFeedbackSuccessModal(
-            'Data Siswa Berhasil Diperbarui!',
-            `Target tabungan siswa ${student.name} berhasil diatur ke ${formatRp(newTarget)} dan nomor WhatsApp berhasil disimpan.`
+            'Data & Pasfoto Siswa Berhasil Diperbarui!',
+            `Profil, pasfoto, target tabungan ${student.name} (${formatRp(newTarget)}), dan no WhatsApp berhasil diperbarui secara permanen.`
         );
     }
 }

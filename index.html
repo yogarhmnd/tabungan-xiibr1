@@ -1076,18 +1076,45 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Edit Target Tabungan & WhatsApp (KHUSUS ADMIN) -->
+    <!-- MODAL 2: Edit Profil, Pasfoto, Target Tabungan & WhatsApp (KHUSUS ADMIN) -->
     <div class="modal-backdrop" id="modal-edit-target">
         <div class="modal-card">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-bullseye"></i> Edit Target Tabungan & No WA Siswa</h3>
+                <h3><i class="fa-solid fa-user-pen text-emerald"></i> Edit Profil & Pasfoto Siswa</h3>
                 <button class="modal-close" onclick="closeModal('modal-edit-target')">&times;</button>
             </div>
             <form id="form-edit-target" onsubmit="handleTargetSubmit(event)">
                 <div class="modal-body">
                     <input type="hidden" id="target-student-id">
+                    <input type="hidden" id="target-student-photo-val">
+
+                    <!-- Pasfoto Siswa Interaktif Langsung -->
+                    <div class="form-group mb-3 text-center">
+                        <label class="d-block mb-2 font-weight-bold"><i class="fa-solid fa-camera text-primary"></i> Pasfoto Siswa</label>
+                        <div class="d-flex align-items-center justify-content-center gap-3">
+                            <div class="edit-single-photo-preview" id="edit-single-photo-box" onclick="triggerEditSinglePhotoUpload()" title="Klik untuk pilih file foto baru">
+                                <img src="" id="edit-single-photo-img" alt="Foto Siswa" onerror="this.style.display='none'; document.getElementById('edit-single-photo-fallback').style.display='flex';">
+                                <div class="edit-single-photo-fallback" id="edit-single-photo-fallback">A</div>
+                                <div class="edit-single-photo-overlay"><i class="fa-solid fa-camera"></i></div>
+                            </div>
+                            <div class="d-flex flex-column gap-2 text-start">
+                                <input type="file" id="edit-single-photo-file" accept="image/*" style="display: none;" onchange="handleEditSinglePhotoFile(this.files[0])">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="triggerEditSinglePhotoUpload()">
+                                    <i class="fa-solid fa-upload"></i> Upload Foto
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="promptEditSinglePhotoUrl()">
+                                    <i class="fa-solid fa-link"></i> URL / Path
+                                </button>
+                                <button type="button" class="btn btn-danger-soft btn-sm" onclick="removeEditSinglePhoto()">
+                                    <i class="fa-solid fa-trash"></i> Hapus Foto
+                                </button>
+                            </div>
+                        </div>
+                        <small class="text-muted d-block mt-2">Foto otomatis terkompresi & langsung terupdate ke seluruh sistem data.</small>
+                    </div>
+
                     <div class="form-group mb-3">
-                        <label>Nama Siswa:</label>
+                        <label>Nama Siswa & NISN:</label>
                         <input type="text" id="target-student-name" class="form-control" readonly style="background: rgba(255,255,255,0.08); font-weight:700;">
                     </div>
                     <div class="form-group mb-3">
