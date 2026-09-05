@@ -4334,17 +4334,17 @@ function handleStudentSelectChange(selectedNisn) {
     }
 }
 
-// Filter dropdown 44 siswa secara langsung dari input pencarian
+/// Filter dropdown siswa secara langsung dari input pencarian (A-Z)
 function filterLoginStudentDropdown(keyword) {
     const q = keyword.toLowerCase().trim();
     const loginSelect = document.getElementById('siswa-login-nisn');
     if (!loginSelect) return;
 
-    const sorted = [...appStudents].sort((a, b) => a.name.localeCompare(b.name));
+    const sorted = [...appStudents].sort((a, b) => a.name.localeCompare(b.name, 'id', { sensitivity: 'base' }));
     const filtered = q ? sorted.filter(s => s.name.toLowerCase().includes(q) || s.nisn.includes(q)) : sorted;
 
-    loginSelect.innerHTML = `<option value="">-- Pilih 1 dari ${filtered.length} Siswa --</option>` +
-        filtered.map((s, idx) => `<option value="${s.nisn}">${idx + 1}. ${s.name} (NISN: ${s.nisn})</option>`).join('');
+    loginSelect.innerHTML = `<option value="">-- Pilih Nama Siswa (${filtered.length}) --</option>` +
+        filtered.map(s => `<option value="${s.nisn}">${escapeHtml(s.name)} (NISN: ${s.nisn})</option>`).join('');
 
     if (filtered.length === 1) {
         loginSelect.value = filtered[0].nisn;
@@ -4360,7 +4360,7 @@ function handleLoginSiswa(e) {
     const passwordInput = document.getElementById('siswa-password').value.trim();
 
     if (!selectedNisn) {
-        showToast('Silakan pilih salah satu dari 44 nama siswa terdaftar!', 'danger');
+        showToast('Silakan pilih nama siswa yang terdaftar!', 'danger');
         return;
     }
 
@@ -4551,19 +4551,19 @@ function formatWaPhone(phone) {
     return cleaned;
 }
 
-// Populate Student Select Dropdowns (44 Students sorted)
+/// Populate Student Select Dropdowns (Urut A-Z tanpa nomor urut)
 function populateStudentDropdowns() {
     const loginSelect = document.getElementById('siswa-login-nisn');
     const txSelect = document.getElementById('tx-student-id');
     const filterSelect = document.getElementById('filter-student');
 
-    const sorted = [...appStudents].sort((a, b) => a.name.localeCompare(b.name));
+    const sorted = [...appStudents].sort((a, b) => a.name.localeCompare(b.name, 'id', { sensitivity: 'base' }));
 
-    const optionsHtml = sorted.map((s, idx) => `<option value="${s.nisn}">${idx + 1}. ${s.name} (NISN: ${s.nisn})</option>`).join('');
-    const txOptionsHtml = sorted.map((s, idx) => `<option value="${s.id}">${idx + 1}. ${s.name} (NISN: ${s.nisn})</option>`).join('');
+    const optionsHtml = sorted.map(s => `<option value="${s.nisn}">${escapeHtml(s.name)} (NISN: ${s.nisn})</option>`).join('');
+    const txOptionsHtml = sorted.map(s => `<option value="${s.id}">${escapeHtml(s.name)} (NISN: ${s.nisn})</option>`).join('');
 
-    if (loginSelect) loginSelect.innerHTML = `<option value="">-- Pilih 1 dari ${sorted.length} Siswa Terdaftar --</option>` + optionsHtml;
-    if (txSelect) txSelect.innerHTML = `<option value="">-- Pilih Siswa --</option>` + txOptionsHtml;
+    if (loginSelect) loginSelect.innerHTML = `<option value="">-- Pilih Nama Siswa (A-Z) --</option>` + optionsHtml;
+    if (txSelect) txSelect.innerHTML = `<option value="">-- Pilih Nama Siswa (A-Z) --</option>` + txOptionsHtml;
     if (filterSelect) filterSelect.innerHTML = `<option value="all">Semua Siswa</option>` + txOptionsHtml;
 }
 

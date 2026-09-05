@@ -60,7 +60,7 @@
                 </button>
             </form>
 
-            <!-- Student Form (Login Siswa 1 dari 44) -->
+            <!-- Student Form (Login Siswa) -->
             <form id="form-login-siswa" class="hidden" onsubmit="handleLoginSiswa(event)">
                 <!-- Pencarian Cepat Nama / NISN -->
                 <div class="form-group mb-2">
@@ -68,9 +68,9 @@
                     <input type="text" id="siswa-search-input" class="form-control" placeholder="Ketik nama atau NISN untuk mencari..." oninput="filterLoginStudentDropdown(this.value)">
                 </div>
 
-                <!-- Dropdown Pemilihan 1 dari 44 Siswa -->
+                <!-- Dropdown Pemilihan Siswa A-Z -->
                 <div class="form-group mb-3">
-                    <label for="siswa-login-nisn"><i class="fa-solid fa-user-graduate"></i> Pilih 1 dari 44 Siswa Terdaftar <span class="required">*</span></label>
+                    <label for="siswa-login-nisn"><i class="fa-solid fa-user-graduate"></i> Pilih Nama Siswa (A-Z) <span class="required">*</span></label>
                     <select id="siswa-login-nisn" class="form-control" required onchange="handleStudentSelectChange(this.value)">
                         <option value="">-- Klik untuk memilih nama siswa --</option>
                     </select>
