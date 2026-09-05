@@ -2,32 +2,41 @@
    STYLE SYSTEM: Tabungan Siswa XII Bisnis Ritel 1 (BR 1)
    SMK PGRI 11 CILEDUG KOTA TANGERANG
    Wali Kelas: Yoga Rahmanda, S.Pd.
-   Ultra-Modern & Elegant Design System (Oceanic Sky Gradient Aesthetic)
-   Palette: #03045E | #0077B6 | #00B4D8 | #90E0EF | #CAF0F8
+   Ultra-Modern & Elegant Design System (Oceanic Mint & Champagne Gold Aesthetic)
+   Palette: #03045E | #0077B6 | #00B4D8 | #84DCC6 | #DFBA73 | #CAF0F8
    ========================================================================== */
 
 :root {
-    /* Color Palette - Deep Luxurious Oceanic Sky (Dark Mode) */
+    /* Color Palette - Deep Luxurious Oceanic Sky with Mint & Champagne Gold Accents (Dark Mode) */
     --ocean-darkest: #03045e;
     --ocean-navy: #0077b6;
     --ocean-cyan: #00b4d8;
     --ocean-ice: #90e0ef;
     --ocean-frost: #caf0f8;
 
-    --bg-main: #030712;
-    --bg-card: rgba(3, 10, 36, 0.78);
-    --bg-card-hover: rgba(5, 18, 56, 0.88);
+    /* Mint & Gold Palette from Reference Visual */
+    --mint-teal: #70c1b3;
+    --mint-emerald: #84dcc6;
+    --mint-sage: #95d5b2;
+    --gold-champagne: #dfba73;
+    --gold-amber: #c59b27;
+    --gold-sand: #edd59e;
+    --gold-frost: #f5dfb8;
+
+    --bg-main: #020922;
+    --bg-card: rgba(3, 10, 36, 0.82);
+    --bg-card-hover: rgba(5, 18, 56, 0.92);
     --bg-sidebar: rgba(2, 7, 26, 0.96);
-    --border-color: rgba(0, 180, 216, 0.16);
-    --border-highlight: rgba(0, 180, 216, 0.45);
+    --border-color: rgba(0, 180, 216, 0.18);
+    --border-highlight: rgba(223, 186, 115, 0.45);
     --border-glow: rgba(0, 180, 216, 0.25);
 
     /* Text Colors */
     --text-primary: #f8fafc;
     --text-secondary: #90e0ef;
-    --text-muted: #64748b;
+    --text-muted: #94a3b8;
 
-    /* Accent Colors (Ocean Sky System) */
+    /* Accent Colors */
     --color-indigo: #0077b6;
     --color-indigo-dark: #03045e;
     --color-indigo-light: #00b4d8;
@@ -39,15 +48,16 @@
     --color-rose: #f43f5e;
     --color-rose-dark: #e11d48;
     --color-rose-light: #fb7185;
-    --color-amber: #f59e0b;
+    --color-amber: #dfba73;
     --color-purple: #818cf8;
 
     /* Dynamic Gradients */
     --grad-ocean-primary: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
     --grad-ocean-dark: linear-gradient(135deg, #03045e 0%, #0077b6 100%);
     --grad-ocean-light: linear-gradient(135deg, #90e0ef 0%, #caf0f8 100%);
-    --grad-ocean-banner: linear-gradient(135deg, #03045e 0%, #0077b6 50%, #00b4d8 100%);
+    --grad-ocean-banner: linear-gradient(135deg, #03045e 0%, #0077b6 45%, #b8860b 82%, #dfba73 100%);
     --grad-ocean-subtle: linear-gradient(135deg, rgba(0, 119, 182, 0.15) 0%, rgba(0, 180, 216, 0.08) 100%);
+    --grad-gold-metallic: linear-gradient(90deg, #0b192c 0%, #1c2b3d 40%, #9e7a36 82%, #d4af37 100%);
 
     /* Typography */
     --font-heading: 'Outfit', sans-serif;
@@ -61,6 +71,7 @@
     --glow-emerald: 0 0 25px rgba(16, 185, 129, 0.35);
     --glow-rose: 0 0 25px rgba(244, 63, 94, 0.35);
     --glow-indigo: 0 0 25px rgba(0, 180, 216, 0.35);
+    --glow-gold: 0 0 25px rgba(223, 186, 115, 0.35);
 
     /* Radius System */
     --radius-xs: 6px;
@@ -72,29 +83,30 @@
 }
 
 /* ====================================================================
-   COMPLETE LIGHT THEME OVERRIDES (Ocean Frost & Sky Blue Gradient)
+   COMPLETE LIGHT THEME OVERRIDES (Mint Aqua & Champagne Gold Gradient)
    ==================================================================== */
 [data-theme="light"] {
-    --bg-main: #f0f9ff;
-    --bg-card: rgba(255, 255, 255, 0.94);
+    --bg-main: #f4fafb;
+    --bg-card: rgba(255, 255, 255, 0.92);
     --bg-card-hover: #ffffff;
-    --bg-sidebar: rgba(255, 255, 255, 0.96);
-    --border-color: #e0f2fe;
-    --border-highlight: #90e0ef;
+    --bg-sidebar: rgba(255, 255, 255, 0.95);
+    --border-color: #dceef2;
+    --border-highlight: #dfba73;
     --border-glow: rgba(0, 180, 216, 0.2);
 
-    --text-primary: #03045e;
+    --text-primary: #0f172a;
     --text-secondary: #0077b6;
     --text-muted: #64748b;
 
     --shadow-sm: 0 2px 6px rgba(0, 119, 182, 0.05);
     --shadow-md: 0 8px 20px rgba(0, 119, 182, 0.08);
     --shadow-lg: 0 16px 36px rgba(0, 119, 182, 0.12);
-    --shadow-card: 0 8px 24px -4px rgba(0, 119, 182, 0.07), 0 0 1px 1px rgba(0, 180, 216, 0.12);
+    --shadow-card: 0 10px 30px -4px rgba(0, 119, 182, 0.1), 0 0 0 1px rgba(223, 186, 115, 0.3) inset;
 
     --glow-emerald: 0 4px 20px rgba(16, 185, 129, 0.15);
     --glow-rose: 0 4px 20px rgba(244, 63, 94, 0.15);
     --glow-indigo: 0 4px 20px rgba(0, 119, 182, 0.2);
+    --glow-gold: 0 4px 20px rgba(223, 186, 115, 0.25);
 }
 
 /* Base Reset & Box Sizing */
@@ -118,18 +130,20 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     background-image:
-        radial-gradient(at 0% 0%, rgba(0, 180, 216, 0.16) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 119, 182, 0.14) 0px, transparent 50%),
-        radial-gradient(at 50% 30%, rgba(3, 4, 94, 0.35) 0px, transparent 70%);
+        radial-gradient(ellipse at 12% 25%, rgba(16, 185, 129, 0.2) 0px, transparent 50%),
+        radial-gradient(ellipse at 88% 75%, rgba(217, 119, 6, 0.22) 0px, transparent 50%),
+        radial-gradient(ellipse at 50% 45%, rgba(0, 180, 216, 0.22) 0px, transparent 65%),
+        linear-gradient(135deg, #020922 0%, #03045e 45%, #181406 100%);
     background-attachment: fixed;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background 0.35s ease, color 0.3s ease;
 }
 
 [data-theme="light"] body {
     background-image:
-        linear-gradient(180deg, #caf0f8 0%, #e0f2fe 30%, #f0f9ff 70%, #ffffff 100%),
-        radial-gradient(at 0% 0%, rgba(0, 180, 216, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 119, 182, 0.08) 0px, transparent 50%);
+        radial-gradient(ellipse at 10% 20%, rgba(132, 220, 198, 0.75) 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 80%, rgba(223, 186, 115, 0.7) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 50%, rgba(202, 240, 248, 0.6) 0%, transparent 60%),
+        linear-gradient(125deg, #a4e5d4 0%, #8ae0cc 20%, #8dd5db 45%, #c8edf5 65%, #faedd3 85%, #edd59e 100%);
 }
 
 .hidden {
@@ -137,7 +151,7 @@ body {
 }
 
 /* ====================================================================
-   1. LOGIN OVERLAY & SAAS CLOUD AESTHETIC DESIGN
+   1. LOGIN OVERLAY & PANORAMIC MINT-CYAN-GOLD AESTHETIC DESIGN
    ==================================================================== */
 .login-overlay {
     position: fixed;
@@ -145,7 +159,11 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at 50% 15%, #0077b6 0%, #03045e 55%, #020320 100%);
+    background:
+        radial-gradient(ellipse at 12% 25%, rgba(16, 185, 129, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 88% 75%, rgba(217, 119, 6, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 45%, rgba(0, 180, 216, 0.22) 0%, transparent 65%),
+        linear-gradient(135deg, #020922 0%, #03045e 45%, #181406 100%);
     backdrop-filter: blur(24px);
     display: flex;
     align-items: center;
@@ -157,17 +175,21 @@ body {
 }
 
 [data-theme="light"] .login-overlay {
-    background: linear-gradient(180deg, #90e0ef 0%, #caf0f8 30%, #e0f7fa 65%, #ffffff 100%) !important;
+    background:
+        radial-gradient(ellipse at 10% 20%, rgba(132, 220, 198, 0.8) 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 80%, rgba(223, 186, 115, 0.75) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 50%, rgba(202, 240, 248, 0.65) 0%, transparent 60%),
+        linear-gradient(125deg, #9be2d0 0%, #84dcc6 22%, #85d8d8 42%, #c2ecf7 65%, #fbedd5 85%, #dfba73 100%) !important;
 }
 
-/* Ambient Concentric Orbital Rings (SaaS Sky Aesthetic) */
+/* Ambient Concentric Orbital Rings */
 .login-ambient-halo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 1000px;
-    height: 1000px;
+    width: 1100px;
+    height: 1100px;
     pointer-events: none;
     display: flex;
     align-items: center;
@@ -178,59 +200,177 @@ body {
 .halo-ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(0, 180, 216, 0.25);
+    border: 1px solid rgba(0, 180, 216, 0.22);
     pointer-events: none;
+    transition: all 0.3s ease;
 }
 
 .halo-ring-1 {
-    width: 460px;
-    height: 460px;
+    width: 440px;
+    height: 440px;
+    border-color: rgba(223, 186, 115, 0.3);
 }
 
 .halo-ring-2 {
-    width: 720px;
-    height: 720px;
-    border-color: rgba(144, 224, 239, 0.18);
+    width: 680px;
+    height: 680px;
+    border-color: rgba(144, 224, 239, 0.22);
 }
 
 .halo-ring-3 {
-    width: 980px;
-    height: 980px;
-    border-color: rgba(202, 240, 248, 0.1);
+    width: 920px;
+    height: 920px;
+    border-color: rgba(132, 220, 198, 0.18);
+}
+
+.halo-ring-4 {
+    width: 1150px;
+    height: 1150px;
+    border-color: rgba(223, 186, 115, 0.12);
 }
 
 [data-theme="light"] .halo-ring-1 {
-    border-color: rgba(0, 119, 182, 0.35) !important;
+    border-color: rgba(223, 186, 115, 0.45) !important;
 }
 
 [data-theme="light"] .halo-ring-2 {
-    border-color: rgba(0, 180, 216, 0.25) !important;
+    border-color: rgba(0, 180, 216, 0.3) !important;
 }
 
 [data-theme="light"] .halo-ring-3 {
-    border-color: rgba(144, 224, 239, 0.2) !important;
+    border-color: rgba(112, 193, 179, 0.3) !important;
+}
+
+[data-theme="light"] .halo-ring-4 {
+    border-color: rgba(223, 186, 115, 0.2) !important;
+}
+
+/* Floating Vector Line Art Ornaments (Watermark Icons & Circuits) */
+.login-bg-ornaments {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 38vw;
+    max-width: 480px;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.login-bg-left {
+    left: 0;
+    color: rgba(132, 220, 198, 0.55);
+}
+
+.login-bg-right {
+    right: 0;
+    color: rgba(223, 186, 115, 0.55);
+}
+
+[data-theme="light"] .login-bg-left {
+    color: #4a9e8e !important;
+}
+
+[data-theme="light"] .login-bg-right {
+    color: #b8860b !important;
+}
+
+.bg-circuit-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.ornament-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    opacity: 0.55;
+    animation: gentleFloat 6s ease-in-out infinite alternate;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+[data-theme="light"] .ornament-item {
+    opacity: 0.65 !important;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08)) !important;
+}
+
+.item-cap { font-size: 2.1rem; animation-delay: 0s; }
+.item-book { font-size: 1.8rem; animation-delay: 1.2s; }
+.item-moneybag { font-size: 2.2rem; animation-delay: 2.4s; }
+.item-coins { font-size: 1.9rem; animation-delay: 3.6s; }
+.item-plant, .item-piggy { font-size: 1.8rem; animation-delay: 4.8s; }
+
+@keyframes gentleFloat {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-8px) rotate(2deg); }
 }
 
 /* Floating Glassmorphic Login Card */
 .login-card {
-    background: rgba(3, 4, 94, 0.75);
-    border: 1.5px solid rgba(0, 180, 216, 0.35);
+    background: rgba(3, 10, 36, 0.82);
+    border: 1.5px solid rgba(223, 186, 115, 0.35);
     border-radius: var(--radius-xl);
     width: 100%;
     max-width: 420px;
-    padding: 2.5rem 2rem 2rem;
-    box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.75), 0 0 30px rgba(0, 180, 216, 0.12) inset;
-    backdrop-filter: blur(28px);
+    padding: 2.6rem 2.2rem 2.2rem;
+    box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(223, 186, 115, 0.12) inset;
+    backdrop-filter: blur(32px);
     animation: modalPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     z-index: 2;
 }
 
 [data-theme="light"] .login-card {
-    background: rgba(255, 255, 255, 0.88) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 25px 60px -15px rgba(0, 119, 182, 0.22), 0 0 0 1px rgba(144, 224, 239, 0.6) inset, 0 12px 30px rgba(0, 0, 0, 0.04) !important;
-    backdrop-filter: blur(32px) !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 25px 65px -12px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(223, 186, 115, 0.35) inset, 0 10px 30px rgba(112, 193, 179, 0.12) !important;
+    backdrop-filter: blur(36px) !important;
+}
+
+/* Vintage Gold Corner Filigree Ornaments */
+.card-filigree {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.filigree-tl {
+    top: 8px;
+    left: 8px;
+}
+
+.filigree-tr {
+    top: 8px;
+    right: 8px;
+    transform: scaleX(-1);
+}
+
+.filigree-bl {
+    bottom: 8px;
+    left: 8px;
+    transform: scaleY(-1);
+}
+
+.filigree-br {
+    bottom: 8px;
+    right: 8px;
+    transform: scale(-1);
+}
+
+.card-filigree svg {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 /* Top Right Minimalist Theme Toggle */
@@ -249,30 +389,32 @@ body {
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: var(--text-primary);
+    border: 1.5px solid rgba(223, 186, 115, 0.4);
+    color: #dfba73;
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-theme-toggle-login:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(223, 186, 115, 0.2);
+    border-color: #dfba73;
     transform: translateY(-2px) rotate(15deg);
+    box-shadow: 0 4px 14px rgba(223, 186, 115, 0.35);
 }
 
 [data-theme="light"] .btn-theme-toggle-login {
     background: #ffffff !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    color: #1e293b !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+    border: 1.5px solid #dfba73 !important;
+    color: #0f172a !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
 }
 
 [data-theme="light"] .btn-theme-toggle-login:hover {
-    background: #f8fafc !important;
-    border-color: #cbd5e1 !important;
+    background: #fdfbf7 !important;
+    border-color: #c59b27 !important;
+    color: #c59b27 !important;
 }
 
 @keyframes modalPopIn {
@@ -280,45 +422,73 @@ body {
     to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Header & Centered Logo Icon Box */
+/* Header & Centered Logo with Gold Mandala Frame */
 .login-header {
     text-align: center;
     margin-bottom: 1.5rem;
 }
 
-.login-icon {
+.logo-gold-frame {
+    position: relative;
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gold-mandala-frame {
+    position: absolute;
     width: 58px;
     height: 58px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border: 1.5px solid #dfba73;
+    border-radius: 16px;
+    transform: rotate(45deg);
+    pointer-events: none;
+    box-shadow: 0 0 12px rgba(223, 186, 115, 0.3);
+    transition: transform 0.4s ease, border-color 0.3s ease;
+}
+
+.login-icon:hover .gold-mandala-frame {
+    transform: rotate(90deg) scale(1.06);
+    border-color: #c59b27;
+}
+
+.login-icon {
+    width: 62px;
+    height: 62px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid #dfba73;
     border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
-    box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.8);
     overflow: hidden;
     padding: 7px;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
 }
 
 .login-icon:hover {
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 14px 30px -4px rgba(0, 0, 0, 0.45);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 28px -4px rgba(223, 186, 115, 0.45);
 }
 
 .login-logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 10px;
     display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 [data-theme="light"] .login-icon {
     background: #ffffff !important;
-    border: 1.5px solid rgba(0, 0, 0, 0.06) !important;
-    box-shadow: 0 12px 26px -4px rgba(0, 0, 0, 0.09), 0 4px 10px rgba(0, 0, 0, 0.03) !important;
+    border: 1.5px solid #dfba73 !important;
+    box-shadow: 0 10px 24px -4px rgba(223, 186, 115, 0.3), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
 }
 
 .login-header h2 {
@@ -326,26 +496,31 @@ body {
     font-size: 1.35rem;
     font-weight: 800;
     color: var(--text-primary);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
     margin-bottom: 0.25rem;
 }
 
 .login-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0;
+    letter-spacing: 0.2px;
+}
+
+[data-theme="light"] .login-header h2 {
+    color: #0f172a !important;
 }
 
 [data-theme="light"] .login-subtitle {
-    color: #64748b !important;
+    color: #475569 !important;
 }
 
 /* Modern Pill Segmented Control Tabs */
 .login-tabs {
     display: flex;
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(223, 186, 115, 0.25);
     border-radius: 14px;
     padding: 4px;
     margin-bottom: 1.35rem;
@@ -353,8 +528,8 @@ body {
 }
 
 [data-theme="light"] .login-tabs {
-    background: #f1f5f9 !important;
-    border: 1px solid #e2e8f0 !important;
+    background: #eef5f8 !important;
+    border: 1px solid #d8eaee !important;
 }
 
 .login-tab-btn {
@@ -381,25 +556,25 @@ body {
 }
 
 [data-theme="light"] .login-tab-btn {
-    color: #64748b;
+    color: #4a7c6f !important;
 }
 
 [data-theme="light"] .login-tab-btn.active {
     background: #ffffff !important;
     color: #0f172a !important;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Action Submit Buttons (Inspired by Sleek 'Get Started' Button) */
+/* Action Submit Buttons (High-End Dark Charcoal to Golden Metallic Gradient) */
 .login-submit-btn {
-    background: #111827 !important;
+    background: linear-gradient(90deg, #0b192c 0%, #1c2b3d 40%, #9e7a36 82%, #d4af37 100%) !important;
     color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(223, 186, 115, 0.35) !important;
     border-radius: 14px !important;
-    padding: 0.85rem 1.25rem !important;
+    padding: 0.88rem 1.25rem !important;
     font-weight: 700 !important;
     font-size: 0.925rem !important;
-    box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.45) !important;
+    box-shadow: 0 8px 24px -4px rgba(15, 28, 46, 0.45), 0 0 15px rgba(223, 186, 115, 0.2) !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex;
     align-items: center;
@@ -408,21 +583,20 @@ body {
 }
 
 .login-submit-btn:hover {
-    background: #000000 !important;
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6) !important;
+    filter: brightness(1.1);
+    box-shadow: 0 12px 30px -4px rgba(197, 155, 39, 0.5), 0 0 20px rgba(223, 186, 115, 0.35) !important;
 }
 
 [data-theme="light"] .login-submit-btn {
-    background: #18181b !important;
+    background: linear-gradient(90deg, #071728 0%, #172a3d 40%, #9e7a36 80%, #d4af37 100%) !important;
     color: #ffffff !important;
-    border: none !important;
-    box-shadow: 0 8px 22px -4px rgba(24, 24, 27, 0.3) !important;
+    border: 1px solid rgba(223, 186, 115, 0.4) !important;
+    box-shadow: 0 8px 24px -4px rgba(7, 23, 40, 0.35), 0 0 15px rgba(223, 186, 115, 0.25) !important;
 }
 
 [data-theme="light"] .login-submit-btn:hover {
-    background: #09090b !important;
-    box-shadow: 0 12px 28px -4px rgba(9, 9, 11, 0.45) !important;
+    box-shadow: 0 12px 30px -4px rgba(7, 23, 40, 0.5), 0 0 25px rgba(212, 175, 55, 0.4) !important;
 }
 
 .login-hint {
@@ -1824,17 +1998,11 @@ select option {
     font-family: var(--font-heading);
     font-size: 1.65rem;
     font-weight: 800;
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .student-welcome-banner {
-    background: linear-gradient(135deg, #ffffff, #f8fafc) !important;
-    border: 1.5px solid #cbd5e1 !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05) !important;
+    color: #ffffff;
 }
 
 [data-theme="light"] .s-welcome-info h2 {
-    color: #0f172a !important;
+    color: #ffffff !important;
 }
 
 /* ====================================================================

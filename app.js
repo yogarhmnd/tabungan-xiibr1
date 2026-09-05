@@ -4126,17 +4126,17 @@ function adaptLogoBackground(imgEl, targetBoxId = null) {
     }
 }
 
-// GRADIENT PALETTE UNTUK AVATAR SISWA (Modern Oceanic Sky Palette)
+// GRADIENT PALETTE UNTUK AVATAR SISWA (Oceanic Mint & Champagne Gold Palette)
 function getStudentAvatarGradient(name) {
     const gradients = [
         'linear-gradient(135deg, #03045e, #0077b6)', // Deep Ocean - Cobalt
         'linear-gradient(135deg, #0077b6, #00b4d8)', // Cobalt - Cyan
-        'linear-gradient(135deg, #00b4d8, #90e0ef)', // Cyan - Ice
-        'linear-gradient(135deg, #03045e, #00b4d8)', // Navy - Cyan
-        'linear-gradient(135deg, #0077b6, #90e0ef)', // Cobalt - Ice
-        'linear-gradient(135deg, #0284c7, #38bdf8)', // Sky - Light Cyan
-        'linear-gradient(135deg, #0f766e, #14b8a6)', // Deep Teal - Emerald
-        'linear-gradient(135deg, #1d4ed8, #60a5fa)'  // Royal - Ice Blue
+        'linear-gradient(135deg, #00b4d8, #84dcc6)', // Cyan - Mint Teal
+        'linear-gradient(135deg, #03045e, #c59b27)', // Navy - Champagne Gold
+        'linear-gradient(135deg, #0077b6, #dfba73)', // Cobalt - Amber Gold
+        'linear-gradient(135deg, #0f766e, #84dcc6)', // Teal - Mint
+        'linear-gradient(135deg, #1e293b, #dfba73)', // Slate - Gold Sheen
+        'linear-gradient(135deg, #0284c7, #38bdf8)'  // Sky - Light Cyan
     ];
     let hash = 0;
     for (let i = 0; i < (name || '').length; i++) {

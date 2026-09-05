@@ -16,31 +16,134 @@
 </head>
 <body>
 
-    <!-- SCREEN 1: LOGIN MODAL OVERLAY (Minimalist SaaS Cloud Aesthetic) -->
+    <!-- SCREEN 1: LOGIN MODAL OVERLAY (Oceanic Mint & Champagne Gold Aesthetic) -->
     <div id="login-overlay" class="login-overlay">
+        <!-- SVG Gradient Definitions -->
+        <svg class="hidden-svg-defs" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+            <defs>
+                <linearGradient id="goldLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#dfba73"/>
+                    <stop offset="50%" stop-color="#c59b27"/>
+                    <stop offset="100%" stop-color="#edd59e"/>
+                </linearGradient>
+                <linearGradient id="tealLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#84dcc6"/>
+                    <stop offset="50%" stop-color="#00b4d8"/>
+                    <stop offset="100%" stop-color="#0077b6"/>
+                </linearGradient>
+            </defs>
+        </svg>
+
         <!-- Ambient Concentric Circular Halo / Orbit Rings in Background -->
         <div class="login-ambient-halo">
             <div class="halo-ring halo-ring-1"></div>
             <div class="halo-ring halo-ring-2"></div>
             <div class="halo-ring halo-ring-3"></div>
+            <div class="halo-ring halo-ring-4"></div>
+        </div>
+
+        <!-- Ambient Floating Financial & Education Watermark Vector Ornaments (Left & Right) -->
+        <div class="login-bg-ornaments login-bg-left">
+            <svg class="bg-circuit-svg" viewBox="0 0 500 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 500 L140 410 L260 410 L380 300" stroke="currentColor" stroke-width="1.4" stroke-dasharray="8 5" opacity="0.4"/>
+                <circle cx="140" cy="410" r="4" fill="currentColor" opacity="0.6"/>
+                <circle cx="260" cy="410" r="4" fill="currentColor" opacity="0.6"/>
+                <path d="M40 640 L200 520 L310 520 L400 420" stroke="currentColor" stroke-width="1.2" opacity="0.3"/>
+                <circle cx="200" cy="520" r="3.5" fill="currentColor" opacity="0.5"/>
+            </svg>
+            <div class="ornament-item item-book" style="top: 25%; left: 16%;" title="Buku Tabungan">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div class="ornament-item item-cap" style="top: 45%; left: 22%;" title="Pendidikan">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="ornament-item item-moneybag" style="top: 65%; left: 18%;" title="Tabungan Kas">
+                <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class="ornament-item item-coins" style="top: 36%; left: 30%;" title="Koin Tabungan">
+                <i class="fa-solid fa-coins"></i>
+            </div>
+            <div class="ornament-item item-plant" style="top: 55%; left: 10%;" title="Investasi Masa Depan">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+        </div>
+
+        <div class="login-bg-ornaments login-bg-right">
+            <svg class="bg-circuit-svg" viewBox="0 0 500 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M500 180 L360 270 L240 270 L120 380" stroke="currentColor" stroke-width="1.4" stroke-dasharray="8 5" opacity="0.4"/>
+                <circle cx="360" cy="270" r="4" fill="currentColor" opacity="0.6"/>
+                <circle cx="240" cy="270" r="4" fill="currentColor" opacity="0.6"/>
+                <path d="M460 60 L300 180 L190 180 L90 280" stroke="currentColor" stroke-width="1.2" opacity="0.3"/>
+                <circle cx="300" cy="180" r="3.5" fill="currentColor" opacity="0.5"/>
+            </svg>
+            <div class="ornament-item item-cap" style="top: 22%; right: 20%;" title="Pendidikan">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="ornament-item item-book" style="top: 36%; right: 28%;" title="Buku Tabungan">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div class="ornament-item item-moneybag" style="top: 48%; right: 16%;" title="Tabungan Kas">
+                <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class="ornament-item item-coins" style="top: 66%; right: 25%;" title="Koin Tabungan">
+                <i class="fa-solid fa-coins"></i>
+            </div>
+            <div class="ornament-item item-piggy" style="top: 30%; right: 10%;" title="Celengan Siswa">
+                <i class="fa-solid fa-piggy-bank"></i>
+            </div>
         </div>
 
         <div class="login-card">
+            <!-- 4 Corner Vintage Gold Filigree Ornaments -->
+            <div class="card-filigree filigree-tl">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3 H22 C14 3 6 11 6 19 V38" stroke="url(#goldLineGrad)" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M6 6 C12 6 18 12 18 18 C18 24 12 28 8 24 C4 20 8 12 16 12 C24 12 28 20 28 28" stroke="url(#goldLineGrad)" stroke-width="1" stroke-linecap="round" opacity="0.75"/>
+                    <circle cx="3" cy="3" r="2" fill="#c59b27"/>
+                    <circle cx="28" cy="28" r="1.5" fill="#dfba73"/>
+                </svg>
+            </div>
+            <div class="card-filigree filigree-tr">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3 H22 C14 3 6 11 6 19 V38" stroke="url(#goldLineGrad)" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M6 6 C12 6 18 12 18 18 C18 24 12 28 8 24 C4 20 8 12 16 12 C24 12 28 20 28 28" stroke="url(#goldLineGrad)" stroke-width="1" stroke-linecap="round" opacity="0.75"/>
+                    <circle cx="3" cy="3" r="2" fill="#c59b27"/>
+                    <circle cx="28" cy="28" r="1.5" fill="#dfba73"/>
+                </svg>
+            </div>
+            <div class="card-filigree filigree-bl">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3 H22 C14 3 6 11 6 19 V38" stroke="url(#goldLineGrad)" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M6 6 C12 6 18 12 18 18 C18 24 12 28 8 24 C4 20 8 12 16 12 C24 12 28 20 28 28" stroke="url(#goldLineGrad)" stroke-width="1" stroke-linecap="round" opacity="0.75"/>
+                    <circle cx="3" cy="3" r="2" fill="#c59b27"/>
+                    <circle cx="28" cy="28" r="1.5" fill="#dfba73"/>
+                </svg>
+            </div>
+            <div class="card-filigree filigree-br">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3 H22 C14 3 6 11 6 19 V38" stroke="url(#goldLineGrad)" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M6 6 C12 6 18 12 18 18 C18 24 12 28 8 24 C4 20 8 12 16 12 C24 12 28 20 28 28" stroke="url(#goldLineGrad)" stroke-width="1" stroke-linecap="round" opacity="0.75"/>
+                    <circle cx="3" cy="3" r="2" fill="#c59b27"/>
+                    <circle cx="28" cy="28" r="1.5" fill="#dfba73"/>
+                </svg>
+            </div>
+
             <!-- Top Right Floating Theme Toggle -->
             <div class="login-card-topbar">
                 <button type="button" class="btn-theme-toggle-login" onclick="toggleTheme()" title="Ubah Tema Warna (Terang / Gelap)" aria-label="Ubah Tema">
-                    <i class="fa-solid fa-sun" id="theme-icon-login"></i>
+                    <i class="fa-solid fa-moon" id="theme-icon-login"></i>
                 </button>
             </div>
 
-            <!-- Login Header: Centered Minimalist Logo & Clean Typography -->
+            <!-- Login Header: Centered Geometric Gold Mandala Framed Logo & Clean Typography -->
             <div class="login-header">
-                <div class="login-icon" id="login-icon-box" title="SMK PGRI 11 CILEDUG">
+                <div class="login-icon logo-gold-frame" id="login-icon-box" title="SMK PGRI 11 CILEDUG">
+                    <div class="gold-mandala-frame"></div>
                     <img src="PGRI.png" id="login-logo-img" alt="Logo SMK PGRI 11" class="login-logo-img" onload="adaptLogoBackground(this, 'login-icon-box')" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
                     <i class="fa-solid fa-graduation-cap" style="display: none;"></i>
                 </div>
                 <h2>SMK PGRI 11 CILEDUG</h2>
-                <p class="login-subtitle">Tabungan Siswa XII Bisnis Ritel 1</p>
+                <p class="login-subtitle">XII Bisnis Ritel 1</p>
             </div>
 
             <div class="login-tabs">
