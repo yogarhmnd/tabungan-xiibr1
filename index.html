@@ -19,10 +19,14 @@
     <!-- SCREEN 1: LOGIN MODAL OVERLAY -->
     <div id="login-overlay" class="login-overlay">
         <div class="login-card">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="badge badge-emerald"><i class="fa-solid fa-shield-halved"></i> Sistem Tabungan Resmi</span>
-                <button type="button" class="btn btn-secondary btn-sm" onclick="toggleTheme()" title="Ubah Tema Warna (Light / Dark)">
-                    <i class="fa-solid fa-sun" id="theme-icon-login"></i> <span id="theme-text-login">Mode Terang</span>
+            <div class="login-top-bar">
+                <div class="login-official-badge">
+                    <span class="badge-dot-glow"></span>
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Sistem Tabungan Resmi</span>
+                </div>
+                <button type="button" class="btn-theme-toggle-login" onclick="toggleTheme()" title="Ubah Tema Warna (Terang / Gelap)" aria-label="Ubah Tema">
+                    <i class="fa-solid fa-sun" id="theme-icon-login"></i>
                 </button>
             </div>
             <div class="login-header">

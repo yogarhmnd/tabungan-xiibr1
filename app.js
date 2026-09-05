@@ -4061,14 +4061,10 @@ function applyTheme(theme, showNotification = false) {
         headerIcon.className = isLight ? 'fa-solid fa-moon text-indigo' : 'fa-solid fa-sun text-amber';
     }
 
-    // Update Login Overlay Icon & Text
+    // Update Login Overlay Icon
     const loginIcon = document.getElementById('theme-icon-login');
-    const loginText = document.getElementById('theme-text-login');
     if (loginIcon) {
         loginIcon.className = isLight ? 'fa-solid fa-moon text-indigo' : 'fa-solid fa-sun text-amber';
-    }
-    if (loginText) {
-        loginText.innerText = isLight ? 'Mode Gelap' : 'Mode Terang';
     }
 
     if (savingsChartInstance) {

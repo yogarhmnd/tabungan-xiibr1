@@ -173,6 +173,109 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08) !important;
 }
 
+/* Login Top Bar: Aesthetic Official Badge & Compact Theme Toggle */
+.login-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.35rem;
+    gap: 0.75rem;
+}
+
+.login-official-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.42rem 0.85rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 78, 59, 0.28));
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    border-radius: var(--radius-full);
+    color: #34d399;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.45px;
+    text-transform: uppercase;
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.login-official-badge:hover {
+    border-color: rgba(16, 185, 129, 0.7);
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.3);
+    transform: translateY(-1px);
+}
+
+.login-official-badge i {
+    font-size: 0.85rem;
+    color: var(--color-emerald);
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.7));
+}
+
+.badge-dot-glow {
+    width: 6.5px;
+    height: 6.5px;
+    border-radius: 50%;
+    background-color: var(--color-emerald);
+    box-shadow: 0 0 8px var(--color-emerald), 0 0 14px rgba(16, 185, 129, 0.6);
+    display: inline-block;
+    animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+[data-theme="light"] .login-official-badge {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5) !important;
+    border: 1px solid #6ee7b7 !important;
+    color: #065f46 !important;
+    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.12) !important;
+}
+
+[data-theme="light"] .login-official-badge i {
+    color: #059669 !important;
+    filter: none;
+}
+
+/* Compact Icon-Only Theme Toggle on Login */
+.btn-theme-toggle-login {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.btn-theme-toggle-login:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px) rotate(15deg);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .btn-theme-toggle-login {
+    background: #f1f5f9 !important;
+    border: 1.5px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .btn-theme-toggle-login:hover {
+    background: #e2e8f0 !important;
+    border-color: #94a3b8 !important;
+}
+
 @keyframes modalPopIn {
     from { opacity: 0; transform: scale(0.94) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
