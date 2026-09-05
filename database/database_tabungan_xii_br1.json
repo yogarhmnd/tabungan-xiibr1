@@ -2,7 +2,7 @@
   "metadata": {
     "database_name": "db_tabungan_xii_br1",
     "description": "Database Sistem Tabungan Siswa XII Bisnis Ritel 1 (SMK PGRI 11 CILEDUG)",
-    "created_at": "2026-09-05T01:47:54.930Z",
+    "created_at": "2026-09-05T02:01:14.640Z",
     "version": "1.0.0",
     "author": "Yoga Rahmanda, S.Pd. (Wali Kelas XII BR 1)",
     "target_per_student": 2000000,
@@ -15,7 +15,7 @@
       "username": "walikelas",
       "name": "Yoga Rahmanda, S.Pd.",
       "role": "Wali Kelas XII BR 1",
-      "password_hash": "admin123",
+      "password_hash": "qwerty48",
       "email": "yogarahmanda@smkpgri11cld.sch.id"
     },
     {

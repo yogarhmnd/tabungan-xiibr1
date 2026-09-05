@@ -40,7 +40,7 @@ const fullDatabaseJson = {
             username: 'walikelas',
             name: 'Yoga Rahmanda, S.Pd.',
             role: 'Wali Kelas XII BR 1',
-            password_hash: 'admin123',
+            password_hash: 'qwerty48',
             email: 'yogarahmanda@smkpgri11cld.sch.id'
         },
         {
@@ -95,7 +95,7 @@ CREATE TABLE \`admins\` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO \`admins\` (\`id\`, \`username\`, \`name\`, \`role\`, \`password_hash\`, \`email\`) VALUES
-('ADM-001', 'walikelas', 'Yoga Rahmanda, S.Pd.', 'Wali Kelas XII BR 1', 'admin123', 'yogarahmanda@smkpgri11cld.sch.id'),
+('ADM-001', 'walikelas', 'Yoga Rahmanda, S.Pd.', 'Wali Kelas XII BR 1', 'qwerty48', 'yogarahmanda@smkpgri11cld.sch.id'),
 ('ADM-002', 'bendahara', 'Bendahara Tabungan BR 1', 'Bendahara Kelas', 'bendahara123', 'bendahara.br1@smkpgri11cld.sch.id');
 
 -- -------------------------------------------------------------------------
@@ -261,7 +261,7 @@ CREATE TABLE admins (
 );
 
 INSERT INTO admins (id, username, name, role, password_hash, email) VALUES
-('ADM-001', 'walikelas', 'Yoga Rahmanda, S.Pd.', 'Wali Kelas XII BR 1', 'admin123', 'yogarahmanda@smkpgri11cld.sch.id'),
+('ADM-001', 'walikelas', 'Yoga Rahmanda, S.Pd.', 'Wali Kelas XII BR 1', 'qwerty48', 'yogarahmanda@smkpgri11cld.sch.id'),
 ('ADM-002', 'bendahara', 'Bendahara Tabungan BR 1', 'Bendahara Kelas', 'bendahara123', 'bendahara.br1@smkpgri11cld.sch.id');
 
 -- 2. Tabel Students (44 Siswa)

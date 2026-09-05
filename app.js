@@ -4274,7 +4274,7 @@ function handleLoginAdmin(e) {
     const user = document.getElementById('admin-username').value.trim();
     const pass = document.getElementById('admin-password').value.trim();
 
-    if (user === 'admin' && pass === 'admin123') {
+    if ((user === 'admin' || user === 'walikelas') && pass === 'qwerty48') {
         currentUser = {
             role: 'admin',
             name: 'Yoga Rahmanda, S.Pd.',
