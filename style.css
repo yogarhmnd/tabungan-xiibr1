@@ -2268,6 +2268,61 @@ select option {
 .badge-indigo { background: rgba(99, 102, 241, 0.15); color: var(--color-indigo); border: 1px solid rgba(99, 102, 241, 0.3); }
 .badge-amber { background: rgba(245, 158, 11, 0.15); color: var(--color-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
 
+/* Cloud Realtime Sync Status Badge */
+.cloud-sync-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    letter-spacing: 0.3px;
+    background: rgba(0, 180, 216, 0.12);
+    border: 1px solid rgba(0, 180, 216, 0.35);
+    color: var(--ocean-cyan);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.cloud-sync-badge.sync-active {
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #10b981;
+}
+
+.cloud-sync-badge.sync-loading {
+    background: rgba(245, 158, 11, 0.14);
+    border-color: rgba(245, 158, 11, 0.4);
+    color: #f59e0b;
+}
+
+.cloud-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    animation: cloudDotBlink 1.8s infinite ease-in-out;
+}
+
+.cloud-sync-badge.sync-loading .cloud-pulse-dot {
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b;
+}
+
+@keyframes cloudDotBlink {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.4; }
+}
+
+[data-theme="light"] .cloud-sync-badge.sync-active {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border-color: #a7f3d0 !important;
+    color: #047857 !important;
+}
+
 /* Progress Bar */
 .progress-bar-container {
     width: 100%;

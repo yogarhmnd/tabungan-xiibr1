@@ -12,6 +12,25 @@ const STORAGE_AUTH_KEY = 'tabungbr1_session_v11';
 const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v11';
 const STORAGE_THEME_KEY = 'tabungbr1_theme_v11';
 
+// Firebase Realtime Database Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBYQE1E7ngrkm3lNQCkDw6Xzqc-cnT49Ac",
+  authDomain: "tabungan-xiibr1.firebaseapp.com",
+  databaseURL: "https://tabungan-xiibr1-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "tabungan-xiibr1",
+  storageBucket: "tabungan-xiibr1.firebasestorage.app",
+  messagingSenderId: "1034930108247",
+  appId: "1:1034930108247:web:6ce84384d99ebb35d2f012",
+  measurementId: "G-VVQ3FTZ8E0"
+};
+
+let firebaseApp = null;
+let firebaseDb = null;
+let isSyncingToCloud = false;
+let isReceivingRemoteUpdate = false;
+let firebaseSyncDebounceTimer = null;
+
+
 // Official Class List for XII Bisnis Ritel 1 (44 Students with Registered WhatsApp Phone Numbers)
 const INITIAL_TRANSACTIONS = [
     {
@@ -4035,6 +4054,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateStudentDropdowns();
     checkAuthSession();
     setTimeout(adaptLogoBackground, 200);
+    initFirebaseRealtimeSync();
 });
 
 // THEME SYSTEM (Light / Dark Mode Navigation)
@@ -4206,6 +4226,7 @@ function saveStudents() {
             console.error('Gagal menyimpan ke LocalStorage:', err2);
         }
     }
+    syncToFirebase();
 }
 
 function saveTransactions() {
@@ -4214,6 +4235,7 @@ function saveTransactions() {
     } catch (e) {
         console.error('LocalStorage saveTransactions error:', e);
     }
+    syncToFirebase();
 }
 
 // Reset all savings data to zero (Admin utility)
@@ -4649,11 +4671,187 @@ function renderLeaderboard() {
     }).join('');
 }
 
+// ==========================================================================
+// FIREBASE REALTIME DATABASE CLOUD SYNCHRONIZATION
+// ==========================================================================
+
+function initFirebaseRealtimeSync() {
+    if (typeof firebase === 'undefined') {
+        console.warn('[Firebase] SDK belum termuat, beralih ke mode offline lokal.');
+        updateCloudSyncStatus('offline', 'Mode Lokal');
+        return;
+    }
+
+    try {
+        if (!firebase.apps || !firebase.apps.length) {
+            firebaseApp = firebase.initializeApp(firebaseConfig);
+        } else {
+            firebaseApp = firebase.app();
+        }
+        firebaseDb = firebase.database();
+        console.log('[Firebase] Realtime Database tersambung.');
+
+        // 1. Pantau status koneksi internet & cloud
+        const connectedRef = firebaseDb.ref('.info/connected');
+        connectedRef.on('value', (snap) => {
+            if (snap.val() === true) {
+                console.log('[Firebase] Terhubung ke Cloud RTDB.');
+                updateCloudSyncStatus('connected', 'Live Cloud');
+            } else {
+                console.log('[Firebase] Koneksi Cloud terputus / offline.');
+                updateCloudSyncStatus('offline', 'Mode Offline');
+            }
+        });
+
+        // 2. Real-time Listener data tabungan
+        const mainRef = firebaseDb.ref('tabungan_br1');
+        mainRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
+                console.log('[Firebase] Menerima pembaruan real-time dari Cloud.');
+                isReceivingRemoteUpdate = true;
+
+                // Perbarui state lokal dengan data cloud terbaru
+                appStudents = data.students;
+                if (data.transactions && Array.isArray(data.transactions)) {
+                    appTransactions = data.transactions;
+                } else if (data.transactions && typeof data.transactions === 'object') {
+                    appTransactions = Object.values(data.transactions);
+                } else {
+                    appTransactions = [];
+                }
+
+                // Simpan ke cache browser
+                try {
+                    localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
+                    localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
+                } catch(e) {
+                    console.warn('Gagal menyimpan cache lokal dari cloud:', e);
+                }
+
+                // Jika sedang login sebagai siswa, perbarui objek currentUser
+                if (currentUser && currentUser.role === 'siswa') {
+                    const freshStudent = appStudents.find(s => s.id === currentUser.id || s.nisn === currentUser.nisn);
+                    if (freshStudent) {
+                        currentUser = { ...currentUser, ...freshStudent };
+                        sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+                    }
+                }
+
+                // Render ulang tampilan jika sudah login
+                if (currentUser) {
+                    renderAllViews();
+                    if (currentUser.role === 'admin') {
+                        updateStatsCards();
+                        updateChart();
+                    }
+                }
+                populateStudentDropdowns();
+
+                isReceivingRemoteUpdate = false;
+                updateCloudSyncStatus('connected', 'Live Cloud');
+            } else {
+                // Jika database Cloud masih kosong, lakukan inisialisasi awal (seed)
+                console.log('[Firebase] Cloud RTDB kosong. Menginisialisasi seed data awal...');
+                syncToFirebase(true);
+            }
+        }, (error) => {
+            console.error('[Firebase] Realtime listener error:', error);
+            updateCloudSyncStatus('error', 'Sync Error');
+        });
+
+    } catch (err) {
+        console.error('[Firebase] Gagal menginisialisasi Firebase:', err);
+        updateCloudSyncStatus('offline', 'Mode Lokal');
+    }
+}
+
+function syncToFirebase(force = false) {
+    if (!firebaseDb) return;
+    if (isReceivingRemoteUpdate && !force) return;
+
+    if (firebaseSyncDebounceTimer) {
+        clearTimeout(firebaseSyncDebounceTimer);
+    }
+
+    firebaseSyncDebounceTimer = setTimeout(() => {
+        isSyncingToCloud = true;
+        updateCloudSyncStatus('syncing', 'Sinkron...');
+
+        const payload = {
+            students: appStudents,
+            transactions: appTransactions,
+            lastUpdated: new Date().toISOString()
+        };
+
+        firebaseDb.ref('tabungan_br1').set(payload)
+            .then(() => {
+                isSyncingToCloud = false;
+                updateCloudSyncStatus('connected', 'Live Cloud');
+                console.log('[Firebase] Data berhasil disinkronkan ke Cloud.');
+            })
+            .catch((error) => {
+                isSyncingToCloud = false;
+                console.error('[Firebase] Cloud sync error:', error);
+                updateCloudSyncStatus('error', 'Gagal Sinkron');
+            });
+    }, force ? 0 : 300);
+}
+
+function updateCloudSyncStatus(status, text = null) {
+    const badge = document.getElementById('cloud-sync-badge');
+    const label = document.getElementById('cloud-sync-status-text');
+    if (!badge) return;
+
+    badge.classList.remove('sync-active', 'sync-loading', 'sync-offline');
+
+    if (status === 'connected') {
+        badge.classList.add('sync-active');
+        badge.title = 'Status Cloud Database: Terhubung & Real-Time Sync Aktif (Multi-Device)';
+        if (label) label.textContent = text || 'Live Cloud';
+    } else if (status === 'syncing') {
+        badge.classList.add('sync-loading');
+        badge.title = 'Sedang Menyinkronkan data ke Cloud Database...';
+        if (label) label.textContent = text || 'Sinkronisasi...';
+    } else {
+        badge.classList.add('sync-offline');
+        badge.title = 'Koneksi Cloud Terputus (Menggunakan cache lokal browser)';
+        if (label) label.textContent = text || 'Mode Lokal';
+    }
+}
+
 function refreshData() {
-    loadState();
-    renderAllViews();
-    if (currentUser && currentUser.role === 'admin') updateChart();
-    showToast('Data berhasil diperbarui!', 'success');
+    updateCloudSyncStatus('syncing', 'Memuat...');
+    showToast('Menyegarkan dan menyinkronkan data dari Cloud...', 'info');
+    if (firebaseDb) {
+        firebaseDb.ref('tabungan_br1').once('value').then((snapshot) => {
+            const data = snapshot.val();
+            if (data && data.students) {
+                appStudents = data.students;
+                appTransactions = data.transactions || [];
+                localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
+                localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
+                renderAllViews();
+                if (currentUser && currentUser.role === 'admin') {
+                    updateStatsCards();
+                    updateChart();
+                }
+                showToast('Data berhasil diperbarui secara real-time dari Cloud!', 'success');
+            } else {
+                renderAllViews();
+                showToast('Data lokal telah disegarkan!', 'success');
+            }
+            updateCloudSyncStatus('connected', 'Live Cloud');
+        }).catch(err => {
+            renderAllViews();
+            showToast('Memuat data dari cache lokal.', 'warning');
+            updateCloudSyncStatus('connected', 'Live Cloud');
+        });
+    } else {
+        loadState();
+        renderAllViews();
+        showToast('Data lokal berhasil disegarkan!', 'success');
+    }
 }
 
 // 1. ADMIN DASHBOARD

@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Chart.js for visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase Realtime Database SDK (Compat for seamless direct sync) -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-database-compat.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -362,8 +365,13 @@
                         <i class="fa-solid fa-user-plus"></i> <span>Tambah Siswa</span>
                     </button>
 
-                    <!-- Utility Group: Theme Toggle & Refresh Data -->
+                    <!-- Utility Group: Cloud Realtime Sync & Theme Toggle & Refresh Data -->
                     <div class="header-utility-group">
+                        <div id="cloud-sync-badge" class="cloud-sync-badge sync-active" title="Status Cloud Database: Terhubung & Real-Time Sync Aktif">
+                            <span class="cloud-pulse-dot"></span>
+                            <i class="fa-solid fa-cloud"></i>
+                            <span class="cloud-sync-text" id="cloud-sync-status-text">Cloud Sync</span>
+                        </div>
                         <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" title="Ubah Tema Warna (Light / Dark Mode)">
                             <i class="fa-solid fa-sun" id="theme-icon-header"></i>
                         </button>
