@@ -430,9 +430,9 @@ body {
 
 .logo-gold-frame {
     position: relative;
-    width: 66px;
-    height: 66px;
-    margin: 0 auto 1.1rem;
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -440,13 +440,13 @@ body {
 
 .gold-mandala-frame {
     position: absolute;
-    width: 58px;
-    height: 58px;
+    width: 74px;
+    height: 74px;
     border: 1.5px solid #dfba73;
-    border-radius: 16px;
+    border-radius: 20px;
     transform: rotate(45deg);
     pointer-events: none;
-    box-shadow: 0 0 12px rgba(223, 186, 115, 0.3);
+    box-shadow: 0 0 14px rgba(223, 186, 115, 0.35);
     transition: transform 0.4s ease, border-color 0.3s ease;
 }
 
@@ -456,33 +456,33 @@ body {
 }
 
 .login-icon {
-    width: 62px;
-    height: 62px;
+    width: 76px;
+    height: 76px;
     background: rgba(255, 255, 255, 0.95);
     border: 1.5px solid #dfba73;
-    border-radius: 18px;
+    border-radius: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.8);
     overflow: hidden;
-    padding: 7px;
+    padding: 8px;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 2;
 }
 
 .login-icon:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 28px -4px rgba(223, 186, 115, 0.45);
+    box-shadow: 0 14px 32px -4px rgba(223, 186, 115, 0.5);
 }
 
 .login-logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: 12px;
     display: block;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.15));
 }
 
 [data-theme="light"] .login-icon {
@@ -613,6 +613,30 @@ body {
     background: #f8fafc;
     border-color: #e2e8f0;
     color: #475569;
+}
+
+/* Login Card Footer Copyright */
+.login-card-footer {
+    text-align: center;
+    margin-top: 1.25rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(223, 186, 115, 0.2);
+}
+
+.login-copyright {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-block;
+}
+
+[data-theme="light"] .login-card-footer {
+    border-top: 1px solid rgba(223, 186, 115, 0.3);
+}
+
+[data-theme="light"] .login-copyright {
+    color: #64748b !important;
 }
 
 /* Student Selected Preview Card on Login */
