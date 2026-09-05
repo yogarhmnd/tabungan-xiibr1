@@ -4900,7 +4900,7 @@ function renderStudentsGrid() {
     container.innerHTML = sortedStudents.map(s => {
         const progress = s.target > 0 ? Math.min(100, Math.round((s.balance / s.target) * 100)) : 0;
         const avatarHtml = s.photo 
-            ? `<div class="student-avatar-frame"><img src="${s.photo}" alt="${escapeHtml(s.name)}" class="student-photo-img" onerror="this.onerror=null; this.parentElement.outerHTML='<div class=\\'student-avatar\\' style=\\'background: ${getStudentAvatarGradient(s.name)};\\'>${s.name.charAt(0)}</div>';"></div>`
+            ? `<div class="student-avatar-frame" style="background: ${getStudentAvatarGradient(s.name)};"><img src="${s.photo}" alt="${escapeHtml(s.name)}" class="student-photo-img" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerText='${s.name.charAt(0)}';"></div>`
             : `<div class="student-avatar" style="background: ${getStudentAvatarGradient(s.name)};">${s.name.charAt(0)}</div>`;
 
         return `
