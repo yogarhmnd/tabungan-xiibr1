@@ -18,12 +18,12 @@ data.transactions.forEach(t => {
 const appJsPath = path.join(__dirname, '..', 'app.js');
 let appJsContent = fs.readFileSync(appJsPath, 'utf8');
 
-// Update storage keys to v10
-appJsContent = appJsContent.replace(/tabungbr1_students_v\d+/g, 'tabungbr1_students_v10');
-appJsContent = appJsContent.replace(/tabungbr1_transactions_v\d+/g, 'tabungbr1_transactions_v10');
-appJsContent = appJsContent.replace(/tabungbr1_session_v\d+/g, 'tabungbr1_session_v10');
-appJsContent = appJsContent.replace(/tabungbr1_waconfig_v\d+/g, 'tabungbr1_waconfig_v10');
-appJsContent = appJsContent.replace(/tabungbr1_theme_v\d+/g, 'tabungbr1_theme_v10');
+// Update storage keys to v11
+appJsContent = appJsContent.replace(/tabungbr1_students_v\d+/g, 'tabungbr1_students_v11');
+appJsContent = appJsContent.replace(/tabungbr1_transactions_v\d+/g, 'tabungbr1_transactions_v11');
+appJsContent = appJsContent.replace(/tabungbr1_session_v\d+/g, 'tabungbr1_session_v11');
+appJsContent = appJsContent.replace(/tabungbr1_waconfig_v\d+/g, 'tabungbr1_waconfig_v11');
+appJsContent = appJsContent.replace(/tabungbr1_theme_v\d+/g, 'tabungbr1_theme_v11');
 
 // Replace INITIAL_TRANSACTIONS
 const txJsonStr = JSON.stringify(data.transactions, null, 4);

@@ -6,11 +6,11 @@
    ========================================================================= */
 
 // Storage Keys (Auto-seeded with 44 Official Students - Target Rp 2.000.000)
-const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v10';
-const STORAGE_TX_KEY = 'tabungbr1_transactions_v10';
-const STORAGE_AUTH_KEY = 'tabungbr1_session_v10';
-const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v10';
-const STORAGE_THEME_KEY = 'tabungbr1_theme_v10';
+const STORAGE_STUDENTS_KEY = 'tabungbr1_students_v11';
+const STORAGE_TX_KEY = 'tabungbr1_transactions_v11';
+const STORAGE_AUTH_KEY = 'tabungbr1_session_v11';
+const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v11';
+const STORAGE_THEME_KEY = 'tabungbr1_theme_v11';
 
 // Official Class List for XII Bisnis Ritel 1 (44 Students with Registered WhatsApp Phone Numbers)
 const INITIAL_TRANSACTIONS = [
@@ -4150,25 +4150,16 @@ function loadState() {
     let savedStudents = localStorage.getItem(STORAGE_STUDENTS_KEY);
     let savedTx = localStorage.getItem(STORAGE_TX_KEY);
 
-    // Cek migrasi dari storage versi sebelumnya jika ada
-    if (!savedStudents) {
-        savedStudents = localStorage.getItem('tabungbr1_students_v10') || localStorage.getItem('tabungbr1_students_v10');
-    }
-    if (!savedTx) {
-        savedTx = localStorage.getItem('tabungbr1_transactions_v10') || localStorage.getItem('tabungbr1_transactions_v10');
-    }
-
     if (savedStudents) {
         try {
             const parsed = JSON.parse(savedStudents);
-            // Salin data 44 siswa resmi dan tetapkan target tabungan ke Rp 2.000.000
             appStudents = OFFICIAL_STUDENTS.map((official) => {
-                const found = parsed.find(s => s.nisn === official.nisn || s.id === official.id || s.name.toUpperCase() === official.name.toUpperCase());
+                const found = parsed.find(s => s.nisn === official.nisn || s.id === official.id || (s.name && official.name && s.name.toUpperCase() === official.name.toUpperCase()));
                 return {
                     id: official.id,
                     nisn: official.nisn,
                     name: (found && found.name) ? found.name : official.name,
-                    photo: (found && typeof found.photo === 'string' && found.photo.trim().length > 0) ? found.photo : (official.photo || `assets/students/${official.nisn}.jpg`),
+                    photo: (found && typeof found.photo === 'string' && found.photo.trim().length > 0) ? found.photo : (official.photo || null),
                     phone: (found && found.phone) ? found.phone : official.phone,
                     balance: (found && typeof found.balance === 'number') ? found.balance : official.balance,
                     target: (found && typeof found.target === 'number' && found.target > 0) ? found.target : 2000000,
@@ -4181,7 +4172,6 @@ function loadState() {
             saveStudents();
         }
     } else {
-        // Inisialisasi awal: Otomatis memuat 44 siswa resmi dengan pasfoto resmi dan target Rp 2.000.000
         appStudents = JSON.parse(JSON.stringify(OFFICIAL_STUDENTS));
         saveStudents();
     }
@@ -6882,3 +6872,116 @@ function copySeedTextareaToClipboard() {
     });
 }
 
+// ==========================================================================
+// STUDENT SELF PHOTO SETTINGS (Ubah Pasfoto Mandiri Siswa)
+// ==========================================================================
+
+function openStudentSelfPhotoModal() {
+    if (!currentUser || currentUser.role !== 'siswa' || !currentUser.studentId) {
+        showToast('Fitur ini khusus untuk akun siswa yang sedang login.', 'warning');
+        return;
+    }
+
+    const student = appStudents.find(s => s.id === currentUser.studentId);
+    if (!student) {
+        showToast('Data akun siswa tidak ditemukan.', 'danger');
+        return;
+    }
+
+    const photoVal = document.getElementById('self-photo-val');
+    if (photoVal) photoVal.value = student.photo || '';
+
+    const descEl = document.getElementById('self-photo-student-desc');
+    if (descEl) descEl.innerText = `${student.name} (NISN: ${student.nisn})`;
+
+    updateSelfPhotoPreviewDisplay(student.photo, student.name);
+    openModal('modal-student-self-photo');
+}
+
+function updateSelfPhotoPreviewDisplay(photoUrl, studentName) {
+    const imgEl = document.getElementById('self-photo-img');
+    const fallbackEl = document.getElementById('self-photo-fallback');
+    const name = studentName || (currentUser ? currentUser.name : 'S');
+
+    if (photoUrl && photoUrl.trim()) {
+        if (imgEl) {
+            imgEl.src = photoUrl;
+            imgEl.style.display = 'block';
+        }
+        if (fallbackEl) fallbackEl.style.display = 'none';
+    } else {
+        if (imgEl) imgEl.style.display = 'none';
+        if (fallbackEl) {
+            fallbackEl.style.display = 'flex';
+            fallbackEl.innerText = name.charAt(0).toUpperCase();
+            fallbackEl.style.background = getStudentAvatarGradient(name);
+        }
+    }
+}
+
+function triggerSelfPhotoUpload() {
+    const inp = document.getElementById('self-photo-file-inp');
+    if (inp) inp.click();
+}
+
+async function handleSelfPhotoFile(file) {
+    if (!file) return;
+    showToast('Mengompres pasfoto profil...', 'info');
+
+    const base64 = await compressImageFile(file, 240, 300, 0.78);
+    if (!base64) {
+        showToast('Gagal memproses file foto.', 'danger');
+        return;
+    }
+
+    const photoVal = document.getElementById('self-photo-val');
+    if (photoVal) photoVal.value = base64;
+
+    const student = appStudents.find(s => s.id === currentUser.studentId);
+    updateSelfPhotoPreviewDisplay(base64, student ? student.name : 'S');
+    showToast('Pasfoto baru siap disimpan!', 'success');
+}
+
+function promptSelfPhotoUrl() {
+    const photoVal = document.getElementById('self-photo-val');
+    const current = photoVal ? photoVal.value : '';
+    const url = prompt('Masukkan URL foto online (https://...) atau path lokal (assets/students/...):', current);
+    if (url === null) return;
+
+    const trimmed = url.trim();
+    if (photoVal) photoVal.value = trimmed;
+
+    const student = appStudents.find(s => s.id === currentUser.studentId);
+    updateSelfPhotoPreviewDisplay(trimmed, student ? student.name : 'S');
+    if (trimmed) showToast('URL pasfoto berhasil diterapkan!', 'success');
+}
+
+function removeSelfPhoto() {
+    const photoVal = document.getElementById('self-photo-val');
+    if (photoVal) photoVal.value = '';
+
+    const student = appStudents.find(s => s.id === currentUser.studentId);
+    updateSelfPhotoPreviewDisplay('', student ? student.name : 'S');
+    showToast('Foto profil dihapus (menggunakan avatar inisial).', 'info');
+}
+
+function handleStudentSelfPhotoSubmit(e) {
+    e.preventDefault();
+    if (!currentUser || !currentUser.studentId) return;
+
+    const photoVal = document.getElementById('self-photo-val');
+    const newPhoto = photoVal ? (photoVal.value.trim() || null) : null;
+
+    const student = appStudents.find(s => s.id === currentUser.studentId);
+    if (student) {
+        student.photo = newPhoto;
+        saveStudents();
+        renderAllViews();
+        closeModal('modal-student-self-photo');
+
+        showFeedbackSuccessModal(
+            'Pasfoto Berhasil Diperbarui!',
+            `Pasfoto profil tabungan Anda (${student.name}) telah berhasil disimpan dan disinkronkan ke seluruh sistem.`
+        );
+    }
+}

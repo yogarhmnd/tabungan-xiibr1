@@ -1946,6 +1946,11 @@ select option {
     color: #ffffff !important;
 }
 
+.s-welcome-avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
 .s-welcome-avatar {
     width: 80px;
     height: 100px;
@@ -1960,7 +1965,38 @@ select option {
     border: 2.5px solid #90e0ef;
     box-shadow: 0 0 24px rgba(0, 180, 216, 0.45);
     background: #03045e;
-    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.s-welcome-avatar:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 30px rgba(0, 180, 216, 0.7);
+}
+
+.s-avatar-edit-badge {
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--color-emerald), #059669);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 5;
+}
+
+.s-avatar-edit-badge:hover {
+    transform: scale(1.15);
+    background: #10b981;
 }
 
 .s-welcome-avatar img {
