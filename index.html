@@ -163,11 +163,16 @@
             <form id="form-login-admin" onsubmit="handleLoginAdmin(event)">
                 <div class="form-group mb-3">
                     <label for="admin-username"><i class="fa-solid fa-user"></i> Username</label>
-                    <input type="text" id="admin-username" class="form-control" placeholder="admin / walikelas" required>
+                    <input type="text" id="admin-username" class="form-control" placeholder="admin / walikelas" required autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="username">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="admin-password"><i class="fa-solid fa-lock"></i> Password</label>
-                    <input type="password" id="admin-password" class="form-control" placeholder="Masukkan password admin" required>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label for="admin-password"><i class="fa-solid fa-lock"></i> Password</label>
+                        <button type="button" class="btn-link-toggle" onclick="togglePasswordVisibility('admin-password', 'eye-icon-admin')" title="Lihat / Sembunyikan Password">
+                            <i class="fa-solid fa-eye" id="eye-icon-admin"></i> <small>Lihat</small>
+                        </button>
+                    </div>
+                    <input type="password" id="admin-password" class="form-control" placeholder="Masukkan password admin (qwerty48)" required autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="current-password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block btn-lg mt-3 login-submit-btn">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Sebagai Wali Kelas

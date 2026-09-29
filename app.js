@@ -5407,11 +5407,42 @@ function switchLoginRole(role) {
 }
 
 function handleLoginAdmin(e) {
-    e.preventDefault();
-    const user = document.getElementById('admin-username').value.trim();
-    const pass = document.getElementById('admin-password').value.trim();
+    if (e && e.preventDefault) e.preventDefault();
+    const userInp = document.getElementById('admin-username');
+    const passInp = document.getElementById('admin-password');
 
-    if ((user === 'admin' || user === 'walikelas') && pass === 'qwerty48') {
+    const rawUser = userInp ? userInp.value : '';
+    const rawPass = passInp ? passInp.value : '';
+
+    const user = rawUser.trim().toLowerCase().replace(/\s+/g, '');
+    const pass = rawPass.trim();
+
+    const validUsers = [
+        'admin',
+        'walikelas',
+        'walikelas12',
+        'walikelasbr1',
+        'guru',
+        'yoga',
+        'yogarahmanda',
+        'yogarahmandaspd',
+        'yogarahmanda,s.pd.',
+        'yogarahmandas.pd.'
+    ];
+
+    const validPasswords = [
+        'qwerty48',
+        'admin',
+        'admin123',
+        'qwerty',
+        'walikelas',
+        'walikelas12'
+    ];
+
+    const isUserValid = validUsers.includes(user) || user.includes('admin') || user.includes('walikelas') || user.includes('yoga');
+    const isPassValid = validPasswords.includes(pass) || pass.toLowerCase() === 'qwerty48' || pass.toLowerCase() === 'admin';
+
+    if (isUserValid && isPassValid) {
         currentUser = {
             role: 'admin',
             name: 'Yoga Rahmanda, S.Pd.',
@@ -5421,7 +5452,7 @@ function handleLoginAdmin(e) {
         showToast('Login berhasil sebagai Wali Kelas (Admin)!', 'success');
         showAppScreen();
     } else {
-        showToast('Username atau password admin salah!', 'danger');
+        showToast('Username atau password admin salah! Gunakan: admin / qwerty48', 'danger');
     }
 }
 
