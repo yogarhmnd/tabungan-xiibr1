@@ -1714,11 +1714,16 @@
                     <i class="fa-solid fa-circle-info text-primary"></i> Setelah dipublikasikan di Firebase Console, klik tombol <b>"Tes & Upload Data Sekarang"</b> di bawah untuk langsung mengunggah 44 data siswa dan riwayat transaksi ke Cloud.
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal('modal-firebase-rules-guide')">Tutup</button>
-                <button type="button" class="btn btn-primary" onclick="forceUploadToFirebaseCloud()">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> Tes & Upload Data Sekarang
+            <div class="modal-footer d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-emerald" onclick="scanAndRecoverPendingLocalTransactions()">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Pulihkan Transaksi dari Memori HP/Laptop
                 </button>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modal-firebase-rules-guide')">Tutup</button>
+                    <button type="button" class="btn btn-primary" onclick="forceUploadToFirebaseCloud()">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Tes & Upload Data Sekarang
+                    </button>
+                </div>
             </div>
         </div>
     </div>
