@@ -8483,3 +8483,134 @@ function handleStudentSelfPhotoSubmit(e) {
         );
     }
 }
+
+
+// Backup & Unduh Data Input LocalStorage Tanggal 28-29 September 2026
+function downloadLocalStorageBackupSept28_29() {
+    const potentialKeys = [
+        'tabungbr1_transactions_v12',
+        'tabungbr1_transactions_v11',
+        'tabungbr1_transactions_v10',
+        'tabungbr1_transactions_v9',
+        'tabungbr1_transactions_v8',
+        'tabungbr1_transactions_v7',
+        'tabungbr1_transactions_v6',
+        'tabungbr1_transactions_v5',
+        'tabungbr1_transactions_v4',
+        'tabungbr1_transactions_v3',
+        'tabungbr1_transactions_v2',
+        'tabungbr1_transactions_v1',
+        'tabungbr1_transactions',
+        'tabungan_transactions',
+        'transactions'
+    ];
+
+    let foundTx = [];
+    const seenIds = new Set();
+
+    function checkAndAdd(t) {
+        if (!t || (!t.id && !t.studentId)) return;
+        const d = String(t.date || '');
+        if (d.includes('2026-09-28') || d.includes('2026-09-29') || d.includes('2026-09-30')) {
+            const idKey = t.id || (t.studentId + '_' + t.date + '_' + t.amount);
+            if (!seenIds.has(idKey)) {
+                seenIds.add(idKey);
+                foundTx.push(t);
+            }
+        }
+    }
+
+    if (Array.isArray(appTransactions)) {
+        appTransactions.forEach(checkAndAdd);
+    }
+
+    potentialKeys.forEach(k => {
+        const raw = localStorage.getItem(k);
+        if (raw) {
+            try {
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed)) {
+                    parsed.forEach(checkAndAdd);
+                }
+            } catch(e) {}
+        }
+    });
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        try {
+            const val = localStorage.getItem(key);
+            if (val && (val.includes('2026-09-28') || val.includes('2026-09-29'))) {
+                const parsed = JSON.parse(val);
+                if (Array.isArray(parsed)) {
+                    parsed.forEach(checkAndAdd);
+                } else if (typeof parsed === 'object') {
+                    checkAndAdd(parsed);
+                }
+            }
+        } catch(e) {}
+    }
+
+    if (foundTx.length === 0) {
+        let allLocalTx = [];
+        potentialKeys.forEach(k => {
+            const raw = localStorage.getItem(k);
+            if (raw) {
+                try {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed)) {
+                        parsed.forEach(t => {
+                            if (t && t.id && !seenIds.has(t.id)) {
+                                seenIds.add(t.id);
+                                allLocalTx.push(t);
+                            }
+                        });
+                    }
+                } catch(e) {}
+            }
+        });
+        foundTx = allLocalTx;
+    }
+
+    if (foundTx.length === 0) {
+        showToast('Tidak ditemukan data transaksi lokal di memori browser ini.', 'warning');
+        return;
+    }
+
+    foundTx.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // Create JSON Blob Download
+    const jsonStr = JSON.stringify(foundTx, null, 2);
+    const blobJson = new Blob([jsonStr], { type: 'application/json' });
+    const urlJson = URL.createObjectURL(blobJson);
+    const aJson = document.createElement('a');
+    aJson.href = urlJson;
+    aJson.download = 'backup_tabungan_28-29_september_2026.json';
+    document.body.appendChild(aJson);
+    aJson.click();
+    document.body.removeChild(aJson);
+    URL.revokeObjectURL(urlJson);
+
+    // Sync to memory & Firebase if missing
+    let addedCount = 0;
+    foundTx.forEach(t => {
+        const exists = appTransactions.some(ex => ex.id === t.id || (ex.studentId === t.studentId && ex.date === t.date && ex.amount === t.amount));
+        if (!exists) {
+            appTransactions.push(t);
+            addedCount++;
+            const student = appStudents.find(s => s.id === t.studentId);
+            if (student) {
+                if (t.type === 'setor') student.balance += t.amount;
+                else if (t.type === 'tarik') student.balance -= t.amount;
+            }
+        }
+    });
+
+    if (addedCount > 0) {
+        appTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+        saveToFirebaseDatabase(true);
+        renderAllViews();
+    }
+
+    showToast(`Berhasil mem-backup & mengunduh ${foundTx.length} transaksi (${addedCount} data disinkronkan ke Cloud)! `, 'success');
+}
