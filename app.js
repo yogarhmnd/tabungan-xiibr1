@@ -5943,6 +5943,56 @@ function renderLeaderboard() {
 // FIREBASE REALTIME DATABASE ENGINE (ALWAYS ONLINE & AUTO-RECONNECT)
 // ==========================================================================
 
+
+// ==========================================================================
+// CLOUD SYNC BADGE & REALTIME STATUS ENGINE
+// ==========================================================================
+function updateCloudSyncStatus(status, text) {
+    const badge = document.getElementById('cloud-sync-badge');
+    const textEl = document.getElementById('cloud-sync-status-text');
+    if (textEl && text) {
+        textEl.innerText = text;
+    }
+    if (badge) {
+        badge.classList.remove('sync-active', 'syncing', 'error', 'offline', 'connected');
+        if (status === 'connected' || status === 'online') {
+            badge.classList.add('sync-active', 'connected');
+            badge.title = 'Status Cloud Database: Terhubung & Real-Time Sync Aktif';
+        } else if (status === 'syncing') {
+            badge.classList.add('syncing');
+            badge.title = 'Status Cloud Database: Sedang Menyinkronkan Data...';
+        } else if (status === 'error') {
+            badge.classList.add('error');
+            badge.title = 'Status Cloud Database: Terjadi Hambatan Akses (Izin/Jaringan)';
+        } else if (status === 'offline') {
+            badge.classList.add('offline');
+            badge.title = 'Status Cloud Database: Mode Lokal / Offline';
+        } else {
+            badge.classList.add(status);
+        }
+    }
+}
+
+function handleCloudBadgeClick() {
+    if (firebasePermissionDenied) {
+        if (typeof openModal === 'function') openModal('modal-firebase-rules-guide');
+        return;
+    }
+    if (firebaseDb) {
+        updateCloudSyncStatus('syncing', 'Menyinkronkan...');
+        if (typeof checkAndRefreshCloudData === 'function') checkAndRefreshCloudData(false);
+    } else {
+        if (typeof showToast === 'function') showToast('Firebase Realtime Database belum terinisialisasi. Memulai koneksi...', 'info');
+        if (typeof initFirebaseRealtimeSync === 'function') initFirebaseRealtimeSync();
+    }
+}
+
+function forceUploadToFirebaseCloud() {
+    if (typeof closeModal === 'function') closeModal('modal-firebase-rules-guide');
+    if (typeof showToast === 'function') showToast('Mengunggah data ke Cloud Firebase Database...', 'info');
+    saveToFirebaseDatabase(false);
+}
+
 function initFirebaseRealtimeSync() {
     if (typeof firebase === 'undefined') {
         console.warn('[Firebase] SDK belum termuat, beralih ke mode offline lokal.');
