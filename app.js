@@ -5401,9 +5401,9 @@ function scanAndRecoverPendingLocalTransactions() {
             saveToFirebaseDatabase(true);
             renderAllViews();
             if (currentUser && currentUser.role === 'admin') {
-                updateStatsCards();
-                updateChart();
-            }
+        if (typeof updateStatsCards === 'function') updateStatsCards();
+        if (typeof updateChart === 'function') updateChart();
+    }
             populateStudentDropdowns();
 
             showFeedbackSuccessModal(
@@ -5462,9 +5462,9 @@ function importManualBackupJSONText(rawInput) {
             saveToFirebaseDatabase(true);
             renderAllViews();
             if (currentUser && currentUser.role === 'admin') {
-                updateStatsCards();
-                updateChart();
-            }
+        if (typeof updateStatsCards === 'function') updateStatsCards();
+        if (typeof updateChart === 'function') updateChart();
+    }
             populateStudentDropdowns();
             showFeedbackSuccessModal(
                 'Import Data Berhasil!',
@@ -6029,7 +6029,7 @@ function initFirebaseRealtimeSync() {
                 if (currentUser) {
                     renderAllViews();
                     if (currentUser.role === 'admin') {
-                        updateStatsCards();
+                        if (typeof updateStatsCards === 'function') updateStatsCards();
                         updateChart();
                     }
                 }
@@ -6118,7 +6118,7 @@ function checkAndRefreshCloudData(silent = false) {
             if (currentUser) {
                 renderAllViews();
                 if (currentUser.role === 'admin') {
-                    updateStatsCards();
+                    if (typeof updateStatsCards === 'function') updateStatsCards();
                     updateChart();
                 }
             }
@@ -7278,70 +7278,86 @@ function updateModalStudentInfo(studentId) {
 function handleTransactionSubmit(e) {
     if (e && e.preventDefault) e.preventDefault();
 
-    const studentId = document.getElementById('tx-student-id').value;
-    const type = document.getElementById('tx-type').value || 'setor';
-    const amount = Number(document.getElementById('tx-amount').value);
-    const category = document.getElementById('tx-category').value || 'Tabungan Harian';
-    const date = document.getElementById('tx-date').value || new Date().toISOString();
-    const note = document.getElementById('tx-note').value || '';
+    try {
+        const studentIdEl = document.getElementById('tx-student-id');
+        const studentId = studentIdEl ? studentIdEl.value : '';
+        const typeEl = document.getElementById('tx-type');
+        const type = typeEl ? (typeEl.value || 'setor') : 'setor';
+        const amountEl = document.getElementById('tx-amount');
+        const amountVal = amountEl ? amountEl.value : '';
+        const amount = Number(amountVal);
+        const categoryEl = document.getElementById('tx-category');
+        const category = categoryEl ? (categoryEl.value || 'Tabungan Harian') : 'Tabungan Harian';
+        const dateEl = document.getElementById('tx-date');
+        const dateInput = dateEl ? dateEl.value : '';
+        const date = dateInput || new Date().toISOString();
+        const noteEl = document.getElementById('tx-note');
+        const note = noteEl ? noteEl.value : '';
 
-    if (!studentId) {
-        showToast('Silakan pilih nama siswa terlebih dahulu!', 'danger');
-        return;
+        if (!studentId) {
+            showToast('Silakan pilih nama siswa terlebih dahulu!', 'danger');
+            return false;
+        }
+
+        if (isNaN(amount) || amount <= 0) {
+            showToast('Masukkan nominal tabungan yang valid (lebih dari 0)!', 'danger');
+            return false;
+        }
+
+        const studentIndex = appStudents.findIndex(s => s.id === studentId || s.nisn === studentId);
+        if (studentIndex === -1) {
+            showToast('Data siswa tidak ditemukan!', 'danger');
+            return false;
+        }
+
+        const student = appStudents[studentIndex];
+
+        if (type === 'tarik' && amount > student.balance) {
+            showToast(`Penarikan gagal! Saldo ${student.name} (${formatRp(student.balance)}) tidak mencukupi untuk penarikan ${formatRp(amount)}.`, 'danger');
+            return false;
+        }
+
+        if (type === 'setor') student.balance += amount;
+        else student.balance -= amount;
+
+        const txId = 'TX-' + Math.floor(1000 + Math.random() * 9000);
+        const newTx = {
+            id: txId,
+            studentId: student.id,
+            studentName: student.name,
+            type: type,
+            category: category,
+            amount: amount,
+            date: date,
+            note: note
+        };
+
+        appTransactions.push(newTx);
+        appTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        lastCreatedTx = newTx;
+
+        saveStudents();
+        saveTransactions();
+        saveToFirebaseDatabase(true);
+        renderAllViews();
+        if (currentUser && currentUser.role === 'admin') {
+            if (typeof updateChart === 'function') updateChart();
+        }
+
+        closeModal('modal-transaction');
+
+        const actionText = type === 'setor' ? 'Setoran' : 'Penarikan';
+        showFeedbackSuccessModal(
+            `${actionText} ${formatRp(amount)} Berhasil Disimpan!`,
+            `${actionText} tabungan sebesar ${formatRp(amount)} untuk ${student.name} berhasil dicatat dan disinkronkan langsung ke Cloud Firebase Database.`
+        );
+        return true;
+    } catch (err) {
+        console.error('[Transaction Submit Error]', err);
+        showToast('Gagal menyimpan transaksi: ' + err.message, 'danger');
+        return false;
     }
-
-    if (!amount || amount <= 0) {
-        showToast('Masukkan nominal tabungan yang valid!', 'danger');
-        return;
-    }
-
-    const studentIndex = appStudents.findIndex(s => s.id === studentId || s.nisn === studentId);
-    if (studentIndex === -1) {
-        showToast('Data siswa tidak ditemukan!', 'danger');
-        return;
-    }
-
-    const student = appStudents[studentIndex];
-
-    if (type === 'tarik' && amount > student.balance) {
-        showToast(`Penarikan gagal! Saldo ${student.name} (${formatRp(student.balance)}) tidak mencukupi untuk penarikan ${formatRp(amount)}.`, 'danger');
-        return;
-    }
-
-    if (type === 'setor') student.balance += amount;
-    else student.balance -= amount;
-
-    const txId = 'TX-' + Math.floor(1000 + Math.random() * 9000);
-    const newTx = {
-        id: txId,
-        studentId: student.id,
-        studentName: student.name,
-        type: type,
-        category: category,
-        amount: amount,
-        date: date,
-        note: note
-    };
-
-    appTransactions.push(newTx);
-    appTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    lastCreatedTx = newTx;
-
-    saveStudents();
-    saveTransactions();
-    saveToFirebaseDatabase(true);
-    renderAllViews();
-    if (currentUser && currentUser.role === 'admin') {
-        updateStatsCards();
-        updateChart();
-    }
-
-    closeModal('modal-transaction');
-    showFeedbackSuccessModal(
-        `Setoran ${formatRp(amount)} Berhasil Disimpan!`,
-        `Setoran tabungan sebesar ${formatRp(amount)} untuk ${student.name} berhasil dicatat dan disinkronkan langsung ke Cloud Firebase Database.`
-    );
 }
 
 // WHATSAPP NOTIFICATION ENGINE & FORMATTERS

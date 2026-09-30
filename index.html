@@ -1043,7 +1043,7 @@
                 <h3 id="modal-tx-title"><i class="fa-solid fa-money-bill-transfer"></i> Catat Transaksi Tabungan</h3>
                 <button class="modal-close" onclick="closeModal('modal-transaction')">&times;</button>
             </div>
-            <form id="form-transaction" onsubmit="handleTransactionSubmit(event)">
+            <form id="form-transaction" novalidate onsubmit="handleTransactionSubmit(event); return false;">
                 <div class="modal-body">
                     <input type="hidden" id="tx-type" value="setor">
 
