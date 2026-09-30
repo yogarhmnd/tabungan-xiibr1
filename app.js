@@ -7188,23 +7188,36 @@ function handleTargetSubmit(e) {
 
 // Open Transaction Modal
 function openTransactionModal(type = 'setor', studentId = '') {
-    document.getElementById('tx-type').value = type;
+    // Ensure dropdown options are populated
+    populateStudentDropdowns();
+
+    const typeInp = document.getElementById('tx-type');
+    if (typeInp) typeInp.value = type;
+
     const titleEl = document.getElementById('modal-tx-title');
     const submitBtn = document.getElementById('btn-tx-submit');
 
     if (type === 'setor') {
-        titleEl.innerHTML = `<i class="fa-solid fa-circle-plus text-emerald"></i> Catat Setoran Uang Masuk`;
-        submitBtn.className = 'btn btn-emerald';
-        submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Simpan Setoran & Notifikasi WA`;
+        if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-circle-plus text-emerald"></i> Catat Setoran Uang Masuk`;
+        if (submitBtn) {
+            submitBtn.className = 'btn btn-emerald';
+            submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Simpan Setoran Tabungan`;
+        }
         const catSelect = document.getElementById('tx-category');
         if (catSelect) {
-            catSelect.innerHTML = `<option value="Tabungan Harian" selected>Tabungan Harian</option>`;
+            catSelect.innerHTML = `<option value="Tabungan Harian" selected>Tabungan Harian</option>
+                <option value="Uang Kas Kelas">Uang Kas Kelas</option>
+                <option value="Dana Pariwisata/Perpisahan">Dana Pariwisata/Perpisahan</option>
+                <option value="Modal Usaha Ritel">Modal Usaha Ritel</option>
+                <option value="Lainnya">Lainnya</option>`;
             catSelect.value = 'Tabungan Harian';
         }
     } else {
-        titleEl.innerHTML = `<i class="fa-solid fa-circle-minus text-rose"></i> Catat Penarikan Uang Keluar`;
-        submitBtn.className = 'btn btn-rose';
-        submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Simpan Penarikan & Notifikasi WA`;
+        if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-circle-minus text-rose"></i> Catat Penarikan Uang Keluar`;
+        if (submitBtn) {
+            submitBtn.className = 'btn btn-rose';
+            submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Simpan Penarikan Tabungan`;
+        }
         const catSelect = document.getElementById('tx-category');
         if (catSelect) {
             catSelect.innerHTML = `
@@ -7216,19 +7229,28 @@ function openTransactionModal(type = 'setor', studentId = '') {
         }
     }
 
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    document.getElementById('tx-date').value = now.toISOString().slice(0, 16);
+    // Format local ISO date string cleanly without timezone offset mutation
+    const d = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const localIso = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    
+    const dateInp = document.getElementById('tx-date');
+    if (dateInp) dateInp.value = localIso;
 
-    document.getElementById('tx-amount').value = '';
-    document.getElementById('tx-note').value = '';
+    const amountInp = document.getElementById('tx-amount');
+    if (amountInp) amountInp.value = '';
 
-    if (studentId) {
-        document.getElementById('tx-student-id').value = studentId;
+    const noteInp = document.getElementById('tx-note');
+    if (noteInp) noteInp.value = '';
+
+    const selectEl = document.getElementById('tx-student-id');
+    if (studentId && selectEl) {
+        selectEl.value = studentId;
         updateModalStudentInfo(studentId);
-    } else {
-        document.getElementById('tx-student-id').value = '';
-        document.getElementById('modal-student-banner').classList.add('hidden');
+    } else if (selectEl) {
+        selectEl.value = '';
+        const banner = document.getElementById('modal-student-banner');
+        if (banner) banner.classList.add('hidden');
     }
 
     openModal('modal-transaction');
@@ -7254,18 +7276,28 @@ function updateModalStudentInfo(studentId) {
 
 // Submit Transaction & Trigger WhatsApp Notification Modal
 function handleTransactionSubmit(e) {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
 
     const studentId = document.getElementById('tx-student-id').value;
-    const type = document.getElementById('tx-type').value;
+    const type = document.getElementById('tx-type').value || 'setor';
     const amount = Number(document.getElementById('tx-amount').value);
-    const category = document.getElementById('tx-category').value;
-    const date = document.getElementById('tx-date').value;
-    const note = document.getElementById('tx-note').value;
+    const category = document.getElementById('tx-category').value || 'Tabungan Harian';
+    const date = document.getElementById('tx-date').value || new Date().toISOString();
+    const note = document.getElementById('tx-note').value || '';
 
-    const studentIndex = appStudents.findIndex(s => s.id === studentId);
+    if (!studentId) {
+        showToast('Silakan pilih nama siswa terlebih dahulu!', 'danger');
+        return;
+    }
+
+    if (!amount || amount <= 0) {
+        showToast('Masukkan nominal tabungan yang valid!', 'danger');
+        return;
+    }
+
+    const studentIndex = appStudents.findIndex(s => s.id === studentId || s.nisn === studentId);
     if (studentIndex === -1) {
-        showToast('Siswa tidak ditemukan!', 'danger');
+        showToast('Data siswa tidak ditemukan!', 'danger');
         return;
     }
 
@@ -7298,14 +7330,18 @@ function handleTransactionSubmit(e) {
 
     saveStudents();
     saveTransactions();
+    saveToFirebaseDatabase(true);
     renderAllViews();
-    if (currentUser.role === 'admin') updateChart();
+    if (currentUser && currentUser.role === 'admin') {
+        updateStatsCards();
+        updateChart();
+    }
+
     closeModal('modal-transaction');
-
-    showToast(`Transaksi ${type === 'setor' ? 'Setoran' : 'Penarikan'} ${formatRp(amount)} berhasil disimpan!`, 'success');
-
-    // Prompt WhatsApp Notification Modal for Admin
-    openWaPromptModal(newTx, student);
+    showFeedbackSuccessModal(
+        `Setoran ${formatRp(amount)} Berhasil Disimpan!`,
+        `Setoran tabungan sebesar ${formatRp(amount)} untuk ${student.name} berhasil dicatat dan disinkronkan langsung ke Cloud Firebase Database.`
+    );
 }
 
 // WHATSAPP NOTIFICATION ENGINE & FORMATTERS
