@@ -530,6 +530,9 @@
                             <p>Kelola mutasi uang masuk & keluar seluruh siswa kelas XII BR 1</p>
                         </div>
                         <div class="card-actions header-btn-group">
+                            <button class="btn btn-emerald" onclick="scanAndRecoverPendingLocalTransactions(true)" title="Pindai & Pulihkan Transaksi Terhapus / Hilang dari Memori Perangkat">
+                                <i class="fa-solid fa-clock-rotate-left"></i> Pulihkan Data Hilang
+                            </button>
                             <button class="btn btn-emerald" onclick="openTransactionModal('setor')">
                                 <i class="fa-solid fa-plus-circle"></i> + Setor Uang
                             </button>
@@ -1720,7 +1723,7 @@
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-emerald" onclick="scanAndRecoverPendingLocalTransactions()">
+                <button type="button" class="btn btn-emerald" onclick="scanAndRecoverPendingLocalTransactions(true)">
                     <i class="fa-solid fa-clock-rotate-left"></i> Pulihkan Transaksi dari Memori HP/Laptop
                 </button>
                 <div class="d-flex gap-2">
@@ -1729,6 +1732,62 @@
                         <i class="fa-solid fa-cloud-arrow-up"></i> Tes & Upload Data Sekarang
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- MODAL POPUP: Pemulihan / Recovery Data Transaksi yang Hilang -->
+    <div class="modal-backdrop" id="modal-data-recovery">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-clock-rotate-left text-emerald"></i> Pulihkan Data Transaksi Tabungan</h3>
+                <button class="modal-close" onclick="closeModal('modal-data-recovery')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert-info-box p-3 rounded mb-3" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);">
+                    <i class="fa-solid fa-circle-check text-emerald"></i> 
+                    Pemindai otomatis memindai memori lokal HP/Laptop Anda. Jika Anda memiliki catatan teks/JSON transaksi yang hilang hari ini (30 September 2026), tempelkan di bawah atau isi formulir cepat di bawah untuk langsung menyimpannya ke database.
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="recovery-json-text">Tempelkan Teks JSON / Catatan Transaksi (Opsional)</label>
+                    <textarea id="recovery-json-text" class="form-control" rows="3" placeholder="Tempelkan data JSON transaksi di sini jika ada..."></textarea>
+                </div>
+
+                <div class="text-center my-2 text-muted"><strong>- ATAU INPUT CEPAT TRANSAKSI YANG HILANG -</strong></div>
+
+                <div class="form-group mb-2">
+                    <label for="rec-student-id">Pilih Siswa XII BR 1 <span class="text-danger">*</span></label>
+                    <select id="rec-student-id" class="form-control">
+                        <option value="">-- Pilih Nama Siswa --</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group mb-2 col-6">
+                        <label for="rec-type">Jenis Transaksi</label>
+                        <select id="rec-type" class="form-control">
+                            <option value="setor">Setoran (Uang Masuk)</option>
+                            <option value="tarik">Penarikan (Uang Keluar)</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2 col-6">
+                        <label for="rec-amount">Nominal Rp <span class="text-danger">*</span></label>
+                        <input type="number" id="rec-amount" class="form-control" placeholder="Contoh: 50000" inputmode="numeric">
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="rec-date">Tanggal Transaksi</label>
+                    <input type="datetime-local" id="rec-date" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('modal-data-recovery')">Batal</button>
+                <button type="button" class="btn btn-emerald" onclick="executeManualDataRecovery()">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Pulihkan & Simpan Transaksi
+                </button>
             </div>
         </div>
     </div>

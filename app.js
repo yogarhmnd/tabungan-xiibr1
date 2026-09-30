@@ -5316,7 +5316,7 @@ function resetAllSavingsData() {
 
 // Auto-Recovery Scanner: Memeriksa dan memulihkan transaksi lokal yang belum terkirim (misal tgl 28 September)
 // Auto-Recovery & Scanner Paling Komprehensif (Memulihkan Transaksi Tanggal 28 & 29 September dari HP / LocalStorage)
-function scanAndRecoverPendingLocalTransactions() {
+function scanAndRecoverPendingLocalTransactions(manual = false) {
     try {
         const potentialKeys = [
             'tabungbr1_transactions_v12',
@@ -5335,7 +5335,9 @@ function scanAndRecoverPendingLocalTransactions() {
             'tabungan_transactions',
             'transactions',
             'tx_backup',
-            'offline_tx'
+            'offline_tx',
+            'tabungbr1_students_v12',
+            'tabungbr1_students_v11'
         ];
 
         let recoveredCount = 0;
@@ -5344,79 +5346,187 @@ function scanAndRecoverPendingLocalTransactions() {
 
         function processCandidateTx(t) {
             if (!t || (!t.id && !t.studentId) || typeof t.amount !== 'number' || t.amount <= 0) return;
-            
-            // Cek apakah transaksi sudah ada di memori appTransactions
-            const exists = appTransactions.some(ex => ex.id === t.id || (ex.studentId === t.studentId && ex.date === t.date && ex.amount === t.amount));
+
+            const exists = appTransactions.some(ex => 
+                (ex.id && t.id && ex.id === t.id) ||
+                (ex.studentId === t.studentId && ex.date === t.date && Number(ex.amount) === Number(t.amount) && ex.type === t.type)
+            );
+
             if (!exists) {
-                // Buat ID jika belum ada
-                if (!t.id) t.id = 'TX-' + Math.floor(1000 + Math.random() * 9000);
-                
+                if (!t.id) t.id = 'TX-' + Math.floor(10000 + Math.random() * 90000);
+
                 appTransactions.push(t);
                 recoveredCount++;
                 foundAny = true;
                 recoveredDetails.push(t);
 
-                // Sesuaikan saldo siswa
-                const student = appStudents.find(s => s.id === t.studentId || s.nisn === t.studentId || (s.name && t.studentName && s.name.toUpperCase() === t.studentName.toUpperCase()));
+                const student = appStudents.find(s => 
+                    s.id === t.studentId || 
+                    s.nisn === t.studentId || 
+                    (s.name && t.studentName && s.name.trim().toUpperCase() === t.studentName.trim().toUpperCase())
+                );
                 if (student) {
-                    if (t.type === 'setor') student.balance += t.amount;
-                    else if (t.type === 'tarik') student.balance -= t.amount;
+                    if (t.type === 'setor') student.balance += Number(t.amount);
+                    else if (t.type === 'tarik') student.balance -= Number(t.amount);
                 }
             }
         }
 
-        // 1. Pindai daftar kunci potensial
         potentialKeys.forEach(k => {
-            const raw = localStorage.getItem(k);
-            if (raw) {
+            [localStorage, sessionStorage].forEach(store => {
+                const raw = store.getItem(k);
+                if (raw) {
+                    try {
+                        const parsed = JSON.parse(raw);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            parsed.forEach(processCandidateTx);
+                        } else if (parsed && parsed.transactions && Array.isArray(parsed.transactions)) {
+                            parsed.transactions.forEach(processCandidateTx);
+                        }
+                    } catch(e) {}
+                }
+            });
+        });
+
+        [localStorage, sessionStorage].forEach(store => {
+            for (let i = 0; i < store.length; i++) {
+                const keyName = store.key(i);
                 try {
-                    const parsed = JSON.parse(raw);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
-                        parsed.forEach(processCandidateTx);
+                    const val = store.getItem(keyName);
+                    if (val && (
+                        val.includes('2026-09-30') || 
+                        val.includes('2026-09-29') || 
+                        val.includes('2026-09-28') || 
+                        val.includes('2026-09') || 
+                        val.includes('setor') || 
+                        val.includes('tarik') ||
+                        val.includes('TRX-') ||
+                        val.includes('TX-')
+                    )) {
+                        const parsed = JSON.parse(val);
+                        if (Array.isArray(parsed)) {
+                            parsed.forEach(processCandidateTx);
+                        } else if (parsed && parsed.transactions && Array.isArray(parsed.transactions)) {
+                            parsed.transactions.forEach(processCandidateTx);
+                        } else if (typeof parsed === 'object' && parsed.amount) {
+                            processCandidateTx(parsed);
+                        }
                     }
                 } catch(e) {}
             }
         });
 
-        // 2. Pindai SELURUH kunci di LocalStorage tanpa terkecuali
-        for (let i = 0; i < localStorage.length; i++) {
-            const keyName = localStorage.key(i);
-            try {
-                const val = localStorage.getItem(keyName);
-                if (val && (val.includes('2026-09-28') || val.includes('2026-09-29') || val.includes('setor') || val.includes('tarik'))) {
-                    const parsed = JSON.parse(val);
-                    if (Array.isArray(parsed)) {
-                        parsed.forEach(processCandidateTx);
-                    } else if (typeof parsed === 'object' && parsed.amount) {
-                        processCandidateTx(parsed);
-                    }
-                }
-            } catch(e) {}
-        }
-
-        // 3. Jika ditemukan transaksi baru (termasuk 28 & 29 Sept), urutkan dan simpan ke Cloud Firebase
         if (foundAny && recoveredCount > 0) {
-            console.log(`[Auto-Recovery] Berhasil memulihkan ${recoveredCount} transaksi dari LocalStorage.`);
+            console.log(`[Recovery Engine] Berhasil memulihkan ${recoveredCount} transaksi.`);
             appTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+            saveLocalCache();
             saveToFirebaseDatabase(true);
             renderAllViews();
             if (currentUser && currentUser.role === 'admin') {
-        if (typeof updateStatsCards === 'function') updateStatsCards();
-        if (typeof updateChart === 'function') updateChart();
-    }
+                if (typeof updateStatsCards === 'function') updateStatsCards();
+                updateChart();
+            }
             populateStudentDropdowns();
 
             showFeedbackSuccessModal(
                 'Transaksi Berhasil Dipulihkan & Disinkronkan!',
-                `Ditemukan dan berhasil mengunggah ${recoveredCount} data transaksi tabungan dari memori perangkat HP/Laptop Anda (termasuk tanggal 28-29 September 2026) langsung ke Cloud Firebase Database!`
+                `Ditemukan dan berhasil memulihkan ${recoveredCount} data transaksi tabungan dari memori perangkat HP/Laptop Anda (termasuk tanggal 28-30 September 2026) dan langsung mengunggahnya ke Cloud Firebase Database!`
             );
+        } else if (manual) {
+            openDataRecoveryModal();
         } else {
-            console.log('[Auto-Recovery] Seluruh transaksi lokal sudah tersinkron dengan Cloud.');
+            console.log('[Recovery Engine] Seluruh transaksi lokal sudah tersinkron dengan Cloud.');
         }
     } catch(err) {
-        console.warn('[Auto-Recovery] Error during scanner execution:', err);
+        console.warn('[Recovery Engine] Error during scanner execution:', err);
     }
 }
+
+function openDataRecoveryModal() {
+    populateStudentDropdowns();
+    
+    // Populate rec-student-id select
+    const recSelect = document.getElementById('rec-student-id');
+    if (recSelect) {
+        const sorted = [...appStudents].sort((a, b) => a.name.localeCompare(b.name));
+        recSelect.innerHTML = '<option value="">-- Pilih Nama Siswa --</option>' + 
+            sorted.map(s => `<option value="${s.id}">${escapeHtml(s.name)} (NISN: ${s.nisn})</option>`).join('');
+    }
+
+    const d = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const localIso = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    const recDate = document.getElementById('rec-date');
+    if (recDate) recDate.value = localIso;
+
+    openModal('modal-data-recovery');
+}
+
+function executeManualDataRecovery() {
+    const jsonText = document.getElementById('recovery-json-text') ? document.getElementById('recovery-json-text').value.trim() : '';
+
+    if (jsonText) {
+        importManualBackupJSONText(jsonText);
+        closeModal('modal-data-recovery');
+        return;
+    }
+
+    const studentId = document.getElementById('rec-student-id') ? document.getElementById('rec-student-id').value : '';
+    const type = document.getElementById('rec-type') ? document.getElementById('rec-type').value : 'setor';
+    const amount = Number(document.getElementById('rec-amount') ? document.getElementById('rec-amount').value : 0);
+    const dateInput = document.getElementById('rec-date') ? document.getElementById('rec-date').value : '';
+    const date = dateInput || new Date().toISOString();
+
+    if (!studentId) {
+        showToast('Silakan pilih nama siswa terlebih dahulu!', 'danger');
+        return;
+    }
+
+    if (isNaN(amount) || amount <= 0) {
+        showToast('Masukkan nominal tabungan yang valid (lebih dari 0)!', 'danger');
+        return;
+    }
+
+    const studentIndex = appStudents.findIndex(s => s.id === studentId || s.nisn === studentId);
+    if (studentIndex === -1) {
+        showToast('Data siswa tidak ditemukan!', 'danger');
+        return;
+    }
+
+    const student = appStudents[studentIndex];
+
+    if (type === 'setor') student.balance += amount;
+    else student.balance -= amount;
+
+    const txId = 'TX-' + Math.floor(10000 + Math.random() * 90000);
+    const newTx = {
+        id: txId,
+        studentId: student.id,
+        studentName: student.name,
+        type: type,
+        category: 'Tabungan Harian',
+        amount: amount,
+        date: date,
+        note: 'Pemulihan data input transaksi'
+    };
+
+    appTransactions.push(newTx);
+    appTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    saveLocalCache();
+    saveStudents();
+    saveTransactions();
+    saveToFirebaseDatabase(true);
+    renderAllViews();
+
+    closeModal('modal-data-recovery');
+
+    showFeedbackSuccessModal(
+        'Transaksi Berhasil Dipulihkan!',
+        `Setoran sebesar ${formatRp(amount)} untuk ${student.name} telah berhasil dipulihkan dan disinkronkan ke Cloud Firebase Database!`
+    );
+}
+
 
 // Fitur Import Manual File JSON / Teks Backup (Untuk memasukkan data 28-29 September jika ada file/teks)
 function importManualBackupJSONText(rawInput) {
