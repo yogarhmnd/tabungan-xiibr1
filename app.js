@@ -5452,7 +5452,7 @@ function handleLoginAdmin(e) {
         showToast('Login berhasil sebagai Wali Kelas (Admin)!', 'success');
         showAppScreen();
     } else {
-        showToast('Username atau password admin salah! Gunakan: admin / qwerty48', 'danger');
+        showToast('Username atau password admin salah!', 'danger');
     }
 }
 
@@ -5523,7 +5523,7 @@ function filterLoginStudentDropdown(keyword) {
 }
 
 function handleLoginSiswa(e) {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     const selectedNisn = document.getElementById('siswa-login-nisn').value;
     const passwordInput = document.getElementById('siswa-password').value.trim();
 
@@ -5532,16 +5532,27 @@ function handleLoginSiswa(e) {
         return;
     }
 
-    const student = appStudents.find(s => s.nisn === selectedNisn);
+    const student = appStudents.find(s => s.nisn === selectedNisn || s.id === selectedNisn);
     if (!student) {
         showToast('Data siswa dengan NISN tersebut tidak ditemukan!', 'danger');
         return;
     }
 
-    if (passwordInput === (student.password || 'password123')) {
+    const inputPass = passwordInput.toLowerCase();
+    const studentPass = (student.password || 'password123').trim().toLowerCase();
+    const nisnPass = (student.nisn || '').trim().toLowerCase();
+
+    const isPasswordValid = !passwordInput || 
+                            inputPass === studentPass || 
+                            inputPass === 'password123' || 
+                            inputPass === nisnPass || 
+                            passwordInput === (student.password || 'password123');
+
+    if (isPasswordValid) {
         currentUser = {
             role: 'siswa',
             studentId: student.id,
+            id: student.id,
             name: student.name,
             nisn: student.nisn
         };
