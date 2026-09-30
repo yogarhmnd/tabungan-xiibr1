@@ -3484,15 +3484,45 @@ select.form-control {
 }
 
 .metric-icon {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    border-radius: 14px !important;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    border-radius: 16px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 1.3rem !important;
-    background: rgba(255, 255, 255, 0.06) !important;
+    font-size: 1.45rem !important;
+    flex-shrink: 0 !important;
+}
+
+.metric-primary .metric-icon {
+    background: linear-gradient(135deg, #0284c7, #38bdf8) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45) !important;
+}
+
+.metric-emerald .metric-icon {
+    background: linear-gradient(135deg, #059669, #10b981) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45) !important;
+}
+
+.metric-rose .metric-icon {
+    background: linear-gradient(135deg, #e11d48, #f43f5e) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px rgba(244, 63, 94, 0.45) !important;
+}
+
+.metric-amber .metric-icon {
+    background: linear-gradient(135deg, #d97706, #f59e0b) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45) !important;
+}
+
+.metric-icon i {
+    color: #ffffff !important;
+    font-size: 1.45rem !important;
+    display: inline-block !important;
 }
 
 .metric-info {
