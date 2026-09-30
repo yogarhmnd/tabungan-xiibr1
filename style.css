@@ -3329,3 +3329,596 @@ select.form-control {
     box-shadow: none !important;
     animation: none !important;
 }
+
+
+/* ====================================================================
+   CLEAN, UNCLUTTERED & DYNAMIC UI DESIGN SYSTEM (ZERO OVERLAP OPTIMIZATION)
+   ==================================================================== */
+
+/* 1. Global Reset & Container Whitespace */
+.main-content {
+    max-width: 1440px !important;
+    margin: 0 auto !important;
+    padding: 1.5rem 2rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* 2. Top Header & Navigation Layout (Anti-Collision & Flex Wrap) */
+.top-header {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    padding: 1rem 1.5rem !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-xl, 20px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+    margin-bottom: 0.5rem !important;
+}
+
+[data-theme="light"] .top-header {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+.header-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    flex-shrink: 0;
+}
+
+.header-title h1 {
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+}
+
+.header-title p {
+    font-size: 0.82rem !important;
+    color: var(--text-muted, #94a3b8) !important;
+    margin: 0.15rem 0 0 0 !important;
+}
+
+.header-center-group {
+    flex: 1 !important;
+    max-width: 460px !important;
+    min-width: 260px !important;
+}
+
+.search-box {
+    position: relative !important;
+    width: 100% !important;
+}
+
+.search-box input {
+    width: 100% !important;
+    height: 44px !important;
+    border-radius: var(--radius-full, 9999px) !important;
+    padding: 0.65rem 1.25rem 0.65rem 2.75rem !important;
+    font-size: 0.9rem !important;
+    background: rgba(30, 41, 59, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: var(--text-main, #f8fafc) !important;
+    transition: all 0.25s ease !important;
+}
+
+.search-box input:focus {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: var(--color-emerald, #10b981) !important;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18) !important;
+}
+
+.search-box i {
+    position: absolute !important;
+    left: 1.1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: var(--text-muted, #94a3b8) !important;
+    font-size: 0.95rem !important;
+    pointer-events: none !important;
+}
+
+.header-actions {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    flex-shrink: 0;
+}
+
+.header-utility-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.cloud-sync-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.45rem 0.85rem !important;
+    border-radius: var(--radius-full, 9999px) !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    transition: all 0.2s ease !important;
+}
+
+/* 3. Summary Metrics Grid (Responsive 4-Card & 2-Card Layout without Overlap) */
+.metrics-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+    gap: 1.1rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.metric-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.1rem !important;
+    padding: 1.25rem 1.35rem !important;
+    background: rgba(18, 24, 38, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-xl, 20px) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    overflow: hidden !important;
+}
+
+.metric-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.metric-icon {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.3rem !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.metric-info {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+}
+
+.metric-label {
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    color: var(--text-muted, #94a3b8) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 0.25rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.metric-value {
+    font-size: clamp(1.2rem, 1.8vw, 1.55rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.metric-subtext {
+    font-size: 0.74rem !important;
+    color: var(--text-muted, #94a3b8) !important;
+    margin-top: 0.3rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* 4. Section Card & Header Buttons Formatting (Zero Button Collision) */
+.card {
+    background: rgba(18, 24, 38, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-xl, 20px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    overflow: hidden !important;
+}
+
+[data-theme="light"] .card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+.card-header {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    padding: 1.25rem 1.5rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.card-title h3 {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.6rem !important;
+}
+
+.card-title p {
+    font-size: 0.82rem !important;
+    color: var(--text-muted, #94a3b8) !important;
+    margin: 0.2rem 0 0 0 !important;
+}
+
+.card-actions, 
+.header-btn-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.6rem !important;
+}
+
+.header-btn-group .btn {
+    padding: 0.55rem 0.95rem !important;
+    font-size: 0.84rem !important;
+    border-radius: var(--radius-md, 12px) !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+}
+
+/* 5. Clean Student Grid Cards */
+.students-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 1.2rem !important;
+    padding: 1.5rem !important;
+}
+
+.student-card {
+    background: rgba(30, 41, 59, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 18px !important;
+    padding: 1.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    transition: all 0.25s ease !important;
+}
+
+.student-card:hover {
+    transform: translateY(-3px) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3) !important;
+}
+
+.student-card-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.85rem !important;
+}
+
+.student-avatar {
+    width: 46px !important;
+    height: 56px !important;
+    border-radius: 14px !important;
+    flex-shrink: 0 !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.student-card-info {
+    min-width: 0 !important;
+    flex: 1 !important;
+}
+
+.student-card-info h4 {
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    margin: 0 0 0.25rem 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.student-card-info p {
+    font-size: 0.78rem !important;
+    color: var(--text-muted, #94a3b8) !important;
+    margin: 0 !important;
+}
+
+.student-balance-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.65rem 0.9rem !important;
+    background: rgba(15, 23, 42, 0.6) !important;
+    border-radius: 12px !important;
+    margin-top: 0.25rem !important;
+}
+
+.student-balance-box span {
+    font-size: 0.78rem !important;
+    color: var(--text-muted, #94a3b8) !important;
+}
+
+.student-balance-box strong {
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    color: var(--color-emerald, #10b981) !important;
+}
+
+.student-actions {
+    display: flex !important;
+    gap: 0.5rem !important;
+}
+
+.student-actions .btn {
+    flex: 1 !important;
+    padding: 0.5rem 0.65rem !important;
+    font-size: 0.8rem !important;
+    border-radius: 10px !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+}
+
+/* 6. Modals (Clean, Non-Overlapping & Responsive) */
+.modal-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 1000 !important;
+    background: rgba(11, 15, 25, 0.78) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1.25rem !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.25s ease !important;
+}
+
+.modal-backdrop.active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.modal-card {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    max-height: 88vh !important;
+    background: #0f172a !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    transform: scale(0.96) translateY(10px) !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+[data-theme="light"] .modal-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.15) !important;
+}
+
+.modal-backdrop.active .modal-card {
+    transform: scale(1) translateY(0) !important;
+}
+
+.modal-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 1.25rem 1.5rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    flex-shrink: 0 !important;
+}
+
+.modal-header h3 {
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.6rem !important;
+    padding-right: 1.5rem !important;
+}
+
+.modal-close {
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-muted, #94a3b8) !important;
+    font-size: 1.5rem !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+    flex-shrink: 0 !important;
+}
+
+.modal-close:hover {
+    color: var(--text-main, #ffffff) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.modal-body {
+    padding: 1.5rem !important;
+    overflow-y: auto !important;
+    flex: 1 !important;
+}
+
+.modal-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.75rem !important;
+    padding: 1.1rem 1.5rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    flex-shrink: 0 !important;
+    background: rgba(15, 23, 42, 0.4) !important;
+}
+
+/* 7. Tables Formatting & Smooth Horizonal Scroll */
+.data-table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 16px !important;
+}
+
+.data-table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+.data-table th {
+    background: rgba(30, 41, 59, 0.8) !important;
+    padding: 0.9rem 1rem !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--text-muted, #94a3b8) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    white-space: nowrap !important;
+}
+
+.data-table td {
+    padding: 0.9rem 1rem !important;
+    font-size: 0.88rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    vertical-align: middle !important;
+}
+
+.data-table tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* 8. Mobile Breakpoints Optimization (No Collisions) */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem 0.85rem !important;
+        gap: 1rem !important;
+    }
+
+    .top-header {
+        padding: 0.85rem 1rem !important;
+        border-radius: 16px !important;
+    }
+
+    .header-center-group {
+        order: 3;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 0.25rem !important;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.75rem !important;
+    }
+
+    .metric-card {
+        padding: 0.9rem 0.85rem !important;
+        gap: 0.75rem !important;
+        border-radius: 16px !important;
+    }
+
+    .metric-icon {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        font-size: 1.1rem !important;
+        border-radius: 10px !important;
+    }
+
+    .metric-value {
+        font-size: 1.15rem !important;
+    }
+
+    .card-header {
+        padding: 1rem 1.1rem !important;
+    }
+
+    .card-actions, 
+    .header-btn-group {
+        width: 100% !important;
+        margin-top: 0.5rem !important;
+    }
+
+    .header-btn-group .btn {
+        flex: 1 !important;
+        justify-content: center !important;
+    }
+
+    .students-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+        padding: 1rem !important;
+    }
+
+    .modal-backdrop {
+        padding: 0.65rem !important;
+    }
+
+    .modal-card {
+        border-radius: 20px !important;
+        max-height: 92vh !important;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem 1.1rem !important;
+    }
+
+    .modal-footer {
+        flex-direction: column-reverse !important;
+    }
+
+    .modal-footer .btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .metrics-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
