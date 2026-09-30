@@ -5993,6 +5993,132 @@ function forceUploadToFirebaseCloud() {
     saveToFirebaseDatabase(false);
 }
 
+
+// ==========================================================================
+// BI-DIRECTIONAL SMART MERGE & PERSISTENT SYNC ENGINE
+// Mencegah data ter-reset / kembali ke data lama saat refresh atau sync
+// ==========================================================================
+function applyCloudDataWithLocalMerge(data) {
+    if (!data || !data.students || !Array.isArray(data.students) || data.students.length === 0) {
+        return;
+    }
+
+    let remoteTx = [];
+    if (data.transactions && Array.isArray(data.transactions)) {
+        remoteTx = data.transactions;
+    } else if (data.transactions && typeof data.transactions === 'object') {
+        remoteTx = Object.values(data.transactions);
+    }
+
+    const remoteStudents = data.students;
+
+    // 1. Smart Merge Transactions (Gabungkan data remote & data lokal tanpa kehilangan transaksi)
+    const txMap = new Map();
+    
+    // Pindai data transaksi dari remote Cloud
+    remoteTx.forEach(t => {
+        if (t && (t.id || t.studentId)) {
+            const key = t.id || `${t.studentId}_${t.date}_${t.amount}_${t.type}`;
+            txMap.set(key, t);
+        }
+    });
+
+    // Gabungkan data transaksi lokal (LocalStorage / Memory) yang belum ada di Cloud
+    let missingLocalTxToSync = false;
+    if (Array.isArray(appTransactions)) {
+        appTransactions.forEach(localT => {
+            if (!localT || (!localT.id && !localT.studentId)) return;
+            const key = localT.id || `${localT.studentId}_${localT.date}_${localT.amount}_${localT.type}`;
+            
+            if (!txMap.has(key)) {
+                // Pengecekan duplikasi berdasarkan kriteria siswa + tanggal + nominal + jenis
+                const isDuplicate = Array.from(txMap.values()).some(rt =>
+                    (rt.id && localT.id && rt.id === localT.id) ||
+                    (rt.studentId === localT.studentId && 
+                     rt.date === localT.date && 
+                     Number(rt.amount) === Number(localT.amount) && 
+                     rt.type === localT.type)
+                );
+                if (!isDuplicate) {
+                    txMap.set(key, localT);
+                    missingLocalTxToSync = true;
+                }
+            }
+        });
+    }
+
+    // Urutkan seluruh transaksi yang sudah ter-merge secara kronologis
+    const mergedTransactions = Array.from(txMap.values());
+    mergedTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+    appTransactions = mergedTransactions;
+
+    // 2. Smart Merge Siswa & Rekalkulasi Saldo
+    const studentMap = new Map();
+    remoteStudents.forEach(s => {
+        if (s && (s.id || s.nisn)) {
+            const key = s.id || s.nisn;
+            studentMap.set(key, { ...s });
+        }
+    });
+
+    // Pindai pembaruan siswa lokal (seperti foto profil lokal / edit data)
+    if (Array.isArray(appStudents)) {
+        appStudents.forEach(localS => {
+            if (!localS || (!localS.id && !localS.nisn)) return;
+            const key = localS.id || localS.nisn;
+            if (studentMap.has(key)) {
+                const remoteS = studentMap.get(key);
+                if (localS.photo && localS.photo.startsWith('data:image') && (!remoteS.photo || !remoteS.photo.startsWith('data:image'))) {
+                    remoteS.photo = localS.photo;
+                }
+            } else {
+                studentMap.set(key, { ...localS });
+                missingLocalTxToSync = true;
+            }
+        });
+    }
+
+    let mergedStudents = Array.from(studentMap.values());
+
+    // Rekalkulasi saldo setiap siswa secara akurat berdasarkan mutasi transaksi ter-merge
+    mergedStudents = mergedStudents.map(student => {
+        let netBalance = 0;
+        mergedTransactions.forEach(t => {
+            const matchesId = (t.studentId === student.id || t.studentId === student.nisn);
+            const matchesName = (student.name && t.studentName && student.name.trim().toUpperCase() === t.studentName.trim().toUpperCase());
+            if (matchesId || matchesName) {
+                if (t.type === 'setor') netBalance += Number(t.amount || 0);
+                else if (t.type === 'tarik') netBalance -= Number(t.amount || 0);
+            }
+        });
+
+        const finalBalance = Math.max(netBalance, student.balance || 0);
+        return {
+            ...student,
+            balance: finalBalance
+        };
+    });
+
+    appStudents = mergedStudents;
+
+    // 3. Simpan konfigurasi WA jika ada
+    if (data.waConfig && typeof data.waConfig === 'object') {
+        waConfig = { ...waConfig, ...data.waConfig };
+        try {
+            localStorage.setItem(STORAGE_WA_CONFIG_KEY, JSON.stringify(waConfig));
+        } catch(e) {}
+    }
+
+    // 4. Langsung simpan hasil merge ke LocalStorage agar saat di-refresh data tetap tersimpan permanen
+    saveLocalCache();
+
+    // 5. Jika ada transaksi/siswa lokal yang belum ada di Cloud, unggah otomatis data ter-merge ke Cloud
+    if (missingLocalTxToSync && firebaseDb && !isSyncingToCloud) {
+        console.log('[Cloud Merge] Transaksi lokal terdeteksi dan di-merge. Mengunggah data terbaru ke Firebase...');
+        setTimeout(() => saveToFirebaseDatabase(true), 300);
+    }
+}
+
 function initFirebaseRealtimeSync() {
     if (typeof firebase === 'undefined') {
         console.warn('[Firebase] SDK belum termuat, beralih ke mode offline lokal.');
@@ -6045,26 +6171,8 @@ function initFirebaseRealtimeSync() {
                 isReceivingRemoteUpdate = true;
                 isFirebaseSyncedOnce = true;
 
-                // Perbarui state lokal dengan data cloud terbaru
-                appStudents = data.students;
-                if (data.transactions && Array.isArray(data.transactions)) {
-                    appTransactions = data.transactions;
-                } else if (data.transactions && typeof data.transactions === 'object') {
-                    appTransactions = Object.values(data.transactions);
-                } else {
-                    appTransactions = [];
-                }
-
-                // Sinkronkan konfigurasi WhatsApp Gateway jika tersedia di cloud
-                if (data.waConfig && typeof data.waConfig === 'object') {
-                    waConfig = { ...waConfig, ...data.waConfig };
-                    try {
-                        localStorage.setItem(STORAGE_WA_CONFIG_KEY, JSON.stringify(waConfig));
-                    } catch(e) {}
-                }
-
-                // Simpan ke cache browser untuk performa instan saat buka halaman berikutnya
-                saveLocalCache();
+                // Merge data Cloud dengan data Local secara cerdas tanpa menghapus transaksi lokal
+                applyCloudDataWithLocalMerge(data);
 
                 // Jika sedang login sebagai siswa, perbarui objek currentUser
                 if (currentUser && currentUser.role === 'siswa') {
@@ -6147,15 +6255,7 @@ function checkAndRefreshCloudData(silent = false) {
     firebaseDb.ref('tabungan_br1').once('value').then((snapshot) => {
         const data = snapshot.val();
         if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
-            appStudents = data.students;
-            if (data.transactions && Array.isArray(data.transactions)) {
-                appTransactions = data.transactions;
-            } else if (data.transactions && typeof data.transactions === 'object') {
-                appTransactions = Object.values(data.transactions);
-            }
-            if (data.waConfig) waConfig = { ...waConfig, ...data.waConfig };
-
-            saveLocalCache();
+            applyCloudDataWithLocalMerge(data);
 
             if (currentUser && currentUser.role === 'siswa') {
                 const freshStudent = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
@@ -7387,6 +7487,7 @@ function handleTransactionSubmit(e) {
 
         lastCreatedTx = newTx;
 
+        saveLocalCache();
         saveStudents();
         saveTransactions();
         saveToFirebaseDatabase(true);
