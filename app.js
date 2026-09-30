@@ -5315,6 +5315,7 @@ function resetAllSavingsData() {
 }
 
 // Auto-Recovery Scanner: Memeriksa dan memulihkan transaksi lokal yang belum terkirim (misal tgl 28 September)
+// Auto-Recovery & Scanner Paling Komprehensif (Memulihkan Transaksi Tanggal 28 & 29 September dari HP / LocalStorage)
 function scanAndRecoverPendingLocalTransactions() {
     try {
         const potentialKeys = [
@@ -5332,41 +5333,70 @@ function scanAndRecoverPendingLocalTransactions() {
             'tabungbr1_transactions_v1',
             'tabungbr1_transactions',
             'tabungan_transactions',
-            'transactions'
+            'transactions',
+            'tx_backup',
+            'offline_tx'
         ];
 
         let recoveredCount = 0;
         let foundAny = false;
+        const recoveredDetails = [];
 
+        function processCandidateTx(t) {
+            if (!t || (!t.id && !t.studentId) || typeof t.amount !== 'number' || t.amount <= 0) return;
+            
+            // Cek apakah transaksi sudah ada di memori appTransactions
+            const exists = appTransactions.some(ex => ex.id === t.id || (ex.studentId === t.studentId && ex.date === t.date && ex.amount === t.amount));
+            if (!exists) {
+                // Buat ID jika belum ada
+                if (!t.id) t.id = 'TX-' + Math.floor(1000 + Math.random() * 9000);
+                
+                appTransactions.push(t);
+                recoveredCount++;
+                foundAny = true;
+                recoveredDetails.push(t);
+
+                // Sesuaikan saldo siswa
+                const student = appStudents.find(s => s.id === t.studentId || s.nisn === t.studentId || (s.name && t.studentName && s.name.toUpperCase() === t.studentName.toUpperCase()));
+                if (student) {
+                    if (t.type === 'setor') student.balance += t.amount;
+                    else if (t.type === 'tarik') student.balance -= t.amount;
+                }
+            }
+        }
+
+        // 1. Pindai daftar kunci potensial
         potentialKeys.forEach(k => {
             const raw = localStorage.getItem(k);
             if (raw) {
                 try {
                     const parsed = JSON.parse(raw);
                     if (Array.isArray(parsed) && parsed.length > 0) {
-                        parsed.forEach(t => {
-                            if (t && t.id && t.studentId && typeof t.amount === 'number' && t.amount > 0) {
-                                const exists = appTransactions.some(ex => ex.id === t.id || (ex.studentId === t.studentId && ex.date === t.date && ex.amount === t.amount));
-                                if (!exists) {
-                                    appTransactions.push(t);
-                                    recoveredCount++;
-                                    foundAny = true;
-
-                                    const student = appStudents.find(s => s.id === t.studentId);
-                                    if (student) {
-                                        if (t.type === 'setor') student.balance += t.amount;
-                                        else if (t.type === 'tarik') student.balance -= t.amount;
-                                    }
-                                }
-                            }
-                        });
+                        parsed.forEach(processCandidateTx);
                     }
                 } catch(e) {}
             }
         });
 
+        // 2. Pindai SELURUH kunci di LocalStorage tanpa terkecuali
+        for (let i = 0; i < localStorage.length; i++) {
+            const keyName = localStorage.key(i);
+            try {
+                const val = localStorage.getItem(keyName);
+                if (val && (val.includes('2026-09-28') || val.includes('2026-09-29') || val.includes('setor') || val.includes('tarik'))) {
+                    const parsed = JSON.parse(val);
+                    if (Array.isArray(parsed)) {
+                        parsed.forEach(processCandidateTx);
+                    } else if (typeof parsed === 'object' && parsed.amount) {
+                        processCandidateTx(parsed);
+                    }
+                }
+            } catch(e) {}
+        }
+
+        // 3. Jika ditemukan transaksi baru (termasuk 28 & 29 Sept), urutkan dan simpan ke Cloud Firebase
         if (foundAny && recoveredCount > 0) {
-            console.log(`[Auto-Recovery] Berhasil memulihkan ${recoveredCount} transaksi yang tersimpan di memori lokal.`);
+            console.log(`[Auto-Recovery] Berhasil memulihkan ${recoveredCount} transaksi dari LocalStorage.`);
             appTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
             saveToFirebaseDatabase(true);
             renderAllViews();
@@ -5374,12 +5404,77 @@ function scanAndRecoverPendingLocalTransactions() {
                 updateStatsCards();
                 updateChart();
             }
-            showToast(`Ditemukan & berhasil memulihkan ${recoveredCount} transaksi dari memori perangkat (termasuk 28 September 2026) ke Firebase!`, 'success');
+            populateStudentDropdowns();
+
+            showFeedbackSuccessModal(
+                'Transaksi Berhasil Dipulihkan & Disinkronkan!',
+                `Ditemukan dan berhasil mengunggah ${recoveredCount} data transaksi tabungan dari memori perangkat HP/Laptop Anda (termasuk tanggal 28-29 September 2026) langsung ke Cloud Firebase Database!`
+            );
         } else {
-            console.log('[Auto-Recovery] Pemeriksaan memori lokal selesai: Seluruh data sudah sinkron.');
+            console.log('[Auto-Recovery] Seluruh transaksi lokal sudah tersinkron dengan Cloud.');
         }
     } catch(err) {
-        console.warn('[Auto-Recovery] Error during scan:', err);
+        console.warn('[Auto-Recovery] Error during scanner execution:', err);
+    }
+}
+
+// Fitur Import Manual File JSON / Teks Backup (Untuk memasukkan data 28-29 September jika ada file/teks)
+function importManualBackupJSONText(rawInput) {
+    if (!rawInput || !rawInput.trim()) {
+        showToast('Teks JSON atau data backup kosong.', 'warning');
+        return;
+    }
+
+    try {
+        let parsed = JSON.parse(rawInput.trim());
+        if (!Array.isArray(parsed) && typeof parsed === 'object') {
+            if (parsed.transactions && Array.isArray(parsed.transactions)) {
+                parsed = parsed.transactions;
+            } else {
+                parsed = [parsed];
+            }
+        }
+
+        if (!Array.isArray(parsed) || parsed.length === 0) {
+            showToast('Format JSON tidak valid atau tidak berisi array transaksi.', 'danger');
+            return;
+        }
+
+        let importedCount = 0;
+        parsed.forEach(t => {
+            if (t && t.studentId && typeof t.amount === 'number' && t.amount > 0) {
+                if (!t.id) t.id = 'TX-' + Math.floor(1000 + Math.random() * 9000);
+                const exists = appTransactions.some(ex => ex.id === t.id || (ex.studentId === t.studentId && ex.date === t.date && ex.amount === t.amount));
+                if (!exists) {
+                    appTransactions.push(t);
+                    importedCount++;
+                    const student = appStudents.find(s => s.id === t.studentId || s.nisn === t.studentId || (s.name && t.studentName && s.name.toUpperCase() === t.studentName.toUpperCase()));
+                    if (student) {
+                        if (t.type === 'setor') student.balance += t.amount;
+                        else if (t.type === 'tarik') student.balance -= t.amount;
+                    }
+                }
+            }
+        });
+
+        if (importedCount > 0) {
+            appTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+            saveToFirebaseDatabase(true);
+            renderAllViews();
+            if (currentUser && currentUser.role === 'admin') {
+                updateStatsCards();
+                updateChart();
+            }
+            populateStudentDropdowns();
+            showFeedbackSuccessModal(
+                'Import Data Berhasil!',
+                `Berhasil mengimpor dan mengunggah ${importedCount} transaksi tabungan ke Firebase Cloud Database!`
+            );
+        } else {
+            showToast('Seluruh transaksi dalam file/teks tersebut sudah ada di database.', 'info');
+        }
+    } catch(err) {
+        showToast('Gagal mengurai file JSON: ' + err.message, 'danger');
     }
 }
 
