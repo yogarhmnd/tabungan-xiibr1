@@ -7333,6 +7333,8 @@ function openEditTargetModal(studentId) {
     document.getElementById('target-student-name').value = `${student.name} (NISN: ${student.nisn})`;
     document.getElementById('target-student-phone').value = student.phone || '';
     document.getElementById('target-amount-input').value = student.target || 2000000;
+    const directBalInp = document.getElementById('direct-balance-input');
+    if (directBalInp) directBalInp.value = student.balance || 0;
     document.getElementById('target-student-photo-val').value = student.photo || '';
 
     updateEditSinglePhotoDisplay(student.photo, student.name);
@@ -7427,22 +7429,43 @@ function handleTargetSubmit(e) {
     const newTarget = Number(document.getElementById('target-amount-input').value) || 2000000;
     const newPhone = document.getElementById('target-student-phone').value.trim();
     const newPhoto = document.getElementById('target-student-photo-val').value.trim() || null;
+    const directBalanceInp = document.getElementById('direct-balance-input');
 
     const studentIndex = appStudents.findIndex(s => s.id === studentId);
     if (studentIndex !== -1) {
         const student = appStudents[studentIndex];
+        let directBalanceChanged = false;
+        let oldBal = student.balance;
+
+        if (directBalanceInp && directBalanceInp.value !== '') {
+            const newBal = Number(directBalanceInp.value);
+            if (!isNaN(newBal) && newBal >= 0 && newBal !== student.balance) {
+                student.balance = newBal;
+                directBalanceChanged = true;
+            }
+        }
+
         student.target = newTarget;
         student.phone = newPhone;
         student.photo = newPhoto;
 
+        saveLocalCache();
         saveStudents();
+        saveToFirebaseDatabase(true);
         renderAllViews();
         closeModal('modal-edit-target');
 
-        showFeedbackSuccessModal(
-            'Data & Pasfoto Siswa Berhasil Diperbarui!',
-            `Profil, pasfoto, target tabungan ${student.name} (${formatRp(newTarget)}), dan no WhatsApp berhasil diperbarui secara permanen.`
-        );
+        if (directBalanceChanged) {
+            showFeedbackSuccessModal(
+                'Koreksi Direct Saldo Siswa Berhasil!',
+                `Saldo ${student.name} telah dikoreksi secara langsung dari ${formatRp(oldBal)} menjadi ${formatRp(student.balance)} TANPA mencatat mutasi di arus kas masuk/keluar.`
+            );
+        } else {
+            showFeedbackSuccessModal(
+                'Data & Pasfoto Siswa Berhasil Diperbarui!',
+                `Profil, pasfoto, target tabungan ${student.name} (${formatRp(newTarget)}), dan no WhatsApp berhasil diperbarui secara permanen.`
+            );
+        }
     }
 }
 
@@ -8173,7 +8196,7 @@ function renderBatchEditStudentRows(studentsList = null) {
                 <input type="text" class="form-control batch-inp-password font-monospace" value="${escapeHtml(s.password || 'password123')}" required placeholder="Password" data-id="${s.id}">
             </td>
             <td style="text-align: right;">
-                <span class="badge badge-emerald font-weight-bold">${formatRp(s.balance || 0)}</span>
+                <input type="number" class="form-control batch-inp-balance text-end font-weight-bold text-emerald" value="${s.balance || 0}" step="500" min="0" placeholder="Saldo Rp" data-id="${s.id}" style="max-width: 140px; margin-left: auto;">
             </td>
         </tr>
         `;
@@ -8384,6 +8407,8 @@ function syncBatchTableInputsToMemory() {
         if (targetInp && !isNaN(parseInt(targetInp.value, 10))) student.target = parseInt(targetInp.value, 10);
         if (passInp && passInp.value.trim()) student.password = passInp.value.trim();
         if (photoInp) student.photo = photoInp.value.trim() || null;
+        const balanceInp = row.querySelector('.batch-inp-balance');
+        if (balanceInp && !isNaN(parseInt(balanceInp.value, 10))) student.balance = parseInt(balanceInp.value, 10);
     });
 }
 

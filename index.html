@@ -1153,6 +1153,17 @@
                         <label for="target-amount-input">Nominal Target Tabungan Rp <span class="required">*</span></label>
                         <input type="number" id="target-amount-input" class="form-control" placeholder="Contoh: 2000000" min="0" step="10000" required>
                     </div>
+
+                    <div class="form-group mb-3 p-3 rounded" style="background: rgba(223, 186, 115, 0.08); border: 1.5px solid rgba(223, 186, 115, 0.35);">
+                        <label for="direct-balance-input" class="text-amber font-weight-bold d-flex align-items-center gap-2 mb-1">
+                            <i class="fa-solid fa-pen-to-square"></i> Koreksi Direct Saldo Tabungan (Rp)
+                        </label>
+                        <input type="number" id="direct-balance-input" class="form-control font-weight-bold text-emerald" placeholder="Nominal Saldo Terbaru..." min="0" step="500">
+                        <small class="text-muted d-block mt-1" style="font-size: 0.78rem; line-height: 1.4;">
+                            <i class="fa-solid fa-triangle-exclamation text-amber"></i> 
+                            Fitur ini mengubah nominal saldo siswa <strong>secara langsung</strong> jika terjadi kesalahan pencatatan, <strong>TANPA mencatat transaksi baru di arus kas masuk/keluar</strong>.
+                        </small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('modal-edit-target')">Batal</button>
