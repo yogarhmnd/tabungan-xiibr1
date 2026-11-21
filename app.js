@@ -12,7 +12,7 @@ const STORAGE_AUTH_KEY = 'tabungbr1_session_v12';
 const STORAGE_WA_CONFIG_KEY = 'tabungbr1_waconfig_v12';
 const STORAGE_THEME_KEY = 'tabungbr1_theme_v12';
 
-// Firebase Realtime Database Configuration
+// Firebase & Cloud Firestore Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBYQE1E7ngrkm3lNQCkDw6Xzqc-cnT49Ac",
     authDomain: "tabungan-xiibr1.firebaseapp.com",
@@ -26,6 +26,8 @@ const firebaseConfig = {
 
 let firebaseApp = null;
 let firebaseDb = null;
+let firebaseFirestore = null;
+let firestoreUnsubscribe = null;
 let isSyncingToCloud = false;
 let isFirebaseSyncedOnce = false;
 let isReceivingRemoteUpdate = false;
@@ -4953,7 +4955,6 @@ const OFFICIAL_STUDENTS = [
         "name": "MUHAMMAD AMALUL ARIFIN",
         "nisn": "0086723136",
         "password": "password123",
-        "phone": "081234567028",
         "photo": "data:image/jpeg;base64,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",
         "target": 2000000
     },
@@ -6088,19 +6089,20 @@ function handleCloudBadgeClick() {
         if (typeof openModal === 'function') openModal('modal-firebase-rules-guide');
         return;
     }
-    if (firebaseDb) {
+    if (firebaseFirestore || firebaseDb) {
         updateCloudSyncStatus('syncing', 'Menyinkronkan...');
         if (typeof checkAndRefreshCloudData === 'function') checkAndRefreshCloudData(false);
     } else {
-        if (typeof showToast === 'function') showToast('Firebase Realtime Database belum terinisialisasi. Memulai koneksi...', 'info');
-        if (typeof initFirebaseRealtimeSync === 'function') initFirebaseRealtimeSync();
+        if (typeof showToast === 'function') showToast('Cloud Firestore belum terinisialisasi. Memulai koneksi...', 'info');
+        if (typeof initFirestoreSync === 'function') initFirestoreSync();
+        else if (typeof initFirebaseRealtimeSync === 'function') initFirebaseRealtimeSync();
     }
 }
 
 function forceUploadToFirebaseCloud() {
     if (typeof closeModal === 'function') closeModal('modal-firebase-rules-guide');
-    if (typeof showToast === 'function') showToast('Mengunggah data ke Cloud Firebase Database...', 'info');
-    saveToFirebaseDatabase(false);
+    if (typeof showToast === 'function') showToast('Mengunggah data ke Cloud Firestore Database...', 'info');
+    saveToFirestoreDatabase(true);
 }
 
 
@@ -6230,15 +6232,20 @@ function applyCloudDataWithLocalMerge(data) {
     saveLocalCache();
 
     // 5. Jika ada transaksi/siswa lokal yang belum ada di Cloud, unggah otomatis data ter-merge ke Cloud
-    if (missingLocalTxToSync && firebaseDb && !isSyncingToCloud) {
-        console.log('[Cloud Merge] Transaksi lokal terdeteksi dan di-merge. Mengunggah data terbaru ke Firebase...');
-        setTimeout(() => saveToFirebaseDatabase(true), 300);
+    if (missingLocalTxToSync && firebaseFirestore && !isSyncingToCloud) {
+        console.log('[Cloud Merge] Transaksi lokal terdeteksi dan di-merge. Mengunggah data terbaru ke Firestore...');
+        setTimeout(() => saveToFirestoreDatabase(true), 300);
     }
 }
 
-function initFirebaseRealtimeSync() {
-    if (typeof firebase === 'undefined') {
-        console.warn('[Firebase] SDK belum termuat, beralih ke mode offline lokal.');
+// ==========================================================================
+// CLOUD FIRESTORE DIRECT INTEGRATION & REALTIME ENGINE
+// SMK PGRI 11 CILEDUG - KELAS XII BISNIS RITEL 1
+// ==========================================================================
+
+function initFirestoreSync() {
+    if (typeof firebase === 'undefined' || !firebase.firestore) {
+        console.warn('[Firestore] SDK Cloud Firestore belum termuat, beralih ke mode offline lokal.');
         updateCloudSyncStatus('offline', 'Mode Lokal');
         return;
     }
@@ -6249,49 +6256,161 @@ function initFirebaseRealtimeSync() {
         } else {
             firebaseApp = firebase.app();
         }
-        firebaseDb = firebase.database();
-        console.log('[Firebase] Realtime Database tersambung.');
 
-        // Pastikan socket aktif
-        firebase.database().goOnline();
+        firebaseFirestore = firebase.firestore();
+        console.log('[Firestore] Cloud Firestore tersambung.');
 
-        // Coba sign in secara anonim jika diaktifkan di Firebase Console
+        // Aktifkan offline persistence multi-tab jika didukung browser
+        try {
+            firebaseFirestore.enablePersistence({ synchronizeTabs: true }).catch(err => {
+                if (err.code === 'failed-precondition') {
+                    console.log('[Firestore] Catatan persistence multi-tab: beberapa tab browser terbuka.');
+                } else if (err.code === 'unimplemented') {
+                    console.log('[Firestore] Browser tidak mendukung persistence IndexedDB.');
+                }
+            });
+        } catch (persErr) { }
+
+        // Autentikasi anonim opsional untuk izin akses aman
         if (firebase.auth) {
             try {
-                firebase.auth().signInAnonymously().catch(e => {
-                    console.log('[Firebase Auth] Anonymous notice:', e.message);
+                firebase.auth().signInAnonymously().catch(authErr => {
+                    console.log('[Firestore Auth] Anonymous note:', authErr.message);
                 });
-            } catch (authErr) {
-                // ignore
-            }
+            } catch (authE) { }
         }
 
-        // 1. Pantau status koneksi internet & socket Firebase
-        const connectedRef = firebaseDb.ref('.info/connected');
-        connectedRef.on('value', (snap) => {
-            if (snap.val() === true && !firebasePermissionDenied) {
-                console.log('[Firebase] Terhubung ke Cloud RTDB.');
-                updateCloudSyncStatus('connected', 'Firebase Online');
-            } else if (!firebasePermissionDenied) {
-                console.log('[Firebase] Koneksi Cloud terputus / offline.');
-                updateCloudSyncStatus('offline', 'Menghubungkan...');
+        // Setup Real-time Snapshot Listener pada primary system document
+        const mainDocRef = firebaseFirestore.collection('tabungan_system').doc('main_store');
+
+        if (firestoreUnsubscribe) {
+            try { firestoreUnsubscribe(); } catch (e) { }
+        }
+
+        firestoreUnsubscribe = mainDocRef.onSnapshot({ includeMetadataChanges: true }, (docSnap) => {
+            firebasePermissionDenied = false;
+
+            if (docSnap.exists) {
+                const data = docSnap.data();
+                const source = docSnap.metadata.hasPendingWrites ? 'Lokal (Pending)' : 'Cloud Firestore';
+                console.log(`[Firestore] Menerima pembaruan real-time dari ${source}.`);
+
+                if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
+                    isReceivingRemoteUpdate = true;
+                    isFirebaseSyncedOnce = true;
+
+                    // Merge data Cloud Firestore dengan data Local secara cerdas tanpa menghapus data lokal
+                    applyCloudDataWithLocalMerge(data);
+
+                    // Sinkronkan objek currentUser jika sedang login sebagai siswa
+                    if (currentUser && currentUser.role === 'siswa') {
+                        const freshStudent = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
+                        if (freshStudent) {
+                            currentUser = { ...currentUser, ...freshStudent, studentId: freshStudent.id, id: freshStudent.id };
+                            sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+                        }
+                    }
+
+                    // Render ulang tampilan sistem
+                    if (currentUser) {
+                        renderAllViews();
+                        if (currentUser.role === 'admin') {
+                            if (typeof updateStatsCards === 'function') updateStatsCards();
+                            updateChart();
+                        }
+                    }
+                    populateStudentDropdowns();
+
+                    isReceivingRemoteUpdate = false;
+                    updateCloudSyncStatus('connected', 'Firestore Online');
+                }
+            } else {
+                console.log('[Firestore] Database Cloud Firestore masih kosong. Melakukan inisialisasi & migrasi otomatis...');
+                migrateOrSeedToFirestore();
+            }
+        }, (error) => {
+            console.error('[Firestore] Realtime snapshot error:', error);
+            if (error.code === 'permission-denied' || (error.message && error.message.toLowerCase().includes('permission'))) {
+                firebasePermissionDenied = true;
+                updateCloudSyncStatus('error', 'Aturan Firestore');
+            } else {
+                updateCloudSyncStatus('error', 'Sync Error');
             }
         });
 
-        // 2. Real-time Listener data tabungan (Always On-Time Sync)
-        const mainRef = firebaseDb.ref('tabungan_br1');
-        mainRef.on('value', (snapshot) => {
-            firebasePermissionDenied = false;
-            const data = snapshot.val();
-            if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
-                console.log('[Firebase] Menerima pembaruan real-time dari Cloud RTDB.');
-                isReceivingRemoteUpdate = true;
-                isFirebaseSyncedOnce = true;
+        // Pasang listener reconnection saat tab browser aktif kembali
+        setupAlwaysOnlineListeners();
 
-                // Merge data Cloud dengan data Local secara cerdas tanpa menghapus transaksi lokal
+    } catch (err) {
+        console.error('[Firestore] Gagal menginisialisasi Cloud Firestore:', err);
+        updateCloudSyncStatus('offline', 'Mode Lokal');
+    }
+}
+
+// Inisialisasi otomatis: migrasi dari Realtime Database atau seed data default
+function migrateOrSeedToFirestore() {
+    if (typeof firebase !== 'undefined' && firebase.database) {
+        try {
+            const legacyRtdb = firebase.database();
+            legacyRtdb.ref('tabungan_br1').once('value').then(snap => {
+                const val = snap.val();
+                if (val && val.students && Array.isArray(val.students) && val.students.length > 0) {
+                    console.log('[Firestore Migration] Data ditemukan di Realtime Database! Memigrasikan ke Cloud Firestore...');
+                    applyCloudDataWithLocalMerge(val);
+                    saveToFirestoreDatabase(true);
+                    return;
+                }
+                console.log('[Firestore Seed] Menyiapkan data default 44 siswa ke Cloud Firestore...');
+                saveToFirestoreDatabase(true);
+            }).catch(() => {
+                saveToFirestoreDatabase(true);
+            });
+            return;
+        } catch (e) { }
+    }
+    saveToFirestoreDatabase(true);
+}
+
+function setupAlwaysOnlineListeners() {
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && firebaseFirestore) {
+            console.log('[Firestore Manager] Tab aktif kembali: Memastikan sinkronisasi data Cloud...');
+            checkAndRefreshCloudData(true);
+        }
+    });
+
+    window.addEventListener('online', () => {
+        if (firebaseFirestore) {
+            console.log('[Firestore Manager] Jaringan online kembali: Menyambungkan ulang ke Cloud...');
+            try { firebaseFirestore.enableNetwork(); } catch (e) { }
+            checkAndRefreshCloudData(true);
+        }
+    });
+
+    window.addEventListener('focus', () => {
+        if (firebaseFirestore) {
+            checkAndRefreshCloudData(true);
+        }
+    });
+
+    setInterval(() => {
+        if (firebaseFirestore && document.visibilityState === 'visible') {
+            checkAndRefreshCloudData(true);
+        }
+    }, 45000);
+}
+
+function checkAndRefreshCloudData(silent = false) {
+    if (!firebaseFirestore) return;
+    if (!silent) updateCloudSyncStatus('syncing', 'Menyinkronkan...');
+
+    const docRef = firebaseFirestore.collection('tabungan_system').doc('main_store');
+    docRef.get().then((docSnap) => {
+        if (docSnap.exists) {
+            const data = docSnap.data();
+            if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
                 applyCloudDataWithLocalMerge(data);
 
-                // Jika sedang login sebagai siswa, perbarui objek currentUser
                 if (currentUser && currentUser.role === 'siswa') {
                     const freshStudent = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
                     if (freshStudent) {
@@ -6300,7 +6419,6 @@ function initFirebaseRealtimeSync() {
                     }
                 }
 
-                // Render ulang tampilan jika sudah login
                 if (currentUser) {
                     renderAllViews();
                     if (currentUser.role === 'admin') {
@@ -6309,99 +6427,30 @@ function initFirebaseRealtimeSync() {
                     }
                 }
                 populateStudentDropdowns();
-
-                isReceivingRemoteUpdate = false;
-                updateCloudSyncStatus('connected', 'Firebase Online');
-            } else if (!data || !data.students) {
-                console.log('[Firebase] Cloud RTDB kosong. Menginisialisasi seed data awal...');
-                saveToFirebaseDatabase(true);
+                updateCloudSyncStatus('connected', 'Firestore Online');
+                if (!silent) showToast('Data terbaru berhasil disinkronkan dari Cloud Firestore!', 'success');
             }
-        }, (error) => {
-            console.error('[Firebase] Realtime listener error:', error);
-            if (error.code === 'PERMISSION_DENIED' || (error.message && error.message.toLowerCase().includes('permission_denied'))) {
-                firebasePermissionDenied = true;
-                updateCloudSyncStatus('error', 'Aturan Cloud');
-            } else {
-                updateCloudSyncStatus('error', 'Sync Error');
-            }
-        });
-
-        // 3. Pasang Listener Always-Online & Auto-Reconnect saat Buka HP / Tab Kembali
-        setupAlwaysOnlineListeners();
-
-    } catch (err) {
-        console.error('[Firebase] Gagal menginisialisasi Firebase:', err);
-        updateCloudSyncStatus('offline', 'Mode Lokal');
-    }
-}
-
-function setupAlwaysOnlineListeners() {
-    document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && firebaseDb) {
-            console.log('[Firebase Manager] Tab aktif kembali -> Memastikan koneksi online...');
-            firebase.database().goOnline();
-            checkAndRefreshCloudData(true);
-        }
-    });
-
-    window.addEventListener('online', () => {
-        if (firebaseDb) {
-            console.log('[Firebase Manager] Jaringan online kembali -> Mengaktifkan socket...');
-            firebase.database().goOnline();
-            checkAndRefreshCloudData(true);
-        }
-    });
-
-    window.addEventListener('focus', () => {
-        if (firebaseDb) {
-            firebase.database().goOnline();
-        }
-    });
-
-    setInterval(() => {
-        if (firebaseDb && document.visibilityState === 'visible') {
-            firebase.database().goOnline();
-        }
-    }, 25000);
-}
-
-function checkAndRefreshCloudData(silent = false) {
-    if (!firebaseDb) return;
-    if (!silent) updateCloudSyncStatus('syncing', 'Menyinkronkan...');
-
-    firebaseDb.ref('tabungan_br1').once('value').then((snapshot) => {
-        const data = snapshot.val();
-        if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
-            applyCloudDataWithLocalMerge(data);
-
-            if (currentUser && currentUser.role === 'siswa') {
-                const freshStudent = appStudents.find(s => s.id === currentUser.studentId || s.id === currentUser.id || s.nisn === currentUser.nisn);
-                if (freshStudent) {
-                    currentUser = { ...currentUser, ...freshStudent, studentId: freshStudent.id, id: freshStudent.id };
-                    sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
-                }
-            }
-
-            if (currentUser) {
-                renderAllViews();
-                if (currentUser.role === 'admin') {
-                    if (typeof updateStatsCards === 'function') updateStatsCards();
-                    updateChart();
-                }
-            }
-            populateStudentDropdowns();
-            updateCloudSyncStatus('connected', 'Firebase Online');
-            if (!silent) showToast('Data terbaru berhasil disinkronkan dari Cloud!', 'success');
+        } else {
+            migrateOrSeedToFirestore();
         }
     }).catch(err => {
-        console.warn('[Firebase] Check refresh error:', err);
+        console.warn('[Firestore] Check refresh error:', err);
     });
 }
 
-function saveToFirebaseDatabase(force = true) {
-    if (!firebaseDb) {
-        console.warn('[Firebase] Database belum siap.');
-        return Promise.resolve(false);
+// Simpan data utama ke Cloud Firestore & Mirror ke Modular Collections
+function saveToFirestoreDatabase(force = true) {
+    if (!firebaseFirestore) {
+        if (typeof firebase !== 'undefined' && firebase.firestore) {
+            try {
+                if (!firebase.apps || !firebase.apps.length) firebaseApp = firebase.initializeApp(firebaseConfig);
+                firebaseFirestore = firebase.firestore();
+            } catch (e) { }
+        }
+        if (!firebaseFirestore) {
+            console.warn('[Firestore] Database Firestore belum siap.');
+            return Promise.resolve(false);
+        }
     }
 
     if (firebaseSyncDebounceTimer) {
@@ -6416,28 +6465,40 @@ function saveToFirebaseDatabase(force = true) {
         repository: "https://github.com/yogarhmnd/tabungan-xiibr1",
         liveUrl: "https://tabungan-xiibr1.vercel.app",
         appName: "Tabungan Siswa XII BR 1 SMK PGRI 11 CILEDUG KOTA TANGERANG",
-        version: "v1.2.0-cloud",
+        version: "v2.0.0-firestore",
+        databaseType: "Cloud Firestore",
         lastUpdated: new Date().toISOString(),
         waConfig: typeof waConfig !== 'undefined' ? waConfig : {},
         students: appStudents,
-        transactions: appTransactions
+        transactions: appTransactions,
+        systemStats: {
+            totalStudents: appStudents.length,
+            totalTransactions: appTransactions.length,
+            totalBalance: appStudents.reduce((sum, s) => sum + (s.balance || 0), 0)
+        }
     };
 
-    return firebaseDb.ref('tabungan_br1').set(payload)
+    const docRef = firebaseFirestore.collection('tabungan_system').doc('main_store');
+
+    return docRef.set(payload, { merge: true })
         .then(() => {
             firebasePermissionDenied = false;
             isSyncingToCloud = false;
             isFirebaseSyncedOnce = true;
-            updateCloudSyncStatus('connected', 'Firebase Online');
-            console.log('[Firebase] Berhasil tersimpan ke Cloud RTDB.');
+            updateCloudSyncStatus('connected', 'Firestore Online');
+            console.log('[Firestore] Berhasil tersimpan ke Cloud Firestore.');
+
+            // Mirror ke Modular Collections untuk query langsung di Firestore Console
+            syncModularFirestoreCollections(payload);
+
             return true;
         })
         .catch((error) => {
             isSyncingToCloud = false;
-            console.error('[Firebase] Gagal simpan ke Cloud:', error);
-            if (error.code === 'PERMISSION_DENIED' || (error.message && error.message.toLowerCase().includes('permission_denied'))) {
+            console.error('[Firestore] Gagal simpan ke Cloud Firestore:', error);
+            if (error.code === 'permission-denied' || (error.message && error.message.toLowerCase().includes('permission'))) {
                 firebasePermissionDenied = true;
-                updateCloudSyncStatus('error', 'Aturan Cloud');
+                updateCloudSyncStatus('error', 'Aturan Firestore');
             } else {
                 updateCloudSyncStatus('error', 'Gagal Simpan');
             }
@@ -6445,21 +6506,97 @@ function saveToFirebaseDatabase(force = true) {
         });
 }
 
+// Mirroring data ke Firestore Collections (students, transactions, settings)
+function syncModularFirestoreCollections(payload) {
+    if (!firebaseFirestore || !payload) return;
+    try {
+        const batch = firebaseFirestore.batch();
+
+        // 1. Dokumen per siswa di collection 'students'
+        if (Array.isArray(payload.students)) {
+            payload.students.forEach(s => {
+                if (s && (s.id || s.nisn)) {
+                    const docId = String(s.id || s.nisn);
+                    const sRef = firebaseFirestore.collection('students').doc(docId);
+                    batch.set(sRef, {
+                        id: s.id,
+                        name: s.name,
+                        nisn: s.nisn,
+                        gender: s.gender || '',
+                        balance: Number(s.balance) || 0,
+                        target: Number(s.target) || 0,
+                        phone: s.phone || '',
+                        parentPhone: s.parentPhone || '',
+                        photo: s.photo || '',
+                        notes: s.notes || '',
+                        lastUpdated: payload.lastUpdated
+                    }, { merge: true });
+                }
+            });
+        }
+
+        // 2. Dokumen transaksi di collection 'transactions' (hingga 100 riwayat transaksi)
+        if (Array.isArray(payload.transactions)) {
+            const list = payload.transactions.slice(0, 100);
+            list.forEach(t => {
+                if (t && t.id) {
+                    const tRef = firebaseFirestore.collection('transactions').doc(String(t.id));
+                    batch.set(tRef, {
+                        id: t.id,
+                        studentId: t.studentId,
+                        studentName: t.studentName,
+                        amount: Number(t.amount) || 0,
+                        type: t.type,
+                        category: t.category || '',
+                        note: t.note || '',
+                        date: t.date,
+                        syncedAt: payload.lastUpdated
+                    }, { merge: true });
+                }
+            });
+        }
+
+        // 3. Konfigurasi Sistem di collection 'settings'
+        const setRef = firebaseFirestore.collection('settings').doc('wa_gateway');
+        batch.set(setRef, {
+            waConfig: payload.waConfig || {},
+            lastUpdated: payload.lastUpdated
+        }, { merge: true });
+
+        batch.commit().then(() => {
+            console.log('[Firestore] Sinkronisasi modular collections (students, transactions, settings) berhasil.');
+        }).catch(err => {
+            console.warn('[Firestore] Modular sync batch note:', err.message);
+        });
+    } catch (e) {
+        console.warn('[Firestore] Error pada modular batch:', e);
+    }
+}
+
+// Backward Compatibility Aliases agar seluruh fungsi website tetap berjalan mulus
+function initFirebaseRealtimeSync() {
+    return initFirestoreSync();
+}
+
+function saveToFirebaseDatabase(force = true) {
+    return saveToFirestoreDatabase(force);
+}
+
 function syncToFirebase(force = false) {
     if (force) {
-        return saveToFirebaseDatabase(true);
+        return saveToFirestoreDatabase(true);
     }
     if (firebaseSyncDebounceTimer) {
         clearTimeout(firebaseSyncDebounceTimer);
     }
     firebaseSyncDebounceTimer = setTimeout(() => {
-        saveToFirebaseDatabase(true);
+        saveToFirestoreDatabase(true);
     }, 250);
 }
 
 function refreshData() {
     updateCloudSyncStatus('syncing', 'Menyegarkan...');
-    showToast('Menyegarkan data langsung dari Firebase Database...', 'info');
+    showToast('Menyegarkan data langsung dari Cloud Firestore...', 'info');
     checkAndRefreshCloudData(false);
 }
 
