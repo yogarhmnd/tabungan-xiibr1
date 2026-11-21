@@ -487,18 +487,19 @@
                 </div>
 
                 <!-- Recent Transactions Widget -->
-                <div class="card full-width">
-                    <div class="card-header">
+                <div class="card full-width card-recent-transactions">
+                    <div class="card-header recent-tx-header">
                         <div class="card-title">
                             <h3><i class="fa-solid fa-clock-rotate-left"></i> Transaksi Terakhir Kelas</h3>
-                            <p>Mutasi setoran & penarikan paling baru</p>
+                            <p>Mutasi setoran &amp; penarikan paling baru</p>
                         </div>
-                        <button class="btn btn-secondary btn-sm" onclick="switchTab('transaksi')">
-                            Lihat Semua Transaksi <i class="fa-solid fa-arrow-right"></i>
+                        <button type="button" class="btn btn-secondary btn-sm btn-recent-tx-all" onclick="switchTab('transaksi')" aria-label="Lihat Semua Transaksi">
+                            <span>Lihat Semua</span> <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive">
+                        <!-- Desktop Table View -->
+                        <div class="table-responsive recent-tx-table-wrapper">
                             <table class="data-table">
                                 <thead>
                                     <tr>
@@ -515,6 +516,10 @@
                                     <!-- Dynamic -->
                                 </tbody>
                             </table>
+                        </div>
+                        <!-- Mobile Responsive Transaction Stream -->
+                        <div class="recent-tx-mobile-list" id="recent-transactions-mobile">
+                            <!-- Dynamic Mobile Cards -->
                         </div>
                     </div>
                 </div>

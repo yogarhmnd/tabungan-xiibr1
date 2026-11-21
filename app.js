@@ -6499,44 +6499,98 @@ function renderDashboard() {
     // Recent Transactions (Dengan Avatar Foto Dinamis)
     const recentTx = [...appTransactions].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
     const recentTbody = document.getElementById('recent-transactions-tbody');
-    if (recentTx.length === 0) {
-        recentTbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted p-4">Belum ada transaksi. Silakan tambah setoran siswa.</td></tr>`;
-    } else {
-        recentTbody.innerHTML = recentTx.map(t => {
-            const student = appStudents.find(s => s.id === t.studentId);
-            const avatarHtml = getStudentMiniAvatarHtml(student || t.studentName, 28);
-            return `
-            <tr>
-                <td><code>${t.id}</code></td>
-                <td>${formatDateTime(t.date)}</td>
-                <td>
-                    <div class="student-col-flex">
-                        ${avatarHtml}
-                        <span><strong>${escapeHtml(t.studentName)}</strong></span>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge ${t.type === 'setor' ? 'badge-emerald' : 'badge-rose'}">
-                        ${t.type === 'setor' ? 'SETORAN' : 'PENARIKAN'}
-                    </span>
-                </td>
-                <td>${escapeHtml(t.category)}</td>
-                <td class="font-weight-bold ${t.type === 'setor' ? 'text-emerald' : 'text-rose'}">
-                    ${t.type === 'setor' ? '+' : '-'} ${formatRp(t.amount)}
-                </td>
-                <td>
-                    <div class="d-flex gap-1">
-                        <button class="btn btn-secondary btn-sm" onclick="openReceiptModal('${t.id}')">
-                            <i class="fa-solid fa-receipt"></i> Struk
-                        </button>
-                        <button class="btn btn-whatsapp btn-sm" onclick="triggerWaDirect('${t.id}')" title="Kirim WA Notifikasi">
-                            <i class="fa-brands fa-whatsapp"></i> WA
-                        </button>
-                    </div>
-                </td>
-            </tr>
+    const recentMobileList = document.getElementById('recent-transactions-mobile');
+
+    if (recentTbody) {
+        if (recentTx.length === 0) {
+            recentTbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted p-4">Belum ada transaksi. Silakan tambah setoran siswa.</td></tr>`;
+        } else {
+            recentTbody.innerHTML = recentTx.map(t => {
+                const student = appStudents.find(s => s.id === t.studentId);
+                const avatarHtml = getStudentMiniAvatarHtml(student || t.studentName, 28);
+                return `
+                <tr>
+                    <td><code>${t.id}</code></td>
+                    <td>${formatDateTime(t.date)}</td>
+                    <td>
+                        <div class="student-col-flex">
+                            ${avatarHtml}
+                            <span><strong>${escapeHtml(t.studentName)}</strong></span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge ${t.type === 'setor' ? 'badge-emerald' : 'badge-rose'}">
+                            ${t.type === 'setor' ? 'SETORAN' : 'PENARIKAN'}
+                        </span>
+                    </td>
+                    <td>${escapeHtml(t.category)}</td>
+                    <td class="font-weight-bold ${t.type === 'setor' ? 'text-emerald' : 'text-rose'}">
+                        ${t.type === 'setor' ? '+' : '-'} ${formatRp(t.amount)}
+                    </td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="openReceiptModal('${t.id}')">
+                                <i class="fa-solid fa-receipt"></i> Struk
+                            </button>
+                            <button type="button" class="btn btn-whatsapp btn-sm" onclick="triggerWaDirect('${t.id}')" title="Kirim WA Notifikasi">
+                                <i class="fa-brands fa-whatsapp"></i> WA
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                `;
+            }).join('');
+        }
+    }
+
+    if (recentMobileList) {
+        if (recentTx.length === 0) {
+            recentMobileList.innerHTML = `
+                <div class="recent-tx-empty text-center text-muted p-4">
+                    <i class="fa-solid fa-receipt fa-2x mb-2 text-secondary" style="opacity: 0.5;"></i>
+                    <p class="mb-0">Belum ada transaksi mutasi. Silakan tambah setoran siswa.</p>
+                </div>
             `;
-        }).join('');
+        } else {
+            recentMobileList.innerHTML = recentTx.map(t => {
+                const student = appStudents.find(s => s.id === t.studentId);
+                const avatarHtml = getStudentMiniAvatarHtml(student || t.studentName, 36);
+                const isSetor = t.type === 'setor';
+                return `
+                <div class="recent-tx-mobile-card">
+                    <div class="tx-m-header">
+                        <div class="tx-m-student">
+                            ${avatarHtml}
+                            <div class="tx-m-student-details">
+                                <span class="tx-m-name">${escapeHtml(t.studentName)}</span>
+                                <span class="tx-m-date"><i class="fa-regular fa-clock"></i> ${formatDateTime(t.date)}</span>
+                            </div>
+                        </div>
+                        <div class="tx-m-amount-badge">
+                            <span class="tx-m-amount ${isSetor ? 'text-emerald' : 'text-rose'}">
+                                ${isSetor ? '+' : '-'} ${formatRp(t.amount)}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="tx-m-meta-row">
+                        <span class="badge ${isSetor ? 'badge-emerald' : 'badge-rose'}">
+                            <i class="fa-solid ${isSetor ? 'fa-arrow-down-left' : 'fa-arrow-up-right'}"></i> ${isSetor ? 'SETORAN' : 'PENARIKAN'}
+                        </span>
+                        <span class="badge badge-indigo">${escapeHtml(t.category)}</span>
+                        <code class="tx-m-code">${t.id}</code>
+                    </div>
+                    <div class="tx-m-actions">
+                        <button type="button" class="btn btn-secondary btn-sm tx-m-btn" onclick="openReceiptModal('${t.id}')" aria-label="Lihat Struk ${t.id}">
+                            <i class="fa-solid fa-receipt"></i> <span>Struk</span>
+                        </button>
+                        <button type="button" class="btn btn-whatsapp btn-sm tx-m-btn" onclick="triggerWaDirect('${t.id}')" title="Kirim WA Notifikasi" aria-label="Kirim Notifikasi WA ${t.id}">
+                            <i class="fa-brands fa-whatsapp"></i> <span>Kirim WA</span>
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
     }
 }
 
