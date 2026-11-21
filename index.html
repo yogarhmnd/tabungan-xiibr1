@@ -345,14 +345,14 @@
         <!-- Main Content Area -->
         <main class="main-content">
             <!-- Top Navbar Header -->
-            <header class="top-header">
+            <header class="top-header" role="banner">
                 <div class="header-left-group">
-                    <button class="mobile-hamburger-btn" onclick="toggleSidebar()" title="Buka Menu Navigasi">
-                        <i class="fa-solid fa-bars"></i> <span>Menu</span>
+                    <button type="button" class="mobile-hamburger-btn" onclick="toggleSidebar()" title="Buka Menu Navigasi" aria-label="Buka Menu Navigasi">
+                        <i class="fa-solid fa-bars" aria-hidden="true"></i> <span class="hamburger-text">Menu</span>
                     </button>
                     <div class="header-title">
-                        <h1 id="page-title">Dashboard Tabungan Siswa</h1>
-                        <p id="page-subtitle">Sistem Tabungan XII Bisnis Ritel 1 - SMK PGRI 11 Ciledug Kota Tangerang.</p>
+                        <h1 id="page-title">Dashboard Kas Kelas</h1>
+                        <p id="page-subtitle">Sistem Tabungan XII Bisnis Ritel 1: SMK PGRI 11 Ciledug Kota Tangerang.</p>
                     </div>
                 </div>
 
@@ -360,28 +360,28 @@
                 <div class="header-center-group admin-only">
                     <div class="search-box header-search-expanded">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="global-search" placeholder="Cari siswa, NISN, atau mutasi transaksi..." oninput="handleGlobalSearch(this.value)">
+                        <input type="text" id="global-search" placeholder="Cari siswa, NISN, atau mutasi transaksi..." oninput="handleGlobalSearch(this.value)" aria-label="Pencarian Global">
                     </div>
                 </div>
 
                 <!-- Right-aligned action and utility items -->
                 <div class="header-actions">
                     <!-- Primary Action -->
-                    <button class="btn btn-primary admin-only" onclick="openAddStudentModal()" title="Tambah Data Siswa Baru">
-                        <i class="fa-solid fa-user-plus"></i> <span>Tambah Siswa</span>
+                    <button type="button" class="btn btn-primary admin-only btn-add-student-top" onclick="openAddStudentModal()" title="Tambah Data Siswa Baru" aria-label="Tambah Siswa Baru">
+                        <i class="fa-solid fa-user-plus" aria-hidden="true"></i> <span class="btn-text">Tambah Siswa</span>
                     </button>
 
                     <!-- Utility Group: Cloud Realtime Sync & Theme Toggle & Refresh Data -->
                     <div class="header-utility-group">
-                        <div id="cloud-sync-badge" class="cloud-sync-badge sync-active" onclick="handleCloudBadgeClick()" title="Status Cloud Database: Terhubung & Real-Time Sync Aktif">
+                        <div id="cloud-sync-badge" class="cloud-sync-badge sync-active" onclick="handleCloudBadgeClick()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();handleCloudBadgeClick();}" title="Status Cloud Database: Terhubung & Real-Time Sync Aktif" aria-label="Status Sinkronisasi Cloud" role="button" tabindex="0">
                             <span class="cloud-pulse-dot"></span>
                             <i class="fa-solid fa-cloud"></i>
                             <span class="cloud-sync-text" id="cloud-sync-status-text">Cloud Sync</span>
                         </div>
-                        <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" title="Ubah Tema Warna (Light / Dark Mode)">
+                        <button type="button" class="btn btn-secondary btn-icon btn-theme-toggle-header" onclick="toggleTheme()" title="Ubah Tema Warna (Light / Dark Mode)" aria-label="Ubah Tema Warna">
                             <i class="fa-solid fa-sun" id="theme-icon-header"></i>
                         </button>
-                        <button class="btn btn-secondary btn-icon" onclick="refreshData()" title="Segarkan / Refresh Data">
+                        <button type="button" class="btn btn-secondary btn-icon btn-refresh-header" onclick="refreshData()" title="Segarkan / Refresh Data" aria-label="Segarkan Data Tabungan">
                             <i class="fa-solid fa-rotate"></i>
                         </button>
                     </div>
@@ -390,8 +390,8 @@
 
                     <!-- Logout Button -->
                     <div class="header-user-group">
-                        <button class="btn btn-rose btn-logout-top" onclick="handleLogout()" title="Keluar / Logout dari Sistem">
-                            <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+                        <button type="button" class="btn btn-rose btn-logout-top" onclick="handleLogout()" title="Keluar / Logout dari Sistem" aria-label="Keluar dari Sistem">
+                            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> <span class="btn-text">Logout</span>
                         </button>
                     </div>
                 </div>
@@ -919,7 +919,7 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3><i class="fa-solid fa-trophy"></i> Papan Tabungan Kelas XII BR 1</h3>
-                            <p>Peringkat & saldo tabungan seluruh siswa — <em>Hanya dapat dilihat</em></p>
+                            <p>Peringkat & saldo tabungan seluruh siswa: <em>Hanya dapat dilihat</em></p>
                         </div>
                     </div>
                     <div class="card-body p-0">

@@ -1,4 +1,4 @@
-/* ==========================================================================
+ta/* ==========================================================================
    APPLICATION INTERACTIVITY & LOGIC: Tabungan Siswa XII BR 1
    SMK PGRI 11 CILEDUG KOTA TANGERANG
    Wali Kelas: Yoga Rahmanda, S.Pd.
@@ -14,14 +14,14 @@ const STORAGE_THEME_KEY = 'tabungbr1_theme_v12';
 
 // Firebase Realtime Database Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBYQE1E7ngrkm3lNQCkDw6Xzqc-cnT49Ac",
-  authDomain: "tabungan-xiibr1.firebaseapp.com",
-  databaseURL: "https://tabungan-xiibr1-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "tabungan-xiibr1",
-  storageBucket: "tabungan-xiibr1.firebasestorage.app",
-  messagingSenderId: "1034930108247",
-  appId: "1:1034930108247:web:6ce84384d99ebb35d2f012",
-  measurementId: "G-VVQ3FTZ8E0"
+    apiKey: "AIzaSyBYQE1E7ngrkm3lNQCkDw6Xzqc-cnT49Ac",
+    authDomain: "tabungan-xiibr1.firebaseapp.com",
+    databaseURL: "https://tabungan-xiibr1-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "tabungan-xiibr1",
+    storageBucket: "tabungan-xiibr1.firebasestorage.app",
+    messagingSenderId: "1034930108247",
+    appId: "1:1034930108247:web:6ce84384d99ebb35d2f012",
+    measurementId: "G-VVQ3FTZ8E0"
 };
 
 let firebaseApp = null;
@@ -5156,7 +5156,7 @@ function applyTheme(theme, showNotification = false) {
     localStorage.setItem(STORAGE_THEME_KEY, theme);
 
     const isLight = theme === 'light';
-    
+
     // Update Header Icon
     const headerIcon = document.getElementById('theme-icon-header');
     if (headerIcon) {
@@ -5212,7 +5212,7 @@ function adaptLogoBackground(imgEl, targetBoxId = null) {
             g = Math.round(g / count);
             b = Math.round(b / count);
 
-            const boxesToUpdate = targetBoxId 
+            const boxesToUpdate = targetBoxId
                 ? [document.getElementById(targetBoxId)]
                 : [document.getElementById('brand-icon-box'), document.getElementById('login-icon-box')];
 
@@ -5251,7 +5251,7 @@ function saveLocalCache() {
     try {
         localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(appStudents));
         localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
-    } catch(e) {
+    } catch (e) {
         try {
             const lightweight = appStudents.map(s => {
                 const copy = { ...s };
@@ -5262,7 +5262,7 @@ function saveLocalCache() {
             });
             localStorage.setItem(STORAGE_STUDENTS_KEY, JSON.stringify(lightweight));
             localStorage.setItem(STORAGE_TX_KEY, JSON.stringify(appTransactions));
-        } catch(err2) {
+        } catch (err2) {
             console.warn('[Cache] Gagal menyimpan cache lokal:', err2);
         }
     }
@@ -5276,7 +5276,7 @@ function loadState() {
     if (cachedStudents) {
         try {
             appStudents = JSON.parse(cachedStudents);
-        } catch(e) {
+        } catch (e) {
             appStudents = JSON.parse(JSON.stringify(OFFICIAL_STUDENTS));
         }
     } else {
@@ -5286,7 +5286,7 @@ function loadState() {
     if (cachedTx) {
         try {
             appTransactions = JSON.parse(cachedTx);
-        } catch(e) {
+        } catch (e) {
             appTransactions = (typeof INITIAL_TRANSACTIONS !== 'undefined') ? JSON.parse(JSON.stringify(INITIAL_TRANSACTIONS)) : [];
         }
     } else {
@@ -5305,7 +5305,7 @@ function saveTransactions() {
 // Reset all savings data to zero (Admin utility)
 function resetAllSavingsData() {
     if (!confirm('Apakah Anda yakin ingin MENGHAPUS SEMUA DATA MUTASI TRANSAKSI dan MERESET SALDO seluruh 44 siswa menjadi Rp 0?')) return;
-    
+
     appStudents = JSON.parse(JSON.stringify(OFFICIAL_STUDENTS));
     appTransactions = [];
     saveToFirebaseDatabase(true);
@@ -5347,7 +5347,7 @@ function scanAndRecoverPendingLocalTransactions(manual = false) {
         function processCandidateTx(t) {
             if (!t || (!t.id && !t.studentId) || typeof t.amount !== 'number' || t.amount <= 0) return;
 
-            const exists = appTransactions.some(ex => 
+            const exists = appTransactions.some(ex =>
                 (ex.id && t.id && ex.id === t.id) ||
                 (ex.studentId === t.studentId && ex.date === t.date && Number(ex.amount) === Number(t.amount) && ex.type === t.type)
             );
@@ -5360,9 +5360,9 @@ function scanAndRecoverPendingLocalTransactions(manual = false) {
                 foundAny = true;
                 recoveredDetails.push(t);
 
-                const student = appStudents.find(s => 
-                    s.id === t.studentId || 
-                    s.nisn === t.studentId || 
+                const student = appStudents.find(s =>
+                    s.id === t.studentId ||
+                    s.nisn === t.studentId ||
                     (s.name && t.studentName && s.name.trim().toUpperCase() === t.studentName.trim().toUpperCase())
                 );
                 if (student) {
@@ -5383,7 +5383,7 @@ function scanAndRecoverPendingLocalTransactions(manual = false) {
                         } else if (parsed && parsed.transactions && Array.isArray(parsed.transactions)) {
                             parsed.transactions.forEach(processCandidateTx);
                         }
-                    } catch(e) {}
+                    } catch (e) { }
                 }
             });
         });
@@ -5394,11 +5394,11 @@ function scanAndRecoverPendingLocalTransactions(manual = false) {
                 try {
                     const val = store.getItem(keyName);
                     if (val && (
-                        val.includes('2026-09-30') || 
-                        val.includes('2026-09-29') || 
-                        val.includes('2026-09-28') || 
-                        val.includes('2026-09') || 
-                        val.includes('setor') || 
+                        val.includes('2026-09-30') ||
+                        val.includes('2026-09-29') ||
+                        val.includes('2026-09-28') ||
+                        val.includes('2026-09') ||
+                        val.includes('setor') ||
                         val.includes('tarik') ||
                         val.includes('TRX-') ||
                         val.includes('TX-')
@@ -5412,7 +5412,7 @@ function scanAndRecoverPendingLocalTransactions(manual = false) {
                             processCandidateTx(parsed);
                         }
                     }
-                } catch(e) {}
+                } catch (e) { }
             }
         });
 
@@ -5437,19 +5437,19 @@ function scanAndRecoverPendingLocalTransactions(manual = false) {
         } else {
             console.log('[Recovery Engine] Seluruh transaksi lokal sudah tersinkron dengan Cloud.');
         }
-    } catch(err) {
+    } catch (err) {
         console.warn('[Recovery Engine] Error during scanner execution:', err);
     }
 }
 
 function openDataRecoveryModal() {
     populateStudentDropdowns();
-    
+
     // Populate rec-student-id select
     const recSelect = document.getElementById('rec-student-id');
     if (recSelect) {
         const sorted = [...appStudents].sort((a, b) => a.name.localeCompare(b.name));
-        recSelect.innerHTML = '<option value="">-- Pilih Nama Siswa --</option>' + 
+        recSelect.innerHTML = '<option value="">-- Pilih Nama Siswa --</option>' +
             sorted.map(s => `<option value="${s.id}">${escapeHtml(s.name)} (NISN: ${s.nisn})</option>`).join('');
     }
 
@@ -5572,9 +5572,9 @@ function importManualBackupJSONText(rawInput) {
             saveToFirebaseDatabase(true);
             renderAllViews();
             if (currentUser && currentUser.role === 'admin') {
-        if (typeof updateStatsCards === 'function') updateStatsCards();
-        if (typeof updateChart === 'function') updateChart();
-    }
+                if (typeof updateStatsCards === 'function') updateStatsCards();
+                if (typeof updateChart === 'function') updateChart();
+            }
             populateStudentDropdowns();
             showFeedbackSuccessModal(
                 'Import Data Berhasil!',
@@ -5583,7 +5583,7 @@ function importManualBackupJSONText(rawInput) {
         } else {
             showToast('Seluruh transaksi dalam file/teks tersebut sudah ada di database.', 'info');
         }
-    } catch(err) {
+    } catch (err) {
         showToast('Gagal mengurai file JSON: ' + err.message, 'danger');
     }
 }
@@ -5679,7 +5679,7 @@ function togglePasswordVisibility(inputId, iconId) {
 function handleStudentSelectChange(selectedNisn) {
     const previewBox = document.getElementById('login-student-preview');
     const submitBtn = document.getElementById('btn-login-siswa-submit');
-    
+
     if (!selectedNisn) {
         if (previewBox) previewBox.classList.add('hidden');
         if (submitBtn) submitBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> Masuk Sebagai Siswa`;
@@ -5747,11 +5747,11 @@ function handleLoginSiswa(e) {
     const studentPass = (student.password || 'password123').trim().toLowerCase();
     const nisnPass = (student.nisn || '').trim().toLowerCase();
 
-    const isPasswordValid = !passwordInput || 
-                            inputPass === studentPass || 
-                            inputPass === 'password123' || 
-                            inputPass === nisnPass || 
-                            passwordInput === (student.password || 'password123');
+    const isPasswordValid = !passwordInput ||
+        inputPass === studentPass ||
+        inputPass === 'password123' ||
+        inputPass === nisnPass ||
+        passwordInput === (student.password || 'password123');
 
     if (isPasswordValid) {
         currentUser = {
@@ -5771,11 +5771,11 @@ function handleLoginSiswa(e) {
 
 function handleLogout() {
     if (!confirm('Apakah Anda yakin ingin keluar (logout) dari sistem tabungan ini?')) return;
-    
+
     const roleName = currentUser && currentUser.role === 'admin' ? 'Wali Kelas' : 'Siswa';
     currentUser = null;
     sessionStorage.removeItem(STORAGE_AUTH_KEY);
-    
+
     showToast(`Berhasil keluar (logout) dari akun ${roleName}.`, 'success');
     showLoginOverlay();
 }
@@ -5790,7 +5790,7 @@ function showAppScreen() {
     document.getElementById('app-wrapper').style.display = 'flex';
 
     const isAdmin = currentUser.role === 'admin';
-    
+
     // Tampilkan/sembunyikan elemen berdasarkan role
     document.querySelectorAll('.admin-only').forEach(el => {
         if (isAdmin) el.classList.remove('hidden');
@@ -5803,27 +5803,27 @@ function showAppScreen() {
 
     // Tandai sidebar role untuk styling CSS
     document.getElementById('app-wrapper').setAttribute('data-role', isAdmin ? 'admin' : 'siswa');
-    
+
     const roleIcon = document.getElementById('user-role-badge').querySelector('i');
-    
+
     if (isAdmin) {
         // WALI KELAS: tampilan penuh admin
         document.getElementById('logged-user-name').innerText = 'Yoga Rahmanda, S.Pd.';
         document.getElementById('logged-user-role').innerText = 'Wali Kelas (Admin)';
         document.getElementById('logged-user-role').className = 'badge badge-emerald';
         if (roleIcon) roleIcon.className = 'fa-solid fa-user-shield';
-        document.getElementById('page-title').innerText = 'Dashboard Tabungan Kelas';
-        document.getElementById('page-subtitle').innerText = 'Panel Wali Kelas — Kelola Tabungan XII Bisnis Ritel 1';
+        document.getElementById('page-title').innerText = 'Dashboard Kas Kelas';
+        document.getElementById('page-subtitle').innerText = 'Panel Wali Kelas: Kelola Tabungan XII Bisnis Ritel 1';
         switchTab('dashboard');
         initChart();
     } else {
         // SISWA: tampilan terbatas
         document.getElementById('logged-user-name').innerText = currentUser.name;
-        document.getElementById('logged-user-role').innerText = `Siswa — NISN: ${currentUser.nisn}`;
+        document.getElementById('logged-user-role').innerText = `Siswa (NISN: ${currentUser.nisn})`;
         document.getElementById('logged-user-role').className = 'badge badge-indigo';
         if (roleIcon) roleIcon.className = 'fa-solid fa-user-graduate';
         document.getElementById('page-title').innerText = 'Buku Tabungan Saya';
-        document.getElementById('page-subtitle').innerText = `Halo, ${currentUser.name}! — XII Bisnis Ritel 1 SMK PGRI 11 Ciledug`;
+        document.getElementById('page-subtitle').innerText = `Halo, ${currentUser.name}! (XII Bisnis Ritel 1 SMK PGRI 11 Ciledug)`;
         switchTab('tabungan-saya');
     }
 
@@ -5887,19 +5887,19 @@ function switchTab(tabId) {
 
     // Judul halaman kontekstual
     const titleMap = {
-        'dashboard': 'Dashboard Kas & Tabungan Kelas',
-        'transaksi': 'Kelola Transaksi Uang Masuk & Keluar',
-        'siswa': 'Data Siswa XII Bisnis Ritel 1 (44 Siswa)',
-        'laporan': 'Laporan Keuangan Kas Kelas',
+        'dashboard': 'Dashboard Kas Kelas',
+        'transaksi': 'Kelola Transaksi',
+        'siswa': 'Data Siswa XII BR 1',
+        'laporan': 'Laporan Kas & Rekap',
         'tabungan-saya': 'Buku Tabungan Saya',
         'teman-sekelas': 'Papan Tabungan Kelas'
     };
     const subtitleMap = {
-        'dashboard': 'Panel Wali Kelas — Kelola Tabungan XII Bisnis Ritel 1',
+        'dashboard': 'Panel Wali Kelas: Kelola Tabungan XII Bisnis Ritel 1',
         'transaksi': 'Riwayat lengkap mutasi setoran & penarikan seluruh siswa',
         'siswa': 'Data profil, saldo, & target tabungan 44 siswa terdaftar',
         'laporan': 'Rekapitulasi resmi oleh Wali Kelas Yoga Rahmanda, S.Pd.',
-        'tabungan-saya': currentUser ? `Halo, ${currentUser.name}! — XII Bisnis Ritel 1` : '',
+        'tabungan-saya': currentUser ? `Halo, ${currentUser.name}! (XII Bisnis Ritel 1)` : '',
         'teman-sekelas': 'Peringkat & progres tabungan seluruh teman sekelas Anda'
     };
     document.getElementById('page-title').innerText = titleMap[tabId] || 'Tabungan Siswa';
@@ -6018,8 +6018,8 @@ function renderLeaderboard() {
         const statusBadge = progress >= 100
             ? `<span class="badge badge-emerald"><i class="fa-solid fa-check-circle"></i> Lunas</span>`
             : progress >= 50
-            ? `<span class="badge badge-amber"><i class="fa-solid fa-hourglass-half"></i> Setengah Jalan</span>`
-            : `<span class="badge badge-indigo"><i class="fa-solid fa-hourglass-start"></i> Baru Mulai</span>`;
+                ? `<span class="badge badge-amber"><i class="fa-solid fa-hourglass-half"></i> Setengah Jalan</span>`
+                : `<span class="badge badge-indigo"><i class="fa-solid fa-hourglass-start"></i> Baru Mulai</span>`;
 
         return `
         <tr style="${isMe ? 'background: rgba(99,102,241,0.12); font-weight: 700;' : ''}">
@@ -6124,7 +6124,7 @@ function applyCloudDataWithLocalMerge(data) {
 
     // 1. Smart Merge Transactions (Gabungkan data remote & data lokal tanpa kehilangan transaksi)
     const txMap = new Map();
-    
+
     // Pindai data transaksi dari remote Cloud
     remoteTx.forEach(t => {
         if (t && (t.id || t.studentId)) {
@@ -6139,15 +6139,15 @@ function applyCloudDataWithLocalMerge(data) {
         appTransactions.forEach(localT => {
             if (!localT || (!localT.id && !localT.studentId)) return;
             const key = localT.id || `${localT.studentId}_${localT.date}_${localT.amount}_${localT.type}`;
-            
+
             if (!txMap.has(key)) {
                 // Pengecekan duplikasi berdasarkan kriteria siswa + tanggal + nominal + jenis
                 const isDuplicate = Array.from(txMap.values()).some(rt =>
                     (rt.id && localT.id && rt.id === localT.id) ||
-                    (rt.studentId === localT.studentId && 
-                     rt.date === localT.date && 
-                     Number(rt.amount) === Number(localT.amount) && 
-                     rt.type === localT.type)
+                    (rt.studentId === localT.studentId &&
+                        rt.date === localT.date &&
+                        Number(rt.amount) === Number(localT.amount) &&
+                        rt.type === localT.type)
                 );
                 if (!isDuplicate) {
                     txMap.set(key, localT);
@@ -6181,6 +6181,9 @@ function applyCloudDataWithLocalMerge(data) {
                 if (localS.photo && localS.photo.startsWith('data:image') && (!remoteS.photo || !remoteS.photo.startsWith('data:image'))) {
                     remoteS.photo = localS.photo;
                 }
+                if (isSyncingToCloud && typeof localS.balance === 'number' && !isNaN(localS.balance)) {
+                    remoteS.balance = localS.balance;
+                }
             } else {
                 studentMap.set(key, { ...localS });
                 missingLocalTxToSync = true;
@@ -6190,7 +6193,8 @@ function applyCloudDataWithLocalMerge(data) {
 
     let mergedStudents = Array.from(studentMap.values());
 
-    // Rekalkulasi saldo setiap siswa secara akurat berdasarkan mutasi transaksi ter-merge
+    // Rekalkulasi saldo setiap siswa secara akurat: hormati saldo tersimpan (termasuk direct edit),
+    // atau gunakan akumulasi mutasi transaksi jika saldo belum terdefinisi.
     mergedStudents = mergedStudents.map(student => {
         let netBalance = 0;
         mergedTransactions.forEach(t => {
@@ -6202,7 +6206,10 @@ function applyCloudDataWithLocalMerge(data) {
             }
         });
 
-        const finalBalance = Math.max(netBalance, student.balance || 0);
+        const finalBalance = (typeof student.balance === 'number' && !isNaN(student.balance))
+            ? student.balance
+            : (netBalance || 0);
+
         return {
             ...student,
             balance: finalBalance
@@ -6216,7 +6223,7 @@ function applyCloudDataWithLocalMerge(data) {
         waConfig = { ...waConfig, ...data.waConfig };
         try {
             localStorage.setItem(STORAGE_WA_CONFIG_KEY, JSON.stringify(waConfig));
-        } catch(e) {}
+        } catch (e) { }
     }
 
     // 4. Langsung simpan hasil merge ke LocalStorage agar saat di-refresh data tetap tersimpan permanen
@@ -6254,7 +6261,7 @@ function initFirebaseRealtimeSync() {
                 firebase.auth().signInAnonymously().catch(e => {
                     console.log('[Firebase Auth] Anonymous notice:', e.message);
                 });
-            } catch(authErr) {
+            } catch (authErr) {
                 // ignore
             }
         }
@@ -6553,7 +6560,7 @@ function renderStudentDashboard() {
     document.getElementById('s-welcome-name').innerText = student.name;
     document.getElementById('s-welcome-nisn').innerText = student.nisn;
 
-    const myTx = appTransactions.filter(t => t.studentId === student.id);
+    const myTx = appTransactions.filter(t => t.studentId === student.id || t.studentId === student.nisn);
     const totalSetor = myTx.filter(t => t.type === 'setor').reduce((acc, t) => acc + t.amount, 0);
     const totalTarik = myTx.filter(t => t.type === 'tarik').reduce((acc, t) => acc + t.amount, 0);
 
@@ -6569,10 +6576,13 @@ function renderStudentDashboard() {
 
     const sortedTx = [...myTx].sort((a, b) => new Date(b.date) - new Date(a.date));
     const tbody = document.getElementById('my-history-tbody');
-    if (sortedTx.length === 0) {
+    let txSum = myTx.reduce((acc, t) => acc + (t.type === 'setor' ? t.amount : -t.amount), 0);
+    const diff = (student.balance || 0) - txSum;
+
+    if (sortedTx.length === 0 && diff === 0) {
         tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted p-4">Belum ada riwayat transaksi tabungan untuk Anda.</td></tr>`;
     } else {
-        tbody.innerHTML = sortedTx.map(t => `
+        let rowsHtml = sortedTx.map(t => `
             <tr>
                 <td><code>${t.id}</code></td>
                 <td>${formatDateTime(t.date)}</td>
@@ -6593,6 +6603,28 @@ function renderStudentDashboard() {
                 </td>
             </tr>
         `).join('');
+
+        if (diff !== 0) {
+            const isPos = diff > 0;
+            const adjRow = `
+                <tr style="background: rgba(223, 186, 115, 0.12); font-weight: 600;">
+                    <td><code>ADJ-DIRECT</code></td>
+                    <td><em>Terkini</em></td>
+                    <td>
+                        <span class="badge badge-amber"><i class="fa-solid fa-pen-to-square"></i> KOREKSI SALDO</span>
+                    </td>
+                    <td><span class="badge badge-indigo">Penyesuaian</span></td>
+                    <td class="${isPos ? 'text-emerald' : 'text-rose'}" style="font-weight:700;">
+                        ${isPos ? '+' : '-'} ${formatRp(Math.abs(diff))}
+                    </td>
+                    <td><small>Koreksi direct saldo oleh Wali Kelas</small></td>
+                    <td><span class="text-muted small">-</span></td>
+                </tr>
+            `;
+            rowsHtml = adjRow + rowsHtml;
+        }
+
+        tbody.innerHTML = rowsHtml;
     }
 }
 
@@ -6619,7 +6651,7 @@ function applyTransactionFilters() {
     if (filterStudent !== 'all') filtered = filtered.filter(t => t.studentId === filterStudent);
     if (filterCategory !== 'all') filtered = filtered.filter(t => t.category === filterCategory);
     if (filterSearch) {
-        filtered = filtered.filter(t => 
+        filtered = filtered.filter(t =>
             t.studentName.toLowerCase().includes(filterSearch) ||
             t.id.toLowerCase().includes(filterSearch) ||
             (t.note && t.note.toLowerCase().includes(filterSearch))
@@ -6684,7 +6716,7 @@ function renderStudentsGrid() {
 
     container.innerHTML = sortedStudents.map(s => {
         const progress = s.target > 0 ? Math.min(100, Math.round((s.balance / s.target) * 100)) : 0;
-        const avatarHtml = s.photo 
+        const avatarHtml = s.photo
             ? `<div class="student-avatar-frame" style="background: ${getStudentAvatarGradient(s.name)};"><img src="${s.photo}" alt="${escapeHtml(s.name)}" class="student-photo-img" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerText='${s.name.charAt(0)}';"></div>`
             : `<div class="student-avatar" style="background: ${getStudentAvatarGradient(s.name)};">${s.name.charAt(0)}</div>`;
 
@@ -6731,7 +6763,7 @@ let currentReportTab = 'harian';
 
 function switchReportTab(tabType) {
     currentReportTab = tabType;
-    
+
     // Update active tab buttons and subviews
     ['harian', 'mingguan', 'bulanan', 'siswa'].forEach(t => {
         const btn = document.getElementById(`btn-rekap-${t}`);
@@ -7211,7 +7243,7 @@ let waConfig = {
 function loadWaConfig() {
     const saved = localStorage.getItem(STORAGE_WA_CONFIG_KEY);
     if (saved) {
-        try { waConfig = JSON.parse(saved); } catch(e) {}
+        try { waConfig = JSON.parse(saved); } catch (e) { }
     }
 }
 
@@ -7276,9 +7308,9 @@ function openBatchWaSummaryModal(type, category, date, note, processedList, tota
 
     document.getElementById('batch-wa-summary-title').innerText = `${processedList.length} Transaksi ${isSetor ? 'Setoran' : 'Penarikan'} Masal Berhasil`;
     document.getElementById('batch-wa-total-amount').innerText = formatRp(totalAmount);
-    
-    const waStatusText = (waConfig.autoBackground && waConfig.url && waConfig.token) 
-        ? 'OTOMATIS TERKIRIM DI BACKGROUND (WA Gateway Active)' 
+
+    const waStatusText = (waConfig.autoBackground && waConfig.url && waConfig.token)
+        ? 'OTOMATIS TERKIRIM DI BACKGROUND (WA Gateway Active)'
         : 'Standby (Siap Diposting Ke Grup WA)';
     document.getElementById('batch-wa-dispatch-status').innerText = waStatusText;
 
@@ -7431,15 +7463,16 @@ function handleTargetSubmit(e) {
     const newPhoto = document.getElementById('target-student-photo-val').value.trim() || null;
     const directBalanceInp = document.getElementById('direct-balance-input');
 
-    const studentIndex = appStudents.findIndex(s => s.id === studentId);
+    const studentIndex = appStudents.findIndex(s => s.id === studentId || s.nisn === studentId);
     if (studentIndex !== -1) {
         const student = appStudents[studentIndex];
         let directBalanceChanged = false;
-        let oldBal = student.balance;
+        let oldBal = Number(student.balance || 0);
 
-        if (directBalanceInp && directBalanceInp.value !== '') {
-            const newBal = Number(directBalanceInp.value);
-            if (!isNaN(newBal) && newBal >= 0 && newBal !== student.balance) {
+        if (directBalanceInp && directBalanceInp.value.toString().trim() !== '') {
+            const rawBal = directBalanceInp.value.toString().replace(/[^0-9]/g, '');
+            const newBal = rawBal !== '' ? parseInt(rawBal, 10) : NaN;
+            if (!isNaN(newBal) && newBal >= 0 && newBal !== oldBal) {
                 student.balance = newBal;
                 directBalanceChanged = true;
             }
@@ -7452,7 +7485,17 @@ function handleTargetSubmit(e) {
         saveLocalCache();
         saveStudents();
         saveToFirebaseDatabase(true);
+
+        // Jika user yang sedang login adalah siswa ini, perbarui objek currentUser di sesi login
+        if (currentUser && currentUser.role === 'siswa' && (currentUser.studentId === student.id || currentUser.nisn === student.nisn || currentUser.id === student.id)) {
+            currentUser = { ...currentUser, ...student, studentId: student.id, id: student.id };
+            sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+        }
+
         renderAllViews();
+        if (typeof updateStatsCards === 'function') updateStatsCards();
+        if (typeof updateChart === 'function') updateChart();
+        populateStudentDropdowns();
         closeModal('modal-edit-target');
 
         if (directBalanceChanged) {
@@ -7516,7 +7559,7 @@ function openTransactionModal(type = 'setor', studentId = '') {
     const d = new Date();
     const pad = n => String(n).padStart(2, '0');
     const localIso = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
-    
+
     const dateInp = document.getElementById('tx-date');
     if (dateInp) dateInp.value = localIso;
 
@@ -7675,8 +7718,8 @@ function buildWaMessageText(tx, student) {
     const txTypeStr = isSetor ? 'setoran tabungan siswa' : 'penarikan tabungan siswa';
     const txJenisStr = isSetor ? 'Setoran Tabungan' : 'Penarikan Tabungan';
     const txNominalLabel = isSetor ? 'Nominal Setoran' : 'Nominal Penarikan';
-    const concludingSentence = isSetor 
-        ? 'Setoran tersebut telah dicatat dan diperbarui pada administrasi tabungan kelas.' 
+    const concludingSentence = isSetor
+        ? 'Setoran tersebut telah dicatat dan diperbarui pada administrasi tabungan kelas.'
         : 'Penarikan tersebut telah dicatat dan diperbarui pada administrasi tabungan kelas.';
 
     const formattedDate = formatWaDate(tx.date);
@@ -7809,7 +7852,7 @@ function deleteTransaction(txId) {
 
 // Passbook Modal
 function openPassbookModal(studentId) {
-    const student = appStudents.find(s => s.id === studentId);
+    const student = appStudents.find(s => s.id === studentId || s.nisn === studentId);
     if (!student) return;
 
     document.getElementById('pb-nisn').innerText = `NISN: ${student.nisn}`;
@@ -7832,14 +7875,15 @@ function openPassbookModal(studentId) {
     document.getElementById('pb-progress-text').innerText = `${progress}%`;
     document.getElementById('pb-progress-bar').style.width = `${progress}%`;
 
-    const studentTx = appTransactions.filter(t => t.studentId === studentId).sort((a, b) => new Date(a.date) - new Date(b.date));
+    const studentTx = appTransactions.filter(t => t.studentId === student.id || t.studentId === student.nisn).sort((a, b) => new Date(a.date) - new Date(b.date));
 
     let runningBalance = 0;
     const tbody = document.getElementById('pb-history-tbody');
+    let rowsHtml = '';
     if (studentTx.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted p-4">Belum ada mutasi transaksi untuk siswa ini.</td></tr>`;
+        rowsHtml = `<tr><td colspan="7" class="text-center text-muted p-4">Belum ada mutasi transaksi untuk siswa ini.</td></tr>`;
     } else {
-        tbody.innerHTML = studentTx.map((t, idx) => {
+        rowsHtml = studentTx.map((t, idx) => {
             if (t.type === 'setor') runningBalance += t.amount;
             else runningBalance -= t.amount;
 
@@ -7857,6 +7901,29 @@ function openPassbookModal(studentId) {
         }).join('');
     }
 
+    const diff = (student.balance || 0) - runningBalance;
+    if (diff !== 0) {
+        runningBalance += diff;
+        const isPos = diff > 0;
+        const adjRow = `
+            <tr style="background: rgba(223, 186, 115, 0.12); font-weight: 600;">
+                <td>*</td>
+                <td><em>Penyesuaian</em></td>
+                <td><span class="badge badge-amber"><i class="fa-solid fa-pen-to-square"></i> Koreksi Saldo</span></td>
+                <td><small>Koreksi Direct Saldo oleh Wali Kelas</small></td>
+                <td class="text-emerald">${isPos ? '+' + formatRp(diff) : '-'}</td>
+                <td class="text-rose">${!isPos ? '-' + formatRp(Math.abs(diff)) : '-'}</td>
+                <td class="font-weight-bold text-emerald">${formatRp(runningBalance)}</td>
+            </tr>
+        `;
+        if (studentTx.length === 0) {
+            rowsHtml = adjRow;
+        } else {
+            rowsHtml += adjRow;
+        }
+    }
+
+    tbody.innerHTML = rowsHtml;
     openModal('modal-passbook');
 }
 
@@ -8125,7 +8192,7 @@ function openBatchEditStudentsModal() {
     renderBatchEditStudentRows();
     const searchInput = document.getElementById('batch-edit-search');
     if (searchInput) searchInput.value = '';
-    
+
     const importPanel = document.getElementById('batch-import-panel');
     if (importPanel) importPanel.classList.add('hidden');
 
@@ -8146,7 +8213,7 @@ function renderBatchEditStudentRows(studentsList = null) {
     }
 
     tbody.innerHTML = list.map((s, idx) => {
-        const thumbImg = s.photo 
+        const thumbImg = s.photo
             ? `<img src="${s.photo}" alt="${escapeHtml(s.name)}" id="batch-thumb-img-${s.id}">`
             : `<div id="batch-thumb-img-${s.id}" class="d-flex align-items-center justify-content-center w-100 h-100 font-weight-bold" style="background: ${getStudentAvatarGradient(s.name)}; font-size: 1.1rem; color: #fff;">${s.name.charAt(0)}</div>`;
 
@@ -8216,9 +8283,9 @@ function compressImageFile(file, maxWidth = 280, maxHeight = 350, quality = 0.8)
             return;
         }
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             const img = new Image();
-            img.onload = function() {
+            img.onload = function () {
                 const canvas = document.createElement('canvas');
                 let width = img.width;
                 let height = img.height;
@@ -8242,12 +8309,12 @@ function compressImageFile(file, maxWidth = 280, maxHeight = 350, quality = 0.8)
                 const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
                 resolve(compressedBase64);
             };
-            img.onerror = function() {
+            img.onerror = function () {
                 resolve(e.target.result);
             };
             img.src = e.target.result;
         };
-        reader.onerror = function() {
+        reader.onerror = function () {
             resolve(null);
         };
         reader.readAsDataURL(file);
@@ -8408,7 +8475,13 @@ function syncBatchTableInputsToMemory() {
         if (passInp && passInp.value.trim()) student.password = passInp.value.trim();
         if (photoInp) student.photo = photoInp.value.trim() || null;
         const balanceInp = row.querySelector('.batch-inp-balance');
-        if (balanceInp && !isNaN(parseInt(balanceInp.value, 10))) student.balance = parseInt(balanceInp.value, 10);
+        if (balanceInp && balanceInp.value.toString().trim() !== '') {
+            const rawBal = balanceInp.value.toString().replace(/[^0-9]/g, '');
+            const newBal = rawBal !== '' ? parseInt(rawBal, 10) : NaN;
+            if (!isNaN(newBal) && newBal >= 0) {
+                student.balance = newBal;
+            }
+        }
     });
 }
 
@@ -8421,7 +8494,7 @@ function filterBatchEditStudentRows(query) {
         return;
     }
 
-    const filtered = appStudents.filter(s => 
+    const filtered = appStudents.filter(s =>
         s.name.toLowerCase().includes(q) ||
         s.nisn.includes(q) ||
         (s.phone && s.phone.includes(q))
@@ -8494,7 +8567,7 @@ function processBatchImportText() {
         const photo = parts[5] ? parts[5].trim() : '';
 
         // Match with existing rows
-        const nameInp = Array.from(document.querySelectorAll('.batch-inp-name')).find(inp => 
+        const nameInp = Array.from(document.querySelectorAll('.batch-inp-name')).find(inp =>
             inp.value.toLowerCase().trim() === name.toLowerCase()
         );
 
@@ -8575,6 +8648,15 @@ function detectBatchChanges() {
         if ((init.photo || '') !== (curr.photo || '')) {
             studentDiffs.push({ field: 'photo', label: 'Pasfoto', oldVal: init.photo ? 'Foto Lama' : 'Inisial', newVal: curr.photo ? 'Foto Baru Diperbarui' : 'Dihapus', tagClass: 'tag-photo' });
         }
+        if (Number(init.balance || 0) !== Number(curr.balance || 0)) {
+            studentDiffs.push({
+                field: 'balance',
+                label: 'Saldo Tabungan',
+                oldVal: formatRp(init.balance || 0),
+                newVal: formatRp(curr.balance || 0),
+                tagClass: 'tag-balance'
+            });
+        }
 
         if (studentDiffs.length > 0) {
             changes.push({
@@ -8619,7 +8701,7 @@ function handleSaveBatchEditStudents(event) {
     if (listContainer) {
         listContainer.innerHTML = changes.map(item => {
             const s = item.student;
-            const thumbHtml = s.photo 
+            const thumbHtml = s.photo
                 ? `<img src="${s.photo}" alt="${escapeHtml(s.name)}">`
                 : `<div class="d-flex align-items-center justify-content-center w-100 h-100 font-weight-bold" style="background: ${getStudentAvatarGradient(s.name)}; font-size: 1.1rem; color: #fff;">${s.name.charAt(0)}</div>`;
 
@@ -8632,6 +8714,9 @@ function handleSaveBatchEditStudents(event) {
                 }
                 if (d.field === 'password') {
                     return `<span class="change-tag tag-pass"><i class="fa-solid fa-key"></i> Password diubah</span>`;
+                }
+                if (d.field === 'balance') {
+                    return `<span class="change-tag tag-balance" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);"><i class="fa-solid fa-wallet"></i> Saldo: ${d.oldVal} &rarr; <strong>${d.newVal}</strong></span>`;
                 }
                 return `<span class="change-tag"><i class="fa-solid fa-pen"></i> ${d.label}: <strong>${escapeHtml(d.newVal)}</strong></span>`;
             }).join('');
@@ -8667,8 +8752,20 @@ function executeBatchSaveConfirmed() {
         });
 
         // Simpan ke storage dan perbarui seluruh tampilan
+        saveLocalCache();
         saveStudents();
         saveTransactions();
+        saveToFirebaseDatabase(true);
+
+        // Jika user saat ini adalah siswa, sinkronkan data currentUser
+        if (currentUser && currentUser.role === 'siswa') {
+            const freshMe = appStudents.find(s => s.id === currentUser.studentId || s.nisn === currentUser.nisn || s.id === currentUser.id);
+            if (freshMe) {
+                currentUser = { ...currentUser, ...freshMe, studentId: freshMe.id, id: freshMe.id };
+                sessionStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(currentUser));
+            }
+        }
+
         populateStudentDropdowns();
         renderAllViews();
         if (typeof updateStatsCards === 'function') updateStatsCards();
@@ -8683,7 +8780,7 @@ function executeBatchSaveConfirmed() {
         // Tampilkan Pop-up Sukses yang Mewah & Interaktif
         showFeedbackSuccessModal(
             'Perubahan Data Siswa Berhasil Disimpan!',
-            `Data untuk ${appStudents.length} siswa kelas XII Bisnis Ritel 1 telah berhasil diperbarui dan disinkronkan secara permanen ke sistem.`
+            `Data dan saldo untuk ${appStudents.length} siswa kelas XII Bisnis Ritel 1 telah berhasil diperbarui dan disinkronkan secara permanen ke sistem.`
         );
     } catch (err) {
         console.error('Error saat menyimpan batch siswa:', err);
@@ -8965,7 +9062,7 @@ function downloadLocalStorageBackupSept28_29() {
                 if (Array.isArray(parsed)) {
                     parsed.forEach(checkAndAdd);
                 }
-            } catch(e) {}
+            } catch (e) { }
         }
     });
 
@@ -8981,7 +9078,7 @@ function downloadLocalStorageBackupSept28_29() {
                     checkAndAdd(parsed);
                 }
             }
-        } catch(e) {}
+        } catch (e) { }
     }
 
     if (foundTx.length === 0) {
@@ -8999,7 +9096,7 @@ function downloadLocalStorageBackupSept28_29() {
                             }
                         });
                     }
-                } catch(e) {}
+                } catch (e) { }
             }
         });
         foundTx = allLocalTx;
