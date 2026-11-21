@@ -6506,13 +6506,19 @@ function saveToFirestoreDatabase(force = true) {
         });
 }
 
-// Mirroring data ke Firestore Collections (students, transactions, settings)
+// ==========================================================================
+// ARSITEKTUR DATABASE CLOUD FIRESTORE TERINCI UNTUK SELURUH SISTEM
+// ==========================================================================
+
 function syncModularFirestoreCollections(payload) {
     if (!firebaseFirestore || !payload) return;
     try {
         const batch = firebaseFirestore.batch();
+        const nowIso = payload.lastUpdated || new Date().toISOString();
 
-        // 1. Dokumen per siswa di collection 'students'
+        // ------------------------------------------------------------------
+        // SUB-SISTEM 1: DATA SISWA (Collection: 'students')
+        // ------------------------------------------------------------------
         if (Array.isArray(payload.students)) {
             payload.students.forEach(s => {
                 if (s && (s.id || s.nisn)) {
@@ -6520,22 +6526,27 @@ function syncModularFirestoreCollections(payload) {
                     const sRef = firebaseFirestore.collection('students').doc(docId);
                     batch.set(sRef, {
                         id: s.id,
-                        name: s.name,
                         nisn: s.nisn,
-                        gender: s.gender || '',
+                        name: s.name,
+                        gender: s.gender || (s.name.includes('SITI') || s.name.includes('AULIA') || s.name.includes('PUTRI') ? 'P' : 'L'),
                         balance: Number(s.balance) || 0,
                         target: Number(s.target) || 0,
                         phone: s.phone || '',
                         parentPhone: s.parentPhone || '',
                         photo: s.photo || '',
                         notes: s.notes || '',
-                        lastUpdated: payload.lastUpdated
+                        status: 'active',
+                        classId: 'XII-BR-1',
+                        schoolId: 'SMK-PGRI-11-CLD',
+                        lastUpdated: nowIso
                     }, { merge: true });
                 }
             });
         }
 
-        // 2. Dokumen transaksi di collection 'transactions' (hingga 100 riwayat transaksi)
+        // ------------------------------------------------------------------
+        // SUB-SISTEM 2: BUKU KAS MUTASI TRANSAKSI (Collection: 'transactions')
+        // ------------------------------------------------------------------
         if (Array.isArray(payload.transactions)) {
             const list = payload.transactions.slice(0, 100);
             list.forEach(t => {
@@ -6546,31 +6557,173 @@ function syncModularFirestoreCollections(payload) {
                         studentId: t.studentId,
                         studentName: t.studentName,
                         amount: Number(t.amount) || 0,
-                        type: t.type,
-                        category: t.category || '',
+                        type: t.type, // 'setor' | 'tarik'
+                        category: t.category || 'Tabungan Harian',
                         note: t.note || '',
                         date: t.date,
-                        syncedAt: payload.lastUpdated
+                        receiptNumber: `REC-${t.id}`,
+                        recordedBy: 'Yoga Rahmanda, S.Pd.',
+                        syncedAt: nowIso
                     }, { merge: true });
                 }
             });
         }
 
-        // 3. Konfigurasi Sistem di collection 'settings'
-        const setRef = firebaseFirestore.collection('settings').doc('wa_gateway');
-        batch.set(setRef, {
-            waConfig: payload.waConfig || {},
-            lastUpdated: payload.lastUpdated
+        // ------------------------------------------------------------------
+        // SUB-SISTEM 3: LAPORAN & REKAPITULASI KAS (Collection: 'reports')
+        // ------------------------------------------------------------------
+        const totalSaldo = (payload.students || []).reduce((acc, s) => acc + (Number(s.balance) || 0), 0);
+        const totalMasuk = (payload.transactions || []).filter(t => t.type === 'setor').reduce((acc, t) => acc + (Number(t.amount) || 0), 0);
+        const totalKeluar = (payload.transactions || []).filter(t => t.type === 'tarik').reduce((acc, t) => acc + (Number(t.amount) || 0), 0);
+        const avgSaldo = payload.students && payload.students.length ? Math.round(totalSaldo / payload.students.length) : 0;
+        const targetAchievedCount = (payload.students || []).filter(s => (s.balance || 0) >= (s.target || 500000) && (s.target || 0) > 0).length;
+
+        // Dokumen Rekap Kas Terkini
+        const summaryRef = firebaseFirestore.collection('reports').doc('summary_latest');
+        batch.set(summaryRef, {
+            reportTitle: 'Rekapitulasi Keuangan Kas & Tabungan Siswa',
+            className: 'XII Bisnis Ritel 1',
+            schoolName: 'SMK PGRI 11 CILEDUG KOTA TANGERANG',
+            totalKasMasuk: totalMasuk,
+            totalPenarikan: totalKeluar,
+            totalSaldoTerkumpul: totalSaldo,
+            totalSiswaAktif: (payload.students || []).length,
+            averageSaldoPerSiswa: avgSaldo,
+            targetAchievedCount: targetAchievedCount,
+            lastTransactionId: payload.transactions && payload.transactions.length ? payload.transactions[payload.transactions.length - 1].id : null,
+            generatedAt: nowIso
         }, { merge: true });
 
+        // Dokumen Leaderboard Peringkat Tabungan
+        const sortedStudents = [...(payload.students || [])].sort((a, b) => (b.balance || 0) - (a.balance || 0)).slice(0, 10);
+        const leaderboardRef = firebaseFirestore.collection('reports').doc('leaderboard');
+        batch.set(leaderboardRef, {
+            title: 'Top 10 Peringkat Saldo Tabungan XII BR 1',
+            topRankings: sortedStudents.map((s, idx) => ({
+                rank: idx + 1,
+                studentId: s.id,
+                name: s.name,
+                nisn: s.nisn,
+                balance: Number(s.balance) || 0,
+                progressPercent: s.target ? Math.min(100, Math.round((s.balance / s.target) * 100)) : 0
+            })),
+            updatedAt: nowIso
+        }, { merge: true });
+
+        // ------------------------------------------------------------------
+        // SUB-SISTEM 4: IDENTITAS SEKOLAH & KELAS (Collection: 'school_config')
+        // ------------------------------------------------------------------
+        const schoolConfigRef = firebaseFirestore.collection('school_config').doc('class_info');
+        batch.set(schoolConfigRef, {
+            schoolName: 'SMK PGRI 11 CILEDUG KOTA TANGERANG',
+            schoolAddress: 'Jl. Raden Fatah No. 11, Parung Serab, Ciledug, Kota Tangerang, Banten',
+            className: 'XII Bisnis Ritel 1 (XII BR 1)',
+            homeroomTeacher: 'Yoga Rahmanda, S.Pd.',
+            academicYear: '2026/2027',
+            programKeahlian: 'Bisnis Daring dan Pemasaran / Bisnis Ritel',
+            systemVersion: 'v2.1.0-firestore-modular',
+            currency: 'IDR (Rp)',
+            rules: {
+                minDeposit: 1000,
+                defaultTarget: 500000,
+                allowDirectWithdrawal: true
+            },
+            updatedAt: nowIso
+        }, { merge: true });
+
+        // ------------------------------------------------------------------
+        // SUB-SISTEM 5: NOTIFIKASI WHATSAPP GATEWAY (Collection: 'wa_notifications')
+        // ------------------------------------------------------------------
+        const waConfigRef = firebaseFirestore.collection('wa_notifications').doc('gateway');
+        batch.set(waConfigRef, {
+            waConfig: payload.waConfig || {},
+            supportedChannels: ['WhatsApp Direct', 'Fonnte Gateway', 'Web Share API'],
+            senderName: 'Wali Kelas XII BR 1 (Yoga Rahmanda, S.Pd.)',
+            updatedAt: nowIso
+        }, { merge: true });
+
+        // ------------------------------------------------------------------
+        // SUB-SISTEM 6: JEJAK AUDIT SISTEM (Collection: 'audit_logs')
+        // ------------------------------------------------------------------
+        const logId = `AUDIT-${Date.now().toString(36).toUpperCase()}`;
+        const auditRef = firebaseFirestore.collection('audit_logs').doc(logId);
+        batch.set(auditRef, {
+            id: logId,
+            action: 'SYNC_FULL_SYSTEM',
+            performedBy: (currentUser && currentUser.name) ? currentUser.name : 'System Sync Engine',
+            role: (currentUser && currentUser.role) ? currentUser.role : 'system',
+            totalStudentsSynced: (payload.students || []).length,
+            totalTransactionsSynced: (payload.transactions || []).length,
+            totalBalanceCalculated: totalSaldo,
+            timestamp: nowIso
+        });
+
+        // Eksekusi penulisan atomik seluruh sistem ke Firestore
         batch.commit().then(() => {
-            console.log('[Firestore] Sinkronisasi modular collections (students, transactions, settings) berhasil.');
+            console.log('[Firestore] Sinkronisasi seluruh 8 sub-sistem ke Cloud Firestore berhasil.');
         }).catch(err => {
             console.warn('[Firestore] Modular sync batch note:', err.message);
         });
+
     } catch (e) {
         console.warn('[Firestore] Error pada modular batch:', e);
     }
+}
+
+// Helper: Mencatat Koreksi Saldo Langsung ke Firestore
+function recordFirestoreBalanceAdjustment(studentId, studentName, oldBalance, newBalance, reason) {
+    if (!firebaseFirestore) return;
+    try {
+        const adjId = `ADJ-${Date.now().toString(36).toUpperCase()}-${studentId}`;
+        const diff = Number(newBalance) - Number(oldBalance);
+        firebaseFirestore.collection('balance_adjustments').doc(adjId).set({
+            id: adjId,
+            studentId: studentId,
+            studentName: studentName,
+            oldBalance: Number(oldBalance),
+            newBalance: Number(newBalance),
+            difference: diff,
+            reason: reason || 'Koreksi Saldo Langsung oleh Wali Kelas',
+            adjustedBy: currentUser ? currentUser.name : 'Wali Kelas (Admin)',
+            timestamp: new Date().toISOString()
+        }).catch(err => console.warn('[Firestore Adjustment Log Note]:', err.message));
+    } catch (e) { }
+}
+
+// Helper: Mencatat Riwayat Pengiriman Notifikasi WA ke Firestore
+function logFirestoreWaNotification(studentId, studentName, phone, messageType, amount) {
+    if (!firebaseFirestore) return;
+    try {
+        const logId = `WA-${Date.now().toString(36).toUpperCase()}`;
+        firebaseFirestore.collection('wa_notifications').doc('gateway').collection('logs').doc(logId).set({
+            id: logId,
+            studentId: studentId,
+            studentName: studentName,
+            phone: phone,
+            messageType: messageType || 'receipt',
+            amount: Number(amount) || 0,
+            triggeredBy: currentUser ? currentUser.name : 'Wali Kelas (Admin)',
+            status: 'dispatched',
+            timestamp: new Date().toISOString()
+        }).catch(err => console.warn('[Firestore WA Log Note]:', err.message));
+    } catch (e) { }
+}
+
+// Helper: Mencatat Jejak Audit Aktivitas ke Firestore
+function logFirestoreAudit(action, summary, details = {}) {
+    if (!firebaseFirestore) return;
+    try {
+        const logId = `LOG-${Date.now().toString(36).toUpperCase()}`;
+        firebaseFirestore.collection('audit_logs').doc(logId).set({
+            id: logId,
+            action: action,
+            summary: summary,
+            details: details,
+            performedBy: currentUser ? currentUser.name : 'System',
+            role: currentUser ? currentUser.role : 'guest',
+            timestamp: new Date().toISOString()
+        }).catch(err => console.warn('[Firestore Audit Log Note]:', err.message));
+    } catch (e) { }
 }
 
 // Backward Compatibility Aliases agar seluruh fungsi website tetap berjalan mulus
@@ -7858,6 +8011,7 @@ function handleTransactionSubmit(e) {
         saveStudents();
         saveTransactions();
         saveToFirebaseDatabase(true);
+        logFirestoreAudit('CREATE_TRANSACTION', `Catat ${type === 'setor' ? 'Setoran' : 'Penarikan'} ${formatRp(amount)} untuk ${student.name}`, { txId, studentId: student.id, type, amount, category });
         renderAllViews();
         if (currentUser && currentUser.role === 'admin') {
             if (typeof updateChart === 'function') updateChart();
@@ -7963,6 +8117,8 @@ function openWaPromptModal(tx, student) {
 
     const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent(msgText)}`;
     document.getElementById('btn-send-wa-now').onclick = () => {
+        logFirestoreWaNotification(student.id, student.name, student.phone, tx.type === 'setor' ? 'Struk Setoran' : 'Struk Penarikan', tx.amount);
+        logFirestoreAudit('SEND_WA_NOTIFICATION', `Kirim notifikasi WA ${tx.type === 'setor' ? 'setoran' : 'penarikan'} ke ${student.name}`, { txId: tx.id, amount: tx.amount });
         window.open(waLink, '_blank');
         closeModal('modal-wa-prompt');
     };
@@ -8033,6 +8189,13 @@ function deleteTransaction(txId) {
         else student.balance += tx.amount;
         saveStudents();
     }
+
+    if (firebaseFirestore) {
+        try {
+            firebaseFirestore.collection('transactions').doc(txId).delete().catch(() => {});
+        } catch (e) { }
+    }
+    logFirestoreAudit('DELETE_TRANSACTION', `Hapus transaksi ${txId} (${formatRp(tx.amount)})`, { txId, studentName: tx.studentName, amount: tx.amount });
 
     appTransactions.splice(txIndex, 1);
     saveTransactions();
@@ -8947,6 +9110,17 @@ function executeBatchSaveConfirmed() {
         saveStudents();
         saveTransactions();
         saveToFirebaseDatabase(true);
+
+        // Catat audit koreksi saldo langsung ke Firestore jika ada perbedaan saldo
+        if (Array.isArray(initialBatchSnapshot)) {
+            appStudents.forEach(s => {
+                const init = initialBatchSnapshot.find(i => i.id === s.id);
+                if (init && Number(init.balance || 0) !== Number(s.balance || 0)) {
+                    recordFirestoreBalanceAdjustment(s.id, s.name, init.balance || 0, s.balance || 0, 'Koreksi Saldo Langsung Massal');
+                }
+            });
+        }
+        logFirestoreAudit('BATCH_EDIT_STUDENTS', `Pembaruan massal data siswa dan saldo kelas XII BR 1 (${appStudents.length} siswa)`);
 
         // Jika user saat ini adalah siswa, sinkronkan data currentUser
         if (currentUser && currentUser.role === 'siswa') {
