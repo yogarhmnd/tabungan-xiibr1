@@ -6101,8 +6101,14 @@ function handleCloudBadgeClick() {
 
 function forceUploadToFirebaseCloud() {
     if (typeof closeModal === 'function') closeModal('modal-firebase-rules-guide');
-    if (typeof showToast === 'function') showToast('Mengunggah data ke Cloud Firestore Database...', 'info');
-    saveToFirestoreDatabase(true);
+    if (typeof showToast === 'function') showToast('Mengunggah seluruh 8 sub-sistem ke Cloud Firestore...', 'info');
+    saveToFirestoreDatabase(true).then((success) => {
+        if (success) {
+            showToast('Seluruh 8 sub-sistem berhasil disinkronkan ke Cloud Firestore!', 'success');
+        } else {
+            showToast('Gagal sinkronisasi. Periksa aturan akses Firestore di Firebase Console.', 'danger');
+        }
+    });
 }
 
 
@@ -6657,6 +6663,18 @@ function syncModularFirestoreCollections(payload) {
             totalBalanceCalculated: totalSaldo,
             timestamp: nowIso
         });
+
+        // ------------------------------------------------------------------
+        // SUB-SISTEM 7: KOREKSI SALDO LANGSUNG (Collection: 'balance_adjustments')
+        // ------------------------------------------------------------------
+        const adjInitRef = firebaseFirestore.collection('balance_adjustments').doc('system_ledger_init');
+        batch.set(adjInitRef, {
+            ledgerName: 'Direct Balance Adjustment Ledger',
+            className: 'XII Bisnis Ritel 1',
+            status: 'active',
+            description: 'Mencatat seluruh riwayat penyesuaian saldo langsung oleh Wali Kelas',
+            lastVerifiedAt: nowIso
+        }, { merge: true });
 
         // Eksekusi penulisan atomik seluruh sistem ke Firestore
         batch.commit().then(() => {
